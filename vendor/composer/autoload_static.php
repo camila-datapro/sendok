@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit07d1f9409b144d1152b158ca8355d0b8
+class ComposerStaticInit7cb607502bdbeaf66fd6ff959e3bd4b9
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -123,10 +123,6 @@ class ComposerStaticInit07d1f9409b144d1152b158ca8355d0b8
             'League\\CommonMark\\' => 18,
             'Laravel\\Ui\\' => 11,
             'Laravel\\Tinker\\' => 15,
-        ),
-        'J' => 
-        array (
-            'JeroenNoten\\LaravelAdminLte\\' => 28,
         ),
         'I' => 
         array (
@@ -387,10 +383,6 @@ class ComposerStaticInit07d1f9409b144d1152b158ca8355d0b8
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
         ),
-        'JeroenNoten\\LaravelAdminLte\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src',
-        ),
         'Illuminate\\Foundation\\Auth\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/ui/auth-backend',
@@ -494,14 +486,7 @@ class ComposerStaticInit07d1f9409b144d1152b158ca8355d0b8
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
-        'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
-        'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
-        'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
-        'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
-        'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
-        'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
-        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
@@ -2397,36 +2382,6 @@ class ComposerStaticInit07d1f9409b144d1152b158ca8355d0b8
         'Illuminate\\View\\ViewFinderInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
-        'JeroenNoten\\LaravelAdminLte\\AdminLte' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/AdminLte.php',
-        'JeroenNoten\\LaravelAdminLte\\AdminLteServiceProvider' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/AdminLteServiceProvider.php',
-        'JeroenNoten\\LaravelAdminLte\\Console\\AdminLteInstallCommand' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Console/AdminLteInstallCommand.php',
-        'JeroenNoten\\LaravelAdminLte\\Console\\AdminLtePluginCommand' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Console/AdminLtePluginCommand.php',
-        'JeroenNoten\\LaravelAdminLte\\Console\\AdminLteStatusCommand' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Console/AdminLteStatusCommand.php',
-        'JeroenNoten\\LaravelAdminLte\\Console\\AdminLteUpdateCommand' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Console/AdminLteUpdateCommand.php',
-        'JeroenNoten\\LaravelAdminLte\\Console\\PackageResources\\AssetsResource' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Console/PackageResources/AssetsResource.php',
-        'JeroenNoten\\LaravelAdminLte\\Console\\PackageResources\\AuthViewsResource' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Console/PackageResources/AuthViewsResource.php',
-        'JeroenNoten\\LaravelAdminLte\\Console\\PackageResources\\BasicRoutesResource' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Console/PackageResources/BasicRoutesResource.php',
-        'JeroenNoten\\LaravelAdminLte\\Console\\PackageResources\\BasicViewsResource' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Console/PackageResources/BasicViewsResource.php',
-        'JeroenNoten\\LaravelAdminLte\\Console\\PackageResources\\ConfigResource' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Console/PackageResources/ConfigResource.php',
-        'JeroenNoten\\LaravelAdminLte\\Console\\PackageResources\\MainViewsResource' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Console/PackageResources/MainViewsResource.php',
-        'JeroenNoten\\LaravelAdminLte\\Console\\PackageResources\\PackageResource' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Console/PackageResources/PackageResource.php',
-        'JeroenNoten\\LaravelAdminLte\\Console\\PackageResources\\PluginsResource' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Console/PackageResources/PluginsResource.php',
-        'JeroenNoten\\LaravelAdminLte\\Console\\PackageResources\\TranslationsResource' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Console/PackageResources/TranslationsResource.php',
-        'JeroenNoten\\LaravelAdminLte\\Events\\BuildingMenu' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Events/BuildingMenu.php',
-        'JeroenNoten\\LaravelAdminLte\\Helpers\\CommandHelper' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Helpers/CommandHelper.php',
-        'JeroenNoten\\LaravelAdminLte\\Helpers\\LayoutHelper' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Helpers/LayoutHelper.php',
-        'JeroenNoten\\LaravelAdminLte\\Helpers\\MenuItemHelper' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Helpers/MenuItemHelper.php',
-        'JeroenNoten\\LaravelAdminLte\\Http\\ViewComposers\\AdminLteComposer' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Http/ViewComposers/AdminLteComposer.php',
-        'JeroenNoten\\LaravelAdminLte\\Menu\\ActiveChecker' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Menu/ActiveChecker.php',
-        'JeroenNoten\\LaravelAdminLte\\Menu\\Builder' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Menu/Builder.php',
-        'JeroenNoten\\LaravelAdminLte\\Menu\\Filters\\ActiveFilter' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Menu/Filters/ActiveFilter.php',
-        'JeroenNoten\\LaravelAdminLte\\Menu\\Filters\\ClassesFilter' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Menu/Filters/ClassesFilter.php',
-        'JeroenNoten\\LaravelAdminLte\\Menu\\Filters\\DataFilter' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Menu/Filters/DataFilter.php',
-        'JeroenNoten\\LaravelAdminLte\\Menu\\Filters\\FilterInterface' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Menu/Filters/FilterInterface.php',
-        'JeroenNoten\\LaravelAdminLte\\Menu\\Filters\\GateFilter' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Menu/Filters/GateFilter.php',
-        'JeroenNoten\\LaravelAdminLte\\Menu\\Filters\\HrefFilter' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Menu/Filters/HrefFilter.php',
-        'JeroenNoten\\LaravelAdminLte\\Menu\\Filters\\LangFilter' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Menu/Filters/LangFilter.php',
-        'JeroenNoten\\LaravelAdminLte\\Menu\\Filters\\SearchFilter' => __DIR__ . '/..' . '/jeroennoten/laravel-adminlte/src/Menu/Filters/SearchFilter.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
@@ -5021,10 +4976,10 @@ class ComposerStaticInit07d1f9409b144d1152b158ca8355d0b8
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit07d1f9409b144d1152b158ca8355d0b8::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit07d1f9409b144d1152b158ca8355d0b8::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit07d1f9409b144d1152b158ca8355d0b8::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit07d1f9409b144d1152b158ca8355d0b8::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit7cb607502bdbeaf66fd6ff959e3bd4b9::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit7cb607502bdbeaf66fd6ff959e3bd4b9::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit7cb607502bdbeaf66fd6ff959e3bd4b9::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit7cb607502bdbeaf66fd6ff959e3bd4b9::$classMap;
 
         }, null, ClassLoader::class);
     }
