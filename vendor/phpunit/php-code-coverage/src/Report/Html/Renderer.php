@@ -199,7 +199,7 @@ abstract class Renderer
     protected function getInactiveBreadcrumb(AbstractNode $node, string $pathToRoot): string
     {
         return \sprintf(
-            '         <li class="breadcrumb-item"><a href="%sindex.html">%s</a></li>' . "\n",
+            '         <li class="breadcrumb-item"><a href="%s/home">%s</a></li>' . "\n",
             $pathToRoot,
             $node->getName()
         );

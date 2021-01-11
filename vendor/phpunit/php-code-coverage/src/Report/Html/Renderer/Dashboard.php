@@ -273,7 +273,7 @@ final class Dashboard extends Renderer
     protected function getActiveBreadcrumb(AbstractNode $node): string
     {
         return \sprintf(
-            '         <li class="breadcrumb-item"><a href="index.html">%s</a></li>' . "\n" .
+            '         <li class="breadcrumb-item"><a href="/home">%s</a></li>' . "\n" .
             '         <li class="breadcrumb-item active">(Dashboard)</li>' . "\n",
             $node->getName()
         );

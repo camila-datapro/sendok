@@ -150,7 +150,7 @@ and licensed for use under the terms of the
 MIT License (MIT). Please see [LICENSE](LICENSE) for more information.
 
 
-[java]: http://docs.oracle.com/javase/8/docs/technotes/guides/collections/index.html
+[java]: http://docs.oracle.com/javase/8/docs/technotes/guides/collections/home
 [apidocs]: https://docs.benramsey.com/ramsey-collection/latest/
 
 [badge-source]: http://img.shields.io/badge/source-ramsey/collection-blue.svg?style=flat-square

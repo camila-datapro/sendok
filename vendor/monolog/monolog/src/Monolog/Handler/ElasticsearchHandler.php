@@ -23,7 +23,7 @@ use Elasticsearch\Client;
 /**
  * Elasticsearch handler
  *
- * @link https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/index.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/home
  *
  * Simple usage example:
  *
