@@ -79,7 +79,7 @@
             </li>
             <li class="nav-item nav-category">Menú principal</li>
             <li class="nav-item">
-              <a class="nav-link" href="/home">
+              <a class="nav-link" href="./home">
                 <i class="menu-icon typcn typcn-document-text"></i>
                 <span class="menu-title">Dashboard</span>
               </a>
@@ -92,13 +92,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/cliente">
+              <a class="nav-link" href="./cliente">
                 <i class="menu-icon typcn typcn-th-large-outline"></i>
                 <span class="menu-title">Crear Cliente</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/propuesta">
+              <a class="nav-link" href="./propuesta">
                 <i class="menu-icon typcn typcn-bell"></i>
                 <span class="menu-title">Crear Propuesta</span>
               </a>

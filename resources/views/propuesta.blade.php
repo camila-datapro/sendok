@@ -21,7 +21,7 @@
       <!-- Layout styles -->
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
       <!-- End Layout styles -->
-      <link rel="shortcut icon" href="../assets/images/favicon.png" />
+      <link rel="shortcut icon" href="{{ asset('/assets/images/favicon.png') }}" />
    </head>
    <body>
       <div class="container-scroller">
@@ -29,9 +29,9 @@
          <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
                <a class="navbar-brand brand-logo" href="/home">
-               <img src="../assets/images/logo.svg" alt="logo" /> </a>
+               <img src="{{ asset('/assets/images/logo.svg') }}" alt="logo" /> </a>
                <a class="navbar-brand brand-logo-mini" href="/home">
-               <img src="../assets/images/logo-mini.svg" alt="logo" /> </a>
+               <img src="{{ asset('/assets/images/logo-mini.svg') }}" alt="logo" /> </a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center">
                <ul class="navbar-nav ml-auto">
@@ -78,25 +78,25 @@
                   </li>
                   <li class="nav-item nav-category">Menú principal</li>
                   <li class="nav-item">
-                     <a class="nav-link" href="/home">
+                     <a class="nav-link" href="./home">
                      <i class="menu-icon typcn typcn-document-text"></i>
                      <span class="menu-title">Crear Cliente</span>
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="/producto">
+                     <a class="nav-link" href="./producto">
                      <i class="menu-icon typcn typcn-shopping-bag"></i>
                      <span class="menu-title">Crear Producto</span>
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="/cliente">
+                     <a class="nav-link" href="./cliente">
                      <i class="menu-icon typcn typcn-th-large-outline"></i>
                      <span class="menu-title">Crear Cliente</span>
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="/propuesta">
+                     <a class="nav-link" href="./propuesta">
                      <i class="menu-icon typcn typcn-bell"></i>
                      <span class="menu-title">Crear Propuesta</span>
                      </a>
@@ -110,7 +110,7 @@
                   <div class="row page-title-header">
                      <div class="col-12">
                         <div class="page-header">
-                           <h4 class="page-title">Crear nuevo producto</h4>
+                           <h4 class="page-title">Crear nueva propuesta comercial</h4>
                         </div>
                      </div>
                   </div>
