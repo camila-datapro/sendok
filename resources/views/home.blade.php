@@ -86,7 +86,7 @@
             </li>
            
             <li class="nav-item">
-              <a class="nav-link" href="/producto">
+              <a class="nav-link" href="./producto">
                 <i class="menu-icon typcn typcn-shopping-bag"></i>
                 <span class="menu-title">Crear Producto</span>
               </a>
