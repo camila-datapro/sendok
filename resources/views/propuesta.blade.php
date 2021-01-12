@@ -80,7 +80,7 @@
                   <li class="nav-item">
                      <a class="nav-link" href="./home">
                      <i class="menu-icon typcn typcn-document-text"></i>
-                     <span class="menu-title">Crear Cliente</span>
+                     <span class="menu-title">Dashboard</span>
                      </a>
                   </li>
                   <li class="nav-item">

@@ -25,108 +25,201 @@
    </head>
    <body>
       <div class="container-scroller">
-         <!-- partial:partials/_navbar.html -->
-         <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-            <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-               <a class="navbar-brand brand-logo" href="./home">
-               <img src="{{ asset('/assets/images/logo.svg') }}" alt="logo" /> </a>
-               <a class="navbar-brand brand-logo-mini" href="./home">
-               <img src="{{ asset('/assets/images/logo-mini.svg') }}" alt="logo" /> </a>
-            </div>
-            <div class="navbar-menu-wrapper d-flex align-items-center">
-               <ul class="navbar-nav ml-auto">
-                  <li class="nav-item dropdown d-none d-xl-inline-block user-dropdown">
-                     <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                     <img class="img-xs rounded-circle" src="{{ asset('/assets/images/faces/face8.jpg') }}" alt="Profile image"> </a>
-                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-                        <div class="dropdown-header text-center">
-                           <img class="img-md rounded-circle" src="{{ asset('/assets/images/faces/face8.jpg') }}" alt="Profile image">
-                           <p class="mb-1 mt-3 font-weight-semibold">Sasha Stifel</p>
-                           <p class="font-weight-light text-muted mb-0">sstifel@datapro.cl</p>
-                        </div>
-                        <a class="dropdown-item disabled" style="color:gray">Mi perfil</a>
-                        <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                           <span class="nav__name">Cerrar Sesión</span>
-                           <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                              @csrf
-                           </form>
-                        </a>
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+         <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
+            <a class="navbar-brand brand-logo" href="./home">
+            <img src="{{ asset('/assets/images/logo.svg') }}" alt="logo" /> </a>
+            <a class="navbar-brand brand-logo-mini" href="./home">
+            <img src="{{ asset('/assets/images/logo-mini.svg') }}" alt="logo" /> </a>
+         </div>
+         <div class="navbar-menu-wrapper d-flex align-items-center">
+            <ul class="navbar-nav ml-auto">
+               <li class="nav-item dropdown d-none d-xl-inline-block user-dropdown">
+                  <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                  <img class="img-xs rounded-circle" src="{{ asset('/assets/images/faces/face8.jpg') }}" alt="Profile image"> </a>
+                  <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                     <div class="dropdown-header text-center">
+                        <img class="img-md rounded-circle" src="{{ asset('/assets/images/faces/face8.jpg') }}" alt="Profile image">
+                        <p class="mb-1 mt-3 font-weight-semibold">Sasha Stifel</p>
+                        <p class="font-weight-light text-muted mb-0">sstifel@datapro.cl</p>
                      </div>
-                  </li>
-               </ul>
-               <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-               <span class="mdi mdi-menu"></span>
-               </button>
-            </div>
+                     <a class="dropdown-item disabled" style="color:gray">Mi perfil</a>
+                     <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        <span class="nav__name">Cerrar Sesión</span>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                           @csrf
+                        </form>
+                     </a>
+                  </div>
+               </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+            </button>
+         </div>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+         <!-- partial:partials/_sidebar.html -->
+         <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+               <li class="nav-item nav-profile">
+                  <a href="#" class="nav-link">
+                     <div class="profile-image">
+                        <img class="img-xs rounded-circle" src="{{ asset('/assets/images/faces/face8.jpg') }}" alt="profile image">
+                        <div class="dot-indicator bg-success"></div>
+                     </div>
+                     <div class="text-wrapper">
+                        <p class="profile-name">Sasha Stifel</p>
+                        <p class="designation">DATAPRO</p>
+                     </div>
+                  </a>
+               </li>
+               <li class="nav-item nav-category">Menú principal</li>
+               <li class="nav-item">
+                  <a class="nav-link" href="./home">
+                  <i class="menu-icon typcn typcn-document-text"></i>
+                  <span class="menu-title">Dashboard</span>
+                  </a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="./producto">
+                  <i class="menu-icon typcn typcn-shopping-bag"></i>
+                  <span class="menu-title">Crear Producto</span>
+                  </a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="./cliente">
+                  <i class="menu-icon typcn typcn-th-large-outline"></i>
+                  <span class="menu-title">Crear Cliente</span>
+                  </a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="./propuesta">
+                  <i class="menu-icon typcn typcn-bell"></i>
+                  <span class="menu-title">Crear Propuesta</span>
+                  </a>
+               </li>
+            </ul>
          </nav>
          <!-- partial -->
-         <div class="container-fluid page-body-wrapper">
-            <!-- partial:partials/_sidebar.html -->
-            <nav class="sidebar sidebar-offcanvas" id="sidebar">
-               <ul class="nav">
-                  <li class="nav-item nav-profile">
-                     <a href="#" class="nav-link">
-                        <div class="profile-image">
-                           <img class="img-xs rounded-circle" src="{{ asset('/assets/images/faces/face8.jpg') }}" alt="profile image">
-                           <div class="dot-indicator bg-success"></div>
-                        </div>
-                        <div class="text-wrapper">
-                           <p class="profile-name">Sasha Stifel</p>
-                           <p class="designation">DATAPRO</p>
-                        </div>
-                     </a>
-                  </li>
-                  <li class="nav-item nav-category">Menú principal</li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="./home">
-                     <i class="menu-icon typcn typcn-document-text"></i>
-                     <span class="menu-title">Dashboard</span>
-                     </a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="./producto">
-                     <i class="menu-icon typcn typcn-shopping-bag"></i>
-                     <span class="menu-title">Crear Producto</span>
-                     </a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="./cliente">
-                     <i class="menu-icon typcn typcn-th-large-outline"></i>
-                     <span class="menu-title">Crear Cliente</span>
-                     </a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="./propuesta">
-                     <i class="menu-icon typcn typcn-bell"></i>
-                     <span class="menu-title">Crear Propuesta</span>
-                     </a>
-                  </li>
-               </ul>
-            </nav>
-            <!-- partial -->
-            <div class="main-panel">
-               <div class="content-wrapper">
-                  <!-- Page Title Header Starts-->
-                  <div class="row page-title-header">
-                     <div class="col-12">
-                        <div class="page-header">
-                           <h4 class="page-title">Crear nuevo cliente</h4>
+         <div class="main-panel">
+            <div class="content-wrapper">
+               <!-- Page Title Header Starts-->
+               <div class="row page-title-header">
+                  <div class="col-12">
+                     <div class="page-header">
+                        <h4 class="page-title">Crear nuevo cliente</h4>
+                     </div>
+                  </div>
+               </div>
+               <!-- Page Title Header Ends-->
+               <div class="row">
+                  <div class="col-md-12 grid-margin">
+                     <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                           <div class="card-body">
+                              <h4 class="card-title">Datos nuevo cliente</h4>
+                              <p class="card-description"> Favor completar los campos correctamente </p>
+                              <form class="forms-sample">
+                                 <div class="form-group">
+                                    <label for="exampleInputName1">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre">
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="exampleInputName1">Rut</label>
+                                    <input type="text" class="form-control" id="rut">
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="exampleInputEmail3">Email</label>
+                                    <input type="text" class="form-control" id="email">
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="exampleInputName1">Teléfono</label>
+                                    <input type="text" class="form-control" id="telefono">
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="exampleFormControlSelect2">Región</label>
+                                    <select class="form-control" id="region">
+                                       <option _blank="">Elija Una</option>
+                                       <option>Región Metropolitana</option>
+                                       <option>I Región</option>
+                                       <option>II Región</option>
+                                       <option>III Región</option>
+                                       <option>IV Región</option>
+                                       <option>V Región</option>
+                                       <option>VI Región</option>
+                                       <option>VII Región</option>
+                                       <option>VIII Región</option>
+                                       <option>IX Región</option>
+                                       <option>X Región</option>
+                                       <option>XI Región</option>
+                                       <option>XII Región</option>
+                                       <option>XIII Región</option>
+                                       <option>XIV Región</option>
+                                       <option>XV Región</option>
+                                    </select>
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="exampleFormControlSelect3">Provincia</label>
+                                    <select class="form-control" id="provincia">
+                                       <option _blank="">Elija Una</option>
+                                       <option>Región Metropolitana</option>
+                                       <option>I Región</option>
+                                       <option>II Región</option>
+                                       <option>III Región</option>
+                                       <option>IV Región</option>
+                                       <option>V Región</option>
+                                       <option>VI Región</option>
+                                       <option>VII Región</option>
+                                       <option>VIII Región</option>
+                                       <option>IX Región</option>
+                                       <option>X Región</option>
+                                       <option>XI Región</option>
+                                       <option>XII Región</option>
+                                       <option>XIII Región</option>
+                                       <option>XIV Región</option>
+                                       <option>XV Región</option>
+                                    </select>
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="exampleFormControlSelect4">Comuna</label>
+                                    <select class="form-control" id="comuna">
+                                       <option _blank="">Elija Una</option>
+                                       <option>Santiago</option>
+                                       <option>Providencia</option>
+                                       <option>Las Condes</option>
+                                       <option>Vitacura</option>
+                                       <option>Lo Barnechea</option>
+                                       <option>Ñuñoa</option>
+                                       <option>La Reina</option>
+                                       <option>Huechuraba</option>
+                                       <option>Quilicura</option>
+                                       <option>Pudahuel</option>
+                                       <option>San Miguel</option>
+                                       <option>La Cisterna</option>
+                                       <option>San Bernardo</option>
+                                       <option>Quinta Normal</option>
+                                       <option>Independencia</option>
+                                       <option>Recoleta</option>
+                                    </select>
+                                 </div>
+                                 <div class="form-group">
+                                    <label for="exampleInputName1">Dirección</label>
+                                    <input type="text" class="form-control" id="direccion">
+                                 </div>
+                                 <div class="form-group">
+                                    <input type="button" onclick="cambioOpciones();" class="btn btn-primary btn-md" value="Crear Cliente">
+                                 </div>
+                              </form>
+                           </div>
                         </div>
                      </div>
                   </div>
-                  <!-- Page Title Header Ends-->
-                  <div class="row">
-                    <div class="col-md-12 grid-margin">
-                        <div class="card">
-                            <div class="card-body">
-                                En desarrollo...
-                            </div>
-                        </div>
-                    </div>
                </div>
                <!-- content-wrapper ends -->
                <!-- partial:partials/_footer.html -->
-
                <!-- partial -->
             </div>
             <!-- main-panel ends -->
