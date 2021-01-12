@@ -474,7 +474,7 @@
                       <div class="card-body">
                         <h4 class="card-title mb-0">Top Performer</h4>
                         <div class="d-flex mt-3 py-2 border-bottom">
-                          <img class="img-sm rounded-circle" src="../assets/images/faces/face3.jpg" alt="profile image">
+                          <img class="img-sm rounded-circle" src="{{ asset('/assets/images/faces/face3.jpg') }}" alt="profile image">
                           <div class="wrapper ml-2">
                             <p class="mb-n1 font-weight-semibold">Ray Douglas</p>
                             <small>162543</small>
@@ -490,7 +490,7 @@
                           <small class="text-muted ml-auto">4 Hours ago</small>
                         </div>
                         <div class="d-flex py-2 border-bottom">
-                          <img class="img-sm rounded-circle" src="../assets/images/faces/face4.jpg" alt="profile image">
+                          <img class="img-sm rounded-circle" src=" {{ asset('/assets/images/faces/face4.jpg') }}" alt="profile image">
                           <div class="wrapper ml-2">
                             <p class="mb-n1 font-weight-semibold">Brian Dean</p>
                             <small>162543</small>
