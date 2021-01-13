@@ -1,7 +1,7 @@
     function cargarRegiones(){
         $.ajax({
             type: "GET",
-            url: '/obtenerRegiones', 
+            url: './obtenerRegiones', 
             data: { }
         }).done(function( msg ) {
         });
@@ -29,7 +29,7 @@
         });
         $.ajax({
             type: "POST",
-            url: '/obtenerProvincias', 
+            url: './obtenerProvincias', 
             data: { id: idRegion,
             _token: $('input[name="_token"]').val() 
             } //esto es necesario, por la validacion de seguridad de laravel
@@ -56,7 +56,7 @@
         });
         $.ajax({
             type: "POST",
-            url: '/obtenerComunas', 
+            url: './obtenerComunas', 
             data: { id: idProvincia,
             _token: $('input[name="_token"]').val() 
             } //esto es necesario, por la validacion de seguridad de laravel
@@ -91,7 +91,7 @@
         });
         $.ajax({
             type: "POST",
-            url: '/crearCliente', 
+            url: './crearCliente', 
             data: { nombre: nombre , rut: rut, email: email, fono: fono, idRegion: idRegion, idProvincia: idProvincia, idComuna: idComuna, direccion: direccion ,
             _token: $('input[name="_token"]').val() 
             } //esto es necesario, por la validacion de seguridad de laravel
