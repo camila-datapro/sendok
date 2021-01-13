@@ -27,7 +27,7 @@
     <title>Dashboard - Sendok</title>
     <style>
         body {
-        background: url(../assets/images/auth/login_1.jpg);
+        background: url(./assets/images/auth/login_1.jpg);
         background-size: cover;
         }
 
