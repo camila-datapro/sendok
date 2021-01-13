@@ -23,3 +23,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/producto','ProductoController@index')->name('producto');
 Route::get('/cliente','ClienteController@index')->name('cliente');
 Route::get('/propuesta','PropuestaController@index')->name('propuesta');
+Route::get('/obtenerRegiones','RegionController@getRegiones')->name('obtenerRegiones');
+Route::get('/obtenerProvincias','ProvinciaController@obtenerProvincias')->name('obtenerProvincias');
