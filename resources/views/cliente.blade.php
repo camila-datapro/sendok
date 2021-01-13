@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
+   <meta name="csrg-token" content="{{ csrf_token() }}" />
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -113,7 +114,7 @@
                         <h4 class="page-title">Crear nuevo cliente</h4>                        
                      </div>
                      <div class="form-group">
-                        <input type="button" onclick="cargarRegiones();" class="btn btn-primary btn-md" value="Desarrollo">
+                        <input type="button" onclick="limpiarSeleccion();cargarRegiones();" class="btn btn-primary btn-md" value="Desarrollo">
                      </div>
                   </div>
                </div>
@@ -127,11 +128,11 @@
                               <p class="card-description"> Favor completar los campos correctamente </p>
                               <form class="forms-sample">
                                  <div class="form-group">
-                                    <label for="exampleInputName1">Nombre</label>
+                                    <label for="exampleInputName1">Nombre Empresa</label>
                                     <input type="text" class="form-control" id="nombre">
                                  </div>
                                  <div class="form-group">
-                                    <label for="exampleInputName1">Rut</label>
+                                    <label for="exampleInputName1">Rut Empresa</label>
                                     <input type="text" class="form-control" id="rut">
                                  </div>
                                  <div class="form-group">
@@ -139,7 +140,7 @@
                                     <input type="text" class="form-control" id="email">
                                  </div>
                                  <div class="form-group">
-                                    <label for="exampleInputName1">Teléfono</label>
+                                    <label for="exampleInputName1">Fono contacto</label>
                                     <input type="text" class="form-control" id="telefono">
                                  </div>
                                  <div class="form-group">
@@ -148,31 +149,21 @@
                                        <option _blank="">Elija Una</option>
                                        <?php                  
                                           for($i=0;$i<sizeOf($regiones);$i++){
-                                             echo "<option value='".$i."'>".$regiones[$i]->region."</option>";
+                                             echo "<option value='".$regiones[$i]->id."'>".$regiones[$i]->region."</option>";
                                           }
                                        ?> 
                                     </select>
                                  </div>
                                  <div class="form-group">
                                     <label for="provincia">Provincia</label>
-                                    <select class="form-control" id="provincia">
-                                       <option _blank="">Elija Una</option> 
-                                       <?php                  
-                                          for($i=0;$i<sizeOf($provincias);$i++){
-                                             echo "<option value='".$i."'>".$provincias[$i]->provincia."</option>";
-                                          }
-                                       ?>
+                                    <select class="form-control" id="provincia" onchange="getComunasProvincia();">
+                                       <option id="_blank">Elija Una </option>
                                     </select>
                                  </div>
                                  <div class="form-group">
                                     <label for="comuna">Comuna</label>
                                     <select class="form-control" id="comuna">
-                                       <option _blank="">Elija Una</option>
-                                       <?php                  
-                                          for($i=0;$i<sizeOf($comunas);$i++){
-                                             echo "<option value='".$i."'>".$comunas[$i]->comuna."</option>";
-                                          }
-                                       ?>
+                                       <option id="_blank">Elija Una </option>
                                     </select>
                                  </div>
                                  <div class="form-group">
@@ -180,7 +171,7 @@
                                     <input type="text" class="form-control" id="direccion">
                                  </div>
                                  <div class="form-group">
-                                    <input type="button" onclick="cambioOpciones();" class="btn btn-primary btn-md" value="Crear Cliente">
+                                    <input type="button" onclick="crearCliente();" class="btn btn-primary btn-md" value="Crear Cliente">
                                  </div>
                               </form>
                            </div>

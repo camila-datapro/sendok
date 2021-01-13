@@ -7,6 +7,7 @@ use App\RegionModel;
 
 class RegionController extends Controller
 {
+    
     public function index(){
         return $this->getRegiones();
     }

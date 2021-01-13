@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\ProvinciaModel;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class ProvinciaController extends Controller
 {
+
     public function index(){
         return $this->getProvincias();
     }
 
-    public function obtenerProvincias(){
-
-        return json_encode(ProvinciaModel::getProvinciasByRegion(1));
+    public function getProvincias(Request $request){
+       //Log::debug("request camila:".$request['id']);
+       $idRegion = $request['id'];
+        return json_encode(ProvinciaModel::getProvinciasByRegion($idRegion));
     }
 }
