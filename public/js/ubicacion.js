@@ -32,7 +32,7 @@ function getProvinciasRegion() {
   });
   $.ajax({
     type: "POST",
-    url: url_prev + 'obtenerProvincias',
+    url: url_prev + '/obtenerProvincias',
     data: {
       id: idRegion,
       _token: $('input[name="_token"]').val()
