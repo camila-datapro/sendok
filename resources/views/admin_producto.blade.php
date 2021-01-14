@@ -29,6 +29,8 @@
       <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
         <!--datatables-->
         <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
+        <script src="{{ asset('/js/app.js') }}"></script>
+      <script src="https://unpkg.com/@popperjs/core@2"></script>
    </head>
    <body>
       <div class="container-scroller">
@@ -267,7 +269,6 @@
       <!-- Custom js for this page-->
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
       <script src="{{ asset('/js/cliente.js') }}"></script>
-      <script src="{{ asset('/js/app.js') }}"></script>
       <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>   
       <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   
         <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
