@@ -14,6 +14,10 @@ class ProvinciaController extends Controller
         return $this->getProvincias();
     }
 
+    public function test(Request $request){
+        return ProvinciaModel::all();
+    }
+
     public function getProvincias(Request $request){
        //Log::debug("request camila:".$request['id']);
        $idRegion = $request['id'];

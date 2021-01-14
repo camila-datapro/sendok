@@ -27,3 +27,5 @@ Route::get('/obtenerRegiones','RegionController@getRegiones')->name('obtenerRegi
 Route::post('/obtenerProvincias','ProvinciaController@getProvincias')->name('obtenerProvincias');
 Route::post('/obtenerComunas','ComunaController@getComunas')->name('obtenerComunas');
 Route::post('/crearCliente','ClienteController@setCliente')->name('crearCliente');
+
+Route::post('/test','ProvinciaController@test')->name('test');

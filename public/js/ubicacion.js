@@ -3,10 +3,10 @@
             type: "GET",
             url: '/obtenerRegiones', 
             data: { }
-        }).done(function( msg ) {
+        }).done(function( msg ) {           
         });
 
-
+      
     }
 
     $('region').on('change', function() {
@@ -21,6 +21,16 @@
 
     
     function getProvinciasRegion(){
+        
+        $.ajax({
+            type: "POST",
+            url: '/test', 
+            data: {test : 1 ,
+            _token: $('input[name="_token"]').val() }
+        }).done(function( msg ) {
+            console.log("entro");
+            console.log(msg);
+        });
         var idRegion = parseInt($("#region").val());
         console.log();
         $.ajaxSetup({
@@ -30,7 +40,7 @@
         });
         $.ajax({
             type: "POST",
-            url: location.origin+'/desarrollo/public/obtenerProvincias', 
+            url: location.origin+'/obtenerProvincias', 
             data: { id: idRegion,
             _token: $('input[name="_token"]').val() 
             } //esto es necesario, por la validacion de seguridad de laravel
@@ -57,7 +67,7 @@
         });
         $.ajax({
             type: "POST",
-            url: location.origin+'/desarrollo/public/obtenerComunas', 
+            url: location.origin+'/obtenerComunas', 
             data: { id: idProvincia,
             _token: $('input[name="_token"]').val() 
             } //esto es necesario, por la validacion de seguridad de laravel
@@ -92,7 +102,7 @@
         });
         $.ajax({
             type: "POST",
-            url: location.origin+'/desarrollo/public/crearCliente', 
+            url: location.origin+'/crearCliente', 
             data: { nombre: nombre , rut: rut, email: email, fono: fono, idRegion: idRegion, idProvincia: idProvincia, idComuna: idComuna, direccion: direccion ,
             _token: $('input[name="_token"]').val() 
             } //esto es necesario, por la validacion de seguridad de laravel
