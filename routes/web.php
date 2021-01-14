@@ -18,14 +18,20 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+//urls de navegacion
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/producto','ProductoController@index')->name('producto');
 Route::get('/cliente','ClienteController@index')->name('cliente');
 Route::get('/propuesta','PropuestaController@index')->name('propuesta');
+Route::get('/admin_cliente', 'AdminClienteController@index')->name('admin_cliente');
+Route::get('/admin_producto', 'AdminProductoController@index')->name('admin_producto');
+//creacion de cliente
 Route::get('/obtenerRegiones','RegionController@getRegiones')->name('obtenerRegiones');
 Route::post('/obtenerProvincias','ProvinciaController@getProvincias')->name('obtenerProvincias');
 Route::post('/obtenerComunas','ComunaController@getComunas')->name('obtenerComunas');
 Route::post('/crearCliente','ClienteController@setCliente')->name('crearCliente');
 
-Route::post('/test','ProvinciaController@test')->name('test');
+//creacion de producto
+Route::get('/obtenerTiposDeProducto','TipoProductoController@getTiposDeProducto')->name('obtenerTiposDeProducto');
+Route::post('/crearProducto','ProductoController@setProducto')->name('crearProducto');
+

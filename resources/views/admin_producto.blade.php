@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
+   <meta name="csrg-token" content="{{ csrf_token() }}" />
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>Sendok</title>
       <!-- plugins:css -->
+      <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
       <link rel="stylesheet" href=" {{ asset('/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/iconfonts/ionicons/css/ionicons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/iconfonts/typicons/src/font/typicons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.base.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.addons.css') }}">
+      
       <!-- endinject -->
       <!-- plugin css for this page -->
       <!-- End plugin css for this page -->
@@ -22,6 +25,10 @@
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
       <!-- End Layout styles -->
       <link rel="shortcut icon" href="{{ asset('/assets/images/favicon.png') }}" />
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+        <!--datatables-->
+        <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
    </head>
    <body>
       <div class="container-scroller">
@@ -133,45 +140,51 @@
          </nav>
          <!-- partial -->
          <div class="main-panel">
-            <div class="content-wrapper">
+            <div class="content-wrapper" style="background: white;">
                <!-- Page Title Header Starts-->
                <div class="row page-title-header">
                   <div class="col-12">
                      <div class="page-header">
-                        <h4 class="page-title">Crear nuevo producto</h4>
+                        <h4 class="page-title">Administrar Productos</h4>                        
                      </div>
                   </div>
                </div>
                <!-- Page Title Header Ends-->
-               <div class="row">
+               <div class="row">            
                   <div class="col-md-12 grid-margin">
                      <div class="col-md-12 grid-margin stretch-card">
-                        <div class="card">
-                           <div class="card-body">
-                              <h4 class="card-title">Seleccione tipo producto</h4>
-                              <div style="padding-left: 0px !important;" class="form-group col-md-12">                                
-                                 <select class="form-control form-control-md" id="tipo_producto">
-                                    <option _blank="">Elija Uno</option>
-                                 </select>
-                              </div>
-                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                                 <label>Nombre Producto</label>
-                                 <input id="nombre_producto" maxlength="20" name="nombre_producto" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
-                              </div>
-                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                                 <label>Descripción Producto</label>
-                                 <input id="descripcion_producto" maxlength="250" name="descripcion_producto" type="text" class="form-control form-control-sm" aria-label="Descripción de Producto">
-                              </div>
-                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                                 <label>Valor venta</label>
-                                 <input type="number" maxlength="10" class="form-control form-control-sm" aria-label="valor_venta" id="valor_venta">
-                              </div>
-
-                              <div class="form-group">
-                                    <input type="button" onclick="crearProducto();" class="btn btn-primary btn-md" value="Crear Producto">
-                                 </div>
-                           </div>
-                        </div>
+                                  
+                              <div class="container">
+                                  <div class="row">
+                                      <div class="col-lg-12">
+                                      <table class="table table-hover tabla_productos display nowrap" cellspacing="0" id="tabla_productos">
+                                            <thead>
+                                                <tr>
+                                                <th scope="col">id Producto</th>
+                                                <th scope="col">Nombre Producto</th>
+                                                <th scope="col">Descripcion Producto</th>
+                                                <th scope="col">Valor Producto</th>
+                                                <th scope="col">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                             <?php                  
+                                                   for($i=0;$i<sizeOf($productos);$i++){
+                                                      echo "<tr>
+                                                      <td>".$productos[$i]->id_producto."</td>
+                                                      <td>".$productos[$i]->nombre_producto."</td>
+                                                      <td>".$productos[$i]->descripcion_producto."</td>
+                                                      <td> $".$productos[$i]->valor_producto."</td>
+                                                      <td><button class='btn btn-danger'><i class='fas fa-trash-alt'></i></button> <button class='btn btn-warning'><i class='fas fa-edit'></i></button></td>
+                                                      </tr>";
+                                                   }
+                                             ?>  
+                                            </tbody>
+                                        </table>
+                                      </div>
+                                    </div>                               
+                                </div>
+                           
                      </div>
                   </div>
                </div>
@@ -183,20 +196,21 @@
          </div>
          <!-- page-body-wrapper ends -->
       </div>
+      <!-- seccion modales-->
 
-      
+
          <!-- Modal -->
          <div class="modal fade" id="modalExitosa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLabel">Creacion Exitosa</h5>
+               <h5 class="modal-title" id="exampleModalLabel">Operación exitosa</h5>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                </button>
                </div>
                <div class="modal-body">
-               Se ha creado el nuevo producto de forma exitosa
+               Se ha realizado la operación de forma exitosa.
                </div>
                <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
@@ -209,13 +223,13 @@
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLabel">Error en la creacion</h5>
+               <h5 class="modal-title" id="exampleModalLabel">Error en la operación</h5>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                </button>
                </div>
                <div class="modal-body">
-               La creación de producto no se pudo realizar correctamente, porfavor intente nuevamente.
+               La operacion no se pudo realizar correctamente, porfavor intente nuevamente.
                </div>
                <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
@@ -236,6 +250,9 @@
             </div>
          </div>
          </div>
+      <!-- fin seccion modales-->
+
+
       <!-- container-scroller -->
       <!-- plugins:js -->
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.base.js') }}"></script>
@@ -247,9 +264,20 @@
       <script src="{{ asset('/assets/js/shared/off-canvas.js') }}"></script>
       <script src="{{ asset('/assets/js/shared/misc.js') }}"></script>
       <!-- endinject -->
-      <script src="{{ asset('/js/producto.js') }}"></script>
       <!-- Custom js for this page-->
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
+      <script src="{{ asset('/js/cliente.js') }}"></script>
+      <script src="{{ asset('/js/app.js') }}"></script>
+      <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>   
+      <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
       <!-- End custom js for this page-->
+      <script>
+         $(document).ready(function() {
+            $(".tabla_productos").DataTable({
+                responsive: true
+            });
+        });
+    </script>
    </body>
 </html>

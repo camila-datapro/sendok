@@ -108,6 +108,8 @@ function crearCliente() {
     $("#modalCargando").modal('hide');
     $("#modalExitosa").modal('show');
   }).fail(function() {
+    $("#modalCargando").modal('hide');
     $("#modalError").modal('show');
   });
 }
+

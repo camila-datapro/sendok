@@ -42,8 +42,8 @@
                   <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                      <div class="dropdown-header text-center">
                         <img class="img-md rounded-circle" src="{{ asset('/assets/images/faces/face8.jpg') }}" alt="Profile image">
-                        <p class="mb-1 mt-3 font-weight-semibold">Sasha Stifel</p>
-                        <p class="font-weight-light text-muted mb-0">sstifel@datapro.cl</p>
+                        <p class="mb-1 mt-3 font-weight-semibold">{{ Auth::user()->name }}</p>
+                        <p class="font-weight-light text-muted mb-0">{{ Auth::user()->email }}</p>
                      </div>
                      <a class="dropdown-item disabled" style="color:gray">Mi perfil</a>
                      <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -72,30 +72,58 @@
                         <div class="dot-indicator bg-success"></div>
                      </div>
                      <div class="text-wrapper">
-                        <p class="profile-name">Sasha Stifel</p>
+                        <p class="profile-name">{{ Auth::user()->name }}</p>
                         <p class="designation">DATAPRO</p>
                      </div>
                   </a>
                </li>
                <li class="nav-item nav-category">Menú principal</li>
+             
                <li class="nav-item">
                   <a class="nav-link" href="./home">
                   <i class="menu-icon typcn typcn-document-text"></i>
                   <span class="menu-title">Dashboard</span>
                   </a>
                </li>
+                  <!-- dropdowns menu-->
+                    <!-- productos-->
                <li class="nav-item">
-                  <a class="nav-link" href="./producto">
-                  <i class="menu-icon typcn typcn-shopping-bag"></i>
-                  <span class="menu-title">Crear Producto</span>
+                  <a class="nav-link" data-toggle="collapse" href="#menu_productos" aria-expanded="false" aria-controls="menu_productos">
+                     <i class="menu-icon typcn typcn-coffee"></i>
+                     <span class="menu-title">Productos</span>
+                     <i class="menu-arrow"></i>
                   </a>
-               </li>
+                  <div class="collapse" id="menu_productos">
+                     <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                        <a class="nav-link" href="./producto">Crear nuevo</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="./admin_producto">Administrar productos</a>
+                        </li>
+                     </ul>
+                  </div>
+                  </li>
+               <!-- fin dropdown productos-->
                <li class="nav-item">
-                  <a class="nav-link" href="./cliente">
-                  <i class="menu-icon typcn typcn-th-large-outline"></i>
-                  <span class="menu-title">Crear Cliente</span>
+                  <a class="nav-link" data-toggle="collapse" href="#menu_clientes" aria-expanded="false" aria-controls="menu_clientes">
+                     <i class="menu-icon typcn typcn-coffee"></i>
+                     <span class="menu-title">Clientes</span>
+                     <i class="menu-arrow"></i>
                   </a>
-               </li>
+                  <div class="collapse" id="menu_clientes">
+                     <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                        <a class="nav-link" href="./cliente">Crear nuevo</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="./admin_cliente">Administrar clientes</a>
+                        </li>
+                     </ul>
+                  </div>
+                  </li>
+                  <!--fin dropdowns clientes-->
+                  <!-- fin dropdowns menu-->
                <li class="nav-item">
                   <a class="nav-link" href="./propuesta">
                   <i class="menu-icon typcn typcn-bell"></i>
@@ -126,19 +154,19 @@
                               <form class="forms-sample">
                                  <div class="form-group">
                                     <label for="exampleInputName1">Nombre Empresa</label>
-                                    <input type="text" class="form-control" id="nombre">
+                                    <input type="text" maxlength="20" class="form-control" id="nombre">
                                  </div>
                                  <div class="form-group">
                                     <label for="exampleInputName1">Rut Empresa</label>
-                                    <input type="text" class="form-control" id="rut">
+                                    <input type="text" maxlength="15" class="form-control" id="rut">
                                  </div>
                                  <div class="form-group">
                                     <label for="exampleInputEmail3">Email</label>
-                                    <input type="text" class="form-control" id="email">
+                                    <input type="email" class="form-control" id="email">
                                  </div>
                                  <div class="form-group">
                                     <label for="exampleInputName1">Fono contacto</label>
-                                    <input type="text" class="form-control" id="telefono">
+                                    <input type="number" maxlength="12" class="form-control" id="telefono">
                                  </div>
                                  <div class="form-group">
                                     <label for="region">Región</label>
@@ -165,7 +193,7 @@
                                  </div>
                                  <div class="form-group">
                                     <label for="exampleInputName1">Dirección</label>
-                                    <input type="text" class="form-control" id="direccion">
+                                    <input type="text" maxlength="30" class="form-control" id="direccion">
                                  </div>
                                  <div class="form-group">
                                     <input type="button" onclick="crearCliente();" class="btn btn-primary btn-md" value="Crear Cliente">
@@ -254,7 +282,7 @@
       <!-- endinject -->
       <!-- Custom js for this page-->
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
-      <script src="{{ asset('/js/ubicacion.js') }}"></script>
+      <script src="{{ asset('/js/cliente.js') }}"></script>
       <!-- End custom js for this page-->
    </body>
 </html>

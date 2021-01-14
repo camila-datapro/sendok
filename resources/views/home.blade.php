@@ -42,8 +42,8 @@
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
                   <img class="img-md rounded-circle" src="{{ asset('/assets/images/faces/face8.jpg') }}" alt="Profile image">
-                  <p class="mb-1 mt-3 font-weight-semibold">Sasha Stifel</p>
-                  <p class="font-weight-light text-muted mb-0">sstifel@datapro.cl</p>
+                  <p class="mb-1 mt-3 font-weight-semibold">{{ Auth::user()->name }}</p>
+                  <p class="font-weight-light text-muted mb-0">{{ Auth::user()->email }}</p>
                 </div>
                 <a class="dropdown-item disabled" style="color:gray">Mi perfil</a>
                 <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -62,49 +62,76 @@
       </nav>
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_sidebar.html -->
-        <nav class="sidebar sidebar-offcanvas" id="sidebar">
-          <ul class="nav">
-            <li class="nav-item nav-profile">
-              <a href="#" class="nav-link">
-                <div class="profile-image">
-                  <img class="img-xs rounded-circle" src="{{ asset('/assets/images/faces/face8.jpg') }}" alt="profile image">
-                  <div class="dot-indicator bg-success"></div>
-                </div>
-                <div class="text-wrapper">
-                  <p class="profile-name">Sasha Stifel</p>
-                  <p class="designation">DATAPRO</p>
-                </div>
-              </a>
-            </li>
-            <li class="nav-item nav-category">Menú principal</li>
-            <li class="nav-item">
-              <a class="nav-link" href="./home">
-                <i class="menu-icon typcn typcn-document-text"></i>
-                <span class="menu-title">Dashboard</span>
-              </a>
-            </li>
-           
-            <li class="nav-item">
-              <a class="nav-link" href="./producto">
-                <i class="menu-icon typcn typcn-shopping-bag"></i>
-                <span class="menu-title">Crear Producto</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./cliente">
-                <i class="menu-icon typcn typcn-th-large-outline"></i>
-                <span class="menu-title">Crear Cliente</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./propuesta">
-                <i class="menu-icon typcn typcn-bell"></i>
-                <span class="menu-title">Crear Propuesta</span>
-              </a>
-            </li>      
-          </ul>
-        </nav>
+         <!-- partial:partials/_sidebar.html -->
+         <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+               <li class="nav-item nav-profile">
+                  <a href="#" class="nav-link">
+                     <div class="profile-image">
+                        <img class="img-xs rounded-circle" src="{{ asset('/assets/images/faces/face8.jpg') }}" alt="profile image">
+                        <div class="dot-indicator bg-success"></div>
+                     </div>
+                     <div class="text-wrapper">
+                        <p class="profile-name">{{ Auth::user()->name }}</p>
+                        <p class="designation">DATAPRO</p>
+                     </div>
+                  </a>
+               </li>
+               <li class="nav-item nav-category">Menú principal</li>
+             
+               <li class="nav-item">
+                  <a class="nav-link" href="./home">
+                  <i class="menu-icon typcn typcn-document-text"></i>
+                  <span class="menu-title">Dashboard</span>
+                  </a>
+               </li>
+                  <!-- dropdowns menu-->
+                    <!-- productos-->
+               <li class="nav-item">
+                  <a class="nav-link" data-toggle="collapse" href="#menu_productos" aria-expanded="false" aria-controls="menu_productos">
+                     <i class="menu-icon typcn typcn-coffee"></i>
+                     <span class="menu-title">Productos</span>
+                     <i class="menu-arrow"></i>
+                  </a>
+                  <div class="collapse" id="menu_productos">
+                     <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                        <a class="nav-link" href="./producto">Crear nuevo</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="./admin_producto">Administrar productos</a>
+                        </li>
+                     </ul>
+                  </div>
+                  </li>
+               <!-- fin dropdown productos-->
+               <li class="nav-item">
+                  <a class="nav-link" data-toggle="collapse" href="#menu_clientes" aria-expanded="false" aria-controls="menu_clientes">
+                     <i class="menu-icon typcn typcn-coffee"></i>
+                     <span class="menu-title">Clientes</span>
+                     <i class="menu-arrow"></i>
+                  </a>
+                  <div class="collapse" id="menu_clientes">
+                     <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                        <a class="nav-link" href="./cliente">Crear nuevo</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="./admin_cliente">Administrar clientes</a>
+                        </li>
+                     </ul>
+                  </div>
+                  </li>
+                  <!--fin dropdowns clientes-->
+                  <!-- fin dropdowns menu-->
+               <li class="nav-item">
+                  <a class="nav-link" href="./propuesta">
+                  <i class="menu-icon typcn typcn-bell"></i>
+                  <span class="menu-title">Crear Propuesta</span>
+                  </a>
+               </li>
+            </ul>
+         </nav>
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
