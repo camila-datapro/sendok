@@ -52,7 +52,7 @@ function cargarTiposDeProducto(){
             $("#modalExitosa").modal('show');
         }, 500);
      
-    })/*.fail(function() {
+    }).fail(function() {
         
         setTimeout(() => {  
             $("#modalCargando").modal('hide'); 
@@ -60,7 +60,7 @@ function cargarTiposDeProducto(){
         setTimeout(() => {  
             $("#modalError").modal('show');
         }, 500);
-    })*/;
+    });
 
     
   

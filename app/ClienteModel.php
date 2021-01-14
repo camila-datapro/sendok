@@ -15,7 +15,7 @@ class ClienteModel extends Model
     }
 
     public static function crearCliente($nombre, $rut, $email, $fono, $idRegion,$idProvincia,$idComuna,$direccion){       
-            $results = DB::select("insert into cliente_destino (
+            $results = DB::insert("insert into cliente_destino (
             rut_cliente,
             nombre_cliente,
             fono_cliente,
@@ -31,9 +31,7 @@ class ClienteModel extends Model
                 ".intval($idRegion).",            
                 '".$email."',                
                 '".$direccion."'
-            )");
-
-            Log::debug($results);
+            )");            
         return $results;
     }
 }
