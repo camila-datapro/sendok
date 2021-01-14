@@ -30,7 +30,7 @@
         });
         $.ajax({
             type: "POST",
-            url: './public/obtenerProvincias', 
+            url: './desarrollo/public/obtenerProvincias', 
             data: { id: idRegion,
             _token: $('input[name="_token"]').val() 
             } //esto es necesario, por la validacion de seguridad de laravel
@@ -57,7 +57,7 @@
         });
         $.ajax({
             type: "POST",
-            url: './public/obtenerComunas', 
+            url: './desarrollo/public/obtenerComunas', 
             data: { id: idProvincia,
             _token: $('input[name="_token"]').val() 
             } //esto es necesario, por la validacion de seguridad de laravel
@@ -92,7 +92,7 @@
         });
         $.ajax({
             type: "POST",
-            url: './public/crearCliente', 
+            url: './desarrollo/public/crearCliente', 
             data: { nombre: nombre , rut: rut, email: email, fono: fono, idRegion: idRegion, idProvincia: idProvincia, idComuna: idComuna, direccion: direccion ,
             _token: $('input[name="_token"]').val() 
             } //esto es necesario, por la validacion de seguridad de laravel
