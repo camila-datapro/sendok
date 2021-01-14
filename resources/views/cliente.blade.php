@@ -113,9 +113,6 @@
                      <div class="page-header">
                         <h4 class="page-title">Crear nuevo cliente</h4>                        
                      </div>
-                     <div class="form-group">
-                        <input type="button" onclick="limpiarSeleccion();cargarRegiones();" class="btn btn-primary btn-md" value="Desarrollo">
-                     </div>
                   </div>
                </div>
                <!-- Page Title Header Ends-->
@@ -187,6 +184,63 @@
          </div>
          <!-- page-body-wrapper ends -->
       </div>
+      <!-- seccion modales-->
+
+
+         <!-- Modal -->
+         <div class="modal fade" id="modalExitosa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Creacion Exitosa</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+               </div>
+               <div class="modal-body">
+               Se ha creado el nuevo cliente de forma exitosa
+               </div>
+               <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+               </div>
+            </div>
+         </div>
+         </div>
+
+         <div class="modal fade" id="modalError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Error en la creacion</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+               </div>
+               <div class="modal-body">
+               La creación de cliente no se pudo realizar correctamente, porfavor intente nuevamente.
+               </div>
+               <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+               </div>
+            </div>
+         </div>
+         </div>
+
+         <div class="modal fade" id="modalCargando" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Cargando datos...</h5>
+               </div>
+               <div class="modal-body align-items-center text-center">
+                <img width="100px" src="{{ asset('img/loading.gif') }}"/>
+               </div>
+            </div>
+         </div>
+         </div>
+      <!-- fin seccion modales-->
+
+
       <!-- container-scroller -->
       <!-- plugins:js -->
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.base.js') }}"></script>
