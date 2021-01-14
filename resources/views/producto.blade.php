@@ -129,6 +129,14 @@
                   <span class="menu-title">Crear Propuesta</span>
                   </a>
                </li>
+               <li class="nav-item">
+                     <a style="background:white; color: blue;" href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        <span class="nav__name">Cerrar Sesión</span>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                           @csrf
+                        </form>
+                     </a>   
+               </li>
             </ul>
          </nav>
          <!-- partial -->
