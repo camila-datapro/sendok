@@ -1,3 +1,5 @@
+    
+    
     function cargarRegiones(){
         $.ajax({
             type: "GET",
@@ -21,7 +23,10 @@
 
     
     function getProvinciasRegion(){
-        
+        console.log(location.origin);
+        console.log(location.href);
+        console.log(location.href);
+        console.log(location.origin+'/test');
         $.ajax({
             type: "POST",
             url: '/test', 
