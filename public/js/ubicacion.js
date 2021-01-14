@@ -22,6 +22,7 @@
     
     function getProvinciasRegion(){
         var idRegion = parseInt($("#region").val());
+        console.log();
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN' : $('meta[name="csrf-token]').attr('content')
@@ -29,7 +30,7 @@
         });
         $.ajax({
             type: "POST",
-            url: './obtenerProvincias', 
+            url: './public/obtenerProvincias', 
             data: { id: idRegion,
             _token: $('input[name="_token"]').val() 
             } //esto es necesario, por la validacion de seguridad de laravel
@@ -56,7 +57,7 @@
         });
         $.ajax({
             type: "POST",
-            url: './obtenerComunas', 
+            url: './public/obtenerComunas', 
             data: { id: idProvincia,
             _token: $('input[name="_token"]').val() 
             } //esto es necesario, por la validacion de seguridad de laravel
@@ -91,7 +92,7 @@
         });
         $.ajax({
             type: "POST",
-            url: './crearCliente', 
+            url: './public/crearCliente', 
             data: { nombre: nombre , rut: rut, email: email, fono: fono, idRegion: idRegion, idProvincia: idProvincia, idComuna: idComuna, direccion: direccion ,
             _token: $('input[name="_token"]').val() 
             } //esto es necesario, por la validacion de seguridad de laravel
