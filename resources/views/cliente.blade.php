@@ -237,7 +237,7 @@
                Se ha creado el nuevo cliente de forma exitosa
                </div>
                <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.reload();" >OK</button>
                </div>
             </div>
          </div>
