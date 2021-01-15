@@ -79,7 +79,7 @@
                      </div>
                      <div class="text-wrapper">
                         <p class="profile-name">{{ Auth::user()->name }}</p>
-                        <p class="designation">DATAPRO</p>
+                        <p class="designation">{{ Auth::user()->empresa }}</p>
                      </div>
                   </a>
                </li>
