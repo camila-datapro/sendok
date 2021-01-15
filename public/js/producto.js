@@ -61,8 +61,44 @@ function cargarTiposDeProducto(){
             $("#modalError").modal('show');
         }, 500);
     });
+  }
 
-    
+  function confirmarEliminacion(id_boton, nombre_producto){
+    var id_producto = parseInt(id_boton.replace('eliminar_',''));
+    $("#modal_eliminar_nombre").text(nombre_producto);
+    $("#modal_eliminar").removeAttr("id_producto");
+     $("#modal_eliminar").attr("id_producto",id_producto);
+     $("#modal_eliminar").modal('show');
+  }
+  
+  function eliminarProducto(){
+    var id_producto = $("#modal_eliminar").attr("id_producto");
+    console.log("entro a eliminacion:");
+    $("#modal_eliminar").modal('hide');
+    $("#modalCargando").modal('show');
+  
+    $.ajax({
+      type: "POST",
+      url: url_prev + '/eliminarProducto',
+      data: {
+        id_producto: id_producto,
+        _token: $('input[name="_token"]').val()
+      } //esto es necesario, por la validacion de seguridad de laravel
+    }).done(function(msg) {
+      setTimeout(() => {  
+          $("#modalCargando").modal('hide'); 
+      }, 500);
+      setTimeout(() => {  
+          $("#modalExitosa").modal('show');
+      }, 500);
+    }).fail(function() {
+      setTimeout(() => {  
+          $("#modalCargando").modal('hide'); 
+      }, 500);
+      setTimeout(() => {  
+          $("#modalError").modal('show');
+      }, 500);
+    });
   
   }
   

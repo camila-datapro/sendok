@@ -34,4 +34,10 @@ class ClienteModel extends Model
             )");            
         return $results;
     }
+
+    public static function eliminarCliente($id_cliente){       
+        $results = DB::delete("delete from cliente_destino 
+        where id_cliente = '".$id_cliente."';");            
+    return $results;
+    }
 }

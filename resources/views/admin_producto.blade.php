@@ -183,7 +183,14 @@
                                                       <td>".$productos[$i]->nombre_producto."</td>
                                                       <td>".$productos[$i]->descripcion_producto."</td>
                                                       <td> $".$productos[$i]->valor_producto."</td>
-                                                      <td><button class='btn btn-danger'><i class='fas fa-trash-alt'></i></button> <button class='btn btn-warning'><i class='fas fa-edit'></i></button></td>
+                                                      <td>
+                                                         <button class='btn btn-danger' id='eliminar_".$productos[$i]->id_producto."' onclick=confirmarEliminacion(this.id,'".$productos[$i]->nombre_producto."'); >
+                                                         <i class='fas fa-trash-alt'></i>
+                                                         </button> 
+                                                         <button disabled class='btn btn-warning' id='editar_".$productos[$i]->id_producto."'>
+                                                         <i class='fas fa-edit'></i>
+                                                         </button>
+                                                      </td>
                                                       </tr>";
                                                    }
                                              ?>  
@@ -208,6 +215,30 @@
 
 
          <!-- Modal -->
+
+         <div class="modal fade" id="modal_eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+               </div>
+               <div class="modal-body">
+               <div class="text-center content-justify-center">
+                  <h4>¿Está seguro de eliminar el elemento? : </h4>               
+                  <h4 id="modal_eliminar_nombre"></h4>
+               </div>
+               </div>
+               <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+               <button type="button" class="btn btn-primary" id="eliminar_producto" onclick="eliminarProducto();">Si, eliminar</button>
+               </div>
+            </div>
+         </div>
+         </div>
+
          <div class="modal fade" id="modalExitosa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -221,7 +252,7 @@
                Se ha realizado la operación de forma exitosa.
                </div>
                <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+               <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.reload();">OK</button>
                </div>
             </div>
          </div>
@@ -259,22 +290,12 @@
          </div>
          </div>
       <!-- fin seccion modales-->
-
-
-      <!-- container-scroller -->
-      <!-- plugins:js -->
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.base.js') }}"></script>
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.addons.js') }}"></script>
-      <!-- endinject -->
-      <!-- Plugin js for this page-->
-      <!-- End plugin js for this page-->
-      <!-- inject:js -->
       <script src="{{ asset('/assets/js/shared/off-canvas.js') }}"></script>
       <script src="{{ asset('/assets/js/shared/misc.js') }}"></script>
-      <!-- endinject -->
-      <!-- Custom js for this page-->
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
-      <script src="{{ asset('/js/cliente.js') }}"></script>
+      <script src="{{ asset('/js/producto.js') }}"></script>
       <script src="https://unpkg.com/@popperjs/core@2"></script>
       <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>   
       <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   

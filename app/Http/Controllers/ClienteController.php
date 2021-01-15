@@ -37,8 +37,16 @@ class ClienteController extends Controller
         $idProvincia = $request['idProvincia'];
         $idComuna = $request['idComuna'];
         $direccion = $request['direccion'];
-        Log::debug("paso por setCliente");
+        Log::debug("Se va a crear un cliente nuevo con los siguientes datos:");
         Log::debug(var_dump($request));
         return ClienteModel::crearCliente($nombre, $rut, $email, $fono, $idRegion,$idProvincia,$idComuna,$direccion);
+    }
+
+    public function removeCliente(Request $request){
+        
+        $id_cliente = $request['id_cliente'];
+        Log::debug("Se eliminará el cliente con id: ".$id_cliente);
+        Log::debug(var_dump($request));
+        return ClienteModel::eliminarCliente($id_cliente);
     }
 }

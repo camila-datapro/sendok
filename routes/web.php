@@ -30,8 +30,10 @@ Route::get('/obtenerRegiones','RegionController@getRegiones')->name('obtenerRegi
 Route::post('/obtenerProvincias','ProvinciaController@getProvincias')->name('obtenerProvincias');
 Route::post('/obtenerComunas','ComunaController@getComunas')->name('obtenerComunas');
 Route::post('/crearCliente','ClienteController@setCliente')->name('crearCliente');
+Route::post('/eliminarCliente','ClienteController@removeCliente')->name('eliminarCliente');
 
 //creacion de producto
 Route::get('/obtenerTiposDeProducto','TipoProductoController@getTiposDeProducto')->name('obtenerTiposDeProducto');
 Route::post('/crearProducto','ProductoController@setProducto')->name('crearProducto');
+Route::post('/eliminarProducto','ProductoController@removeProducto')->name('eliminarProducto');
 

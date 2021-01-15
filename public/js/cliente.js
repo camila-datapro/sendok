@@ -113,3 +113,43 @@ function crearCliente() {
   });
 }
 
+function confirmarEliminacion(id_boton,nombre_cliente){
+  var id_cliente = parseInt(id_boton.replace('eliminar_',''));
+  console.log("entro a confirmacion");
+  $("#modal_eliminar_nombre").text(nombre_cliente);
+  $("#modal_eliminar").removeAttr("id_cliente");
+   $("#modal_eliminar").attr("id_cliente",id_cliente);
+   $("#modal_eliminar").modal('show');
+}
+
+function eliminarCliente(){
+  var id_cliente = $("#modal_eliminar").attr("id_cliente");
+  console.log("entro a eliminacion:");
+  $("#modal_eliminar").modal('hide');
+  $("#modalCargando").modal('show');
+
+  $.ajax({
+    type: "POST",
+    url: url_prev + '/eliminarCliente',
+    data: {
+      id_cliente: id_cliente,
+      _token: $('input[name="_token"]').val()
+    } //esto es necesario, por la validacion de seguridad de laravel
+  }).done(function(msg) {
+    setTimeout(() => {  
+        $("#modalCargando").modal('hide'); 
+    }, 500);
+    setTimeout(() => {  
+        $("#modalExitosa").modal('show');
+    }, 500);
+  }).fail(function() {
+    setTimeout(() => {  
+        $("#modalCargando").modal('hide'); 
+    }, 500);
+    setTimeout(() => {  
+        $("#modalError").modal('show');
+    }, 500);
+  });
+
+  window.location.reload();
+}

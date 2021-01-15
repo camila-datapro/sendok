@@ -14,6 +14,7 @@
       <link rel="stylesheet" href="{{ asset('/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.base.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.addons.css') }}">
+      
       <!-- endinject -->
       <!-- plugin css for this page -->
       <!-- End plugin css for this page -->
@@ -160,39 +161,47 @@
                <div class="row">            
                   <div class="col-md-12 grid-margin">
                      <div class="col-md-12 grid-margin stretch-card">
-                                               
+                                  
                               <div class="container">
                                   <div class="row">
                                       <div class="col-lg-12">
                                       <table class="table table-hover tabla_clientes display nowrap" cellspacing="0" id="tabla_clientes">
                                             <thead>
                                                 <tr>
-                                                <th scope="col">id Cliente</th>
-                                                <th scope="col">Nombre Cliente</th>
-                                                <th scope="col">Fono Cliente</th>
-                                                <th scope="col">Email Cliente</th>
+                                                <th scope="col">id</th>
+                                                <th scope="col">Nombre </th>
+                                                <th scope="col">Fono</th>
+                                                <th scope="col">Email</th>
                                                 <th scope="col">Direccion</th>
+                                                <th scope="col">Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <?php                  
-                                                for($i=0;$i<sizeOf($clientes);$i++){
-                                                    echo "<tr>
-                                                    <td>".$clientes[$i]->id_cliente."</td>
-                                                    <td>".$clientes[$i]->nombre_cliente."</td>
-                                                    <td>".$clientes[$i]->fono_cliente."</td>
-                                                    <td>".$clientes[$i]->email_cliente."</td>
-                                                    <td>".$clientes[$i]->direccion_cliente."</td>
-                                                    <td><button class='btn btn-danger'><i class='fas fa-trash-alt'></i></button> <button class='btn btn-warning'><i class='fas fa-edit'></i></button></td>
-                                                    </tr>";
-                                                }
-                                            ?>                                               
+                                             <?php                  
+                                                   for($i=0;$i<sizeOf($clientes);$i++){
+                                                      echo "<tr>
+                                                      <td>".$clientes[$i]->id_cliente."</td>
+                                                      <td >".$clientes[$i]->nombre_cliente."</td>
+                                                      <td>".$clientes[$i]->fono_cliente."</td>
+                                                      <td> ".$clientes[$i]->email_cliente."</td>
+                                                      <td> ".$clientes[$i]->direccion_cliente."</td>
+                                                      <td>
+                                                         <button class='btn btn-danger' id='eliminar_".$clientes[$i]->id_cliente."' onclick=confirmarEliminacion(this.id,'".$clientes[$i]->nombre_cliente."'); >
+                                                         <i class='fas fa-trash-alt'></i>
+                                                         </button> 
+                                                         <button disabled class='btn btn-warning' id='editar_".$clientes[$i]->id_cliente."'>
+                                                         <i class='fas fa-edit'></i>
+                                                         </button>
+                                                      </td>
+                                                      </tr>";
+                                                   }
+                                             ?>  
                                             </tbody>
                                         </table>
                                       </div>
                                     </div>                               
                                 </div>
-                        
+                           
                      </div>
                   </div>
                </div>
@@ -208,6 +217,32 @@
 
 
          <!-- Modal -->
+
+
+         <div class="modal fade" id="modal_eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+               </div>
+               <div class="modal-body">
+               <div class="text-center content-justify-center">
+                  <h4>¿Está seguro de eliminar el elemento? : </h4>               
+                  <h4 id="modal_eliminar_nombre"></h4>
+               </div>
+               </div>
+               <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+               <button type="button" class="btn btn-primary" id="eliminar_cliente" onclick="eliminarCliente();">Si, eliminar</button>
+               </div>
+            </div>
+         </div>
+         </div>
+
+
          <div class="modal fade" id="modalExitosa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -221,7 +256,7 @@
                Se ha realizado la operación de forma exitosa.
                </div>
                <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+               <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.reload();">OK</button>
                </div>
             </div>
          </div>
@@ -259,27 +294,17 @@
          </div>
          </div>
       <!-- fin seccion modales-->
-
-
-      <!-- container-scroller -->
-      <!-- plugins:js -->
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.base.js') }}"></script>
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.addons.js') }}"></script>
-      <!-- endinject -->
-      <!-- Plugin js for this page-->
-      <!-- End plugin js for this page-->
-      <!-- inject:js -->
       <script src="{{ asset('/assets/js/shared/off-canvas.js') }}"></script>
       <script src="{{ asset('/assets/js/shared/misc.js') }}"></script>
-      <!-- endinject -->
-      <!-- Custom js for this page-->
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
-      <script src="{{ asset('/js/cliente.js') }}"></script>
-      <script src="https://unpkg.com/@popperjs/core@2"></script>                                         
+      <script src="{{ asset('/js/cliente.js')}}"></script>
+      <script src="https://unpkg.com/@popperjs/core@2"></script>
       <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>   
       <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   
-        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-      <!-- End custom js for this page-->
+      <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+   
       <script>
          $(document).ready(function() {
             $(".tabla_clientes").DataTable({

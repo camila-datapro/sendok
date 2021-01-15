@@ -30,4 +30,10 @@ class ProductoModel extends Model
             )");
         return $results;
     }
+
+    public static function eliminarProducto($id_producto){       
+        $results = DB::delete("delete from producto 
+        where id_producto = '".$id_producto."';");            
+    return $results;
+    }
 }
