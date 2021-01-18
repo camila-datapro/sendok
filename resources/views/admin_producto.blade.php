@@ -188,10 +188,10 @@
                                                       <td> % ".$productos[$i]->margen."</td>                                                      
                                                       <td><b>".strtoupper($productos[$i]->tipo_cambio)."</b> ".$productos[$i]->valor_producto."</td>
                                                       <td>
-                                                         <button class='btn btn-danger' id='eliminar_".$productos[$i]->id_producto."' onclick=confirmarEliminacion(this.id,'".$productos[$i]->nombre_producto."'); >
+                                                         <button class='btn btn-danger' id='eliminar_".$productos[$i]->id_producto."' onclick=confirmarEliminacion(this.id,'".$productos[$i]->nombre_producto."') >
                                                          <i class='fas fa-trash-alt'></i>
                                                          </button> 
-                                                         <button class='btn btn-warning' id='ver_".$productos[$i]->id_producto."' onclick=verProducto('".$productos[$i]->nombre_producto."','".$productos[$i]->descripcion_producto."'); >
+                                                         <button class='btn btn-warning' id='ver_".$productos[$i]->id_producto."' onclick=verProducto('".$productos[$i]->nombre_producto."','".$productos[$i]->descripcion_producto."') >
                                                          <i class='fas fa-search'></i>
                                                          </button> 
                                                       </td>
