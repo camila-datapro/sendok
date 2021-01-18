@@ -16,7 +16,7 @@ class ProductoModel extends Model
         return $results;
     }
 
-    public static function crearProducto($id_tipo, $nombre, $valor, $descripcion, $tipo_cambio, $costo, $margen, $stock){
+    public static function crearProducto($id_tipo, $nombre, $valor, $descripcion, $tipo_cambio, $stock, $costo, $margen){
         $results = DB::insert("insert into producto (
             id_tipo_producto,
             nombre_producto,
@@ -32,9 +32,9 @@ class ProductoModel extends Model
                 ".intval($valor).",      
                 '".$descripcion."',
                 '".$tipo_cambio."',
-                ".$stock.",
-                ".$costo.",
-                ".$margen."
+                ".intval($stock).",
+                ".intval($costo).",
+                ".intval($margen)."
             )");
         return $results;
     }
