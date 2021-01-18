@@ -161,6 +161,15 @@
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Descripción Producto</label>
                                  <input id="descripcion_producto" maxlength="250" name="descripcion_producto" type="text" class="form-control form-control-sm" aria-label="Descripción de Producto">
+                              </div>                              
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>Tipo de Cambio</label>
+                                 <select class="form-control" id="select_cambio">
+                                       <option id="_blank">Elija Uno</option>
+                                       <option id="clp">CLP</option>
+                                       <option id="usd">USD</option>
+                                       <option id="uf">UF</option>
+                                 </select>
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Valor venta</label>
@@ -236,6 +245,7 @@
             </div>
          </div>
          </div>
+
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.base.js') }}"></script>
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.addons.js') }}"></script>
       <script src="{{ asset('/assets/js/shared/off-canvas.js') }}"></script>

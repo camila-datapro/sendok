@@ -32,6 +32,7 @@ function cargarTiposDeProducto(){
     var nombre_producto = $("#nombre_producto").val();
     var valor_producto = $("#valor_venta").val();
     var descripcion_producto = $("#descripcion_producto").val();
+    var tipo_cambio = $("#select_cambio option:selected").attr("id");
 
     $("#modalCargando").modal('show');
     $.ajax({
@@ -42,6 +43,7 @@ function cargarTiposDeProducto(){
         nombre: nombre_producto,
         valor: valor_producto,
         descripcion: descripcion_producto,
+        tipo_cambio: tipo_cambio,
         _token: $('input[name="_token"]').val()
         } //esto es necesario, por la validacion de seguridad de laravel
     }).done(function(msg) {
@@ -73,7 +75,6 @@ function cargarTiposDeProducto(){
   
   function eliminarProducto(){
     var id_producto = $("#modal_eliminar").attr("id_producto");
-    console.log("entro a eliminacion:");
     $("#modal_eliminar").modal('hide');
     $("#modalCargando").modal('show');
   

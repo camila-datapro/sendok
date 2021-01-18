@@ -115,7 +115,6 @@ function crearCliente() {
 
 function confirmarEliminacion(id_boton,nombre_cliente){
   var id_cliente = parseInt(id_boton.replace('eliminar_',''));
-  console.log("entro a confirmacion");
   $("#modal_eliminar_nombre").text(nombre_cliente);
   $("#modal_eliminar").removeAttr("id_cliente");
    $("#modal_eliminar").attr("id_cliente",id_cliente);
@@ -124,7 +123,6 @@ function confirmarEliminacion(id_boton,nombre_cliente){
 
 function eliminarCliente(){
   var id_cliente = $("#modal_eliminar").attr("id_cliente");
-  console.log("entro a eliminacion:");
   $("#modal_eliminar").modal('hide');
   $("#modalCargando").modal('show');
 

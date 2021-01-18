@@ -182,7 +182,7 @@
                                                       <td>".$productos[$i]->id_producto."</td>
                                                       <td>".$productos[$i]->nombre_producto."</td>
                                                       <td>".$productos[$i]->descripcion_producto."</td>
-                                                      <td> $".$productos[$i]->valor_producto."</td>
+                                                      <td> <b>".strtoupper($productos[$i]->tipo_cambio)."</b> ".$productos[$i]->valor_producto."</td>
                                                       <td>
                                                          <button class='btn btn-danger' id='eliminar_".$productos[$i]->id_producto."' onclick=confirmarEliminacion(this.id,'".$productos[$i]->nombre_producto."'); >
                                                          <i class='fas fa-trash-alt'></i>

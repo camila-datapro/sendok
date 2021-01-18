@@ -17,8 +17,9 @@ class ProductoController extends Controller
         $nombre = $request['nombre'];
         $id_tipo = $request['id_tipo'];
         $valor = $request['valor'];
-        $descripcion = $request['descripcion'];        
-        $response = ProductoModel::crearProducto($id_tipo,$nombre,$valor,$descripcion);
+        $descripcion = $request['descripcion'];   
+        $tipo_cambio = $request['tipo_cambio'];       
+        $response = ProductoModel::crearProducto($id_tipo,$nombre,$valor,$descripcion,$tipo_cambio);
         return $response;
     }
 
