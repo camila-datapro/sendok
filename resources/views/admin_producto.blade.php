@@ -168,8 +168,7 @@
                                       <table class="table table-hover tabla_productos display nowrap" cellspacing="0" id="tabla_productos">
                                             <thead>
                                                 <tr>                                                
-                                                <th scope="col">Nombre</th>
-                                                <th scope="col">Descripcion</th>
+                                                <th scope="col">Nombre</th>                                                
                                                 <th scope="col">N° Fabricacion</th>
                                                 <th scope="col">Cód. interno</th>
                                                 <th scope="col">Costo</th>
@@ -182,8 +181,7 @@
                                              <?php                  
                                                    for($i=0;$i<sizeOf($productos);$i++){
                                                       echo "<tr>                                                      
-                                                      <td>".$productos[$i]->nombre_producto."</td>
-                                                      <td>".$productos[$i]->descripcion_producto."</td>
+                                                      <td>".$productos[$i]->nombre_producto."</td>                                                      
                                                       <td>".$productos[$i]->numero_fabricacion."</td>
                                                       <td>".$productos[$i]->numero_interno."</td>                                                      
                                                       <td><b>".strtoupper($productos[$i]->tipo_cambio)."</b> ".$productos[$i]->costo."</td>
@@ -192,6 +190,9 @@
                                                       <td>
                                                          <button class='btn btn-danger' id='eliminar_".$productos[$i]->id_producto."' onclick=confirmarEliminacion(this.id,'".$productos[$i]->nombre_producto."'); >
                                                          <i class='fas fa-trash-alt'></i>
+                                                         </button> 
+                                                         <button class='btn btn-warning' id='ver_".$productos[$i]->id_producto."' onclick=verProducto('".$productos[$i]->nombre_producto."','".$productos[$i]->descripcion_producto."'); >
+                                                         <i class='fas fa-search'></i>
                                                          </button> 
                                                       </td>
                                                       </tr>";
@@ -256,6 +257,26 @@
                </div>
                <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.reload();">OK</button>
+               </div>
+            </div>
+         </div>
+         </div>
+
+         <div class="modal fade" id="modal_ver_producto" tabindex="-1" role="dialog" aria-labelledby="modal_ver_producto" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+               <h5 class="modal-title" id="modal_ver_producto">Descripcion de producto</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+               </div>
+               <div class="modal-body">
+               <h3 id="nombre_descripcion"></h3>
+               <h4 id="texto_descripcion"></h4>
+               </div>
+               <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
                </div>
             </div>
          </div>

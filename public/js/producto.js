@@ -125,7 +125,16 @@ $(document).ready(function() {
     if(windowsize<1100){
       setTimeout(() => {  
           $("td.sorting_1").click();
-      }, 100);
+        }, 100);
       
     }
 });
+
+
+function verProducto(nombre, descripcion){
+   $("#texto_descripcion").text(nombre);
+    $("#nombre_descripcion").text(descripcion);
+    setTimeout(() => {  
+$("#modal_ver_producto").modal("show");
+}, 300);
+}
