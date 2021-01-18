@@ -131,9 +131,11 @@ $(document).ready(function() {
 });
 
 
-function verProducto(nombre, descripcion){
-   $("#texto_descripcion").text(nombre);
-    $("#nombre_descripcion").text(descripcion);
+function verProducto(producto){
+   var nombre = producto.nombre;
+   var descripcion = producto.descripcion;
+   $("#texto_descripcion").text(descripcion);
+    $("#nombre_descripcion").text(nombre);
     setTimeout(() => {  
 $("#modal_ver_producto").modal("show");
 }, 300);
