@@ -131,9 +131,9 @@
                   <!--fin dropdowns clientes-->
                   <!-- fin dropdowns menu-->
                <li class="nav-item">
-                  <a class="nav-link" href="./propuesta">
+                  <a class="nav-link" href="./documento">
                   <i class="menu-icon typcn typcn-bell"></i>
-                  <span class="menu-title">Crear Propuesta</span>
+                  <span class="menu-title">Crear Documento</span>
                   </a>
                </li>
                <li class="nav-item">
@@ -168,8 +168,8 @@
                                       <table class="table table-hover tabla_clientes display nowrap" cellspacing="0" id="tabla_clientes">
                                             <thead>
                                                 <tr>
-                                                <th scope="col">id</th>
                                                 <th scope="col">Nombre </th>
+                                                <th scope="col">id</th>                                                
                                                 <th scope="col">Fono</th>
                                                 <th scope="col">Email</th>
                                                 <th scope="col">Direccion</th>
@@ -179,9 +179,9 @@
                                             <tbody>
                                              <?php                  
                                                    for($i=0;$i<sizeOf($clientes);$i++){
-                                                      echo "<tr>
-                                                      <td>".$clientes[$i]->id_cliente."</td>
+                                                      echo "<tr>                                                      
                                                       <td >".$clientes[$i]->nombre_cliente."</td>
+                                                      <td>".$clientes[$i]->id_cliente."</td>
                                                       <td>".$clientes[$i]->fono_cliente."</td>
                                                       <td> ".$clientes[$i]->email_cliente."</td>
                                                       <td> ".$clientes[$i]->direccion_cliente."</td>

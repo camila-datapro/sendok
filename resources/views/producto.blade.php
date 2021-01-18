@@ -116,9 +116,9 @@
                   <!--fin dropdowns clientes-->
                   <!-- fin dropdowns menu-->
                <li class="nav-item">
-                  <a class="nav-link" href="./propuesta">
+                  <a class="nav-link" href="./documento">
                   <i class="menu-icon typcn typcn-bell"></i>
-                  <span class="menu-title">Crear Propuesta</span>
+                  <span class="menu-title">Crear Documento</span>
                   </a>
                </li>
                <li class="nav-item">
@@ -148,10 +148,12 @@
                      <div class="col-md-12 grid-margin stretch-card">
                         <div class="card">
                            <div class="card-body">
-                              <h4 class="card-title">Seleccione tipo producto</h4>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">                                
-                                 <select class="form-control form-control-md" id="tipo_producto">
+                                 <label>Clase</label>
+                                 <select class="form-control form-control-md" id="tipo_producto" onchange="visarUnidades();">
                                     <option _blank="">Elija Uno</option>
+                                    <option id="producto">Producto</option>
+                                    <option id="servicio">Servicio</option>
                                  </select>
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
@@ -159,9 +161,21 @@
                                  <input id="nombre_producto" maxlength="20" name="nombre_producto" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>N° Fabricacion</label>
+                                 <input id="numero_fabricacion" maxlength="20" name="numero_fabricacion" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
+                              </div>
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>N° Interno</label>
+                                 <input id="numero_interno" maxlength="20" name="numero_interno" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
+                              </div>
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Descripción Producto</label>
                                  <input id="descripcion_producto" maxlength="250" name="descripcion_producto" type="text" class="form-control form-control-sm" aria-label="Descripción de Producto">
-                              </div>                              
+                              </div>    
+                              <div style="padding-left: 0px !important; display:none;" class="form-group col-md-12" id="div_unidades">
+                                 <label>Unidades disponibles</label>
+                                 <input id="stock" maxlength="15" name="stock" type="number" class="form-control form-control-sm" aria-label="Stock">
+                              </div>                               
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Tipo de Cambio</label>
                                  <select class="form-control" id="select_cambio">
@@ -170,6 +184,14 @@
                                        <option id="usd">USD</option>
                                        <option id="uf">UF</option>
                                  </select>
+                              </div>
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>Costo</label>
+                                 <input type="number" maxlength="10" class="form-control form-control-sm" aria-label="costo" id="costo">
+                              </div>
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>Margen</label>
+                                 <input type="number" maxlength="10" class="form-control form-control-sm" aria-label="margen" id="margen">
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Valor venta</label>

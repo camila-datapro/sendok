@@ -3,7 +3,17 @@
 //const url_prev = '';
 // cpanel
 const url_prev = location.origin+'/desarrollo/public';
-cargarTiposDeProducto();
+//cargarTiposDeProducto();
+
+function visarUnidades(){
+  var opcion = $("#tipo_producto option:selected").attr("id");
+  if(opcion=="producto"){
+    $("#div_unidades").show();
+  }else{
+    $("#div_unidades").hide();
+  }
+}
+
 
 function cargarTiposDeProducto(){
     
@@ -33,6 +43,9 @@ function cargarTiposDeProducto(){
     var valor_producto = $("#valor_venta").val();
     var descripcion_producto = $("#descripcion_producto").val();
     var tipo_cambio = $("#select_cambio option:selected").attr("id");
+    var stock = $("#stock").val();
+    var costo = $("#costo").val();
+    var margen = $("#margen").val();
 
     $("#modalCargando").modal('show');
     $.ajax({
@@ -44,6 +57,9 @@ function cargarTiposDeProducto(){
         valor: valor_producto,
         descripcion: descripcion_producto,
         tipo_cambio: tipo_cambio,
+        stock: stock,
+        costo: costo,
+        margen: margen,
         _token: $('input[name="_token"]').val()
         } //esto es necesario, por la validacion de seguridad de laravel
     }).done(function(msg) {
@@ -102,5 +118,14 @@ function cargarTiposDeProducto(){
     });
   
   }
-  
-  
+
+
+$(document).ready(function() {
+  var windowsize = $(window).width();
+    if(windowsize<1100){
+      setTimeout(() => {  
+          $("td.sorting_1").click();
+      }, 100);
+      
+    }
+});

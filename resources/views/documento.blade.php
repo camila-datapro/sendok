@@ -124,9 +124,9 @@
                   <!--fin dropdowns clientes-->
                   <!-- fin dropdowns menu-->
                <li class="nav-item">
-                  <a class="nav-link" href="./propuesta">
+                  <a class="nav-link" href="./documento">
                   <i class="menu-icon typcn typcn-bell"></i>
-                  <span class="menu-title">Crear Propuesta</span>
+                  <span class="menu-title">Crear Documento</span>
                   </a>
                </li>
                <li class="nav-item">
@@ -146,19 +146,52 @@
                   <div class="row page-title-header">
                      <div class="col-12">
                         <div class="page-header">
-                           <h4 class="page-title">Crear nueva propuesta comercial</h4>
+                           <h4 class="page-title">Crear Documento</h4>
                         </div>
                      </div>
                   </div>
                   <!-- Page Title Header Ends-->
                   <div class="row">
-                    <div class="col-md-12 grid-margin">
+                  <div class="col-md-12 grid-margin">
+                     <div class="col-md-12 grid-margin stretch-card">
                         <div class="card">
-                            <div class="card-body">
-                                En desarrollo...
-                            </div>
+                           <div class="card-body">
+                              
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">                                
+                              <label>Seleccione Cliente</label>
+                                 <select class="form-control form-control-md" id="tipo_producto">
+                                    <option _blank="">Elija Uno</option>
+                                 </select>
+                              </div>
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>Nombre Producto</label>
+                                 <input id="nombre_producto" maxlength="20" name="nombre_producto" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
+                              </div>
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>Descripción Producto</label>
+                                 <input id="descripcion_producto" maxlength="250" name="descripcion_producto" type="text" class="form-control form-control-sm" aria-label="Descripción de Producto">
+                              </div>                              
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>Tipo de Cambio</label>
+                                 <select class="form-control" id="select_cambio">
+                                       <option id="_blank">Elija Uno</option>
+                                       <option id="clp">CLP</option>
+                                       <option id="usd">USD</option>
+                                       <option id="uf">UF</option>
+                                 </select>
+                              </div>
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>Valor venta</label>
+                                 <input type="number" maxlength="10" class="form-control form-control-sm" aria-label="valor_venta" id="valor_venta">
+                              </div>
+
+                              <div class="form-group">
+                                    <input type="button" onclick="crearProducto();" class="btn btn-primary btn-md" value="Crear Producto">
+                                 </div>
+                           </div>
                         </div>
-                    </div>
+                     </div>
+                  </div>
                </div>
                <!-- content-wrapper ends -->
                <!-- partial:partials/_footer.html -->

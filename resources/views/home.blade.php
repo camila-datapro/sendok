@@ -116,9 +116,9 @@
                   <!--fin dropdowns clientes-->
                   <!-- fin dropdowns menu-->
                <li class="nav-item">
-                  <a class="nav-link" href="./propuesta">
+                  <a class="nav-link" href="./documento">
                   <i class="menu-icon typcn typcn-bell"></i>
-                  <span class="menu-title">Crear Propuesta</span>
+                  <span class="menu-title">Crear Documento</span>
                   </a>
                </li>
                <li class="nav-item">

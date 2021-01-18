@@ -131,9 +131,9 @@
                   <!--fin dropdowns clientes-->
                   <!-- fin dropdowns menu-->
                <li class="nav-item">
-                  <a class="nav-link" href="./propuesta">
+                  <a class="nav-link" href="./documento">
                   <i class="menu-icon typcn typcn-bell"></i>
-                  <span class="menu-title">Crear Propuesta</span>
+                  <span class="menu-title">Crear Documento</span>
                   </a>
                </li>
                <li class="nav-item">
@@ -167,29 +167,32 @@
                                       <div class="col-lg-12">
                                       <table class="table table-hover tabla_productos display nowrap" cellspacing="0" id="tabla_productos">
                                             <thead>
-                                                <tr>
-                                                <th scope="col">id Producto</th>
-                                                <th scope="col">Nombre Producto</th>
-                                                <th scope="col">Descripcion Producto</th>
-                                                <th scope="col">Valor Producto</th>
+                                                <tr>                                                
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Descripcion</th>
+                                                <th scope="col">N° Fabricacion</th>
+                                                <th scope="col">Cód. interno</th>
+                                                <th scope="col">Costo</th>
+                                                <th scope="col">% Margen</th>                                                
+                                                <th scope="col">Precio</th>
                                                 <th scope="col">Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                              <?php                  
                                                    for($i=0;$i<sizeOf($productos);$i++){
-                                                      echo "<tr>
-                                                      <td>".$productos[$i]->id_producto."</td>
+                                                      echo "<tr>                                                      
                                                       <td>".$productos[$i]->nombre_producto."</td>
                                                       <td>".$productos[$i]->descripcion_producto."</td>
-                                                      <td> <b>".strtoupper($productos[$i]->tipo_cambio)."</b> ".$productos[$i]->valor_producto."</td>
+                                                      <td>".$productos[$i]->numero_fabricacion."</td>
+                                                      <td>".$productos[$i]->numero_interno."</td>                                                      
+                                                      <td><b>".strtoupper($productos[$i]->tipo_cambio)."</b> ".$productos[$i]->costo."</td>
+                                                      <td> % ".$productos[$i]->margen."</td>                                                      
+                                                      <td><b>".strtoupper($productos[$i]->tipo_cambio)."</b> ".$productos[$i]->valor_producto."</td>
                                                       <td>
                                                          <button class='btn btn-danger' id='eliminar_".$productos[$i]->id_producto."' onclick=confirmarEliminacion(this.id,'".$productos[$i]->nombre_producto."'); >
                                                          <i class='fas fa-trash-alt'></i>
                                                          </button> 
-                                                         <button disabled class='btn btn-warning' id='editar_".$productos[$i]->id_producto."'>
-                                                         <i class='fas fa-edit'></i>
-                                                         </button>
                                                       </td>
                                                       </tr>";
                                                    }

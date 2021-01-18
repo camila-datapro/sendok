@@ -22,7 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/producto','ProductoController@index')->name('producto');
 Route::get('/cliente','ClienteController@index')->name('cliente');
-Route::get('/propuesta','PropuestaController@index')->name('propuesta');
+Route::get('/documento','DocumentoController@index')->name('documento');
 Route::get('/admin_cliente', 'AdminClienteController@index')->name('admin_cliente');
 Route::get('/admin_producto', 'AdminProductoController@index')->name('admin_producto');
 //creacion de cliente

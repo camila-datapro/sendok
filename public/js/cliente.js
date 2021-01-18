@@ -149,5 +149,14 @@ function eliminarCliente(){
     }, 500);
   });
 
-  window.location.reload();
 }
+
+$(document).ready(function() {
+  var windowsize = $(window).width();
+    if(windowsize<1100){
+      setTimeout(() => {  
+          $("td.sorting_1").click();
+      }, 100);
+      
+    }
+});
