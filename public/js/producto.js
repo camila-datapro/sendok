@@ -1,8 +1,8 @@
 //cambia segun el ambiente
 //local
-const url_prev = '';
+//const url_prev = '';
 // cpanel
-//const url_prev = location.origin+'/desarrollo/public';
+const url_prev = location.origin+'/desarrollo/public';
 //cargarTiposDeProducto();
 
 function visarUnidades(){
