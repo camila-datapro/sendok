@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
+   <meta name="csrg-token" content="{{ csrf_token() }}" />
       <!-- Required meta tags -->
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>Sendok</title>
       <!-- plugins:css -->
+      <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
       <link rel="stylesheet" href=" {{ asset('/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/iconfonts/ionicons/css/ionicons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/iconfonts/typicons/src/font/typicons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.base.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.addons.css') }}">
-      <link href="{{ asset('/css/select_buscador.css') }}" rel="stylesheet" />
+      
       <!-- endinject -->
       <!-- plugin css for this page -->
       <!-- End plugin css for this page -->
@@ -23,17 +25,10 @@
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
       <!-- End Layout styles -->
       <link rel="shortcut icon" href="{{ asset('/assets/images/favicon.png') }}" />
-      <style>
-         .select2-container--default .select2-selection--single {
-         background-color: #fff;
-         border: 1px solid #dee2e6;
-         border-radius: 0px;
-         font-size: 0.75rem;
-         line-height: 14px;
-         font-weight: 300;
-         padding-left: 17px;
-         }
-      </style>
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+        <!--datatables-->
+        <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
    </head>
    <body>
       <div class="container-scroller">
@@ -89,52 +84,53 @@
                   </a>
                </li>
                <li class="nav-item nav-category">Menú principal</li>
+             
                <li class="nav-item">
                   <a class="nav-link" href="./home">
                   <i class="menu-icon typcn typcn-document-text"></i>
                   <span class="menu-title">Dashboard</span>
                   </a>
                </li>
-               <!-- dropdowns menu-->
-               <!-- productos-->
+                  <!-- dropdowns menu-->
+                    <!-- productos-->
                <li class="nav-item">
                   <a class="nav-link" data-toggle="collapse" href="#menu_productos" aria-expanded="false" aria-controls="menu_productos">
-                  <i class="menu-icon typcn typcn-coffee"></i>
-                  <span class="menu-title">Productos</span>
-                  <i class="menu-arrow"></i>
+                     <i class="menu-icon typcn typcn-coffee"></i>
+                     <span class="menu-title">Productos</span>
+                     <i class="menu-arrow"></i>
                   </a>
                   <div class="collapse" id="menu_productos">
                      <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
-                           <a class="nav-link" href="./producto">Crear nuevo</a>
+                        <a class="nav-link" href="./producto">Crear nuevo</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="./admin_producto">Administrar productos</a>
+                        <a class="nav-link" href="./admin_producto">Administrar productos</a>
                         </li>
                      </ul>
                   </div>
-               </li>
+                  </li>
                <!-- fin dropdown productos-->
                <li class="nav-item">
                   <a class="nav-link" data-toggle="collapse" href="#menu_clientes" aria-expanded="false" aria-controls="menu_clientes">
-                  <i class="menu-icon typcn typcn-coffee"></i>
-                  <span class="menu-title">Clientes</span>
-                  <i class="menu-arrow"></i>
+                     <i class="menu-icon typcn typcn-coffee"></i>
+                     <span class="menu-title">Clientes</span>
+                     <i class="menu-arrow"></i>
                   </a>
                   <div class="collapse" id="menu_clientes">
                      <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
-                           <a class="nav-link" href="./cliente">Crear nuevo</a>
+                        <a class="nav-link" href="./cliente">Crear nuevo</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="./admin_cliente">Administrar clientes</a>
+                        <a class="nav-link" href="./admin_cliente">Administrar clientes</a>
                         </li>
                      </ul>
                   </div>
-               </li>
-               <!--fin dropdowns clientes-->
-               <!-- fin dropdowns menu-->
-               <li class="nav-item">
+                  </li>
+                  <!--fin dropdowns clientes-->
+                  <!-- fin dropdowns menu-->
+                  <li class="nav-item">
                   <a class="nav-link" data-toggle="collapse" href="#menu_documentos" aria-expanded="false" aria-controls="menu_clientes">
                      <i class="menu-icon typcn typcn-coffee"></i>
                      <span class="menu-title">Documentos</span>
@@ -152,79 +148,33 @@
                   </div>
                </li>
                <li class="nav-item">
-                  <a style="background:white; color: blue;" href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                     <span class="nav__name">Cerrar Sesión</span>
-                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                     </form>
-                  </a>
+                     <a style="background:white; color: blue;" href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        <span class="nav__name">Cerrar Sesión</span>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                           @csrf
+                        </form>
+                     </a>   
                </li>
             </ul>
          </nav>
          <!-- partial -->
          <div class="main-panel">
-            <div class="content-wrapper">
+            <div class="content-wrapper" style="background: white;">
                <!-- Page Title Header Starts-->
                <div class="row page-title-header">
                   <div class="col-12">
                      <div class="page-header">
-                        <h4 class="page-title">Crear Documento</h4>
+                        <h4 class="page-title">Administrar Documentos</h4>                        
                      </div>
                   </div>
                </div>
                <!-- Page Title Header Ends-->
-               <div class="row" id="datos_ingreso">
+               <div class="row">            
                   <div class="col-md-12 grid-margin">
                      <div class="col-md-12 grid-margin stretch-card">
-                        <div class="card">
-                           <div class="card-body">
-                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                                 <label>Seleccione tipo de documento</label>
-                                 <select class="form-control form-control-md" id="tipo_producto">
-                                    <option _blank="">Elija Uno</option>
-                                    <option id="1">Propuesta Comercial</option>
-                                    <option id="2">Orden de Compra</option>
-                                 </select>
-                              </div>
-                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                                 <label>Seleccione Producto</label>
-                                 <select class=" js-example-basic-single form-control" name="select_producto">
-                                    <option _blank="">Elija Uno</option>
-                                 </select>
-                              </div>
-                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                                 <label>Seleccione Cliente</label>
-                                 <select class=" js-example-basic-single form-control" name="select_cliente">
-                                    <option _blank="">Elija Uno</option>
-                                    <option value="AL">Alabama</option>
-                                    <option value="WY">Wyoming</option>
-                                 </select>
-                              </div>
-                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                                 <label>Unidades</label>
-                                 <input id="unidades" maxlength="10" name="unidades" type="number" class="form-control form-control-sm" aria-label="Unidades">
-                              </div>
-                              
-                              <div class="form-group">
-                                 <input type="button" onclick="vistaPreviaPDF();" class="btn btn-primary btn-md" value="Crear Documento">
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <!-- fin datos ingreso-->
-               <div class="row" id="plantilla_documento" style="display:none;">
-                  <div class="col-md-12 grid-margin">
-                     <div class="col-md-12 grid-margin stretch-card">
-                        <div class="card">
-                           <div class="card-body" id="propuesta_documento">
-                              <?php 
-                                 set_include_path(dirname(__FILE__)."/../");
-                                 include('propuesta_comercial.blade.php');
-                              ?>
-                           </div>
-                        </div>
+                                  
+                             <h4>En desarrollo...</h4>
+                           
                      </div>
                   </div>
                </div>
@@ -235,8 +185,93 @@
             <!-- main-panel ends -->
          </div>
          <!-- page-body-wrapper ends -->
-          <!-- Modal -->
-      
+      </div>
+      <!-- seccion modales-->
+
+
+         <!-- Modal -->
+
+         <div class="modal fade" id="modal_eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+               </div>
+               <div class="modal-body">
+               <div class="text-center content-justify-center">
+                  <h4>¿Está seguro de eliminar el elemento? : </h4>               
+                  <h4 id="modal_eliminar_nombre"></h4>
+               </div>
+               </div>
+               <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+               <button type="button" class="btn btn-primary" id="eliminar_producto" onclick="eliminarProducto();">Si, eliminar</button>
+               </div>
+            </div>
+         </div>
+         </div>
+
+         <div class="modal fade" id="modalExitosa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Operación exitosa</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+               </div>
+               <div class="modal-body">
+               Se ha realizado la operación de forma exitosa.
+               </div>
+               <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.reload();">OK</button>
+               </div>
+            </div>
+         </div>
+         </div>
+
+         <div class="modal fade" id="modal_ver_producto" tabindex="-1" role="dialog" aria-labelledby="modal_ver_producto" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+               <h5 class="modal-title" id="modal_ver_producto">Descripcion de producto</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+               </div>
+               <div class="modal-body">
+               <h3 id="nombre_descripcion"></h3>
+               <h4 id="texto_descripcion"></h4>
+               </div>
+               <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+               </div>
+            </div>
+         </div>
+         </div>
+
+         <div class="modal fade" id="modalError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Error en la operación</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+               </div>
+               <div class="modal-body">
+               La operacion no se pudo realizar correctamente, porfavor intente nuevamente.
+               </div>
+               <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+               </div>
+            </div>
+         </div>
+         </div>
+
          <div class="modal fade" id="modalCargando" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -249,15 +284,24 @@
             </div>
          </div>
          </div>
-      </div>
-      
+      <!-- fin seccion modales-->
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.base.js') }}"></script>
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.addons.js') }}"></script>
-      <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-      <script src="{{ asset('/js/documento.js') }}"></script>
       <script src="{{ asset('/assets/js/shared/off-canvas.js') }}"></script>
       <script src="{{ asset('/assets/js/shared/misc.js') }}"></script>
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
-      <script src="{{ asset('/generaPDF/dist/html2pdf.bundle.min.js') }}"></script>
+      <script src="{{ asset('/js/producto.js') }}"></script>
+      <script src="https://unpkg.com/@popperjs/core@2"></script>
+      <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>   
+      <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+      <!-- End custom js for this page-->
+      <script>
+         $(document).ready(function() {
+            $(".tabla_productos").DataTable({
+                responsive: true
+            });
+        });
+    </script>
    </body>
 </html>

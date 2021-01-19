@@ -54,7 +54,7 @@
                      <a class="dropdown-item disabled" style="color:gray">Mi perfil</a>
                      <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                         <span class="nav__name">Cerrar Sesión</span>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        <form id="logout-form-2" action="{{ route('logout') }}" method="POST" class="d-none">
                            @csrf
                         </form>
                      </a>
@@ -127,14 +127,25 @@
                         </li>
                      </ul>
                   </div>
-                  </li>
+               </li>
                   <!--fin dropdowns clientes-->
                   <!-- fin dropdowns menu-->
-               <li class="nav-item">
-                  <a class="nav-link" href="./documento">
-                  <i class="menu-icon typcn typcn-bell"></i>
-                  <span class="menu-title">Crear Documento</span>
+                  <li class="nav-item">
+                  <a class="nav-link" data-toggle="collapse" href="#menu_documentos" aria-expanded="false" aria-controls="menu_clientes">
+                     <i class="menu-icon typcn typcn-coffee"></i>
+                     <span class="menu-title">Documentos</span>
+                     <i class="menu-arrow"></i>
                   </a>
+                  <div class="collapse" id="menu_documentos">
+                     <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                        <a class="nav-link" href="./documento">Crear nuevo</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="./admin_documentos">Administrar documentos</a>
+                        </li>
+                     </ul>
+                  </div>
                </li>
                <li class="nav-item">
                      <a style="background:white; color: blue;" href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();document.getElementById('logout-form').submit();">

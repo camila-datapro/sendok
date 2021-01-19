@@ -37,3 +37,5 @@ Route::get('/obtenerTiposDeProducto','TipoProductoController@getTiposDeProducto'
 Route::post('/crearProducto','ProductoController@setProducto')->name('crearProducto');
 Route::post('/eliminarProducto','ProductoController@removeProducto')->name('eliminarProducto');
 
+// admin documento
+Route::get('/admin_documentos', 'AdminDocumentoController@index')->name('admin_documentos');
