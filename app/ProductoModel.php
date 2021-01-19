@@ -16,9 +16,20 @@ class ProductoModel extends Model
         return $results;
     }
 
-    public static function crearProducto($clase, $nombre, $valor, $descripcion, $tipo_cambio, $stock, $costo, $margen, $numero_interno, $numero_fabricacion){
-        
-        $results = DB::insert("insert into producto (
+    public static function crearProducto($json_datos){
+
+        $clase = $json_datos->clase;
+        $nombre = $json_datos->nombre_producto;
+        $valor = $json_datos->valor_producto;
+        $descripcion = $json_datos->descripcion_producto;
+        $tipo_cambio = $json_datos->tipo_cambio;
+        $stock = $json_datos->stock;
+        $costo = $json_datos->costo;
+        $margen = $json_datos->margen;
+        $numero_interno = $json_datos->numero_interno;
+        $numero_fabricacion = $json_datos->numero_fabricacion;
+
+        $query = "insert into producto (
             clase,
             nombre_producto,
             valor_producto,
@@ -40,7 +51,8 @@ class ProductoModel extends Model
                 ".intval($margen).",
                 '".$numero_interno."',
                 '".$numero_fabricacion."'
-            )");         
+            )"; 
+        $results = DB::insert($query);         
         return $results;
     }
 

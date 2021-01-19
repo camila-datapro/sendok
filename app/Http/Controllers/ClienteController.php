@@ -28,18 +28,11 @@ class ClienteController extends Controller
     }
 
     public function setCliente(Request $request){
-        
-        $nombre = $request['nombre'];
-        $rut = $request['rut'];
-        $email = $request['email'];
-        $fono = $request['fono'];
-        $idRegion = $request['idRegion'];
-        $idProvincia = $request['idProvincia'];
-        $idComuna = $request['idComuna'];
-        $direccion = $request['direccion'];
-        Log::debug("Se va a crear un cliente nuevo con los siguientes datos:");
-        Log::debug(var_dump($request));
-        return ClienteModel::crearCliente($nombre, $rut, $email, $fono, $idRegion,$idProvincia,$idComuna,$direccion);
+        $json_datos= $request["json_datos"];
+        $json_datos = str_replace("[","",$json_datos);
+        $json_datos = str_replace("]","",$json_datos);
+        $datos = json_decode($json_datos);
+        return ClienteModel::crearCliente($datos);
     }
 
     public function removeCliente(Request $request){

@@ -48,23 +48,30 @@ function cargarTiposDeProducto(){
     var margen = $("#margen").val();
     var numero_interno = $("#numero_interno").val();
     var numero_fabricacion = $("#numero_fabricacion").val();
+    var array_datos = [];
+    var token = $('input[name="_token"]').val();
+    array_datos.push({
+      clase: clase,
+      nombre_producto: nombre_producto,
+      valor_producto: valor_producto,
+      descripcion_producto: descripcion_producto,
+      tipo_cambio: tipo_cambio,
+      stock: stock,
+      costo: costo,
+      margen: margen,
+      numero_interno: numero_interno,
+      numero_fabricacion: numero_fabricacion
+    });
+  
+    var json_datos = JSON.stringify(array_datos);
 
     $("#modalCargando").modal('show');
     $.ajax({
         type: "POST",
         url: url_prev + '/crearProducto',
         data: {
-        clase: clase,
-        nombre: nombre_producto,
-        valor: valor_producto,
-        descripcion: descripcion_producto,
-        tipo_cambio: tipo_cambio,
-        stock: stock,
-        costo: costo,
-        margen: margen,
-        numero_interno: numero_interno,
-        numero_fabricacion: numero_fabricacion,
-        _token: $('input[name="_token"]').val()
+        json_datos: json_datos,
+        _token: token
         } //esto es necesario, por la validacion de seguridad de laravel
     }).done(function(msg) {
         setTimeout(() => {  

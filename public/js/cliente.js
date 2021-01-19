@@ -82,7 +82,21 @@ function crearCliente() {
   var idProvincia = parseInt($("#provincia option:selected").attr('id_provincia'));
   var idComuna = parseInt($("#comuna option:selected").attr('id_comuna'));
   var direccion = $("#direccion").val();
+  var array_datos = [];
+  var token = $('input[name="_token"]').val();
 
+  array_datos.push({
+    nombre: nombre,
+    rut: rut,
+    fono: fono,
+    email: email,
+    id_region: idRegion,
+    id_provincia: idProvincia,
+    id_comuna: idComuna,
+    direccion: direccion
+  });
+
+  var json_datos = JSON.stringify(array_datos);
 
   $.ajaxSetup({
     headers: {
@@ -94,22 +108,23 @@ function crearCliente() {
     type: "POST",
     url: url_prev + '/crearCliente',
     data: {
-      nombre: nombre,
-      rut: rut,
-      email: email,
-      fono: fono,
-      idRegion: idRegion,
-      idProvincia: idProvincia,
-      idComuna: idComuna,
-      direccion: direccion,
-      _token: $('input[name="_token"]').val()
+      json_datos: json_datos,
+      _token: token
     } //esto es necesario, por la validacion de seguridad de laravel
   }).done(function(msg) {
-    $("#modalCargando").modal('hide');
-    $("#modalExitosa").modal('show');
+    setTimeout(() => {  
+      $("#modalCargando").modal('hide');
+    }, 400);
+    setTimeout(() => {  
+      $("#modalExitosa").modal('show');
+    }, 200);
   }).fail(function() {
-    $("#modalCargando").modal('hide');
-    $("#modalError").modal('show');
+    setTimeout(() => {  
+        $("#modalCargando").modal('hide');
+    }, 400);
+    setTimeout(() => {  
+        $("#modalError").modal('show');
+    }, 200);
   });
 }
 

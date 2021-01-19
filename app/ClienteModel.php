@@ -14,8 +14,19 @@ class ClienteModel extends Model
         return $results;
     }
 
-    public static function crearCliente($nombre, $rut, $email, $fono, $idRegion,$idProvincia,$idComuna,$direccion){       
-            $results = DB::insert("insert into cliente_destino (
+    public static function crearCliente($json_datos){    
+
+
+        $nombre = $json_datos->nombre;
+        $rut = $json_datos->rut;
+        $email = $json_datos->email;
+        $fono = $json_datos->fono;
+        $idRegion = $json_datos->id_region;
+        $idProvincia = $json_datos->id_provincia;
+        $idComuna = $json_datos->id_comuna;
+        $direccion = $json_datos->direccion;
+
+        $query = "insert into cliente_destino (
             rut_cliente,
             nombre_cliente,
             fono_cliente,
@@ -31,7 +42,11 @@ class ClienteModel extends Model
                 ".intval($idRegion).",            
                 '".$email."',                
                 '".$direccion."'
-            )");            
+            )";
+        $results = DB::insert($query);            
+
+            
+        Log::debug("La query es: \n".$query); 
         return $results;
     }
 

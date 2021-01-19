@@ -14,17 +14,11 @@ class ProductoController extends Controller
 
     public function setProducto(Request $request){
 
-        $nombre = $request['nombre'];
-        $clase = $request['clase'];
-        $valor = $request['valor'];
-        $descripcion = $request['descripcion'];   
-        $tipo_cambio = $request['tipo_cambio'];       
-        $stock = $request['stock']; 
-        $costo = $request['costo']; 
-        $margen = $request['margen']; 
-        $numero_interno = $request['numero_interno']; 
-        $numero_fabricacion = $request['numero_fabricacion']; 
-        $response = ProductoModel::crearProducto($clase,$nombre,$valor,$descripcion,$tipo_cambio, $stock, $costo, $margen, $numero_interno, $numero_fabricacion);
+        $json_datos= $request["json_datos"];
+        $json_datos = str_replace("[","",$json_datos);
+        $json_datos = str_replace("]","",$json_datos);
+        $datos = json_decode($json_datos);
+        $response = ProductoModel::crearProducto($datos);
         return $response;
     }
 
