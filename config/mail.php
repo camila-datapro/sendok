@@ -41,12 +41,19 @@ return [
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
+            'timeout' => null,
+            'auth_mode' => null,
         ],
 
         'ses' => [
             'transport' => 'ses',
         ],
-
+        'mailgun' => [
+            'transport' => 'mailgun',
+        ],
+        'postmark' => [
+            'transport' => 'postmark',
+        ],
         'sendmail' => [
             'transport' => 'sendmail',
             'path' => '/usr/sbin/sendmail -bs',

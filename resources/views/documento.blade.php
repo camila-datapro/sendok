@@ -180,7 +180,7 @@
                            <div class="card-body">
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Seleccione tipo de documento</label>
-                                 <select class="form-control form-control-md" id="tipo_producto">
+                                 <select class="form-control form-control-md" id="tipo_documento">
                                     <option _blank="">Elija Uno</option>
                                     <option id="1">Propuesta Comercial</option>
                                     <option id="2">Orden de Compra</option>
@@ -188,16 +188,24 @@
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Seleccione Producto</label>
-                                 <select class=" js-example-basic-single form-control" name="select_producto">
-                                    <option _blank="">Elija Uno</option>
+                                 <select class=" js-example-basic-single form-control" name="select_producto" id="select_producto">
+                                    <option id="0">Elija Uno</option>
+                                    <?php 
+                                       for($i=0;$i<sizeOf($productos); $i++){
+                                          echo "<option id=".$productos[$i]->id_producto.">".$productos[$i]->nombre_producto."</option>";
+                                       }
+                                    ?>
                                  </select>
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Seleccione Cliente</label>
-                                 <select class=" js-example-basic-single form-control" name="select_cliente">
-                                    <option _blank="">Elija Uno</option>
-                                    <option value="AL">Alabama</option>
-                                    <option value="WY">Wyoming</option>
+                                 <select class=" js-example-basic-single form-control" name="select_cliente" id="select_cliente">
+                                    <option id="0">Elija Uno</option>
+                                    <?php 
+                                       for($i=0;$i<sizeOf($clientes); $i++){
+                                          echo "<option id=".$clientes[$i]->id_cliente.">".$clientes[$i]->nombre_cliente."</option>";
+                                       }
+                                    ?>
                                  </select>
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
@@ -214,6 +222,7 @@
                   </div>
                </div>
                <!-- fin datos ingreso-->
+               <input hidden pdf_64="" id="hidden_pdf"></input>
                <div class="row" id="plantilla_documento" style="display:none;">
                   <div class="col-md-12 grid-margin">
                      <div class="col-md-12 grid-margin stretch-card">

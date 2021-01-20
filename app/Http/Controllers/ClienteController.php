@@ -23,8 +23,9 @@ class ClienteController extends Controller
         return ClienteModel::all();
     }
 
-    private function getCliente($rutCliente){
-        return ClienteModel::obtenerCliente($rutCliente);
+    public function getCliente(Request $request){
+        $id_cliente= $request["id_cliente"];
+        return ClienteModel::obtenerCliente($id_cliente);
     }
 
     public function setCliente(Request $request){

@@ -27,4 +27,10 @@ class ProductoController extends Controller
         $id_producto = $request['id_producto'];
         return ProductoModel::eliminarProducto($id_producto);
     }
+
+    public function getProducto(Request $request){
+        
+        $id_producto = $request['id_producto'];
+        return ProductoModel::obtenerProducto($id_producto);
+    }
 }

@@ -12,6 +12,7 @@ class ProductoModel extends Model
         return $results;
     }
     public static function obtenerProducto($idProducto){
+        Log::debug("id producto:".$idProducto);
         $results = DB::select("select * from producto where id_producto = ".$idProducto."" );
         return $results;
     }

@@ -31,11 +31,16 @@ Route::post('/obtenerProvincias','ProvinciaController@getProvincias')->name('obt
 Route::post('/obtenerComunas','ComunaController@getComunas')->name('obtenerComunas');
 Route::post('/crearCliente','ClienteController@setCliente')->name('crearCliente');
 Route::post('/eliminarCliente','ClienteController@removeCliente')->name('eliminarCliente');
+Route::post('/getCliente','ClienteController@getCliente')->name('getCliente');
 
 //creacion de producto
 Route::get('/obtenerTiposDeProducto','TipoProductoController@getTiposDeProducto')->name('obtenerTiposDeProducto');
 Route::post('/crearProducto','ProductoController@setProducto')->name('crearProducto');
 Route::post('/eliminarProducto','ProductoController@removeProducto')->name('eliminarProducto');
+Route::post('/getProducto','ProductoController@getProducto')->name('getProducto');
 
 // admin documento
 Route::get('/admin_documentos', 'AdminDocumentoController@index')->name('admin_documentos');
+
+Route::post('/enviarPropuesta', 'DocumentoController@enviarPropuesta')->name('enviarPropuesta');
+

@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\Log;
 class ClienteModel extends Model
 {
     protected $table = 'cliente_destino';
-    public static function obtenerCliente($rutCliente){
-        $results = DB::select("select * from cliente_destino where rut_cliente = '".$rutCliente."'" );
+
+    public static function obtenerCliente($id_cliente){
+        Log::debug("id cliente:".$id_cliente);
+        $results = DB::select("select * from cliente_destino where id_cliente = '".$id_cliente."'" );
         return $results;
     }
 
