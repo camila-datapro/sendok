@@ -7,6 +7,7 @@ use App\ClienteModel;
 use App\ProductoModel;
 use App\Mail\MensajeRecibido;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class DocumentoController extends Controller
 {
@@ -26,11 +27,9 @@ class DocumentoController extends Controller
 
     public function guardarPDF(Request $request){
         Log::debug("test");
-        $bpdf = base64_encode($request["pdf"]);
-        Log::debug($bpdf);
-    
-        file_put_contents('./pdf/'.'propuesta.pdf', base64_decode($bpdf));
-        return "guardado PDF OK";
+        $bpdf = $request["pdf"];
+        file_put_contents('./documentos/propuesta.pdf', base64_decode($bpdf));
+        return "OK";
 
     }
 }

@@ -1,9 +1,9 @@
 
 //cambia segun el ambiente
 //local
-const url_prev = '';
+//const url_prev = '';
 // cpanel
-//const url_prev = location.origin+'/desarrollo/public';
+const url_prev = location.origin+'/desarrollo/public';
 
 // In your Javascript (external .js resource or <script> tag)
 $(document).ready(function() {
@@ -45,13 +45,15 @@ function guardarPropuesta(){
         type: "POST",
         url: url_prev + '/guardarPDF',
         data: {
-          pdf: pdf,
+          pdf: bpdf,
           _token: $('input[name="_token"]').val()
         } //esto es necesario, por la validacion de seguridad de laravel
       }).done(function(msg) {                 
             console.log("se completo guardarPDF : "+msg);
+            $("#modalCargando").modal('hide');
       }).fail(function() {
         console.log("error en funcion guardarPDF");
+        $("#modalCargando").modal('hide');
       });
 
 
@@ -172,6 +174,7 @@ function enviarPropuesta(){
             console.log(msg);
             // setear datos de cliente en plantilla
             console.log("envio de propuesta exitoso");
+            
 
       }).fail(function() {
         console.log("error en funcion enviarPropuesta");
