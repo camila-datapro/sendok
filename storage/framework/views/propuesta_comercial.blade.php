@@ -60,6 +60,11 @@
                         </tbody>
                      </table>
                   </div>
+                  <h2 hidden id="id_usuario"><?php echo Auth::user()->id ?></h2>
+                  <h2 hidden id="id_cliente"></h2>
+                  <h2 hidden id="id_producto"></h2>
+                  <h2 hidden id="id_servicio"></h2>
+
                   <div class="col-md-6" style="padding-right: 0px;">
                      <table class="table table-bordered">
                         <thead>

@@ -17,12 +17,10 @@ class DocumentoController extends Controller
         return view('documento')
         ->with("clientes", ClienteModel::all())
         ->with("productos", ProductoModel::obtenerTodosProductos());
-
     }
 
     public function enviarPropuesta(Request $request){        
         $destinatario = $request["destinatario"];
-        Log::debug("El destinatario es:".$destinatario);
         Mail::to($destinatario)->send( new MensajeRecibido);
         return 'Mensaje enviado';
     }

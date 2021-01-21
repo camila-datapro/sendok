@@ -1,7 +1,3 @@
-//cambia segun el ambiente
-//local
-//const url_prev = '';
-// cpanel
 const url_prev = location.origin+'/desarrollo/public';
 
 function cargarRegiones() {

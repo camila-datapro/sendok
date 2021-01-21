@@ -46,4 +46,6 @@ Route::post('/enviarPropuesta', 'DocumentoController@enviarPropuesta')->name('en
 
 Route::post('/guardarPDF', 'DocumentoController@guardarPDF')->name('guardarPDF');
 
+Route::post('/setPropuesta', 'PropuestaController@setPropuesta')->name('setPropuesta');
+
 
