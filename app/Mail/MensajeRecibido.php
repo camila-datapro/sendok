@@ -31,7 +31,7 @@ class MensajeRecibido extends Mailable
      */
     public function build()
     {
-        Log::debug("El pdf en sesion es: ".Session::get('pdf_64')."");
+        Log::debug("El pdf en sesion es: ");
         return $this->view('emails.envio-documento');
     }
 }

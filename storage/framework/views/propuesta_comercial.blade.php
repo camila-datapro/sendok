@@ -156,7 +156,7 @@
          <!---fin documento-->
          <div class="row">
             <div class="col-md-12" style="text-align: center;">
-               <button disabled style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-primary btn-fw btn-lg" onclick="enviarPropuesta();">ENVIAR PROPUESTA</button>
+               <button style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-primary btn-fw btn-lg" onclick="enviarPropuesta();">ENVIAR PROPUESTA</button>
                <button  style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-warning btn-fw btn-lg" onclick="editarPDF();">EDITAR PROPUESTA</button>
                <button style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-primary btn-lg" data-toggle="modal" onclick="guardarPropuesta();">GUARDAR PROPUESTA</button>
             </div>

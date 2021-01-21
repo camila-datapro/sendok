@@ -19,9 +19,18 @@ class DocumentoController extends Controller
 
     }
 
-    public function enviarPropuesta(Request $request){
-        Session::put('pdf_64', $request["pdf_64"]);
+    public function enviarPropuesta(Request $request){        
         Mail::to('cfigueroa@datapro.cl')->send( new MensajeRecibido);
         return 'Mensaje enviado';
+    }
+
+    public function guardarPDF(Request $request){
+        Log::debug("test");
+        $bpdf = base64_encode($request["pdf"]);
+        Log::debug($bpdf);
+    
+        file_put_contents('./pdf/'.'propuesta.pdf', base64_decode($bpdf));
+        return "guardado PDF OK";
+
     }
 }

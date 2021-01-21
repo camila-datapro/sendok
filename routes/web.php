@@ -44,3 +44,6 @@ Route::get('/admin_documentos', 'AdminDocumentoController@index')->name('admin_d
 
 Route::post('/enviarPropuesta', 'DocumentoController@enviarPropuesta')->name('enviarPropuesta');
 
+Route::post('/guardarPDF', 'DocumentoController@guardarPDF')->name('guardarPDF');
+
+

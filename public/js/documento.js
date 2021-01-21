@@ -1,9 +1,9 @@
 
 //cambia segun el ambiente
 //local
-//const url_prev = '';
+const url_prev = '';
 // cpanel
-const url_prev = location.origin+'/desarrollo/public';
+//const url_prev = location.origin+'/desarrollo/public';
 
 // In your Javascript (external .js resource or <script> tag)
 $(document).ready(function() {
@@ -39,7 +39,25 @@ function guardarPropuesta(){
         // This logs the right base64
         $("#modalCargando").modal("hide");
       //  console.log("la base 64 es:");
-       $("#hidden_pdf").attr("pdf_64",btoa(pdf));
+      var bpdf = btoa(pdf);
+
+      $.ajax({
+        type: "POST",
+        url: url_prev + '/guardarPDF',
+        data: {
+          pdf: pdf,
+          _token: $('input[name="_token"]').val()
+        } //esto es necesario, por la validacion de seguridad de laravel
+      }).done(function(msg) {                 
+            console.log("se completo guardarPDF : "+msg);
+      }).fail(function() {
+        console.log("error en funcion guardarPDF");
+      });
+
+
+
+
+       $("#hidden_pdf").attr("pdf_64",bpdf);
     });
 }
 
