@@ -31,7 +31,20 @@ class MensajeRecibido extends Mailable
      */
     public function build()
     {
-        Log::debug("Se enviara el documento ");
-        return $this->view('emails.envio-documento');
+       
+        if (file_exists('./documentos/propuesta.pdf'))
+        {
+          
+            $contents = file_get_contents('./documentos/propuesta.pdf');
+    
+           
+            Log::debug("Existe el archivo en ./documentos/propuesta.pdf");
+            
+        }
+
+        return $this->view('emails.envio-documento')
+        ->attachData(file_get_contents('./documentos/propuesta.pdf'),'documento.pdf',[
+            'mime' => 'application/pdf',
+        ]);
     }
 }

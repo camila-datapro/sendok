@@ -21,12 +21,14 @@ class DocumentoController extends Controller
     }
 
     public function enviarPropuesta(Request $request){        
-        Mail::to('cfigueroa@datapro.cl')->send( new MensajeRecibido);
+        $destinatario = $request["destinatario"];
+        Log::debug("El destinatario es:".$destinatario);
+        Mail::to($destinatario)->send( new MensajeRecibido);
         return 'Mensaje enviado';
     }
 
     public function guardarPDF(Request $request){
-        Log::debug("test");
+        Log::debug("ingreso a GuardarPDF");
         $bpdf = $request["pdf"];
         file_put_contents('./documentos/propuesta.pdf', base64_decode($bpdf));
         return "OK";

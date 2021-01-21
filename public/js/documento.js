@@ -163,18 +163,74 @@ function eliminarProducto(){
 }
 
 function enviarPropuesta(){
-    var pdf_64 = $("#hidden_pdf").attr("pdf_64");
+  $("#modalCargando").modal('show');
+  const elemento = document.getElementById('propuesta_detalle');
+
+  html2pdf()
+    .set({
+        margin: 1,
+        filename: 'documento.pdf',
+        image: {
+            type: 'png',
+            quality: 0.98
+        },
+        html2canvas: {
+            scale: 1, // a mayor escala, mejores graficos pero mas peso
+        },
+        jsPDF: {
+            unit: "in",
+            format: "a3",
+            orientation: 'portrait' //landscape de forma horizontal
+        }
+    })
+    .from(elemento)    
+    .outputPdf()
+    .then(function(pdf) {        
+      var bpdf = btoa(pdf);
+       $("#hidden_pdf").attr("pdf_64",bpdf);
+    });
+
+
+  // primero guardo la propuesta en el servidor
+    setTimeout(() => {
+      var bpdf = $("#hidden_pdf").attr("pdf_64");
+    $.ajax({
+      type: "POST",
+      url: url_prev + '/guardarPDF',
+      data: {
+        pdf: bpdf,
+        _token: $('input[name="_token"]').val()
+      } //esto es necesario, por la validacion de seguridad de laravel
+    }).done(function(msg) {                 
+          console.log("se completo guardarPDF : "+msg);
+    }).fail(function() {
+      console.log("error en funcion guardarPDF");
+    
+    });
+
+    }, 400);
+  
+    // envio de propuesta
+    var destinatario = $("#email_cliente").text();
     $.ajax({
         type: "POST",
         url: url_prev + '/enviarPropuesta',
         data: {        
+          destinatario: destinatario,
           _token: $('input[name="_token"]').val()
         } //esto es necesario, por la validacion de seguridad de laravel
-      }).done(function(msg) {                   
+      }).done(function(msg) {         
+        setTimeout(() => {
+          $("#modalCargando").modal('hide');   
+        }, 200);    
+        setTimeout(() => {
+          $("#modalExitoso").modal('show');   
+        }, 200);    
+         
             console.log(msg);
             // setear datos de cliente en plantilla
-            console.log("envio de propuesta exitoso");
-            
+            console.log("envio de propuesta exitoso");   
+              
 
       }).fail(function() {
         console.log("error en funcion enviarPropuesta");
