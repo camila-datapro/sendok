@@ -36,18 +36,21 @@ $(document).ready(function () {
 
 				var newTextBoxDiv = $(document.createElement('div'))
 					.attr("id", 'TextBoxDiv' + counter)
-					.attr("style", 'border-top: 1px solid; margin-bottom: 20px;');
+					.attr("style", 'border-top: 1px solid; margin-bottom: 20px;'+
+					'border: 1px solid;'+
+					'border-color: #dee2e6;');
 
 				newTextBoxDiv.after().html('<label>Seleccione producto N° ' + counter + ' : </label>'+
-				'<select id="productos_documento" class="form-control">'+
+				'<select id="select_producto_'+counter+'" class="form-control">'+
 					'<option id="0">Elija Uno</option>'
 					+opciones+
 				'</select>'+
 				'<label>Unidades producto N° '+counter+'</label>'+
-				'<input class="form-control" id="unidades_documento"></input>'+
-				'<label>Descuento para producto N° '+counter+'</label>'+
-				'<input class="form-control" id="descuento_documento"></input>');
-
+				'<input class="form-control" id="unidades_producto_'+counter+'""></input>'+
+				'<label>Descuento para producto N° '+counter+' (opcional)</label>'+
+				'<input class="form-control" id="descuento_producto_'+counter+'""></input>');
+				$("#cantidad_divs").attr("cantidad",counter);
+				console.log("Se sumo uno : "+counter);
 				newTextBoxDiv.appendTo("#TextBoxesGroup");
 				counter++;
 			});
@@ -59,7 +62,8 @@ $(document).ready(function () {
 				}
 
 				counter--;
-
+				console.log("Se resto uno "+counter);
+				$("#cantidad_divs").attr("cantidad",(counter-1));
 				$("#TextBoxDiv" + counter).remove();
 
 			});
@@ -68,7 +72,9 @@ $(document).ready(function () {
 
 				var msg = '';
 				for (i = 1; i < counter; i++) {
-					msg += "\n Descuento #" + i + " : " + $('#textbox' + i).val();
+					msg += "\n Id Producto #" + i + " : " + $('#select_producto_' + i).val();
+					msg += "\n Unidades #" + i + " : " + $('#unidades_producto_' + i).val();
+					msg += "\n Descuento #" + i + " : " + $('#descuento_producto_' + i).val();
 				}
 				alert(msg);
 			});

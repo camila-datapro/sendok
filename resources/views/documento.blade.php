@@ -187,9 +187,9 @@
                                  </select>
                               </div>
                               <div id='TextBoxesGroup'>
-                                 <div id="TextBoxDiv1" style="margin-bottom: 20px;">
+                                 <div id="TextBoxDiv1" style="margin-bottom: 20px; border: 1px solid; border-color: #dee2e6;">
                                     <label>Seleccione producto N° 1: </label>
-                                    <select class=" js-example-basic-single form-control" name="textbox1"  type='textbox' id='textbox1' >
+                                    <select class="form-control" name="textbox1"  type='textbox' id='select_producto_1' >
                                     <option id="0">Elija Uno</option>
                                     <?php 
                                        for($i=0;$i<sizeOf($productos); $i++){
@@ -198,16 +198,18 @@
                                     ?>
                                  </select>  
                                  <label>Unidades producto N° 1</label>
-                                 <input class="form-control form-control-sm" id="unidades_documento_0" nombre="unidades_documento"></input>  
+                                 <input class="form-control form-control-sm" id="unidades_producto_1" nombre="unidades_producto"></input>  
                                  <label>Descuento para producto N° 1 (opcional)</label>
-                                 <input class="form-control form-control-sm"   id="descuento_documento_0" nombre="descuento_documento"></input>                                                                
+                                 <input class="form-control form-control-sm" id="descuento_producto_1" nombre="descuento_producto"></input>                                                                
                                  </div>                           
                               </div>
+                              <input hidden id="cantidad_divs" cantidad="1"></input>
                               <div>                              
-                                 <input type='button'  class="btn btn-success" value='Agregar producto' id='addButton'>
-                                 <input type='button' class="btn btn-success" value='Remover producto' id='removeButton'>
-                                 <button disabled type='button' class="btn btn-success" value='Obtener valores' id='getButtonValue'>Comprobar valores</button>
+                                 <input type='button'  class="btn btn-primary" value='Agregar item' id='addButton'>
+                                 <input type='button' class="btn btn-danger" value='Remover item' id='removeButton'>
+                                 <button type='button' class="btn btn-success" value='Obtener valores' id='getButtonValue'>Comprobar valores</button>
                               </div>
+                              <br>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Seleccione Cliente</label>
                                  <select class=" js-example-basic-single form-control" name="select_cliente" id="select_cliente">
