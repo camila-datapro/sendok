@@ -38,6 +38,7 @@ Route::get('/obtenerTiposDeProducto','TipoProductoController@getTiposDeProducto'
 Route::post('/crearProducto','ProductoController@setProducto')->name('crearProducto');
 Route::post('/eliminarProducto','ProductoController@removeProducto')->name('eliminarProducto');
 Route::post('/getProducto','ProductoController@getProducto')->name('getProducto');
+Route::post('/listProductos','ProductoController@listProductos')->name('listProductos');
 
 // admin documento
 Route::get('/admin_documentos', 'AdminDocumentoController@index')->name('admin_documentos');
@@ -47,5 +48,6 @@ Route::post('/enviarPropuesta', 'DocumentoController@enviarPropuesta')->name('en
 Route::post('/guardarPDF', 'DocumentoController@guardarPDF')->name('guardarPDF');
 
 Route::post('/setPropuesta', 'PropuestaController@setPropuesta')->name('setPropuesta');
+
 
 

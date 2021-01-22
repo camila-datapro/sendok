@@ -1,9 +1,85 @@
 const url_prev = location.origin + '/desarrollo/public';
 
 // In your Javascript (external .js resource or <script> tag)
+
+function listProductos(){
+
+
+  }
 $(document).ready(function () {
 	$('.js-example-basic-single').select2();
+
+	// se obtienen los productos
+	$.ajax({
+		type: "POST",
+		url: url_prev + '/listProductos',
+		data: {
+			_token: $('input[name="_token"]').val()
+		} //esto es necesario, por la validacion de seguridad de laravel
+	}).done(function (msg) {		
+			var productos = msg;
+			var counter = 2;
+
+			$("#addButton").click(function () {
+
+				if (counter > 20) {
+					alert("Only 10 textboxes allow");
+					return false;
+				}
+
+				var opciones = "";
+				console.log(productos);
+					for(var i=0; i<productos.length; i++){
+						opciones =opciones+'<option id="'+productos[i].id_producto+'">'+productos[i].nombre_producto+'</option>';
+					}
+
+
+				var newTextBoxDiv = $(document.createElement('div'))
+					.attr("id", 'TextBoxDiv' + counter)
+					.attr("style", 'border-top: 1px solid; margin-bottom: 20px;');
+
+				newTextBoxDiv.after().html('<label>Seleccione producto N° ' + counter + ' : </label>'+
+				'<select id="productos_documento" class="form-control">'+
+					'<option id="0">Elija Uno</option>'
+					+opciones+
+				'</select>'+
+				'<label>Unidades producto N° '+counter+'</label>'+
+				'<input class="form-control" id="unidades_documento"></input>'+
+				'<label>Descuento para producto N° '+counter+'</label>'+
+				'<input class="form-control" id="descuento_documento"></input>');
+
+				newTextBoxDiv.appendTo("#TextBoxesGroup");
+				counter++;
+			});
+
+			$("#removeButton").click(function () {
+				if (counter == 1) {
+					alert("No more textbox to remove");
+					return false;
+				}
+
+				counter--;
+
+				$("#TextBoxDiv" + counter).remove();
+
+			});
+
+			$("#getButtonValue").click(function () {
+
+				var msg = '';
+				for (i = 1; i < counter; i++) {
+					msg += "\n Descuento #" + i + " : " + $('#textbox' + i).val();
+				}
+				alert(msg);
+			});
+		}).fail(function () {
+			console.log("error en funcion ");		
+		});
+
 });
+
+
+
 
 function guardarPropuesta() {
 	const elemento = document.getElementById('propuesta_detalle');

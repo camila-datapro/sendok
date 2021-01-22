@@ -1,6 +1,7 @@
 const url_prev = location.origin+'/desarrollo/public';
 
 
+
 function visarUnidades(){
   var opcion = $("#tipo_producto option:selected").attr("id");
   if(opcion=="producto"){
@@ -122,8 +123,7 @@ function cargarTiposDeProducto(){
       setTimeout(() => {  
           $("#modalError").modal('show');
       }, 500);
-    });
-  
+    });  
   }
 
 
@@ -142,8 +142,8 @@ function verProducto(producto){
    var nombre = producto.nombre;
    var descripcion = producto.descripcion;
    $("#texto_descripcion").text(descripcion);
-    $("#nombre_descripcion").text(nombre);
+   $("#nombre_descripcion").text(nombre);
     setTimeout(() => {  
-$("#modal_ver_producto").modal("show");
-}, 300);
+      $("#modal_ver_producto").modal("show");
+    }, 300);
 }

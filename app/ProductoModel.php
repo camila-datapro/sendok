@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Log;
 use DB;
 class ProductoModel extends Model
 {
-    public static function obtenerTodosProductos(){
+    public static function listProductos(){
         $results = DB::select("select * from producto" );
         return $results;
     }

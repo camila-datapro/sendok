@@ -16,7 +16,7 @@ class DocumentoController extends Controller
     {
         return view('documento')
         ->with("clientes", ClienteModel::all())
-        ->with("productos", ProductoModel::obtenerTodosProductos());
+        ->with("productos", ProductoModel::listProductos());
     }
 
     public function enviarPropuesta(Request $request){        
