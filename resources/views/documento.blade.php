@@ -208,17 +208,6 @@
                                  <input type='button' class="btn btn-success" value='Remover producto' id='removeButton'>
                                  <button disabled type='button' class="btn btn-success" value='Obtener valores' id='getButtonValue'>Comprobar valores</button>
                               </div>
-                              <div style="padding-left: 0px !important;">
-                                 <label>Seleccione Producto</label>
-                                 <select class=" js-example-basic-single form-control" name="select_producto" id="select_producto">
-                                    <option id="0">Elija Uno</option>
-                                    <?php 
-                                       for($i=0;$i<sizeOf($productos); $i++){
-                                          echo "<option id=".$productos[$i]->id_producto.">".$productos[$i]->nombre_producto."</option>";
-                                       }
-                                    ?>
-                                 </select>
-                              </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Seleccione Cliente</label>
                                  <select class=" js-example-basic-single form-control" name="select_cliente" id="select_cliente">
