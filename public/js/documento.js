@@ -325,55 +325,11 @@ function enviarPropuesta() {
 			var json_valor_unitario_producto ="";
 			var json_subtotal_producto = "";
 			//queda pendiente almacenar en la base de datos
-/*
-            var id_producto = $("#id_producto").text();
-            var valor_s_iva = $("#subtotal").text();
-            var tipo_cambio = valor_s_iva.substr(0, 3).trim();            
-            valor_s_iva = valor_s_iva.substr(3).trim();
-			var iva = $("#iva").text();
-			
-
-            var total = $("#total_con_iva").text().substr(3).trim();
-            var unidades = $("#unidades_propuesta").text();
-            var valor_unitario = $("#valor_producto_propuesta").text().substr(3).trim();
-            var nombre_producto = $("#nombre_producto_propuesta").text();
-
-            var array_datos = [];
-            array_datos.push({
-              nombre_cliente: nombre_cliente,
-              email_destino: email_destino,
-              id_ejecutivo: id_ejecutivo,
-              id_cliente: id_cliente,
-              id_producto: id_producto,
-              valor_s_iva: valor_s_iva,
-              iva: iva,
-              total : total,
-              unidades: unidades,
-              valor_unitario: valor_unitario,
-              nombre_producto: nombre_producto,
-              tipo_cambio : tipo_cambio
-            });
-          
-            var json_datos = JSON.stringify(array_datos);            
-
-              $.ajax({
-                type: "POST",
-                url: url_prev + '/setPropuesta',
-                data: {          
-                  json_datos : json_datos,        
-                  _token: $('input[name="_token"]').val()
-                } //esto es necesario, por la validacion de seguridad de laravel
-              }).done(function (msg) {
-   
-              }).fail(function () {
-                console.log("error en funcion setPropuesta");
-              });
-
-
+        
         }).fail(function () {
           console.log("error en funcion enviarPropuesta");
 		});
-		*/
+		
 		});
 
 
