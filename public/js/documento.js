@@ -27,10 +27,9 @@ $(document).ready(function () {
 					return false;
 				}
 
-				var opciones = "";
-				console.log(productos);
+				var opciones = "";				
 					for(var i=0; i<productos.length; i++){
-						opciones =opciones+'<option id="'+productos[i].id_producto+'">'+productos[i].nombre_producto+'</option>';
+						opciones =opciones+'<option id="'+productos[i].id_producto+'" nombre_producto="'+productos[i].nombre_producto+'" tipo_cambio="'+productos[i].tipo_cambio+'" valor_producto="'+productos[i].valor_producto+'">'+productos[i].nombre_producto+' ('+productos[i].tipo_cambio+' '+productos[i].valor_producto+')'+'</option>';
 					}
 
 
@@ -38,19 +37,20 @@ $(document).ready(function () {
 					.attr("id", 'TextBoxDiv' + counter)
 					.attr("style", 'border-top: 1px solid; margin-bottom: 20px;'+
 					'border: 1px solid;'+
-					'border-color: #dee2e6;');
+					'border-color: #dee2e6;'+
+					'background-color: #e0e4ff;'+
+					' padding: 12px; padding-top: 0px;');
 
-				newTextBoxDiv.after().html('<label>Seleccione producto N° ' + counter + ' : </label>'+
+				newTextBoxDiv.after().html('<label class="top-spaced">Seleccione producto N° ' + counter + ' : </label>'+
 				'<select id="select_producto_'+counter+'" class="form-control">'+
 					'<option id="0">Elija Uno</option>'
 					+opciones+
 				'</select>'+
-				'<label>Unidades producto N° '+counter+'</label>'+
+				'<label class="top-spaced">Unidades producto N° '+counter+'</label>'+
 				'<input class="form-control" id="unidades_producto_'+counter+'""></input>'+
-				'<label>Descuento para producto N° '+counter+' (opcional)</label>'+
+				'<label class="top-spaced">Descuento para producto N° '+counter+' (opcional)</label>'+
 				'<input class="form-control" id="descuento_producto_'+counter+'""></input>');
-				$("#cantidad_divs").attr("cantidad",counter);
-				console.log("Se sumo uno : "+counter);
+				$("#cantidad_divs").attr("cantidad",counter);		
 				newTextBoxDiv.appendTo("#TextBoxesGroup");
 				counter++;
 			});
@@ -62,24 +62,24 @@ $(document).ready(function () {
 				}
 
 				counter--;
-				console.log("Se resto uno "+counter);
 				$("#cantidad_divs").attr("cantidad",(counter-1));
 				$("#TextBoxDiv" + counter).remove();
 
 			});
 
-			$("#getButtonValue").click(function () {
+/*			$("#getButtonValue").click(function () {
 
 				var msg = '';
 				for (i = 1; i < counter; i++) {
 					msg += "\n Id Producto #" + i + " : " + $('#select_producto_' + i).val();
-					msg += "\n Unidades #" + i + " : " + $('#unidades_producto_' + i).val();
+					msg += 
+					"\n Unidades #" + i + " : " + $('#unidades_producto_' + i).val();
 					msg += "\n Descuento #" + i + " : " + $('#descuento_producto_' + i).val();
 				}
 				alert(msg);
-			});
+			});*/
 		}).fail(function () {
-			console.log("error en funcion ");		
+			console.log("error en generacion dinamica de productos ");		
 		});
 
 });
@@ -115,7 +115,6 @@ function guardarPropuesta() {
 		.then(function (pdf) {
 			// This logs the right base64
 			$("#modalCargando").modal("hide");
-			//  console.log("la base 64 es:");
 			var bpdf = btoa(pdf);
 
 			$.ajax({
@@ -126,10 +125,8 @@ function guardarPropuesta() {
 					_token: $('input[name="_token"]').val()
 				} //esto es necesario, por la validacion de seguridad de laravel
 			}).done(function (msg) {
-				console.log("se completo guardarPDF : " + msg);
 				$("#modalCargando").modal('hide');
-			}).fail(function () {
-				console.log("error en funcion guardarPDF");
+			}).fail(function () {				
 				$("#modalCargando").modal('hide');
 			});
 
@@ -144,38 +141,46 @@ function vistaPreviaPDF() {
 	var id_cliente = $("#select_cliente option:selected").attr('id');
 	var id_producto = $("#select_producto option:selected").attr('id');
 	var unidades = $("#unidades");
-	// se deben cargar los datos del cliente
+	//indica la cantidad de productos que se ingresaron en el formulario anterior
+	var cantidad_divs = $("#cantidad_divs").attr("cantidad");
 
-	$.ajax({
-		type: "POST",
-		url: url_prev + '/getCliente',
-		data: {
-			id_cliente: id_cliente,
-			_token: $('input[name="_token"]').val()
-		} //esto es necesario, por la validacion de seguridad de laravel
-	}).done(function (cliente) {
-		var nombre_cliente = cliente[0].nombre_cliente;
-		var email_cliente = cliente[0].email_cliente;
-		var fono_cliente = cliente[0].fono_cliente;
-		$("#nombre_cliente").text(nombre_cliente);
-		$("#email_cliente").text(email_cliente);
-    $("#fono_cliente").text(fono_cliente);
+	// se obtienen los datos del cliente
+
+	$("#nombre_cliente").text($("#select_cliente option:selected").attr("nombre_cliente"));
+	$("#email_cliente").text($("#select_cliente option:selected").attr("email_cliente"));
+    $("#fono_cliente").text($("#select_cliente option:selected").attr("fono_cliente"));
     $("#id_cliente").text(id_cliente);
 
+	//se obtienen los productos dinamicos del formulario anterior
+	// cantidad
+	// nombre
+	// precio unitario
+	// precio total
+	var total_parcial = 0;
+	var subtotal = 0;
+	var iva = 0;
+	var total = 0;
+	var tipo_cambio_p = 0;
+	for(var i=1; i<=cantidad_divs;i++){
+		total_parcial = parseInt($("#select_producto_"+i+" option:selected").attr("valor_producto"))*parseInt($("#unidades_producto_"+i).val());
+		tipo_cambio_p = $("#select_producto_"+i+" option:selected").attr("tipo_cambio").toUpperCase();
+		$("#tabla_propuesta_body").append('<tr>'+
+			'<td>'+$("#unidades_producto_"+i).val()+'</td>'+
+			'<td>'+$("#select_producto_"+i+" option:selected").attr("nombre_producto")+'</td>'+
+			'<td><b>'+tipo_cambio_p+' </b> '+$("#select_producto_"+i+" option:selected").attr("valor_producto")+'</td>'+
+			'<td><b>'+tipo_cambio_p+'</b> '+total_parcial+'</td>'+
+		'</tr>')
+		;
+		subtotal = subtotal + total_parcial;
+	}
 
-
-		// setear datos de cliente en plantilla
-
-
-	}).fail(function () {
-		console.log("error en funcion getCliente");
-	});
-
-
-	// se deben cargar los datos del ejecutivo
-
-	// se deben cargar los datos del producto
-
+	iva= Math.round(subtotal*0.19);
+	total = subtotal + iva;
+	
+	$("#subtotal").text(tipo_cambio_p+' '+subtotal);
+	$("#iva").text(iva);
+	$("#total_con_iva").text(tipo_cambio_p+' '+total);
+/*
 	$.ajax({
 		type: "POST",
 		url: url_prev + '/getProducto',
@@ -191,15 +196,21 @@ function vistaPreviaPDF() {
 		var subtotal = parseInt(precio_unitario) * parseInt(unidades);
 		var iva = Math.round(subtotal * 0.19);
 		var total_con_iva = subtotal + iva;
-
+		for(i=0;i<$("#cantidad_divs").attr("cantidad");i++){
+			
+		}
+		$("#id_producto").text(producto[0].id_producto);    
 		$("#nombre_producto_propuesta").text(nombre_producto);
 		$("#valor_producto_propuesta").text(tipo_cambio + ' ' + precio_unitario);
 		$("#total_propuesta_sin_iva").text(tipo_cambio + ' ' + subtotal);
+
+		$("#unidades_propuesta").text(unidades);
+
+
 		$("#subtotal").text(tipo_cambio + ' ' + subtotal);
 		$("#iva").text(iva);
 		$("#total_con_iva").text(tipo_cambio + ' ' + total_con_iva);
-    $("#unidades_propuesta").text(unidades);
-    $("#id_producto").text(producto[0].id_producto);    
+   
     // aun no se implementa para servicio
     $("#id_servicio").text("");
     
@@ -207,7 +218,7 @@ function vistaPreviaPDF() {
 	}).fail(function () {
 		console.log("error en funcion getProducto");
 	});
-
+ */
 	setTimeout(() => {
 		$("#datos_ingreso").hide();
 	}, 200);
@@ -220,6 +231,7 @@ function vistaPreviaPDF() {
 
 function editarPDF() {
 	setTimeout(() => {
+		$("#tabla_propuesta_body").html("");
 		$("#plantilla_documento").hide();
 	}, 200);
 
@@ -271,8 +283,7 @@ function enviarPropuesta() {
               pdf: bpdf,
               _token: $('input[name="_token"]').val()
             } //esto es necesario, por la validacion de seguridad de laravel
-          }).done(function (msg) {
-            console.log("se completo guardarPDF : " + msg);
+          }).done(function (msg) {            
           }).fail(function () {
             console.log("error en funcion guardarPDF");
 
@@ -297,22 +308,31 @@ function enviarPropuesta() {
           }, 200);
           setTimeout(() => {
             $("#modalExitoso").modal('show');
-          }, 200);
+		  }, 200);
+		  
             // se almacena la propuesta en base de datos
-
+			var cantidad_divs = $("#cantidad_divs").attr("cantidad");
 
             var nombre_cliente = $("#nombre_cliente").text();
             var email_destino =$("#email_cliente").text();
             var id_ejecutivo = $("#id_usuario").text();
-            var id_cliente = $("#id_cliente").text();
+			var id_cliente = $("#id_cliente").text();			
+
+			var json_tipo_cambio = "";
+			var json_id_producto = "";
+			var json_nombre_producto = "";
+			var json_unidades = "";
+			var json_valor_unitario_producto ="";
+			var json_subtotal_producto = "";
+			//queda pendiente almacenar en la base de datos
+/*
             var id_producto = $("#id_producto").text();
-
             var valor_s_iva = $("#subtotal").text();
-
-            var tipo_cambio = valor_s_iva.substr(0, 3).trim();
-            console.log("El tipo de cambio es:"+tipo_cambio);
+            var tipo_cambio = valor_s_iva.substr(0, 3).trim();            
             valor_s_iva = valor_s_iva.substr(3).trim();
-            var iva = $("#iva").text();
+			var iva = $("#iva").text();
+			
+
             var total = $("#total_con_iva").text().substr(3).trim();
             var unidades = $("#unidades_propuesta").text();
             var valor_unitario = $("#valor_producto_propuesta").text().substr(3).trim();
@@ -334,9 +354,7 @@ function enviarPropuesta() {
               tipo_cambio : tipo_cambio
             });
           
-            var json_datos = JSON.stringify(array_datos);
-
-            console.log(json_datos);
+            var json_datos = JSON.stringify(array_datos);            
 
               $.ajax({
                 type: "POST",
@@ -354,7 +372,8 @@ function enviarPropuesta() {
 
         }).fail(function () {
           console.log("error en funcion enviarPropuesta");
-        });
+		});
+		*/
 		});
 
 

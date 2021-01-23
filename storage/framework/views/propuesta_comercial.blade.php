@@ -100,13 +100,8 @@
                            <th style="color: #ffffff !important;text-align:right;"> Precio </th>
                         </tr>
                      </thead>
-                     <tbody>
-                        <tr>
-                           <td id="unidades_propuesta"> </td>
-                           <td id="nombre_producto_propuesta"> </td>
-                           <td id="valor_producto_propuesta"></td>
-                           <td id="total_propuesta_sin_iva" style="text-align:right;"> </td>
-                        </tr>                  
+                     <tbody id="tabla_propuesta_body">
+                        <!--contenido dinamico-->                 
                      </tbody>
                   </table>
                </div>

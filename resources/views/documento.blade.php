@@ -33,6 +33,9 @@
          font-weight: 300;
          padding-left: 17px;
          }
+         .top-spaced{
+            margin-top: 10px;
+         }
       </style>
    </head>
    <body>
@@ -186,48 +189,48 @@
                                     <option id="2">Orden de Compra</option>
                                  </select>
                               </div>
-                              <div id='TextBoxesGroup'>
-                                 <div id="TextBoxDiv1" style="margin-bottom: 20px; border: 1px solid; border-color: #dee2e6;">
-                                    <label>Seleccione producto N° 1: </label>
-                                    <select class="form-control" name="textbox1"  type='textbox' id='select_producto_1' >
-                                    <option id="0">Elija Uno</option>
-                                    <?php 
-                                       for($i=0;$i<sizeOf($productos); $i++){
-                                          echo "<option id=".$productos[$i]->id_producto.">".$productos[$i]->nombre_producto."</option>";
-                                       }
-                                    ?>
-                                 </select>  
-                                 <label>Unidades producto N° 1</label>
-                                 <input class="form-control form-control-sm" id="unidades_producto_1" nombre="unidades_producto"></input>  
-                                 <label>Descuento para producto N° 1 (opcional)</label>
-                                 <input class="form-control form-control-sm" id="descuento_producto_1" nombre="descuento_producto"></input>                                                                
-                                 </div>                           
-                              </div>
-                              <input hidden id="cantidad_divs" cantidad="1"></input>
-                              <div>                              
-                                 <input type='button'  class="btn btn-primary" value='Agregar item' id='addButton'>
-                                 <input type='button' class="btn btn-danger" value='Remover item' id='removeButton'>
-                                 <button type='button' class="btn btn-success" value='Obtener valores' id='getButtonValue'>Comprobar valores</button>
-                              </div>
-                              <br>
+
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Seleccione Cliente</label>
                                  <select class=" js-example-basic-single form-control" name="select_cliente" id="select_cliente">
                                     <option id="0">Elija Uno</option>
                                     <?php 
                                        for($i=0;$i<sizeOf($clientes); $i++){
-                                          echo "<option id=".$clientes[$i]->id_cliente.">".$clientes[$i]->nombre_cliente."</option>";
+                                          echo "<option id=".$clientes[$i]->id_cliente." fono_cliente='".$clientes[$i]->fono_cliente."' nombre_cliente='".$clientes[$i]->nombre_cliente."' email_cliente='".$clientes[$i]->email_cliente."'>".$clientes[$i]->nombre_cliente."</option>";
                                        }
                                     ?>
                                  </select>
-                              </div>
+                              </div>   
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                                 <label>Unidades</label>
-                                 <input id="unidades" maxlength="10" name="unidades" type="number" class="form-control form-control-sm" aria-label="Unidades">
+                              <label><b>Seleccione Producto(s)</b></label>
+                                 <div id='TextBoxesGroup'>
+                                    <div id="TextBoxDiv1" style="margin-bottom: 20px; border: 1px solid; border-color: #dee2e6; background-color: #e0e4ff; padding: 12px; padding-top: 0px;">
+                                       <label class="top-spaced">Seleccione producto N° 1: </label>
+                                       <select class="form-control" name="textbox1"  type='textbox' id='select_producto_1' >
+                                       <option id="0">Elija Uno</option>
+                                       <?php 
+                                          for($i=0;$i<sizeOf($productos); $i++){
+                                             echo "<option id=".$productos[$i]->id_producto." nombre_producto='".$productos[$i]->nombre_producto."' valor_producto='".$productos[$i]->valor_producto."' tipo_cambio='".$productos[$i]->tipo_cambio."'>".$productos[$i]->nombre_producto." (".$productos[$i]->tipo_cambio." ".$productos[$i]->valor_producto.")"."</option>";
+                                          }
+                                       ?>
+                                    </select>  
+                                    <label class="top-spaced">Unidades producto N° 1</label>
+                                    <input class="form-control form-control-sm" id="unidades_producto_1" nombre="unidades_producto"></input>  
+                                    <label class="top-spaced">Descuento para producto N° 1 (opcional)</label>
+                                    <input class="form-control form-control-sm" id="descuento_producto_1" nombre="descuento_producto"></input>                                                                
+                                    </div>                           
+                                 </div>
+                                 <input hidden id="cantidad_divs" cantidad="1"></input>
+                                 
+                                 <div>                              
+                                    <input type='button'  class="btn btn-success" value='Agregar item' id='addButton'>
+                                    <input type='button' class="btn btn-danger" value='Remover item' id='removeButton'>
+                                    <!--<button type='button' class="btn btn-success" value='Obtener valores' id='getButtonValue'>Comprobar valores</button>-->
+                                 </div>                                                                                  
+                                 <br>
                               </div>
-                              
                               <div class="form-group">
-                                 <button disabled type="button" onclick="vistaPreviaPDF();" class="btn btn-primary btn-md" value="Crear Documento">Crear Documento</button>
+                                 <button type="button" onclick="vistaPreviaPDF();" class="btn btn-primary btn-md" value="Crear Documento">Crear Documento</button>
                               </div>
                            </div>
                         </div>
