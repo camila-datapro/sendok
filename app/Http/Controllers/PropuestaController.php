@@ -9,10 +9,7 @@ use App\PropuestaModel;
 class PropuestaController extends Controller
 {
     public function setPropuesta(Request $request){
-        $json_datos= $request["json_datos"];
-        $json_datos = str_replace("[","",$json_datos);
-        $json_datos = str_replace("]","",$json_datos);
-        $datos = json_decode($json_datos);
+        $datos= $request["datos_envio"];
         return PropuestaModel::setPropuesta($datos);
     }
 }

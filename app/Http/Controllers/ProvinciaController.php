@@ -19,7 +19,6 @@ class ProvinciaController extends Controller
     }
 
     public function getProvincias(Request $request){
-       //Log::debug("request camila:".$request['id']);
        $idRegion = $request['id'];
         return json_encode(ProvinciaModel::getProvinciasByRegion($idRegion));
     }

@@ -26,7 +26,6 @@ class DocumentoController extends Controller
     }
 
     public function guardarPDF(Request $request){
-        Log::debug("ingreso a GuardarPDF");
         $bpdf = $request["pdf"];
         file_put_contents('./documentos/propuesta.pdf', base64_decode($bpdf));
         return "OK";

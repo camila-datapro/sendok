@@ -32,14 +32,9 @@ class MensajeRecibido extends Mailable
     public function build()
     {
        
-        if (file_exists('./documentos/propuesta.pdf'))
-        {
-          
-            $contents = file_get_contents('./documentos/propuesta.pdf');
-    
-           
-            Log::debug("Existe el archivo en ./documentos/propuesta.pdf");
-            
+        if (file_exists('./documentos/'))
+        {          
+            $contents = file_get_contents('./documentos/propuesta.pdf');            
         }
 
         return $this->view('emails.envio-documento')

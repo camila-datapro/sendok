@@ -316,14 +316,73 @@ function enviarPropuesta() {
             var nombre_cliente = $("#nombre_cliente").text();
             var email_destino =$("#email_cliente").text();
             var id_ejecutivo = $("#id_usuario").text();
-			var id_cliente = $("#id_cliente").text();			
+			var id_cliente = $("#id_cliente").text();		
+			
+			var array_tipo_cambio = [];
+			var array_id_producto = [];
+			var array_nombre_producto = [];
+			var array_unidades = [];
+			var array_valor_unitario_producto =[];
+			var array_subtotal_producto = [];
+			var total_con_iva = parseInt($("#total_con_iva").text().substr(3).trim());
+			var iva = 0.19;
+			var subtotal = 0;
 
-			var json_tipo_cambio = "";
-			var json_id_producto = "";
-			var json_nombre_producto = "";
-			var json_unidades = "";
-			var json_valor_unitario_producto ="";
-			var json_subtotal_producto = "";
+		  	for(var i=1;i<=cantidad_divs;i++){
+				subtotal = parseInt($("#select_producto_"+i+" option:selected").attr("valor_producto"))*parseInt($("#unidades_producto_"+i).val());				
+				array_tipo_cambio.push($("#select_producto_"+i+" option:selected").attr("tipo_cambio").toUpperCase());
+				array_id_producto.push($("#select_producto_"+i+" option:selected").attr("id"));
+				array_nombre_producto.push($("#select_producto_"+i+" option:selected").attr("nombre_producto"));
+				array_valor_unitario_producto.push($("#select_producto_"+i+" option:selected").attr("valor_producto"));
+				array_unidades.push($("#unidades_producto_"+i).val());
+				array_subtotal_producto.push(subtotal);
+			}			
+
+			var json_tipo_cambio = JSON.stringify(array_tipo_cambio);
+			var json_id_producto = JSON.stringify(array_id_producto);
+			var json_nombre_producto = JSON.stringify(array_nombre_producto);
+			var json_unidades = JSON.stringify(array_unidades);
+			var json_valor_unitario_producto = JSON.stringify(array_valor_unitario_producto);
+			var json_subtotal_producto = JSON.stringify(array_subtotal_producto);
+			var total_s_iva = parseInt($("#subtotal").text().substr(3).trim());
+
+			var id_ejecutivo = $("#id_usuario").text();
+			var id_cliente = $("#select_cliente option:selected").attr("id");
+			var email_cliente = $("#select_cliente option:selected").attr("email_cliente");
+			var fono_cliente =  $("#select_cliente option:selected").attr("fono_cliente");
+			var nombre_cliente = $("#select_cliente option:selected").attr("nombre_cliente");
+
+			
+			var datos_envio = [
+				json_tipo_cambio,
+				json_id_producto,
+				json_nombre_producto,
+				json_unidades,
+				json_valor_unitario_producto,
+				json_subtotal_producto,
+				total_s_iva,
+				total_con_iva,
+				Math.round(total_s_iva*iva),
+				id_ejecutivo,
+				id_cliente,
+				email_cliente,
+				fono_cliente,
+				nombre_cliente
+			];
+
+			$.ajax({
+				type: "POST",
+				url: url_prev + '/setPropuesta',
+				data: {
+				  datos_envio: datos_envio,
+				  _token: $('input[name="_token"]').val()
+				} //esto es necesario, por la validacion de seguridad de laravel
+			  	}).done(function (msg) {
+					  console.log("envio ok");
+
+				}).fail(function () {
+				console.log("error en funcion enviarPropuesta");
+				});
 			//queda pendiente almacenar en la base de datos
         
         }).fail(function () {

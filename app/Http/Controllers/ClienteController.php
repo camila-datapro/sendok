@@ -39,8 +39,6 @@ class ClienteController extends Controller
     public function removeCliente(Request $request){
         
         $id_cliente = $request['id_cliente'];
-        Log::debug("Se eliminará el cliente con id: ".$id_cliente);
-        Log::debug(var_dump($request));
         return ClienteModel::eliminarCliente($id_cliente);
     }
 }
