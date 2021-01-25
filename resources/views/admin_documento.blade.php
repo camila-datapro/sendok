@@ -319,10 +319,7 @@
                               </div>
 
                               <div style="padding-left: 0px !important;" class="form-group col-sm-12">
-                                 <label>Seleccione Cliente</label>
-                                 <?php
-                                         echo var_dump($propuesta);
-                                    ?>
+                                 <label>Seleccione Cliente</label>                               
                                  <select class="form-control" name="select_cliente" id="select_cliente">
                                    
                                     <option id="0">Elija Uno</option>
