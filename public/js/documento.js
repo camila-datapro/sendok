@@ -404,7 +404,8 @@ function enviarCorreo(){
 				id_cliente,
 				email_cliente,
 				fono_cliente,
-				nombre_cliente
+				nombre_cliente,
+				folio
 			];
 
 			$("#modalCargando").modal('hide');

@@ -24,6 +24,7 @@ class PropuestaModel extends Model
        // email cliente -> $datos[11]
        // fono cliente -> $datos[12]
        // nombre cliente -> $datos[13]
+       // folio propuesta -> $datos[14]
 
         $id_ejecutivo = $datos[9]; //ok
         $id_cliente = $datos[10];
@@ -37,7 +38,8 @@ class PropuestaModel extends Model
         $total=$datos[7];      
         $valor_unitario=$datos[4];
         $nombre_producto=$datos[2];
-        $tipo_cambio=$datos[0];    
+        $tipo_cambio=$datos[0];  
+        $folio_propuesta = $datos[14];  
 
         $results = DB::insert("insert
          into propuesta_comercial
@@ -53,7 +55,8 @@ class PropuestaModel extends Model
             nombre_cliente,
             valor_unitario,
             nombre_producto,
-            tipo_cambio
+            tipo_cambio,
+            folio_propuesta
          ) 
          VALUES
          (
@@ -68,7 +71,8 @@ class PropuestaModel extends Model
             '".$nombre_cliente."',
             '".$valor_unitario."',
             '".$nombre_producto."',
-            '".$tipo_cambio."'
+            '".$tipo_cambio."',
+            '".$folio_propuesta."'
          )");
         return $results;
     }
