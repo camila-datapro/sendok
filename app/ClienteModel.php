@@ -26,6 +26,8 @@ class ClienteModel extends Model
         $idProvincia = $json_datos->id_provincia;
         $idComuna = $json_datos->id_comuna;
         $direccion = $json_datos->direccion;
+        $contacto_nombre = $json_datos->nombre_contacto;
+        $contacto_cargo = $json_datos->cargo_contacto;
 
         $query = "insert into cliente_destino (
             rut_cliente,
@@ -34,7 +36,9 @@ class ClienteModel extends Model
             id_comuna_cliente,
             id_region_cliente,
             email_cliente,
-            direccion_cliente
+            direccion_cliente,
+            nombre_contacto,
+            cargo_contacto
             ) VALUES (
                 '".$rut."',
                 '".$nombre."',   
@@ -42,7 +46,9 @@ class ClienteModel extends Model
                 ".intval($idComuna).",       
                 ".intval($idRegion).",            
                 '".$email."',                
-                '".$direccion."'
+                '".$direccion."',
+                '".$contacto_nombre."',
+                '".$contacto_cargo."'
             )";
         $results = DB::insert($query);                            
         return $results;

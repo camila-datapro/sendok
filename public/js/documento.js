@@ -90,10 +90,11 @@ $(document).ready(function () {
 function guardarPropuesta() {
 	const elemento = document.getElementById('propuesta_detalle');
 	$("#modalCargando").modal('show');
+	var folio = $("#folio_propuesta").text();
 	html2pdf()
 		.set({
 			margin: 1,
-			filename: 'documento.pdf',
+			filename: folio+'.pdf',
 			image: {
 				type: 'png',
 				quality: 0.98
@@ -122,6 +123,59 @@ function guardarPropuesta() {
 				url: url_prev + '/guardarPDF',
 				data: {
 					pdf: bpdf,
+					nombre_doc: folio+'.pdf',
+					_token: $('input[name="_token"]').val()
+				} //esto es necesario, por la validacion de seguridad de laravel
+			}).done(function (msg) {
+				$("#modalCargando").modal('hide');
+				$("#enviar_propuesta").show();
+			}).fail(function () {				
+				$("#modalCargando").modal('hide');
+			});
+
+
+			$("#hidden_pdf").attr("pdf_64", bpdf);
+		});
+}
+
+
+function almacenarPropuesta() {
+	const elemento = document.getElementById('propuesta_detalle');
+	$("#modalCargando").modal('show');
+	var folio = $("#folio_propuesta").text();
+	html2pdf()
+		.set({
+			margin: 1,
+			filename: folio+'.pdf',
+			image: {
+				type: 'png',
+				quality: 0.98
+			},
+			html2canvas: {
+				scale: 1, // a mayor escala, mejores graficos pero mas peso
+			},
+			jsPDF: {
+				unit: "in",
+				format: "a3",
+				orientation: 'portrait' //landscape de forma horizontal
+			}
+		})
+		.from(elemento)
+		.save()
+		.catch(err => console.log(err))
+		.finally()
+		.outputPdf()
+		.then(function (pdf) {
+			// This logs the right base64
+			$("#modalCargando").modal("hide");
+			var bpdf = btoa(pdf);
+
+			$.ajax({
+				type: "POST",
+				url: url_prev + '/guardarPDF',
+				data: {
+					pdf: bpdf,
+					nombre_doc: folio+'.pdf',
 					_token: $('input[name="_token"]').val()
 				} //esto es necesario, por la validacion de seguridad de laravel
 			}).done(function (msg) {
@@ -133,12 +187,28 @@ function guardarPropuesta() {
 
 			$("#hidden_pdf").attr("pdf_64", bpdf);
 		});
+		return "OK";
 }
 
 function vistaPreviaPDF() {
 
 	var tipo_documento = $("#tipo_documento option:selected").attr('id');
 	var id_cliente = $("#select_cliente option:selected").attr('id');
+	$.ajax({
+		type: "POST",
+		url: url_prev + '/propuestaLastId',
+		data: {
+			_token: $('input[name="_token"]').val()
+		} //esto es necesario, por la validacion de seguridad de laravel
+	}).done(function (msg) {
+		
+		var folio_propuesta = "PC"+id_cliente+"_"+(parseInt(msg[0].numero_folio)+1);
+		$("#folio_propuesta").text(folio_propuesta);
+	}).fail(function () {				
+		console.log("Error en propuestaLastId");
+	});
+
+
 	var id_producto = $("#select_producto option:selected").attr('id');
 	var unidades = $("#unidades");
 	//indica la cantidad de productos que se ingresaron en el formulario anterior
@@ -148,7 +218,9 @@ function vistaPreviaPDF() {
 
 	$("#nombre_cliente").text($("#select_cliente option:selected").attr("nombre_cliente"));
 	$("#email_cliente").text($("#select_cliente option:selected").attr("email_cliente"));
-    $("#fono_cliente").text($("#select_cliente option:selected").attr("fono_cliente"));
+	$("#fono_cliente").text($("#select_cliente option:selected").attr("fono_cliente"));
+	$("#contacto_nombre").text($("#select_cliente option:selected").attr("contacto_nombre"));
+	$("#contacto_cargo").text($("#select_cliente option:selected").attr("contacto_cargo"));
     $("#id_cliente").text(id_cliente);
 
 	//se obtienen los productos dinamicos del formulario anterior
@@ -248,74 +320,42 @@ function eliminarProducto() {
 
 function enviarPropuesta() {
 	$("#modalCargando").modal('show');
-	const elemento = document.getElementById('propuesta_detalle');
-
-	html2pdf()
-		.set({
-			margin: 1,
-			filename: 'documento.pdf',
-			image: {
-				type: 'png',
-				quality: 0.98
-			},
-			html2canvas: {
-				scale: 1, // a mayor escala, mejores graficos pero mas peso
-			},
-			jsPDF: {
-				unit: "in",
-				format: "a3",
-				orientation: 'portrait' //landscape de forma horizontal
-			}
-		})
-		.from(elemento)
-		.outputPdf()
-		.then(function (pdf) {
-			var bpdf = btoa(pdf);
-      $("#hidden_pdf").attr("pdf_64", bpdf);
-      
-              // primero guardo la propuesta en el servidor
-        setTimeout(() => {
-          //var bpdf = $("#hidden_pdf").attr("pdf_64");
-          $.ajax({
-            type: "POST",
-            url: url_prev + '/guardarPDF',
-            data: {
-              pdf: bpdf,
-              _token: $('input[name="_token"]').val()
-            } //esto es necesario, por la validacion de seguridad de laravel
-          }).done(function (msg) {            
-          }).fail(function () {
-            console.log("error en funcion guardarPDF");
-
-          });
-
-        }, 400);
 
 
-              
-        // envio de propuesta
-        var destinatario = $("#email_cliente").text();
-        $.ajax({
-          type: "POST",
-          url: url_prev + '/enviarPropuesta',
-          data: {
-            destinatario: destinatario,
-            _token: $('input[name="_token"]').val()
-          } //esto es necesario, por la validacion de seguridad de laravel
-        }).done(function (msg) {
-          setTimeout(() => {
-            $("#modalCargando").modal('hide');
-          }, 200);
-          setTimeout(() => {
-            $("#modalExitoso").modal('show');
-		  }, 200);
+	  var texto = "NO";
+	  
+	texto = almacenarPropuesta();
+	console.log(texto);
+	if(texto=="OK"){
+		setTimeout(() => {
+			enviarCorreo();	
+		}, 1500);
+		
+	}
+		
+        
+
+}
+
+function enviarCorreo(){
+		// envio de propuesta
+		var folio = $("#folio_propuesta").text();
+		var destinatario = $("#email_cliente").text();
+		$.ajax({
+		  type: "POST",
+		  url: url_prev + '/enviarPropuesta',
+		  data: {
+			destinatario: destinatario,
+			nombre_doc: folio+'.pdf',
+			_token: $('input[name="_token"]').val()
+		  } //esto es necesario, por la validacion de seguridad de laravel
+		}).done(function (msg) {		  			  
 		  
-            // se almacena la propuesta en base de datos
+			// se almacena la propuesta en base de datos
 			var cantidad_divs = $("#cantidad_divs").attr("cantidad");
-
-            var nombre_cliente = $("#nombre_cliente").text();
-            var email_destino =$("#email_cliente").text();
-            var id_ejecutivo = $("#id_usuario").text();
+			var nombre_cliente = $("#nombre_cliente").text();
+			var email_destino =$("#email_cliente").text();
+			var id_ejecutivo = $("#id_usuario").text();
 			var id_cliente = $("#id_cliente").text();		
 			
 			var array_tipo_cambio = [];
@@ -328,7 +368,7 @@ function enviarPropuesta() {
 			var iva = 0.19;
 			var subtotal = 0;
 
-		  	for(var i=1;i<=cantidad_divs;i++){
+			  for(var i=1;i<=cantidad_divs;i++){
 				subtotal = parseInt($("#select_producto_"+i+" option:selected").attr("valor_producto"))*parseInt($("#unidades_producto_"+i).val());				
 				array_tipo_cambio.push($("#select_producto_"+i+" option:selected").attr("tipo_cambio").toUpperCase());
 				array_id_producto.push($("#select_producto_"+i+" option:selected").attr("id"));
@@ -370,6 +410,7 @@ function enviarPropuesta() {
 				nombre_cliente
 			];
 
+			$("#modalCargando").modal('hide');
 			$.ajax({
 				type: "POST",
 				url: url_prev + '/setPropuesta',
@@ -377,20 +418,16 @@ function enviarPropuesta() {
 				  datos_envio: datos_envio,
 				  _token: $('input[name="_token"]').val()
 				} //esto es necesario, por la validacion de seguridad de laravel
-			  	}).done(function (msg) {
-					  console.log("envio ok");
+				  }).done(function (msg) {
+					  $("#modalExitoso").modal("show");
 
 				}).fail(function () {
 				console.log("error en funcion enviarPropuesta");
 				});
 			//queda pendiente almacenar en la base de datos
-        
-        }).fail(function () {
-          console.log("error en funcion enviarPropuesta");
-		});
 		
-		});
-
-
-
+		}).fail(function () {
+		  console.log("error en funcion enviarPropuesta");
+		});			
+		return "OK";
 }

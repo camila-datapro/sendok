@@ -179,11 +179,11 @@
                                       <table class="table table-hover tabla_clientes display nowrap" cellspacing="0" id="tabla_clientes">
                                             <thead>
                                                 <tr>
-                                                <th scope="col">Nombre </th>
-                                                <th scope="col">id</th>                                                
+                                                <th scope="col">Nombre empresa</th>
+                                                <!--<th scope="col">id</th>-->
                                                 <th scope="col">Fono</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Direccion</th>
+                                                <th scope="col">Nombre Contacto</th>               
+                                                <th scope="col">Email Contacto</th>                                      
                                                 <th scope="col">Acciones</th>
                                                 </tr>
                                             </thead>
@@ -191,11 +191,11 @@
                                              <?php                  
                                                    for($i=0;$i<sizeOf($clientes);$i++){
                                                       echo "<tr>                                                      
-                                                      <td >".$clientes[$i]->nombre_cliente."</td>
-                                                      <td>".$clientes[$i]->id_cliente."</td>
+                                                      <td >".$clientes[$i]->nombre_cliente."</td>                                                      
                                                       <td>".$clientes[$i]->fono_cliente."</td>
+                                                      <td> ".$clientes[$i]->nombre_contacto." -- ".$clientes[$i]->cargo_contacto."</td>
                                                       <td> ".$clientes[$i]->email_cliente."</td>
-                                                      <td> ".$clientes[$i]->direccion_cliente."</td>
+                                                    
                                                       <td>
                                                          <button class='btn btn-danger' id='eliminar_".$clientes[$i]->id_cliente."' onclick=confirmarEliminacion(this.id,'".$clientes[$i]->nombre_cliente."'); >
                                                          <i class='fas fa-trash-alt'></i>

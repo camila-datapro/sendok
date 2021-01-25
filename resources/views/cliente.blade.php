@@ -23,6 +23,12 @@
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
       <!-- End Layout styles -->
       <link rel="shortcut icon" href="{{ asset('/assets/images/favicon.png') }}" />
+      <style>
+      .margined-left{
+         margin-left: 12px;
+      }
+
+      </style>
    </head>
    <body>
       <div class="container-scroller">
@@ -168,51 +174,65 @@
                      <div class="col-md-12 grid-margin stretch-card">
                         <div class="card">
                            <div class="card-body">
-                              <h4 class="card-title">Datos nuevo cliente</h4>
-                              <p class="card-description"> Favor completar los campos correctamente </p>
                               <form class="forms-sample">
-                                 <div class="form-group">
-                                    <label for="exampleInputName1">Nombre Empresa</label>
-                                    <input type="text" maxlength="20" class="form-control" id="nombre">
+                                 <h4 class="card-title" style="color: #001fff9e;">Datos empresa</h4>
+                                 <div class="margined-left">
+                                    <div class="form-group">
+                                       <label for="exampleInputName1">Nombre Empresa</label>
+                                       <input type="text" maxlength="20" class="form-control" id="nombre">
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="exampleInputName1">Rut Empresa</label>
+                                       <input type="text" maxlength="15" class="form-control" id="rut">
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="region">Región</label>
+                                       <select class="form-control" id="region" onchange="getProvinciasRegion();">
+                                          <option _blank="">Elija Una</option>
+                                          <?php                  
+                                             for($i=0;$i<sizeOf($regiones);$i++){
+                                                echo "<option value='".$regiones[$i]->id."'>".$regiones[$i]->region."</option>";
+                                             }
+                                          ?> 
+                                       </select>
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="provincia">Provincia</label>
+                                       <select class="form-control" id="provincia" onchange="getComunasProvincia();">
+                                          <option id="_blank">Elija Una </option>
+                                       </select>
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="comuna">Comuna</label>
+                                       <select class="form-control" id="comuna">
+                                          <option id="_blank">Elija Una </option>
+                                       </select>
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="exampleInputName1">Dirección</label>
+                                       <input type="text" maxlength="30" class="form-control" id="direccion">
+                                    </div>
                                  </div>
-                                 <div class="form-group">
-                                    <label for="exampleInputName1">Rut Empresa</label>
-                                    <input type="text" maxlength="15" class="form-control" id="rut">
-                                 </div>
-                                 <div class="form-group">
-                                    <label for="exampleInputEmail3">Email</label>
-                                    <input type="email" class="form-control" id="email">
-                                 </div>
-                                 <div class="form-group">
-                                    <label for="exampleInputName1">Fono contacto</label>
-                                    <input type="number" maxlength="12" class="form-control" id="telefono">
-                                 </div>
-                                 <div class="form-group">
-                                    <label for="region">Región</label>
-                                    <select class="form-control" id="region" onchange="getProvinciasRegion();">
-                                       <option _blank="">Elija Una</option>
-                                       <?php                  
-                                          for($i=0;$i<sizeOf($regiones);$i++){
-                                             echo "<option value='".$regiones[$i]->id."'>".$regiones[$i]->region."</option>";
-                                          }
-                                       ?> 
-                                    </select>
-                                 </div>
-                                 <div class="form-group">
-                                    <label for="provincia">Provincia</label>
-                                    <select class="form-control" id="provincia" onchange="getComunasProvincia();">
-                                       <option id="_blank">Elija Una </option>
-                                    </select>
-                                 </div>
-                                 <div class="form-group">
-                                    <label for="comuna">Comuna</label>
-                                    <select class="form-control" id="comuna">
-                                       <option id="_blank">Elija Una </option>
-                                    </select>
-                                 </div>
-                                 <div class="form-group">
-                                    <label for="exampleInputName1">Dirección</label>
-                                    <input type="text" maxlength="30" class="form-control" id="direccion">
+                                 <h4 class="card-title" style="color: #001fff9e;">Datos contacto</h4>
+                                 <!-- datos de contacto-->
+                                 <div class="margined-left">                                    
+                                    <div class="form-group">
+                                       <label for="nombre_contacto">Nombre Contacto</label>
+                                       <input type="email" class="form-control" id="nombre_contacto">
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="nombre_contacto">Cargo en la empresa</label>
+                                       <input type="email" class="form-control" id="cargo_contacto">
+                                    </div>
+
+                                    <div class="form-group">
+                                       <label for="exampleInputEmail3">Email contacto</label>
+                                       <input type="email" class="form-control" id="email">
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="exampleInputName1">Fono contacto</label>
+                                       <input type="number" maxlength="12" class="form-control" id="telefono">
+                                    </div>
                                  </div>
                                  <div class="form-group">
                                     <input type="button" onclick="crearCliente();" class="btn btn-primary btn-md" value="Crear Cliente">

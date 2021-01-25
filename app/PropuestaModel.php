@@ -39,7 +39,7 @@ class PropuestaModel extends Model
         $nombre_producto=$datos[2];
         $tipo_cambio=$datos[0];    
 
-        $results = DB::select("insert
+        $results = DB::insert("insert
          into propuesta_comercial
         (
             id_ejecutivo,
@@ -70,6 +70,12 @@ class PropuestaModel extends Model
             '".$nombre_producto."',
             '".$tipo_cambio."'
          )");
+        return $results;
+    }
+
+    public static function getLastId(){
+        $query = "select max(id_propuesta) as numero_folio from propuesta_comercial;";
+        $results = DB::select($query);
         return $results;
     }
 }

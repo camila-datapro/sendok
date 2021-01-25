@@ -78,6 +78,8 @@ function crearCliente() {
   var idProvincia = parseInt($("#provincia option:selected").attr('id_provincia'));
   var idComuna = parseInt($("#comuna option:selected").attr('id_comuna'));
   var direccion = $("#direccion").val();
+  var nombre_contacto = $("#nombre_contacto").val();
+  var cargo_contacto = $("#cargo_contacto").val();
   var array_datos = [];
   var token = $('input[name="_token"]').val();
 
@@ -89,7 +91,9 @@ function crearCliente() {
     id_region: idRegion,
     id_provincia: idProvincia,
     id_comuna: idComuna,
-    direccion: direccion
+    direccion: direccion,
+    nombre_contacto: nombre_contacto,
+    cargo_contacto : cargo_contacto
   });
 
   var json_datos = JSON.stringify(array_datos);
@@ -99,7 +103,7 @@ function crearCliente() {
       'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
     }
   });
-  $("#modalCargando").modal('show');
+
   $.ajax({
     type: "POST",
     url: url_prev + '/crearCliente',
@@ -108,16 +112,9 @@ function crearCliente() {
       _token: token
     } //esto es necesario, por la validacion de seguridad de laravel
   }).done(function(msg) {
-    setTimeout(() => {  
-      $("#modalCargando").modal('hide');
-    }, 400);
-    setTimeout(() => {  
       $("#modalExitosa").modal('show');
-    }, 200);
+    
   }).fail(function() {
-    setTimeout(() => {  
-        $("#modalCargando").modal('hide');
-    }, 400);
     setTimeout(() => {  
         $("#modalError").modal('show');
     }, 200);

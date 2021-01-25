@@ -196,7 +196,7 @@
                                     <option id="0">Elija Uno</option>
                                     <?php 
                                        for($i=0;$i<sizeOf($clientes); $i++){
-                                          echo "<option id=".$clientes[$i]->id_cliente." fono_cliente='".$clientes[$i]->fono_cliente."' nombre_cliente='".$clientes[$i]->nombre_cliente."' email_cliente='".$clientes[$i]->email_cliente."'>".$clientes[$i]->nombre_cliente."</option>";
+                                          echo "<option id=".$clientes[$i]->id_cliente." fono_cliente='".$clientes[$i]->fono_cliente."' nombre_cliente='".$clientes[$i]->nombre_cliente."' email_cliente='".$clientes[$i]->email_cliente."' contacto_nombre='".$clientes[$i]->nombre_contacto."' contacto_cargo='".$clientes[$i]->cargo_contacto."' >".$clientes[$i]->nombre_cliente."</option>";
                                        }
                                     ?>
                                  </select>

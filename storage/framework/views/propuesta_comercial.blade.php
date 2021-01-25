@@ -26,8 +26,8 @@
                   <table class="table table-bordered" style="border-bottom: 4px solid #142444;">
                      <tbody>
                         <tr>
-                           <td style="width: 300px;background: rgba(0, 0, 0, 0.05);"> Propuesta N° </td>
-                           <td> AAAAA </td>
+                           <td style="width: 300px;background: rgba(0, 0, 0, 0.05);"> Folio </td>
+                           <td id="folio_propuesta"></td>
                         </tr>
                         <tr>
                            <td style="width: 300px;background: rgba(0, 0, 0, 0.05);"> Fecha </td>
@@ -49,13 +49,19 @@
                         </thead>
                         <tbody>
                            <tr>
-                              <td id="nombre_cliente"> </td>
+                              <td id="contacto_nombre"></td>
+                           </tr>
+                           <tr>
+                              <td id="contacto_cargo"></td>
                            </tr>
                            <tr>
                               <td id="email_cliente"></td>
                            </tr>
                            <tr>
                               <td id="fono_cliente"></td>
+                           </tr>
+                           <tr>
+                              <td id="nombre_cliente"> </td>
                            </tr>
                         </tbody>
                      </table>
@@ -156,9 +162,9 @@
          <!---fin documento-->
          <div class="row">
             <div class="col-md-12" style="text-align: center;">
-               <button style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-primary btn-fw btn-lg" onclick="enviarPropuesta();">ENVIAR PROPUESTA</button>
+               <button id="enviar_propuesta" style="margin: 10px; cursor: pointer;color: #fff; display: none;" class="btn btn-primary btn-fw btn-lg" onclick="enviarPropuesta();">ENVIAR PROPUESTA</button>
                <button  style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-warning btn-fw btn-lg" onclick="editarPDF();">EDITAR PROPUESTA</button>
-               <button style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-primary btn-lg" data-toggle="modal" onclick="guardarPropuesta();">GUARDAR PROPUESTA</button>
+               <button  style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-primary btn-lg" data-toggle="modal" onclick="guardarPropuesta();">GUARDAR PROPUESTA</button>
             </div>
          </div>
          <div class="" style="height: 100px;"><span class="fa fa-check-circle"></span></div>

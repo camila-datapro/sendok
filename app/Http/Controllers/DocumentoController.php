@@ -21,13 +21,15 @@ class DocumentoController extends Controller
 
     public function enviarPropuesta(Request $request){        
         $destinatario = $request["destinatario"];
-        Mail::to($destinatario)->send( new MensajeRecibido);
+        $nombre_doc = $request["nombre_doc"];
+        Mail::to($destinatario)->send( new MensajeRecibido($nombre_doc));        
         return 'Mensaje enviado';
     }
 
     public function guardarPDF(Request $request){
         $bpdf = $request["pdf"];
-        file_put_contents('./documentos/propuesta.pdf', base64_decode($bpdf));
+        $nombre_doc = $request["nombre_doc"];
+        file_put_contents('./documentos/'.$nombre_doc, base64_decode($bpdf));
         return "OK";
 
     }

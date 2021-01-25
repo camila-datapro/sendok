@@ -19,9 +19,9 @@ class MensajeRecibido extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(String $nombre)
     {
-        
+        $this->nombre = $nombre;
     }
 
     /**
@@ -31,15 +31,12 @@ class MensajeRecibido extends Mailable
      */
     public function build()
     {
-       
-        if (file_exists('./documentos/'))
-        {          
-            $contents = file_get_contents('./documentos/propuesta.pdf');            
-        }
+       Log::debug("Build Mensaje Recibido: ".$this->nombre);
+       $nombre = $this->nombre;
 
         return $this->view('emails.envio-documento')
-        ->attachData(file_get_contents('./documentos/propuesta.pdf'),'documento.pdf',[
+        ->attachData(file_get_contents('./documentos/'.$nombre),$nombre,[
             'mime' => 'application/pdf',
-        ]);
+        ]);;
     }
 }
