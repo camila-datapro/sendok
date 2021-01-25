@@ -89,7 +89,7 @@ $(document).ready(function () {
 
 function guardarPropuesta() {
 	const elemento = document.getElementById('propuesta_detalle');
-	$("#modalCargando").modal('show');
+	
 	var folio = $("#folio_propuesta").text();
 	html2pdf()
 		.set({
@@ -127,10 +127,10 @@ function guardarPropuesta() {
 					_token: $('input[name="_token"]').val()
 				} //esto es necesario, por la validacion de seguridad de laravel
 			}).done(function (msg) {
-				$("#modalCargando").modal('hide');
+				
 				$("#enviar_propuesta").show();
 			}).fail(function () {				
-				$("#modalCargando").modal('hide');
+				
 			});
 
 
@@ -324,14 +324,11 @@ function enviarPropuesta() {
 
 	  var texto = "NO";
 	  
-	texto = almacenarPropuesta();
-	console.log(texto);
-	if(texto=="OK"){
-		setTimeout(() => {
+	//texto = almacenarPropuesta();
+	//console.log(texto);
+	
+	
 			enviarCorreo();	
-		}, 1500);
-		
-	}
 		
         
 
