@@ -66,18 +66,6 @@ $(document).ready(function () {
 				$("#TextBoxDiv" + counter).remove();
 
 			});
-
-/*			$("#getButtonValue").click(function () {
-
-				var msg = '';
-				for (i = 1; i < counter; i++) {
-					msg += "\n Id Producto #" + i + " : " + $('#select_producto_' + i).val();
-					msg += 
-					"\n Unidades #" + i + " : " + $('#unidades_producto_' + i).val();
-					msg += "\n Descuento #" + i + " : " + $('#descuento_producto_' + i).val();
-				}
-				alert(msg);
-			});*/
 		}).fail(function () {
 			console.log("error en generacion dinamica de productos ");		
 		});
@@ -127,10 +115,10 @@ function guardarPropuesta() {
 					_token: $('input[name="_token"]').val()
 				} //esto es necesario, por la validacion de seguridad de laravel
 			}).done(function (msg) {
-				
-				$("#enviar_propuesta").show();
+				guardarEnBD();
+				$("#guardar_propuesta").hide();
 			}).fail(function () {				
-				
+				console.log("Error en descarga del documento");
 			});
 
 
@@ -138,57 +126,6 @@ function guardarPropuesta() {
 		});
 }
 
-
-function almacenarPropuesta() {
-	const elemento = document.getElementById('propuesta_detalle');
-	$("#modalCargando").modal('show');
-	var folio = $("#folio_propuesta").text();
-	html2pdf()
-		.set({
-			margin: 1,
-			filename: folio+'.pdf',
-			image: {
-				type: 'png',
-				quality: 0.98
-			},
-			html2canvas: {
-				scale: 1, // a mayor escala, mejores graficos pero mas peso
-			},
-			jsPDF: {
-				unit: "in",
-				format: "a3",
-				orientation: 'portrait' //landscape de forma horizontal
-			}
-		})
-		.from(elemento)
-		.save()
-		.catch(err => console.log(err))
-		.finally()
-		.outputPdf()
-		.then(function (pdf) {
-			// This logs the right base64
-			$("#modalCargando").modal("hide");
-			var bpdf = btoa(pdf);
-
-			$.ajax({
-				type: "POST",
-				url: url_prev + '/guardarPDF',
-				data: {
-					pdf: bpdf,
-					nombre_doc: folio+'.pdf',
-					_token: $('input[name="_token"]').val()
-				} //esto es necesario, por la validacion de seguridad de laravel
-			}).done(function (msg) {
-				$("#modalCargando").modal('hide');
-			}).fail(function () {				
-				$("#modalCargando").modal('hide');
-			});
-
-
-			$("#hidden_pdf").attr("pdf_64", bpdf);
-		});
-		return "OK";
-}
 
 function vistaPreviaPDF() {
 
@@ -252,45 +189,7 @@ function vistaPreviaPDF() {
 	$("#subtotal").text(tipo_cambio_p+' '+subtotal);
 	$("#iva").text(iva);
 	$("#total_con_iva").text(tipo_cambio_p+' '+total);
-/*
-	$.ajax({
-		type: "POST",
-		url: url_prev + '/getProducto',
-		data: {
-			id_producto: id_producto,
-			_token: $('input[name="_token"]').val()
-		} //esto es necesario, por la validacion de seguridad de laravel
-	}).done(function (producto) {
-		var nombre_producto = producto[0].nombre_producto;
-		var precio_unitario = producto[0].valor_producto;
-		var tipo_cambio = (producto[0].tipo_cambio).toUpperCase();
-		var unidades = $("#unidades").val();
-		var subtotal = parseInt(precio_unitario) * parseInt(unidades);
-		var iva = Math.round(subtotal * 0.19);
-		var total_con_iva = subtotal + iva;
-		for(i=0;i<$("#cantidad_divs").attr("cantidad");i++){
-			
-		}
-		$("#id_producto").text(producto[0].id_producto);    
-		$("#nombre_producto_propuesta").text(nombre_producto);
-		$("#valor_producto_propuesta").text(tipo_cambio + ' ' + precio_unitario);
-		$("#total_propuesta_sin_iva").text(tipo_cambio + ' ' + subtotal);
 
-		$("#unidades_propuesta").text(unidades);
-
-
-		$("#subtotal").text(tipo_cambio + ' ' + subtotal);
-		$("#iva").text(iva);
-		$("#total_con_iva").text(tipo_cambio + ' ' + total_con_iva);
-   
-    // aun no se implementa para servicio
-    $("#id_servicio").text("");
-    
-
-	}).fail(function () {
-		console.log("error en funcion getProducto");
-	});
- */
 	setTimeout(() => {
 		$("#datos_ingreso").hide();
 	}, 200);
@@ -302,6 +201,8 @@ function vistaPreviaPDF() {
 
 
 function editarPDF() {
+	$("#guardar_propuesta").show();
+	$("#enviar_propuesta").hide();
 	setTimeout(() => {
 		$("#tabla_propuesta_body").html("");
 		$("#plantilla_documento").hide();
@@ -320,18 +221,7 @@ function eliminarProducto() {
 
 function enviarPropuesta() {
 	$("#modalCargando").modal('show');
-
-
-	  var texto = "NO";
-	  
-	//texto = almacenarPropuesta();
-	//console.log(texto);
-	
-	
-			enviarCorreo();	
-		
-        
-
+	enviarCorreo();			    
 }
 
 function enviarCorreo(){
@@ -346,86 +236,92 @@ function enviarCorreo(){
 			nombre_doc: folio+'.pdf',
 			_token: $('input[name="_token"]').val()
 		  } //esto es necesario, por la validacion de seguridad de laravel
-		}).done(function (msg) {		  			  
-		  
-			// se almacena la propuesta en base de datos
-			var cantidad_divs = $("#cantidad_divs").attr("cantidad");
-			var nombre_cliente = $("#nombre_cliente").text();
-			var email_destino =$("#email_cliente").text();
-			var id_ejecutivo = $("#id_usuario").text();
-			var id_cliente = $("#id_cliente").text();		
-			
-			var array_tipo_cambio = [];
-			var array_id_producto = [];
-			var array_nombre_producto = [];
-			var array_unidades = [];
-			var array_valor_unitario_producto =[];
-			var array_subtotal_producto = [];
-			var total_con_iva = parseInt($("#total_con_iva").text().substr(3).trim());
-			var iva = 0.19;
-			var subtotal = 0;
-
-			  for(var i=1;i<=cantidad_divs;i++){
-				subtotal = parseInt($("#select_producto_"+i+" option:selected").attr("valor_producto"))*parseInt($("#unidades_producto_"+i).val());				
-				array_tipo_cambio.push($("#select_producto_"+i+" option:selected").attr("tipo_cambio").toUpperCase());
-				array_id_producto.push($("#select_producto_"+i+" option:selected").attr("id"));
-				array_nombre_producto.push($("#select_producto_"+i+" option:selected").attr("nombre_producto"));
-				array_valor_unitario_producto.push($("#select_producto_"+i+" option:selected").attr("valor_producto"));
-				array_unidades.push($("#unidades_producto_"+i).val());
-				array_subtotal_producto.push(subtotal);
-			}			
-
-			var json_tipo_cambio = JSON.stringify(array_tipo_cambio);
-			var json_id_producto = JSON.stringify(array_id_producto);
-			var json_nombre_producto = JSON.stringify(array_nombre_producto);
-			var json_unidades = JSON.stringify(array_unidades);
-			var json_valor_unitario_producto = JSON.stringify(array_valor_unitario_producto);
-			var json_subtotal_producto = JSON.stringify(array_subtotal_producto);
-			var total_s_iva = parseInt($("#subtotal").text().substr(3).trim());
-
-			var id_ejecutivo = $("#id_usuario").text();
-			var id_cliente = $("#select_cliente option:selected").attr("id");
-			var email_cliente = $("#select_cliente option:selected").attr("email_cliente");
-			var fono_cliente =  $("#select_cliente option:selected").attr("fono_cliente");
-			var nombre_cliente = $("#select_cliente option:selected").attr("nombre_cliente");
-
-			
-			var datos_envio = [
-				json_tipo_cambio,
-				json_id_producto,
-				json_nombre_producto,
-				json_unidades,
-				json_valor_unitario_producto,
-				json_subtotal_producto,
-				total_s_iva,
-				total_con_iva,
-				Math.round(total_s_iva*iva),
-				id_ejecutivo,
-				id_cliente,
-				email_cliente,
-				fono_cliente,
-				nombre_cliente,
-				folio
-			];
-
+		}).done(function (msg) {		  	
 			$("#modalCargando").modal('hide');
-			$.ajax({
-				type: "POST",
-				url: url_prev + '/setPropuesta',
-				data: {
-				  datos_envio: datos_envio,
-				  _token: $('input[name="_token"]').val()
-				} //esto es necesario, por la validacion de seguridad de laravel
-				  }).done(function (msg) {
-					  $("#modalExitoso").modal("show");
-
-				}).fail(function () {
-				console.log("error en funcion enviarPropuesta");
-				});
-			//queda pendiente almacenar en la base de datos
-		
+			setTimeout(() => {
+				$("#modalExitoso").modal("show");						
+			}, 300);		  
+			
 		}).fail(function () {
 		  console.log("error en funcion enviarPropuesta");
-		});			
-		return "OK";
+		});					
 }
+
+function guardarEnBD(){
+	// se almacena la propuesta en base de datos
+	var folio = $("#folio_propuesta").text();
+	var cantidad_divs = $("#cantidad_divs").attr("cantidad");
+	var nombre_cliente = $("#nombre_cliente").text();
+	var email_destino =$("#email_cliente").text();
+	var id_ejecutivo = $("#id_usuario").text();
+	var id_cliente = $("#id_cliente").text();		
+	
+	var array_tipo_cambio = [];
+	var array_id_producto = [];
+	var array_nombre_producto = [];
+	var array_unidades = [];
+	var array_valor_unitario_producto =[];
+	var array_subtotal_producto = [];
+	var total_con_iva = parseInt($("#total_con_iva").text().substr(3).trim());
+	var iva = 0.19;
+	var subtotal = 0;
+
+	  for(var i=1;i<=cantidad_divs;i++){
+		subtotal = parseInt($("#select_producto_"+i+" option:selected").attr("valor_producto"))*parseInt($("#unidades_producto_"+i).val());				
+		array_tipo_cambio.push($("#select_producto_"+i+" option:selected").attr("tipo_cambio").toUpperCase());
+		array_id_producto.push($("#select_producto_"+i+" option:selected").attr("id"));
+		array_nombre_producto.push($("#select_producto_"+i+" option:selected").attr("nombre_producto"));
+		array_valor_unitario_producto.push($("#select_producto_"+i+" option:selected").attr("valor_producto"));
+		array_unidades.push($("#unidades_producto_"+i).val());
+		array_subtotal_producto.push(subtotal);
+	}			
+
+	var json_tipo_cambio = JSON.stringify(array_tipo_cambio);
+	var json_id_producto = JSON.stringify(array_id_producto);
+	var json_nombre_producto = JSON.stringify(array_nombre_producto);
+	var json_unidades = JSON.stringify(array_unidades);
+	var json_valor_unitario_producto = JSON.stringify(array_valor_unitario_producto);
+	var json_subtotal_producto = JSON.stringify(array_subtotal_producto);
+	var total_s_iva = parseInt($("#subtotal").text().substr(3).trim());
+
+	var id_ejecutivo = $("#id_usuario").text();
+	var id_cliente = $("#select_cliente option:selected").attr("id");
+	var email_cliente = $("#select_cliente option:selected").attr("email_cliente");
+	var fono_cliente =  $("#select_cliente option:selected").attr("fono_cliente");
+	var nombre_cliente = $("#select_cliente option:selected").attr("nombre_cliente");
+
+	
+	var datos_envio = [
+		json_tipo_cambio,
+		json_id_producto,
+		json_nombre_producto,
+		json_unidades,
+		json_valor_unitario_producto,
+		json_subtotal_producto,
+		total_s_iva,
+		total_con_iva,
+		Math.round(total_s_iva*iva),
+		id_ejecutivo,
+		id_cliente,
+		email_cliente,
+		fono_cliente,
+		nombre_cliente,
+		folio
+	];
+
+	$("#modalCargando").modal('hide');
+	$.ajax({
+		type: "POST",
+		url: url_prev + '/setPropuesta',
+		data: {
+		  datos_envio: datos_envio,
+		  _token: $('input[name="_token"]').val()
+		} //esto es necesario, por la validacion de seguridad de laravel
+		  }).done(function (msg) {
+			$("#enviar_propuesta").show();
+		}).fail(function () {
+		console.log("error en funcion enviarPropuesta");
+		});
+	//queda pendiente almacenar en la base de datos
+}
+

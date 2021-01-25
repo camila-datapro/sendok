@@ -7,6 +7,7 @@ use DB;
 use Illuminate\Support\Facades\Log;
 class PropuestaModel extends Model
 {
+    protected $table = 'propuesta_comercial';
     
     public static function setPropuesta($datos){
 

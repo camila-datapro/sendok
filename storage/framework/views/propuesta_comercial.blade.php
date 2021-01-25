@@ -163,8 +163,8 @@
          <div class="row">
             <div class="col-md-12" style="text-align: center;">
                <button id="enviar_propuesta" style="margin: 10px; cursor: pointer;color: #fff; display: none;" class="btn btn-primary btn-fw btn-lg" onclick="enviarPropuesta();">ENVIAR PROPUESTA</button>
-               <button  style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-warning btn-fw btn-lg" onclick="editarPDF();">EDITAR PROPUESTA</button>
-               <button  style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-primary btn-lg" data-toggle="modal" onclick="guardarPropuesta();">GUARDAR PROPUESTA</button>
+               <button id="editar_propuesta" style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-warning btn-fw btn-lg" onclick="editarPDF();">EDITAR PROPUESTA</button>
+               <button id="guardar_propuesta" style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-primary btn-lg" data-toggle="modal" onclick="guardarPropuesta();">GUARDAR PROPUESTA</button>
             </div>
          </div>
          <div class="" style="height: 100px;"><span class="fa fa-check-circle"></span></div>

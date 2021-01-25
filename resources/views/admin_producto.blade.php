@@ -91,6 +91,23 @@
                   <span class="menu-title">Dashboard</span>
                   </a>
                </li>
+               <li class="nav-item">
+                  <a class="nav-link" data-toggle="collapse" href="#menu_documentos" aria-expanded="false" aria-controls="menu_clientes">
+                     <i class="menu-icon typcn typcn-coffee"></i>
+                     <span class="menu-title">Documentos</span>
+                     <i class="menu-arrow"></i>
+                  </a>
+                  <div class="collapse" id="menu_documentos">
+                     <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                        <a class="nav-link" href="./documento">Crear nuevo</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="./admin_documentos">Administrar documentos</a>
+                        </li>
+                     </ul>
+                  </div>
+               </li>
                   <!-- dropdowns menu-->
                     <!-- productos-->
                <li class="nav-item">
@@ -130,23 +147,7 @@
                   </li>
                   <!--fin dropdowns clientes-->
                   <!-- fin dropdowns menu-->
-                  <li class="nav-item">
-                  <a class="nav-link" data-toggle="collapse" href="#menu_documentos" aria-expanded="false" aria-controls="menu_clientes">
-                     <i class="menu-icon typcn typcn-coffee"></i>
-                     <span class="menu-title">Documentos</span>
-                     <i class="menu-arrow"></i>
-                  </a>
-                  <div class="collapse" id="menu_documentos">
-                     <ul class="nav flex-column sub-menu">
-                        <li class="nav-item">
-                        <a class="nav-link" href="./documento">Crear nuevo</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="./admin_documentos">Administrar documentos</a>
-                        </li>
-                     </ul>
-                  </div>
-               </li>
+                 
                <li class="nav-item">
                      <a style="background:white; color: blue;" href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                         <span class="nav__name">Cerrar Sesión</span>
