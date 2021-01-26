@@ -325,3 +325,199 @@ function guardarEnBD(){
 	//queda pendiente almacenar en la base de datos
 }
 
+
+function crearClienteDocumento(){
+	$("#modalCrearCliente").modal("show");
+}
+
+function cargarRegiones() {
+	$.ajax({
+	  type: "GET",
+	  url: '/obtenerRegiones',
+	  data: {}
+	}).done(function(msg) {});
+  }
+  
+  $('region').on('change', function() {
+	limpiarSeleccion();
+  });
+  
+  function limpiarSeleccion() {
+	var opcion = "<option id='0'> Elija Una </option>";
+	$('#provincia').find('option').remove().end().append(opcion);
+	$('#comuna').find('option').remove().end().append(opcion);
+  }
+  
+  
+  function getProvinciasRegion() {
+	var idRegion = parseInt($("#region").val());
+	$.ajaxSetup({
+	  headers: {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
+	  }
+	});
+	$.ajax({
+	  type: "POST",
+	  url: url_prev + '/obtenerProvincias',
+	  data: {
+		id: idRegion,
+		_token: $('input[name="_token"]').val()
+	  } //esto es necesario, por la validacion de seguridad de laravel
+	}).done(function(msg) {
+	  // se incorporan las opciones en la provincia
+	  var json = JSON.parse(msg);
+	  var opciones = "<option id='0'> Elija Una </option>";
+	  for (var i = 0; i < json.length; i++) {
+		opciones = opciones + "<option id='" + json[i].id + "' id_provincia='" + json[i].id + "'>" + json[i].provincia + "</option>";
+	  }
+	  $('#provincia').find('option').remove().end().append(opciones);
+	});
+  }
+  
+  function getComunasProvincia() {
+	var idProvincia = $("#provincia option:selected").attr('id_provincia');
+	$.ajaxSetup({
+	  headers: {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
+	  }
+	});
+	$.ajax({
+	  type: "POST",
+	  url: url_prev + '/obtenerComunas',
+	  data: {
+		id: idProvincia,
+		_token: $('input[name="_token"]').val()
+	  } //esto es necesario, por la validacion de seguridad de laravel
+	}).done(function(msg) {
+	  // se incorporan las opciones en la comuna
+	  var json = JSON.parse(msg);
+	  var opciones = "<option id='0'> Elija Una </option>";
+	  for (var i = 0; i < json.length; i++) {
+		opciones = opciones + "<option id=" + json[i].id + " id_comuna= '" + json[i].id + "'>" + json[i].comuna + "</option>";
+	  }
+	  $('#comuna').find('option').remove().end().append(opciones);
+	});
+  }
+
+  function crearProductoDocumento(){
+	$("#modalCrearProducto").modal("show");
+  }
+
+  function crearCliente() {
+	var nombre = $("#nombre").val();
+	var rut = $("#rut").val();
+	var fono = parseInt($("#telefono").val());
+	var email = $("#email").val();
+	var idRegion = parseInt($("#region").val());
+	var idProvincia = parseInt($("#provincia option:selected").attr('id_provincia'));
+	var idComuna = parseInt($("#comuna option:selected").attr('id_comuna'));
+	var direccion = $("#direccion").val();
+	var nombre_contacto = $("#nombre_contacto").val();
+	var cargo_contacto = $("#cargo_contacto").val();
+	var array_datos = [];
+	var token = $('input[name="_token"]').val();
+  
+	array_datos.push({
+	  nombre: nombre,
+	  rut: rut,
+	  fono: fono,
+	  email: email,
+	  id_region: idRegion,
+	  id_provincia: idProvincia,
+	  id_comuna: idComuna,
+	  direccion: direccion,
+	  nombre_contacto: nombre_contacto,
+	  cargo_contacto : cargo_contacto
+	});
+  
+	var json_datos = JSON.stringify(array_datos);
+  
+	$.ajaxSetup({
+	  headers: {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
+	  }
+	});
+  
+	$.ajax({
+	  type: "POST",
+	  url: url_prev + '/crearCliente',
+	  data: {
+		json_datos: json_datos,
+		_token: token
+	  } //esto es necesario, por la validacion de seguridad de laravel
+	}).done(function(msg) {
+		$("#modalCrearCliente").modal("hide");
+		setTimeout(() => {
+			$("#modalExitosa").modal('show');	
+		}, 200);
+		
+	  
+	}).fail(function() {
+		$("#modalCrearCliente").modal("hide");
+	  setTimeout(() => {  
+		  $("#modalError").modal('show');
+	  }, 200);
+	});
+  }
+
+  function crearProducto(){
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
+      }
+    });
+
+    var clase = $("#tipo_producto option:selected").attr('id');
+    var nombre_producto = $("#nombre_producto").val();
+    var valor_producto = $("#valor_venta").val();
+    var descripcion_producto = $("#descripcion_producto").val();
+    var tipo_cambio = $("#select_cambio option:selected").attr("id");
+    var stock = $("#stock").val();
+    var costo = $("#costo").val();
+    var margen = $("#margen").val();
+    var numero_interno = $("#numero_interno").val();
+    var numero_fabricacion = $("#numero_fabricacion").val();
+    var array_datos = [];
+    var token = $('input[name="_token"]').val();
+    array_datos.push({
+      clase: clase,
+      nombre_producto: nombre_producto,
+      valor_producto: valor_producto,
+      descripcion_producto: descripcion_producto,
+      tipo_cambio: tipo_cambio,
+      stock: stock,
+      costo: costo,
+      margen: margen,
+      numero_interno: numero_interno,
+      numero_fabricacion: numero_fabricacion
+    });
+  
+    var json_datos = JSON.stringify(array_datos);
+
+    $("#modalCargando").modal('show');
+    $.ajax({
+        type: "POST",
+        url: url_prev + '/crearProducto',
+        data: {
+        json_datos: json_datos,
+        _token: token
+        } //esto es necesario, por la validacion de seguridad de laravel
+    }).done(function(msg) {
+		$("#modalCrearProducto").modal('hide');
+        setTimeout(() => {  
+            $("#modalCargando").modal('hide'); 
+        }, 500);
+        setTimeout(() => {  
+            $("#modalExitosa").modal('show');
+        }, 500);
+     
+    }).fail(function() {
+        
+        setTimeout(() => {  
+            $("#modalCargando").modal('hide'); 
+        }, 500);
+        setTimeout(() => {  
+            $("#modalError").modal('show');
+        }, 500);
+    });
+  }

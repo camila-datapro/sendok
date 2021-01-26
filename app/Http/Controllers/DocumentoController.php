@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\ClienteModel;
 use App\ProductoModel;
 use App\Mail\MensajeRecibido;
+use App\RegionModel;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 
@@ -16,7 +17,8 @@ class DocumentoController extends Controller
     {
         return view('documento')
         ->with("clientes", ClienteModel::all())
-        ->with("productos", ProductoModel::listProductos());
+        ->with("productos", ProductoModel::listProductos())
+        ->with("regiones", RegionModel::all());
     }
 
     public function enviarPropuesta(Request $request){        

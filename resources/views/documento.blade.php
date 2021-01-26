@@ -36,6 +36,10 @@
          .top-spaced{
             margin-top: 10px;
          }
+         .margined-left{
+         margin-left: 12px;
+      }
+
       </style>
    </head>
    <body>
@@ -192,7 +196,8 @@
                               </div>
 
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                                 <label>Seleccione Cliente</label>
+                                 <label>Seleccione Cliente o <button class="button btn-primary" onclick="crearClienteDocumento();">Cree uno nuevo</button></label>
+                                 
                                  <select class=" js-example-basic-single form-control" name="select_cliente" id="select_cliente">
                                     <option id="0">Elija Uno</option>
                                     <?php 
@@ -203,7 +208,7 @@
                                  </select>
                               </div>   
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                              <label><b>Seleccione Producto(s)</b></label>
+                              <label>Seleccione Producto(s) o <button class="button btn-primary" onclick="crearProductoDocumento();">Cree uno nuevo</button></label>
                                  <div id='TextBoxesGroup'>
                                     <div id="TextBoxDiv1" style="margin-bottom: 20px; border: 1px solid; border-color: #dee2e6; background-color: #e0e4ff; padding: 12px; padding-top: 0px;">
                                        <label class="top-spaced">Seleccione producto N° 1: </label>
@@ -298,7 +303,192 @@
          </div>
          </div>
 
+          <!-- Modal -->
+          <div class="modal fade" id="modalCrearCliente" role="dialog">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Crear nuevo cliente</h5>
+                  <button type="button" class="close" data-dismiss="modal" onclick="window.location.reload();">&times;</button>
+               </div>
+               <div class="modal-body">
+               <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                           <div class="card-body">
+                              <form class="forms-sample">
+                                 <h4 class="card-title" style="color: #001fff9e;">Datos empresa</h4>
+                                 <div class="margined-left">
+                                    <div class="form-group">
+                                       <label for="exampleInputName1">Nombre Empresa</label>
+                                       <input type="text" maxlength="20" class="form-control" id="nombre">
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="exampleInputName1">Rut Empresa</label>
+                                       <input type="text" maxlength="15" class="form-control" id="rut">
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="region">Región</label>
+                                       <select class="form-control" id="region" onchange="getProvinciasRegion();">
+                                          <option _blank="">Elija Una</option>
+                                          <?php                  
+                                             for($i=0;$i<sizeOf($regiones);$i++){
+                                                echo "<option value='".$regiones[$i]->id."'>".$regiones[$i]->region."</option>";
+                                             }
+                                          ?> 
+                                       </select>
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="provincia">Provincia</label>
+                                       <select class="form-control" id="provincia" onchange="getComunasProvincia();">
+                                          <option id="_blank">Elija Una </option>
+                                       </select>
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="comuna">Comuna</label>
+                                       <select class="form-control" id="comuna">
+                                          <option id="_blank">Elija Una </option>
+                                       </select>
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="exampleInputName1">Dirección</label>
+                                       <input type="text" maxlength="30" class="form-control" id="direccion">
+                                    </div>
+                                 </div>
+                                 <h4 class="card-title" style="color: #001fff9e;">Datos contacto</h4>
+                                 <!-- datos de contacto-->
+                                 <div class="margined-left">                                    
+                                    <div class="form-group">
+                                       <label for="nombre_contacto">Nombre Contacto</label>
+                                       <input type="email" class="form-control" id="nombre_contacto">
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="nombre_contacto">Cargo en la empresa</label>
+                                       <input type="email" class="form-control" id="cargo_contacto">
+                                    </div>
+
+                                    <div class="form-group">
+                                       <label for="exampleInputEmail3">Email contacto</label>
+                                       <input type="email" class="form-control" id="email">
+                                    </div>
+                                    <div class="form-group">
+                                       <label for="exampleInputName1">Fono contacto</label>
+                                       <input type="number" maxlength="12" class="form-control" id="telefono">
+                                    </div>
+                                 </div>
+                                
+                              </form>
+
+                              <div class="modal-footer">
+                                    <input type="button" onclick="crearCliente();" class="btn btn-primary btn-md" value="Crear Cliente">
+                                 </div>
+                           </div>
+                        </div>
+                     </div>
+
+               </div>   
+            </div>
+         </div>
+         </div>
+
+           <!-- Modal -->
+         <div class="modal fade" id="modalCrearProducto" role="dialog">
+            <div class="modal-dialog modal-lg">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">Crear nuevo producto</h5>
+                     <button type="button" class="close" data-dismiss="modal" onclick="window.location.reload();">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                  <div class="col-md-12 grid-margin stretch-card">
+                        <div class="card">
+                           <div class="card-body">
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">                                
+                                 <label>Clase</label>
+                                 <select class="form-control form-control-md" id="tipo_producto" onchange="visarUnidades();">
+                                    <option _blank="">Elija Uno</option>
+                                    <option id="producto">Producto</option>
+                                    <option id="servicio">Servicio</option>
+                                 </select>
+                              </div>
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>Nombre Producto</label>
+                                 <input id="nombre_producto" maxlength="20" name="nombre_producto" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
+                              </div>
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>N° Fabricacion</label>
+                                 <input id="numero_fabricacion" maxlength="20" name="numero_fabricacion" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
+                              </div>
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>N° Interno</label>
+                                 <input id="numero_interno" maxlength="20" name="numero_interno" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
+                              </div>
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>Descripción Producto</label>
+                                 <input id="descripcion_producto" maxlength="250" name="descripcion_producto" type="text" class="form-control form-control-sm" aria-label="Descripción de Producto">
+                              </div>    
+                              <div style="padding-left: 0px !important; display:none;" class="form-group col-md-12" id="div_unidades">
+                                 <label>Unidades disponibles</label>
+                                 <input id="stock" maxlength="15" name="stock" type="number" class="form-control form-control-sm" aria-label="Stock">
+                              </div>                               
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>Tipo de Cambio</label>
+                                 <select class="form-control" id="select_cambio">
+                                       <option id="_blank">Elija Uno</option>
+                                       <option id="clp">CLP</option>
+                                       <option id="usd">USD</option>
+                                       <option id="uf">UF</option>
+                                 </select>
+                              </div>
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>Costo</label>
+                                 <input type="number" maxlength="10" class="form-control form-control-sm" aria-label="costo" id="costo">
+                              </div>
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>Margen</label>
+                                 <input type="number" maxlength="10" class="form-control form-control-sm" aria-label="margen" id="margen">
+                              </div>
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>Valor venta</label>
+                                 <input type="number" maxlength="10" class="form-control form-control-sm" aria-label="valor_venta" id="valor_venta">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="modal-footer">
+                     <input type="button" onclick="crearProducto();" class="btn btn-primary btn-md" value="Crear Producto">
+                  </div>
+               </div>
+            </div>
+         </div>
+
+
       
+         <div class="modal fade" id="modalExitosa" tabindex="-1" role="dialog" aria-labelledby="modalexito" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                  <h5 class="modal-title" id="modalexito">Creacion Exitosa</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+                  </div>
+                  <div class="modal-body">
+                  Se ha efectuado la operación exitosamente.
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.reload();" >OK</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+
+
+
+      
+
+
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.base.js') }}"></script>
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.addons.js') }}"></script>
       <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
