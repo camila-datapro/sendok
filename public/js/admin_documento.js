@@ -288,31 +288,36 @@ function actualizaEnBD(){
 	//queda pendiente almacenar en la base de datos
 }
 
-
+// envio de correo desde seccion EDITAR
 function enviarPropuesta() {
 	$("#enviar_propuesta").attr("disabled",true);
 	$("#cargando_accion").show();
-	enviarCorreo();			    
+	$("#modal_editar_propuesta").hide();
+	$("#modalCuerpoCorreoEdit").modal("show");				    
 }
 
 function enviarCorreo(){
+	$("#modalEnviando").modal("show");
 		// envio de propuesta
 		var folio = $("#folio_propuesta").text();
 		var destinatario = $("#email_cliente").text();
+		var cuerpo = $("#cuerpo_correo_edit").val();
+		console.log("el cuerpo de correo es:"+cuerpo);
 		$.ajax({
 		  type: "POST",
 		  url: url_prev + '/enviarPropuesta',
 		  data: {
 			destinatario: destinatario,
+			contenido: cuerpo,
 			nombre_doc: folio+'.pdf',
 			_token: $('input[name="_token"]').val()
 		  } //esto es necesario, por la validacion de seguridad de laravel
 		}).done(function (msg) {		  	
 			setEstadoEnviado(folio);
-			$("#cargando_accion").hide();
+			$("#modalEnviando").modal("hide");
 			$("#enviar_propuesta").attr("disabled",false);
 			setTimeout(() => {
-				$("#check_envio").show();					
+				$("#modalExitosa").modal("show");				
 			}, 300);		  
 			
 		}).fail(function () {
@@ -320,8 +325,21 @@ function enviarCorreo(){
 		});					
 }
 
+// envio de correo desde seccion de listado
 
-function sendMailFromList(propuesta){
+function enviarPropuestaList(indice) {
+	$("#modalCuerpoCorreo").modal("show");
+	$("#id_propuesta_hidden").attr("indice_propuesta",indice);
+	//$("#modalCargando").modal('show');
+	   
+}
+
+function sendMailFromList(propuestas){
+	var indice = $("#id_propuesta_hidden").attr("indice_propuesta");
+	var propuesta = propuestas[indice];
+	var contenido = $("#cuerpo_correo").val();
+
+	
 	$("#modalEnviando").modal("show");
 	var folio = propuesta.folio_propuesta;
 	var destinatario = propuesta.email_destino;	
@@ -331,6 +349,7 @@ function sendMailFromList(propuesta){
 	  url: url_prev + '/enviarPropuesta',
 	  data: {
 		destinatario: destinatario,
+		contenido: contenido,
 		nombre_doc: folio+'.pdf',
 		_token: $('input[name="_token"]').val()
 	  } //esto es necesario, por la validacion de seguridad de laravel
@@ -344,6 +363,7 @@ function sendMailFromList(propuesta){
 	  console.log("error en funcion sendMailFromList");
 	});					
 }
+
 
 function setEstadoEnviado(folio){
 	$.ajax({

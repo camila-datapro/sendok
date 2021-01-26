@@ -210,7 +210,7 @@
                                                 <button class='btn btn-warning' id='editar".$propuestas[$i]->id_propuesta."' onclick='adminEditarPropuesta(".$propuestas[$i].")'; >
                                                 <i class='fas fa-edit'></i>
                                                 </button> 
-                                                <button class='btn btn-success' id='enviar_".$propuestas[$i]->id_propuesta."' onclick='sendMailFromList(".$propuestas[$i].")'>
+                                                <button class='btn btn-success' id='enviar_".$propuestas[$i]->id_propuesta."' onclick='enviarPropuestaList(".$i.")'>
                                                 <i class='fas fa-paper-plane'></i>
                                                 </button>
                                              </td>
@@ -220,11 +220,13 @@
                                     </tbody>
                                  </table>
                               </div>
+                              
                            </div>
                         </div>
                      </div>
                   </div>
                </div>
+               <input hidden id="id_propuesta_hidden" indice_propuesta="0"></input>
                <!-- content-wrapper ends -->
                <!-- partial:partials/_footer.html -->
                <!-- partial -->
@@ -413,6 +415,51 @@
             </div>
          </div>
       </div>
+
+              <!-- Modal -->
+              <div class="modal fade" id="modalCuerpoCorreo" tabindex="-1" role="dialog" aria-labelledby="modalcuerpo" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+               <h5 class="modal-title" id="modalcuerpo">Ingrese Contenido del mensaje</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+               </div>
+               <div class="modal-body">
+                  <textarea class="form-control" id="cuerpo_correo"></textarea>
+               </div>
+               <div class="modal-footer">
+                  <?php
+                  echo "<button type='button' class='btn btn-secondary' data-dismiss='modal' onclick='sendMailFromList(".$propuestas.");' >Enviar</button>";
+                  ?>
+               </div>
+            </div>
+         </div>
+         </div>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="modalCuerpoCorreoEdit" tabindex="-1" role="dialog" aria-labelledby="modalcuerpoeditar" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+               <h5 class="modal-title" id="modalcuerpoeditar">Ingrese Contenido del mensaje</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+               </div>
+               <div class="modal-body">
+                  <textarea class="form-control" id="cuerpo_correo_edit"></textarea>
+               </div>
+               <div class="modal-footer">
+                  <?php
+                  echo "<button type='button' class='btn btn-secondary' data-dismiss='modal' onclick='enviarCorreo();' >Enviar</button>";
+                  ?>
+               </div>
+            </div>
+         </div>
+         </div>
       <!-- fin seccion modales-->
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.base.js') }}"></script>
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.addons.js') }}"></script>

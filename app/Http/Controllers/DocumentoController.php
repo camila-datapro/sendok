@@ -24,7 +24,8 @@ class DocumentoController extends Controller
     public function enviarPropuesta(Request $request){        
         $destinatario = $request["destinatario"];
         $nombre_doc = $request["nombre_doc"];
-        Mail::to($destinatario)->send( new MensajeRecibido($nombre_doc));        
+        $contenido = $request["contenido"];
+        Mail::to($destinatario)->send( new MensajeRecibido($nombre_doc, $contenido));        
         return 'Mensaje enviado';
     }
 

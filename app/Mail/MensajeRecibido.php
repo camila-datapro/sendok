@@ -19,9 +19,10 @@ class MensajeRecibido extends Mailable
      *
      * @return void
      */
-    public function __construct(String $nombre)
+    public function __construct(String $nombre, String $contenido)
     {
         $this->nombre = $nombre;
+        $this->contenido = $contenido;
     }
 
     /**
@@ -33,10 +34,17 @@ class MensajeRecibido extends Mailable
     {
        Log::debug("Build Mensaje Recibido: ".$this->nombre);
        $nombre = $this->nombre;
+       $contenido = $this->contenido;
 
+       if($contenido==""){
+            $contenido = "Estimado/a Cliente:
+            Hacemos llegar a usted nuestra propuesta comercial.
+            Saludos y gracias por su preferencia.";
+       }
         return $this->view('emails.envio-documento')
+        ->with("contenido",$contenido)
         ->attachData(file_get_contents('./documentos/'.$nombre),$nombre,[
             'mime' => 'application/pdf',
-        ]);;
+        ]);
     }
 }

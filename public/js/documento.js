@@ -219,26 +219,31 @@ function eliminarProducto() {
 	$("#modalCargando").modal('show');
 }
 
-function enviarPropuesta() {
-	$("#modalCargando").modal('show');
-	enviarCorreo();			    
+function enviarPropuesta(propuesta) {
+	$("#modalCuerpoCorreo").modal("show");
+	//$("#modalCargando").modal('show');	   
 }
 
 function enviarCorreo(){
+	$("#modalCuerpoCorreo").modal("hide");
+	$("#modalCargando").modal('show');
 		// envio de propuesta
 		var folio = $("#folio_propuesta").text();
 		var destinatario = $("#email_cliente").text();
+		var cuerpo = $("#cuerpo_correo").val();
 		$.ajax({
 		  type: "POST",
 		  url: url_prev + '/enviarPropuesta',
 		  data: {
 			destinatario: destinatario,
+			contenido: cuerpo,
 			nombre_doc: folio+'.pdf',
 			_token: $('input[name="_token"]').val()
 		  } //esto es necesario, por la validacion de seguridad de laravel
 		}).done(function (msg) {		  	
 			$("#modalCargando").modal('hide');
-			setTimeout(() => {
+			setEstadoEnviado(folio);
+			setTimeout(() => {				
 				$("#modalExitoso").modal("show");						
 			}, 300);		  
 			
@@ -521,3 +526,18 @@ function cargarRegiones() {
         }, 500);
     });
   }
+
+  function setEstadoEnviado(folio){
+	$.ajax({
+		type: "POST",
+		url: url_prev + '/setEstadoEnviado',
+		data: {
+		  folio: folio,
+		  _token: $('input[name="_token"]').val()
+		} //esto es necesario, por la validacion de seguridad de laravel
+	  }).done(function (msg) {		  	
+		
+	  }).fail(function () {
+		console.log("error en funcion setEstadoEnviado");
+	  });		
+}
