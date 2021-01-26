@@ -162,12 +162,13 @@
          <!---fin documento-->
          <div class="row">
             <div class="col-md-12" style="text-align: center;">
+               <p id="check_envio" style="color: green; display:none;">Documento enviado <i class="fas fa-check"></i></p>
+               <p id="cargando_accion" style="color: red; display:none;"><i class="far fa-hourglass"></i> Cargando...</img></p>
                <button id="enviar_propuesta" style="margin: 10px; cursor: pointer;color: #fff; display: none;" class="btn btn-primary btn-fw btn-lg" onclick="enviarPropuesta();">ENVIAR PROPUESTA</button>
                <button id="editar_propuesta" style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-warning btn-fw btn-lg" onclick="editarPDF();">EDITAR PROPUESTA</button>
                <button id="guardar_propuesta" style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-primary btn-lg" data-toggle="modal" onclick="guardarPropuesta();">GUARDAR PROPUESTA</button>
             </div>
          </div>
-         <div class="" style="height: 100px;"><span class="fa fa-check-circle"></span></div>
       </div>
       <div class="col-md-1"></div>
    </div>

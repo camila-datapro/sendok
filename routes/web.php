@@ -48,6 +48,8 @@ Route::post('/enviarPropuesta', 'DocumentoController@enviarPropuesta')->name('en
 Route::post('/guardarPDF', 'DocumentoController@guardarPDF')->name('guardarPDF');
 
 Route::post('/setPropuesta', 'PropuestaController@setPropuesta')->name('setPropuesta');
+Route::post('/updatePropuesta', 'PropuestaController@updatePropuesta')->name('updatePropuesta');
+Route::post('/setEstadoEnviado', 'PropuestaController@setEstadoEnviado')->name('setEstadoEnviado');
 Route::post('/propuestaLastId', 'PropuestaController@getLastId')->name('propuestaLastId');
 
 
