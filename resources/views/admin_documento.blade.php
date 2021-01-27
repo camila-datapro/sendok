@@ -189,10 +189,10 @@
                                  <table class="table table-hover tabla_propuestas display nowrap" cellspacing="0" id="tabla_propuestas">
                                     <thead>
                                        <tr>
-                                          <th scope="col">Folio</th>
-                                          <th scope="col">Tipo documento</th>
+                                          <th scope="col">Empresa</th>
+                                          <th scope="col">Nombre Contacto</th>
                                           <th scope="col">Fecha creación</th>
-                                          <th scope="col">Email contacto</th>
+                                          <th scope="col">Monto</th>
                                           <th scope="col">Estado Envío</th>
                                           <th scope="col">Acciones</th>
                                        </tr>
@@ -200,15 +200,27 @@
                                     <tbody>
                                        <?php                  
                                           for($i=0;$i<sizeOf($propuestas);$i++){
+                                             $nombre_empresa ="";
+                                             $nombre_contacto= "";
+                                             for($x=0;$x<sizeOf($clientes);$x++){
+                                                   if($clientes[$x]->id_cliente == $propuestas[$i]->id_cliente){
+                                                         $nombre_empresa = $clientes[$x]->nombre_cliente;
+                                                         $nombre_contacto = $clientes[$x]->nombre_contacto;
+                                                         $x = sizeOf($clientes);
+                                                   }
+                                             }
                                              echo "<tr>                                                      
-                                             <td >".$propuestas[$i]->folio_propuesta."</td>                                                      
-                                             <td> Propuesta</td>
-                                             <td> ".$propuestas[$i]->fecha_creacion."</td>
-                                             <td> ".$propuestas[$i]->email_destino."</td>
+                                             <td >".$nombre_empresa."</td>";
+                                             echo "<td> ".$nombre_contacto."</td>";
+                                             echo "<td> ".$propuestas[$i]->fecha_creacion."</td>
+                                             <td> ".$propuestas[$i]->total."</td>
                                              <td> ".(($propuestas[$i]->estado_envio==null) ? 'Pendiente de envío' : $propuestas[$i]->estado_envio )."</td>
                                              <td>
                                                 <button class='btn btn-warning' id='editar".$propuestas[$i]->id_propuesta."' onclick='adminEditarPropuesta(".$propuestas[$i].")'; >
                                                 <i class='fas fa-edit'></i>
+                                                </button> 
+                                                <button class='btn btn-primary' id='ver_".$propuestas[$i]->id_propuesta."' onclick=adminVerPropuesta('".strval($propuestas[$i]->folio_propuesta)."'); >
+                                                <i class='fas fa-eye'></i>
                                                 </button> 
                                                 <button class='btn btn-success' id='enviar_".$propuestas[$i]->id_propuesta."' onclick='enviarPropuestaList(".$i.")'>
                                                 <i class='fas fa-paper-plane'></i>
@@ -220,7 +232,6 @@
                                     </tbody>
                                  </table>
                               </div>
-                              
                            </div>
                         </div>
                      </div>
@@ -277,6 +288,53 @@
             </div>
          </div>
       </div>
+
+      <!-- Modal ver propuesta-->
+      <div class="modal fade" id="modalVerPropuesta" role="dialog">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" onclick="window.location.reload();">&times;</button>
+               </div>
+               <div class="modal-body">
+                  <div class="content-wrapper">
+                     <!-- Page Title Header Starts-->
+                     <div class="row page-title-header">
+                        <div class="col-12">
+                           <div class="page-header">
+                              <h4 class="page-title">Visor de Documento</h4>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- Page Title Header Ends-->
+                     <div class="row" id="ver_propuesta">
+                        <div class="col-md-12 grid-margin">
+                           <div class="col-md-12 grid-margin stretch-card">
+                              <div class="card">
+                                 <div class="card-body">
+                                          
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!-- fin datos ingreso-->
+                   
+                     <!-- content-wrapper ends -->
+                     <!-- partial:partials/_footer.html -->
+                     <!-- partial -->
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button id="cerrar" type="button" class="btn btn-danger" data-dismiss="modal">Salir</button>                 
+               </div>
+            </div>
+         </div>
+      </div>                               
+      <!-- Fin modal ver propuesta-->
+
+
+
       <!-- Modal -->
       <div class="modal fade" id="modal_editar_propuesta" role="dialog">
          <div class="modal-dialog modal-lg">
@@ -415,51 +473,48 @@
             </div>
          </div>
       </div>
-
-              <!-- Modal -->
-              <div class="modal fade" id="modalCuerpoCorreo" tabindex="-1" role="dialog" aria-labelledby="modalcuerpo" aria-hidden="true">
+      <!-- Modal -->
+      <div class="modal fade" id="modalCuerpoCorreo" tabindex="-1" role="dialog" aria-labelledby="modalcuerpo" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
-               <h5 class="modal-title" id="modalcuerpo">Ingrese Contenido del mensaje</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <h5 class="modal-title" id="modalcuerpo">Ingrese Contenido del mensaje</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
-               </button>
+                  </button>
                </div>
                <div class="modal-body">
                   <textarea class="form-control" id="cuerpo_correo"></textarea>
                </div>
                <div class="modal-footer">
                   <?php
-                  echo "<button type='button' class='btn btn-secondary' data-dismiss='modal' onclick='sendMailFromList(".$propuestas.");' >Enviar</button>";
-                  ?>
+                     echo "<button type='button' class='btn btn-secondary' data-dismiss='modal' onclick='sendMailFromList(".$propuestas.");' >Enviar</button>";
+                     ?>
                </div>
             </div>
          </div>
-         </div>
-
-
-            <!-- Modal -->
-            <div class="modal fade" id="modalCuerpoCorreoEdit" tabindex="-1" role="dialog" aria-labelledby="modalcuerpoeditar" aria-hidden="true">
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="modalCuerpoCorreoEdit" tabindex="-1" role="dialog" aria-labelledby="modalcuerpoeditar" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
-               <h5 class="modal-title" id="modalcuerpoeditar">Ingrese Contenido del mensaje</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <h5 class="modal-title" id="modalcuerpoeditar">Ingrese Contenido del mensaje</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
-               </button>
+                  </button>
                </div>
                <div class="modal-body">
                   <textarea class="form-control" id="cuerpo_correo_edit"></textarea>
                </div>
                <div class="modal-footer">
                   <?php
-                  echo "<button type='button' class='btn btn-secondary' data-dismiss='modal' onclick='enviarCorreo();' >Enviar</button>";
-                  ?>
+                     echo "<button type='button' class='btn btn-secondary' data-dismiss='modal' onclick='enviarCorreo();' >Enviar</button>";
+                     ?>
                </div>
             </div>
          </div>
-         </div>
+      </div>
       <!-- fin seccion modales-->
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.base.js') }}"></script>
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.addons.js') }}"></script>

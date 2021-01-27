@@ -170,16 +170,47 @@ function vistaPreviaPDF() {
 	var iva = 0;
 	var total = 0;
 	var tipo_cambio_p = 0;
+	var descuento = 0;
+	var html = "";
+	var tiene_descuento = 0;// 1 si es que tiene
+
+	for(var k=1; k<=cantidad_divs;k++){
+		if($("#descuento_producto_"+k).val()!=""){
+			tiene_descuento = 1;
+			
+		}
+	}
+
+	if(tiene_descuento==1){
+		$("#columna_descuento").show();
+	}else{
+		$("#columna_descuento").hide();
+	}
+
+
 	for(var i=1; i<=cantidad_divs;i++){
-		total_parcial = parseInt($("#select_producto_"+i+" option:selected").attr("valor_producto"))*parseInt($("#unidades_producto_"+i).val());
+		descuento = parseInt(($("#descuento_producto_"+i).val()=="")? 0 : $("#descuento_producto_"+i).val());
+		total_parcial = parseInt($("#select_producto_"+i+" option:selected").attr("valor_producto"))*parseInt($("#unidades_producto_"+i).val()) - descuento;
 		tipo_cambio_p = $("#select_producto_"+i+" option:selected").attr("tipo_cambio").toUpperCase();
-		$("#tabla_propuesta_body").append('<tr>'+
+		
+		html ='<tr>'+
 			'<td>'+$("#unidades_producto_"+i).val()+'</td>'+
 			'<td>'+$("#select_producto_"+i+" option:selected").attr("nombre_producto")+'</td>'+
-			'<td><b>'+tipo_cambio_p+' </b> '+$("#select_producto_"+i+" option:selected").attr("valor_producto")+'</td>'+
-			'<td><b>'+tipo_cambio_p+'</b> '+total_parcial+'</td>'+
-		'</tr>')
-		;
+			'<td><b>'+tipo_cambio_p+' </b> '+$("#select_producto_"+i+" option:selected").attr("valor_producto")+'</td>';
+			//evaluamos si es que tiene descuento y mostramos la columna
+			if(tiene_descuento==1){ // caso que si posea descuento
+			
+				if($("#descuento_producto_"+i).val()!=""){
+					// se muestra el dato	
+					html = html +'<td><b>'+tipo_cambio_p+'</b> '+descuento+'</td>';
+				}else{
+					// se muestra campo vacío para no generar descuadre en la tabla 
+					html = html+'<td>--</td>';
+				}
+			}
+			html = html+'<td><b>'+tipo_cambio_p+'</b> '+total_parcial+'</td></tr>';
+
+		$("#tabla_propuesta_body").append(html);
 		subtotal = subtotal + total_parcial;
 	}
 
@@ -408,6 +439,28 @@ function cargarRegiones() {
 	$("#modalCrearProducto").modal("show");
   }
 
+  margen.addEventListener("blur", function() {
+	// code here  
+	var costo = parseInt($("#costo").val());
+	var margen = parseInt($("#margen").val());
+	var precio = Math.round((costo) * (margen/100));
+	$("#valor_venta").attr("disabled",true);
+	$("#valor_venta").val(precio);
+  
+  });
+  
+  
+  costo.addEventListener("blur", function() {
+	// code here  
+	var costo = parseInt($("#costo").val());
+	var margen = parseInt($("#margen").val());
+	var precio = Math.round((costo) * (margen/100));
+	if($("#margen").val()!=""){    
+	  $("#valor_venta").attr("disabled",true);
+	  $("#valor_venta").val(precio);
+	}
+  });
+
   function crearCliente() {
 	var nombre = $("#nombre").val();
 	var rut = $("#rut").val();
@@ -541,3 +594,5 @@ function cargarRegiones() {
 		console.log("error en funcion setEstadoEnviado");
 	  });		
 }
+
+

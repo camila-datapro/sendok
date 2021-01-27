@@ -103,6 +103,7 @@
                            <th style="color: #ffffff !important;"> CTD </th>
                            <th style="color: #ffffff !important;"> Descripción </th>
                            <th style="color: #ffffff !important;"> Precio Unitario </th>
+                           <th id="columna_descuento" style="color: #ffffff !important; display: none;"> Descuento </th>
                            <th style="color: #ffffff !important;text-align:right;"> Precio </th>
                         </tr>
                      </thead>
