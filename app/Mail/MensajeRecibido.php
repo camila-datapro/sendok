@@ -32,7 +32,6 @@ class MensajeRecibido extends Mailable
      */
     public function build()
     {
-       Log::debug("Build Mensaje Recibido: ".$this->nombre);
        $nombre = $this->nombre;
        $contenido = $this->contenido;
 

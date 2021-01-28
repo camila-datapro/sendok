@@ -300,7 +300,7 @@
                   <p id="info_validacion"></p>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                  <button id="boton_validacion" type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
                </div>
             </div>
          </div>

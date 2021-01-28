@@ -489,123 +489,211 @@ function cargarRegiones() {
   });
 
   function crearCliente() {
-	var nombre = $("#nombre").val();
-	var rut = $("#rut").val();
-	var fono = parseInt($("#telefono").val());
-	var email = $("#email").val();
-	var idRegion = parseInt($("#region").val());
-	var idProvincia = parseInt($("#provincia option:selected").attr('id_provincia'));
-	var idComuna = parseInt($("#comuna option:selected").attr('id_comuna'));
-	var direccion = $("#direccion").val();
-	var nombre_contacto = $("#nombre_contacto").val();
-	var cargo_contacto = $("#cargo_contacto").val();
-	var array_datos = [];
-	var token = $('input[name="_token"]').val();
+	var msj_info = "";
+
+	if($("#nombre").val()==""){
+	  msj_info+= "- Debe ingresar Nombre de Empresa. </br>";
+	}
   
-	array_datos.push({
-	  nombre: nombre,
-	  rut: rut,
-	  fono: fono,
-	  email: email,
-	  id_region: idRegion,
-	  id_provincia: idProvincia,
-	  id_comuna: idComuna,
-	  direccion: direccion,
-	  nombre_contacto: nombre_contacto,
-	  cargo_contacto : cargo_contacto
-	});
+	if($("#rut").val()==""){
+	  msj_info+= "- Debe ingresar RUT. </br>";
+	}
   
-	var json_datos = JSON.stringify(array_datos);
+	if($("#telefono").val()==""){
+	  msj_info+= "- Debe ingresar Teléfono. </br>";
+	}
   
-	$.ajaxSetup({
-	  headers: {
-		'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
-	  }
-	});
+	if($("#email").val()==""){
+	  msj_info+= "- Debe ingresar Email. </br>";
+	}
+	if($("#region").val()=="Elija Una"){
+	  msj_info+= "- Debe seleccionar Region. </br>";
+	}
+	if($("#provincia").val()=="Elija Una"){
+	  msj_info+= "- Debe seleccionar Provincia. </br>";
+	}
+	if($("#comuna").val()=="Elija Una"){
+	  msj_info+= "- Debe seleccionar Comuna. </br>";
+	}
+	if($("#direccion").val()==""){
+	  msj_info+= "- Debe ingresar Direccion. </br>";
+	}
+	if($("#nombre_contacto").val()==""){
+	  msj_info+= "- Debe ingresar Nombre de contacto. </br>";
+	}
   
-	$.ajax({
-	  type: "POST",
-	  url: url_prev + '/crearCliente',
-	  data: {
-		json_datos: json_datos,
-		_token: token
-	  } //esto es necesario, por la validacion de seguridad de laravel
-	}).done(function(msg) {
-		$("#modalCrearCliente").modal("hide");
-		setTimeout(() => {
-			$("#modalExitosa").modal('show');	
-		}, 200);
+	if($("#cargo_contacto").val()==""){
+	  msj_info+= "- Debe ingresar Cargo de contacto. </br>";
+	}
+  
+	if(msj_info==""){
+		var nombre = $("#nombre").val();
+		var rut = $("#rut").val();
+		var fono = parseInt($("#telefono").val());
+		var email = $("#email").val();
+		var idRegion = parseInt($("#region").val());
+		var idProvincia = parseInt($("#provincia option:selected").attr('id_provincia'));
+		var idComuna = parseInt($("#comuna option:selected").attr('id_comuna'));
+		var direccion = $("#direccion").val();
+		var nombre_contacto = $("#nombre_contacto").val();
+		var cargo_contacto = $("#cargo_contacto").val();
+		var array_datos = [];
+		var token = $('input[name="_token"]').val();
+	
+		array_datos.push({
+		nombre: nombre,
+		rut: rut,
+		fono: fono,
+		email: email,
+		id_region: idRegion,
+		id_provincia: idProvincia,
+		id_comuna: idComuna,
+		direccion: direccion,
+		nombre_contacto: nombre_contacto,
+		cargo_contacto : cargo_contacto
+		});
+	
+		var json_datos = JSON.stringify(array_datos);
+	
+		$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
+		}
+		});
+	
+		$.ajax({
+		type: "POST",
+		url: url_prev + '/crearCliente',
+		data: {
+			json_datos: json_datos,
+			_token: token
+		} //esto es necesario, por la validacion de seguridad de laravel
+		}).done(function(msg) {
+			$("#modalCrearCliente").modal("hide");
+			setTimeout(() => {
+				$("#modalExitosa").modal('show');	
+			}, 200);
+			
 		
-	  
-	}).fail(function() {
-		$("#modalCrearCliente").modal("hide");
-	  setTimeout(() => {  
-		  $("#modalError").modal('show');
-	  }, 200);
-	});
+		}).fail(function() {
+			$("#modalCrearCliente").modal("hide");
+		setTimeout(() => {  
+			$("#modalError").modal('show');
+		}, 200);
+		});
+	}else{
+		$("#info_validacion").html(msj_info);
+		$("#modalInfo").modal("show");
+	}
   }
 
   function crearProducto(){
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
-      }
-    });
+	var msg_info = "";
 
-    var clase = $("#tipo_producto option:selected").attr('id');
-    var nombre_producto = $("#nombre_producto").val();
-    var valor_producto = $("#valor_venta").val();
-    var descripcion_producto = $("#descripcion_producto").val();
-    var tipo_cambio = $("#select_cambio option:selected").attr("id");
-    var stock = $("#stock").val();
-    var costo = $("#costo").val();
-    var margen = $("#margen").val();
-    var numero_interno = $("#numero_interno").val();
-    var numero_fabricacion = $("#numero_fabricacion").val();
-    var array_datos = [];
-    var token = $('input[name="_token"]').val();
-    array_datos.push({
-      clase: clase,
-      nombre_producto: nombre_producto,
-      valor_producto: valor_producto,
-      descripcion_producto: descripcion_producto,
-      tipo_cambio: tipo_cambio,
-      stock: stock,
-      costo: costo,
-      margen: margen,
-      numero_interno: numero_interno,
-      numero_fabricacion: numero_fabricacion
-    });
-  
-    var json_datos = JSON.stringify(array_datos);
+    if($("#tipo_producto").val()=="Elija Uno"){
+      msg_info += "- Debe ingresar Tipo de producto.</br>"
+    }
 
-    $("#modalCargando").modal('show');
-    $.ajax({
-        type: "POST",
-        url: url_prev + '/crearProducto',
-        data: {
-        json_datos: json_datos,
-        _token: token
-        } //esto es necesario, por la validacion de seguridad de laravel
-    }).done(function(msg) {
-		$("#modalCrearProducto").modal('hide');
-        setTimeout(() => {  
-            $("#modalCargando").modal('hide'); 
-        }, 500);
-        setTimeout(() => {  
-            $("#modalExitosa").modal('show');
-        }, 500);
-     
-    }).fail(function() {
-        
-        setTimeout(() => {  
-            $("#modalCargando").modal('hide'); 
-        }, 500);
-        setTimeout(() => {  
-            $("#modalError").modal('show');
-        }, 500);
-    });
+    if($("#nombre_producto").val()==""){
+      msg_info += "- Debe ingresar Nombre de producto.</br>"
+    }
+
+    if($("#select_cambio").val()=="Elija Uno"){
+      msg_info += "- Debe ingresar Tipo de cambio.</br>"
+    }
+    if($("#stock").val()==""){
+      msg_info += "- Debe ingresar Stock.</br>"
+    }
+
+    if($("#costo").val()==""){
+      msg_info += "- Debe ingresar Costo.</br>"
+    }
+
+    if($("#margen").val()==""){
+      msg_info += "- Debe ingresar Margen.</br>"
+    }
+
+    if($("#numero_interno").val()==""){
+      msg_info += "- Debe ingresar Numero interno.</br>"
+    }
+
+    if($("#numero_fabricacion").val()==""){
+      msg_info += "- Debe ingresar Numero fabricación.</br>"
+    }
+    if(msg_info==""){
+		$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
+		}
+		});
+
+		var clase = $("#tipo_producto option:selected").attr('id');
+		var nombre_producto = $("#nombre_producto").val();
+		var valor_producto = $("#valor_venta").val();
+		var descripcion_producto = $("#descripcion_producto").val();
+		var tipo_cambio = $("#select_cambio option:selected").attr("id");
+		var stock = $("#stock").val();
+		var costo = $("#costo").val();
+		var margen = $("#margen").val();
+		var numero_interno = $("#numero_interno").val();
+		var numero_fabricacion = $("#numero_fabricacion").val();
+		var array_datos = [];
+		var token = $('input[name="_token"]').val();
+		array_datos.push({
+		clase: clase,
+		nombre_producto: nombre_producto,
+		valor_producto: valor_producto,
+		descripcion_producto: descripcion_producto,
+		tipo_cambio: tipo_cambio,
+		stock: stock,
+		costo: costo,
+		margen: margen,
+		numero_interno: numero_interno,
+		numero_fabricacion: numero_fabricacion
+		});
+	
+		var json_datos = JSON.stringify(array_datos);
+
+		$("#modalCargando").modal('show');
+		$.ajax({
+			type: "POST",
+			url: url_prev + '/crearProducto',
+			data: {
+			json_datos: json_datos,
+			_token: token
+			} //esto es necesario, por la validacion de seguridad de laravel
+		}).done(function(msg) {
+			$("#modalCrearProducto").modal('hide');
+			setTimeout(() => {  
+				$("#modalCargando").modal('hide'); 
+			}, 500);
+			setTimeout(() => {  
+				$("#modalExitosa").modal('show');
+			}, 500);
+		
+		}).fail(function() {
+			
+			setTimeout(() => {  
+				$("#modalCargando").modal('hide'); 
+			}, 500);
+			setTimeout(() => {  
+				$("#modalError").modal('show');
+			}, 500);
+		});
+	}else{
+		$("#modalCrearProducto").modal("hide");		
+		setTimeout(() => {
+			$("#info_validacion").html(msg_info);
+			$("#modalInfo").modal("show");	
+		}, 200);
+	}
   }
+
+
+  $("#boton_validacion").click(function () {
+	$("#modalCrearProducto").modal("show");	
+
+});
 
   function setEstadoEnviado(folio){
 	$.ajax({

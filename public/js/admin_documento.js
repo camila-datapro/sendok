@@ -67,8 +67,6 @@ $(document).ready(function () {
 });
 
 function adminEditarPropuesta(propuesta){	
-	console.log(propuesta.id_cliente);
-	console.log(propuesta);
 	var nombres_producto = JSON.parse(propuesta.nombre_producto);
 	var ids_producto = JSON.parse(propuesta.id_producto);
 	var unidades_producto = JSON.parse(propuesta.unidades);
