@@ -198,6 +198,7 @@
                                  <table class="table table-hover tabla_propuestas display nowrap" cellspacing="0" id="tabla_propuestas">
                                     <thead>
                                        <tr>
+                                          <th scope="col">Folio</th>
                                           <th scope="col">Empresa</th>
                                           <th scope="col">Nombre Contacto</th>
                                           <th scope="col">Fecha creación</th>
@@ -218,8 +219,8 @@
                                                          $x = sizeOf($clientes);
                                                    }
                                              }
-                                             echo "<tr>                                                      
-                                             <td >".$nombre_empresa."</td>";
+                                             echo "<tr>                                                     
+                                             <td >".$propuestas[$i]->folio_propuesta."</td><td>".$nombre_empresa."</td>";
                                              echo "<td> ".$nombre_contacto."</td>";
                                              echo "<td> ".$propuestas[$i]->fecha_creacion."</td>
                                              <td> ".$propuestas[$i]->total."</td>
