@@ -128,106 +128,133 @@ function guardarPropuesta() {
 
 
 function vistaPreviaPDF() {
-
-	var tipo_documento = $("#tipo_documento option:selected").attr('id');
-	var id_cliente = $("#select_cliente option:selected").attr('id');
-	$.ajax({
-		type: "POST",
-		url: url_prev + '/propuestaLastId',
-		data: {
-			_token: $('input[name="_token"]').val()
-		} //esto es necesario, por la validacion de seguridad de laravel
-	}).done(function (msg) {
-		
-		var folio_propuesta = "PC"+id_cliente+"_"+(parseInt(msg[0].numero_folio)+1);
-		$("#folio_propuesta").text(folio_propuesta);
-	}).fail(function () {				
-		console.log("Error en propuestaLastId");
-	});
-
-
-	var id_producto = $("#select_producto option:selected").attr('id');
-	var unidades = $("#unidades");
-	//indica la cantidad de productos que se ingresaron en el formulario anterior
 	var cantidad_divs = $("#cantidad_divs").attr("cantidad");
+	var msg_info = "";
 
-	// se obtienen los datos del cliente
+	if($("#select_cliente").val()=="Elija Uno"){
+		msg_info += "- Debe seleccionar un cliente.</br>";
+	}
 
-	$("#nombre_cliente").text($("#select_cliente option:selected").attr("nombre_cliente"));
-	$("#email_cliente").text($("#select_cliente option:selected").attr("email_cliente"));
-	$("#fono_cliente").text($("#select_cliente option:selected").attr("fono_cliente"));
-	$("#contacto_nombre").text($("#select_cliente option:selected").attr("contacto_nombre"));
-	$("#contacto_cargo").text($("#select_cliente option:selected").attr("contacto_cargo"));
-    $("#id_cliente").text(id_cliente);
+	if($("#tipo_documento").val()=="Elija Uno"){
+		msg_info += "- Debe seleccionar un tipo de documento.</br>";
+	}
 
-	//se obtienen los productos dinamicos del formulario anterior
-	// cantidad
-	// nombre
-	// precio unitario
-	// precio total
-	var total_parcial = 0;
-	var subtotal = 0;
-	var iva = 0;
-	var total = 0;
-	var tipo_cambio_p = 0;
-	var descuento = 0;
-	var html = "";
-	var tiene_descuento = 0;// 1 si es que tiene
 
-	for(var k=1; k<=cantidad_divs;k++){
-		if($("#descuento_producto_"+k).val()!=""){
-			tiene_descuento = 1;
-			
+
+	for(var i=1;i<=parseInt(cantidad_divs);i++){
+		if($("#select_producto_"+i).val()=="Elija Uno"){
+			msg_info += "- Debe seleccionar el producto N°: "+i+".</br>";
 		}
-	}
-
-	if(tiene_descuento==1){
-		$("#columna_descuento").show();
-	}else{
-		$("#columna_descuento").hide();
-	}
-
-
-	for(var i=1; i<=cantidad_divs;i++){
-		descuento = parseInt(($("#descuento_producto_"+i).val()=="")? 0 : $("#descuento_producto_"+i).val());
-		total_parcial = parseInt($("#select_producto_"+i+" option:selected").attr("valor_producto"))*parseInt($("#unidades_producto_"+i).val()) - descuento;
-		tipo_cambio_p = $("#select_producto_"+i+" option:selected").attr("tipo_cambio").toUpperCase();
-		
-		html ='<tr>'+
-			'<td>'+$("#unidades_producto_"+i).val()+'</td>'+
-			'<td>'+$("#select_producto_"+i+" option:selected").attr("nombre_producto")+'</td>'+
-			'<td><b>'+tipo_cambio_p+' </b> '+$("#select_producto_"+i+" option:selected").attr("valor_producto")+'</td>';
-			//evaluamos si es que tiene descuento y mostramos la columna
-			if(tiene_descuento==1){ // caso que si posea descuento
-			
-				if($("#descuento_producto_"+i).val()!=""){
-					// se muestra el dato	
-					html = html +'<td><b>'+tipo_cambio_p+'</b> '+descuento+'</td>';
-				}else{
-					// se muestra campo vacío para no generar descuadre en la tabla 
-					html = html+'<td>--</td>';
-				}
-			}
-			html = html+'<td><b>'+tipo_cambio_p+'</b> '+total_parcial+'</td></tr>';
-
-		$("#tabla_propuesta_body").append(html);
-		subtotal = subtotal + total_parcial;
-	}
-
-	iva= Math.round(subtotal*0.19);
-	total = subtotal + iva;
+		if($("#unidades_producto_"+i).val()==""){
+			msg_info += "- Debe seleccionar las unidades N°: "+i+".</br>";
+		}
 	
-	$("#subtotal").text(tipo_cambio_p+' '+subtotal);
-	$("#iva").text(iva);
-	$("#total_con_iva").text(tipo_cambio_p+' '+total);
+	}
 
-	setTimeout(() => {
-		$("#datos_ingreso").hide();
-	}, 200);
+	if(msg_info==""){
 
-	setTimeout(() => {
-		$("#plantilla_documento").show();
-	}, 200);
+		var tipo_documento = $("#tipo_documento option:selected").attr('id');
+		var id_cliente = $("#select_cliente option:selected").attr('id');
+		$.ajax({
+			type: "POST",
+			url: url_prev + '/propuestaLastId',
+			data: {
+				_token: $('input[name="_token"]').val()
+			} //esto es necesario, por la validacion de seguridad de laravel
+		}).done(function (msg) {
+			
+			var folio_propuesta = "PC"+id_cliente+"_"+(parseInt(msg[0].numero_folio)+1);
+			$("#folio_propuesta").text(folio_propuesta);
+		}).fail(function () {				
+			console.log("Error en propuestaLastId");
+		});
+
+
+		var id_producto = $("#select_producto option:selected").attr('id');
+		var unidades = $("#unidades");
+		//indica la cantidad de productos que se ingresaron en el formulario anterior
+
+		// se obtienen los datos del cliente
+
+		$("#nombre_cliente").text($("#select_cliente option:selected").attr("nombre_cliente"));
+		$("#email_cliente").text($("#select_cliente option:selected").attr("email_cliente"));
+		$("#fono_cliente").text($("#select_cliente option:selected").attr("fono_cliente"));
+		$("#contacto_nombre").text($("#select_cliente option:selected").attr("contacto_nombre"));
+		$("#contacto_cargo").text($("#select_cliente option:selected").attr("contacto_cargo"));
+		$("#id_cliente").text(id_cliente);
+
+		//se obtienen los productos dinamicos del formulario anterior
+		// cantidad
+		// nombre
+		// precio unitario
+		// precio total
+		var total_parcial = 0;
+		var subtotal = 0;
+		var iva = 0;
+		var total = 0;
+		var tipo_cambio_p = 0;
+		var descuento = 0;
+		var html = "";
+		var tiene_descuento = 0;// 1 si es que tiene
+
+		for(var k=1; k<=cantidad_divs;k++){
+			if($("#descuento_producto_"+k).val()!=""){
+				tiene_descuento = 1;
+				
+			}
+		}
+
+		if(tiene_descuento==1){
+			$("#columna_descuento").show();
+		}else{
+			$("#columna_descuento").hide();
+		}
+
+
+		for(var i=1; i<=cantidad_divs;i++){
+			descuento = parseInt(($("#descuento_producto_"+i).val()=="")? 0 : $("#descuento_producto_"+i).val());
+			total_parcial = parseInt($("#select_producto_"+i+" option:selected").attr("valor_producto"))*parseInt($("#unidades_producto_"+i).val()) - descuento;
+			tipo_cambio_p = $("#select_producto_"+i+" option:selected").attr("tipo_cambio").toUpperCase();
+			
+			html ='<tr>'+
+				'<td>'+$("#unidades_producto_"+i).val()+'</td>'+
+				'<td>'+$("#select_producto_"+i+" option:selected").attr("nombre_producto")+'</td>'+
+				'<td><b>'+tipo_cambio_p+' </b> '+$("#select_producto_"+i+" option:selected").attr("valor_producto")+'</td>';
+				//evaluamos si es que tiene descuento y mostramos la columna
+				if(tiene_descuento==1){ // caso que si posea descuento
+				
+					if($("#descuento_producto_"+i).val()!=""){
+						// se muestra el dato	
+						html = html +'<td><b>'+tipo_cambio_p+'</b> '+descuento+'</td>';
+					}else{
+						// se muestra campo vacío para no generar descuadre en la tabla 
+						html = html+'<td>--</td>';
+					}
+				}
+				html = html+'<td><b>'+tipo_cambio_p+'</b> '+total_parcial+'</td></tr>';
+
+			$("#tabla_propuesta_body").append(html);
+			subtotal = subtotal + total_parcial;
+		}
+
+		iva= Math.round(subtotal*0.19);
+		total = subtotal + iva;
+		
+		$("#subtotal").text(tipo_cambio_p+' '+subtotal);
+		$("#iva").text(iva);
+		$("#total_con_iva").text(tipo_cambio_p+' '+total);
+
+		setTimeout(() => {
+			$("#datos_ingreso").hide();
+		}, 200);
+
+		setTimeout(() => {
+			$("#plantilla_documento").show();
+		}, 200);
+	}else{
+		$("#info_validacion").html(msg_info);
+		$("#modalInfo").modal("show");
+	}
 }
 
 

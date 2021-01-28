@@ -40,6 +40,10 @@
          margin-left: 12px;
       }
 
+      .modal {
+         overflow-y:auto;
+         }
+
       </style>
    </head>
    <body>
@@ -282,6 +286,25 @@
          </div>
       </div>
 
+
+      <div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="modalinfo" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="modalinfo">Atención</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p id="info_validacion"></p>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+               </div>
+            </div>
+         </div>
+      </div>
       
          <!-- Modal -->
          <div class="modal fade" id="modalExitoso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

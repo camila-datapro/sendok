@@ -40,6 +40,15 @@
          .top-spaced{
          margin-top: 10px;
          }
+
+         .modal {
+         overflow-y:auto;
+         }
+         
+         iframe{
+            width: 100%;
+            height: 70vh;
+         }
       </style>
    </head>
    <body>
@@ -294,35 +303,14 @@
          <div class="modal-dialog modal-lg">
             <div class="modal-content">
                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" onclick="window.location.reload();">&times;</button>
+               <h4 class="page-title">Visor de Documento</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
                </div>
                <div class="modal-body">
-                  <div class="content-wrapper">
-                     <!-- Page Title Header Starts-->
-                     <div class="row page-title-header">
-                        <div class="col-12">
-                           <div class="page-header">
-                              <h4 class="page-title">Visor de Documento</h4>
-                           </div>
-                        </div>
+                  <div class="row" id="ver_propuesta">
+                     <div class="col-md-12">                                                       
+                        <iframe id="visor_documento" src="" frameborder="0"></iframe>                                      
                      </div>
-                     <!-- Page Title Header Ends-->
-                     <div class="row" id="ver_propuesta">
-                        <div class="col-md-12 grid-margin">
-                           <div class="col-md-12 grid-margin stretch-card">
-                              <div class="card">
-                                 <div class="card-body">
-                                          
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <!-- fin datos ingreso-->
-                   
-                     <!-- content-wrapper ends -->
-                     <!-- partial:partials/_footer.html -->
-                     <!-- partial -->
                   </div>
                </div>
                <div class="modal-footer">
@@ -340,24 +328,13 @@
          <div class="modal-dialog modal-lg">
             <div class="modal-content">
                <div class="modal-header">
+                  <h4 class="page-title">Editar Documento</h4>
                   <button type="button" class="close" data-dismiss="modal" onclick="window.location.reload();">&times;</button>
                </div>
                <div class="modal-body">
-                  <div class="content-wrapper">
-                     <!-- Page Title Header Starts-->
-                     <div class="row page-title-header">
-                        <div class="col-12">
-                           <div class="page-header">
-                              <h4 class="page-title">Editar Documento</h4>
-                           </div>
-                        </div>
-                     </div>
                      <!-- Page Title Header Ends-->
                      <div class="row" id="datos_ingreso">
-                        <div class="col-md-12 grid-margin">
-                           <div class="col-md-12 grid-margin stretch-card">
-                              <div class="card">
-                                 <div class="card-body">
+                        <div class="col-md-12">
                                     <div id="formulario_editar">
                                        <div style="padding-left: 0px !important;" class="form-group col-sm-12">
                                           <label>Seleccione Cliente</label>                               
@@ -398,31 +375,19 @@
                                           <br>
                                        </div>
                                     </div>
-                                 </div>
-                              </div>
-                           </div>
+                           
                         </div>
                      </div>
                      <!-- fin datos ingreso-->
                      <input hidden pdf_64="" id="hidden_pdf"></input>
                      <div class="row" id="plantilla_documento" style="display:none;">
-                        <div class="col-md-12 grid-margin">
-                           <div class="col-md-12 grid-margin stretch-card">
-                              <div class="card">
-                                 <div class="card-body" id="propuesta_documento">
-                                    <?php 
-                                       set_include_path(dirname(__FILE__)."/../");
-                                       include('propuesta_comercial.blade.php');
-                                       ?>
-                                 </div>
-                              </div>
-                           </div>
+                        <div class="col-md-12 ">                                                       
+                           <?php 
+                              set_include_path(dirname(__FILE__)."/../");
+                              include('propuesta_comercial.blade.php');
+                              ?>                                                           
                         </div>
-                     </div>
-                     <!-- content-wrapper ends -->
-                     <!-- partial:partials/_footer.html -->
-                     <!-- partial -->
-                  </div>
+                     </div>                     
                </div>
                <div class="modal-footer">
                   <button id="boton_cerrar_proceso" type="button" class="btn btn-danger" data-dismiss="modal" onclick="window.location.reload();">Salir</button>
@@ -449,6 +414,26 @@
             </div>
          </div>
       </div>
+
+      <div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="modalinfo" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="modalinfo">Atención</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <p id="info_validacion"></p>
+               </div>
+               <div class="modal-footer">
+                  <button id="boton_info" type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+               </div>
+            </div>
+         </div>
+      </div>
+
       <div class="modal fade" id="modalCargando" tabindex="-1" role="dialog" aria-labelledby="modalcargandolabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">

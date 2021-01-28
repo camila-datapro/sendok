@@ -92,8 +92,34 @@ function adminEditarPropuesta(propuesta){
 
 function mostrarVistaPrevia(){
 
-	var id_cliente = $("#select_cliente option:selected").attr('id');
+	
 	var cantidad_divs = $("#cantidad_divs").attr("cantidad");
+
+	var msg_info = "";
+
+	if($("#select_cliente").val()=="Elija Uno"){
+		msg_info += "- Debe seleccionar un cliente.</br>";
+	}
+
+	if($("#tipo_documento").val()=="Elija Uno"){
+		msg_info += "- Debe seleccionar un tipo de documento.</br>";
+	}
+
+
+
+	for(var i=1;i<=parseInt(cantidad_divs);i++){
+		if($("#select_producto_"+i).val()=="Elija Uno"){
+			msg_info += "- Debe seleccionar el producto N°: "+i+".</br>";
+		}
+		if($("#unidades_producto_"+i).val()==""){
+			msg_info += "- Debe seleccionar las unidades N°: "+i+".</br>";
+		}
+	
+	}
+
+	if(msg_info==""){
+
+	var id_cliente = $("#select_cliente option:selected").attr('id');
 	
 	// se obtienen los datos del cliente
 
@@ -170,8 +196,20 @@ function mostrarVistaPrevia(){
 	$("#plantilla_documento").show();
 	$("#boton_mostrar_pdf").hide();
 	$("#boton_guardar_cambios").show();
+	}else{
+		
+		
+			$("#info_validacion").html(msg_info);
+			$("#modalInfo").modal("show");		
+		
+		
+	}
 	
 }
+
+
+
+
 
 function editarPDF() {
 	$("#boton_mostrar_pdf").show();
@@ -412,5 +450,6 @@ function setEstadoEnviado(folio){
 }
 
 function adminVerPropuesta(folio){
+	$("#visor_documento").attr("src","./documentos/"+folio+".pdf");
 	$("#modalVerPropuesta").modal("show");
 }
