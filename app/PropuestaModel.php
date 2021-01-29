@@ -57,7 +57,8 @@ class PropuestaModel extends Model
             valor_unitario,
             nombre_producto,
             tipo_cambio,
-            folio_propuesta
+            folio_propuesta,
+            fecha_modificacion
          ) 
          VALUES
          (
@@ -73,7 +74,8 @@ class PropuestaModel extends Model
             '".$valor_unitario."',
             '".$nombre_producto."',
             '".$tipo_cambio."',
-            '".$folio_propuesta."'
+            '".$folio_propuesta."',
+            NOW()
          )");
         return $results;
     }
@@ -125,7 +127,8 @@ class PropuestaModel extends Model
              nombre_cliente='".$nombre_cliente."',
              valor_unitario='".$valor_unitario."',
              nombre_producto='".$nombre_producto."',
-             tipo_cambio='".$tipo_cambio."'            
+             tipo_cambio='".$tipo_cambio."',
+             fecha_modificacion=NOW()           
              where folio_propuesta='".$folio_propuesta."'");
          return $results;
      }

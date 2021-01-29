@@ -201,7 +201,7 @@
                                           <th scope="col">Folio</th>
                                           <th scope="col">Empresa</th>
                                           <th scope="col">Nombre Contacto</th>
-                                          <th scope="col">Fecha creación</th>
+                                          <th scope="col">Fecha modificacion</th>
                                           <th scope="col">Monto</th>
                                           <th scope="col">Estado Envío</th>
                                           <th scope="col">Acciones</th>
@@ -222,7 +222,7 @@
                                              echo "<tr>                                                     
                                              <td >".$propuestas[$i]->folio_propuesta."</td><td>".$nombre_empresa."</td>";
                                              echo "<td> ".$nombre_contacto."</td>";
-                                             echo "<td> ".$propuestas[$i]->fecha_creacion."</td>
+                                             echo "<td> ".$propuestas[$i]->fecha_modificacion."</td>
                                              <td> ".$propuestas[$i]->total."</td>
                                              <td> ".(($propuestas[$i]->estado_envio==null) ? 'Pendiente de envío' : $propuestas[$i]->estado_envio )."</td>
                                              <td>
