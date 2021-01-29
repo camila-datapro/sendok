@@ -252,8 +252,8 @@ function vistaPreviaPDF() {
 			$("#plantilla_documento").show();
 		}, 200);
 	}else{
-		$("#info_validacion").html(msg_info);
-		$("#modalInfo").modal("show");
+		$("#info_validacion_producto").html(msg_info);
+		$("#modalInfoProducto").modal("show");
 	}
 }
 
@@ -582,10 +582,16 @@ function cargarRegiones() {
 		}, 200);
 		});
 	}else{
-		$("#info_validacion").html(msj_info);
-		$("#modalInfo").modal("show");
+		$("#modalCrearCliente").modal("hide");
+		setTimeout(() => {
+			$("#info_validacion").html(msj_info);
+			$("#modalInfo").modal("show");
+		}, 200);
+		$("#modalCrearCliente").modal("show");
+		
 	}
   }
+
 
   function crearProducto(){
 	var msg_info = "";
@@ -686,6 +692,8 @@ function cargarRegiones() {
 			$("#info_validacion").html(msg_info);
 			$("#modalInfo").modal("show");	
 		}, 200);
+		$("#modalCrearProducto").modal("show");	
+		
 	}
   }
 
@@ -694,6 +702,16 @@ function cargarRegiones() {
 	$("#modalCrearProducto").modal("show");	
 
 });
+
+
+function visarUnidades(){
+	var opcion = $("#tipo_producto option:selected").attr("id");
+	if(opcion=="producto"){
+	  $("#div_unidades").show();
+	}else{
+	  $("#div_unidades").hide();
+	}
+  }
 
   function setEstadoEnviado(folio){
 	$.ajax({

@@ -165,6 +165,7 @@ function crearCliente() {
   }
 }
 
+
 function confirmarEliminacion(id_boton,nombre_cliente){
   var id_cliente = parseInt(id_boton.replace('eliminar_',''));
   $("#modal_eliminar_nombre").text(nombre_cliente);
