@@ -41,6 +41,7 @@ class PropuestaModel extends Model
         $nombre_producto=$datos[2];
         $tipo_cambio=$datos[0];  
         $folio_propuesta = $datos[14];  
+        $descuento = $datos[15];
 
         $results = DB::insert("insert
          into propuesta_comercial
@@ -58,7 +59,8 @@ class PropuestaModel extends Model
             nombre_producto,
             tipo_cambio,
             folio_propuesta,
-            fecha_modificacion
+            fecha_modificacion,
+            descuento
          ) 
          VALUES
          (
@@ -75,7 +77,8 @@ class PropuestaModel extends Model
             '".$nombre_producto."',
             '".$tipo_cambio."',
             '".$folio_propuesta."',
-            NOW()
+            NOW(),
+            '".$descuento."'
          )");
         return $results;
     }
@@ -112,6 +115,7 @@ class PropuestaModel extends Model
          $nombre_producto=$datos[2];
          $tipo_cambio=$datos[0];  
          $folio_propuesta = $datos[14];  
+         $descuento = $datos[15];
  
          $results = DB::update("update
            propuesta_comercial
@@ -128,7 +132,8 @@ class PropuestaModel extends Model
              valor_unitario='".$valor_unitario."',
              nombre_producto='".$nombre_producto."',
              tipo_cambio='".$tipo_cambio."',
-             fecha_modificacion=NOW()           
+             fecha_modificacion=NOW(),
+             descuento = '".$descuento."'           
              where folio_propuesta='".$folio_propuesta."'");
          return $results;
      }

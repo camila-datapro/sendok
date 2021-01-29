@@ -325,6 +325,7 @@ function guardarEnBD(){
 	var array_unidades = [];
 	var array_valor_unitario_producto =[];
 	var array_subtotal_producto = [];
+	var array_descuento = [];
 	var total_con_iva = parseInt($("#total_con_iva").text().substr(3).trim());
 	var iva = 0.19;
 	var subtotal = 0;
@@ -336,15 +337,19 @@ function guardarEnBD(){
 		array_nombre_producto.push($("#select_producto_"+i+" option:selected").attr("nombre_producto"));
 		array_valor_unitario_producto.push($("#select_producto_"+i+" option:selected").attr("valor_producto"));
 		array_unidades.push($("#unidades_producto_"+i).val());
+		array_descuento.push(($("#descuento_producto_"+i).val()));
 		array_subtotal_producto.push(subtotal);
+		
 	}			
 
 	var json_tipo_cambio = JSON.stringify(array_tipo_cambio);
 	var json_id_producto = JSON.stringify(array_id_producto);
 	var json_nombre_producto = JSON.stringify(array_nombre_producto);
 	var json_unidades = JSON.stringify(array_unidades);
+	var json_descuento = JSON.stringify(array_descuento);
 	var json_valor_unitario_producto = JSON.stringify(array_valor_unitario_producto);
 	var json_subtotal_producto = JSON.stringify(array_subtotal_producto);
+
 	var total_s_iva = parseInt($("#subtotal").text().substr(3).trim());
 
 	var id_ejecutivo = $("#id_usuario").text();
@@ -369,7 +374,8 @@ function guardarEnBD(){
 		email_cliente,
 		fono_cliente,
 		nombre_cliente,
-		folio
+		folio,
+		json_descuento
 	];
 
 	$("#modalCargando").modal('hide');

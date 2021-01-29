@@ -70,17 +70,21 @@ function adminEditarPropuesta(propuesta){
 	var nombres_producto = JSON.parse(propuesta.nombre_producto);
 	var ids_producto = JSON.parse(propuesta.id_producto);
 	var unidades_producto = JSON.parse(propuesta.unidades);
+	var descuento_producto = JSON.parse(propuesta.descuento);
 
 	$("#folio_propuesta").text(propuesta.folio_propuesta);
 	//seteo el primer div
 	document.getElementById("select_producto_1").selectedIndex = document.getElementById(ids_producto[0]).index;
 	$("#unidades_producto_1").val(unidades_producto[0]);
+	$("#descuento_producto_1").val(descuento_producto[0]);
 	// descuento se deja para despues 
 	var cantidad_divs = ids_producto.length;
 	for(var i=1; i<cantidad_divs; i++){
 		$("#addButton").click();
 		document.getElementById("select_producto_"+(i+1)).selectedIndex = document.getElementById(ids_producto[i]).index;
 		$("#unidades_producto_"+(i+1)).val(unidades_producto[i]);
+		$("#descuento_producto"+(i+1)).val(descuento_producto[i]);
+
 	}
 
 
@@ -290,6 +294,7 @@ function actualizaEnBD(){
 	var array_id_producto = [];
 	var array_nombre_producto = [];
 	var array_unidades = [];
+	var array_descuento = [];
 	var array_valor_unitario_producto =[];
 	var array_subtotal_producto = [];
 	var total_con_iva = parseInt($("#total_con_iva").text().substr(3).trim());
@@ -303,6 +308,7 @@ function actualizaEnBD(){
 		array_nombre_producto.push($("#select_producto_"+i+" option:selected").attr("nombre_producto"));
 		array_valor_unitario_producto.push($("#select_producto_"+i+" option:selected").attr("valor_producto"));
 		array_unidades.push($("#unidades_producto_"+i).val());
+		array_descuento.push(($("#descuento_producto_"+i).val()));
 		array_subtotal_producto.push(subtotal);
 	}			
 
@@ -310,6 +316,7 @@ function actualizaEnBD(){
 	var json_id_producto = JSON.stringify(array_id_producto);
 	var json_nombre_producto = JSON.stringify(array_nombre_producto);
 	var json_unidades = JSON.stringify(array_unidades);
+	var json_descuento = JSON.stringify(array_descuento);
 	var json_valor_unitario_producto = JSON.stringify(array_valor_unitario_producto);
 	var json_subtotal_producto = JSON.stringify(array_subtotal_producto);
 	var total_s_iva = parseInt($("#subtotal").text().substr(3).trim());
@@ -336,7 +343,8 @@ function actualizaEnBD(){
 		email_cliente,
 		fono_cliente,
 		nombre_cliente,
-		folio
+		folio,
+		json_descuento
 	];
 
 	$("#modalCargando").modal('hide');
