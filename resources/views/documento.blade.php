@@ -226,8 +226,8 @@
                                     </select>  
                                     <label class="top-spaced">Unidades producto N° 1</label>
                                     <input class="form-control form-control-sm" id="unidades_producto_1" nombre="unidades_producto"></input>  
-                                    <label class="top-spaced">Descuento para producto N° 1 (opcional)</label>
-                                    <input class="form-control form-control-sm" id="descuento_producto_1" nombre="descuento_producto"></input>                                                                
+                                    <label class="top-spaced"> % Descuento para producto N° 1 (opcional)</label>
+                                    <input type="number" onkeyup="validaPorcentaje(this)" class="form-control form-control-sm" id="descuento_producto_1" nombre="descuento_producto"></input>                                                                
                                     </div>                           
                                  </div>
                                  <input hidden id="cantidad_divs" cantidad="1"></input>
@@ -507,7 +507,7 @@
                                  <input type="number" maxlength="10" class="form-control form-control-sm" aria-label="costo" id="costo">
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                                 <label>Margen</label>
+                                 <label> % Margen</label>
                                  <input type="number" maxlength="10" class="form-control form-control-sm" aria-label="margen" id="margen">
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">

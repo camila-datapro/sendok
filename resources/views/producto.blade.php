@@ -202,7 +202,7 @@
                                  <input type="number" maxlength="10" class="form-control form-control-sm" aria-label="costo" id="costo">
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                                 <label>Margen</label>
+                                 <label>% Margen</label>
                                  <input type="number" maxlength="10" class="form-control form-control-sm" aria-label="margen" id="margen">
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">

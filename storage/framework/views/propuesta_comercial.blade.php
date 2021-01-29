@@ -103,7 +103,7 @@
                            <th style="color: #ffffff !important;"> CTD </th>
                            <th style="color: #ffffff !important;"> Descripción </th>
                            <th style="color: #ffffff !important;"> Precio Unitario </th>
-                           <th id="columna_descuento" style="color: #ffffff !important; display: none;"> Descuento </th>
+                           <th id="columna_descuento" style="color: #ffffff !important; display: none;"> % Descuento </th>
                            <th style="color: #ffffff !important;text-align:right;"> Precio </th>
                         </tr>
                      </thead>
@@ -168,6 +168,7 @@
                <button id="enviar_propuesta" style="margin: 10px; cursor: pointer;color: #fff; display: none;" class="btn btn-primary btn-fw btn-lg" onclick="enviarPropuesta();">ENVIAR PROPUESTA</button>
                <button id="editar_propuesta" style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-warning btn-fw btn-lg" onclick="editarPDF();">EDITAR PROPUESTA</button>
                <button id="guardar_propuesta" style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-primary btn-lg" data-toggle="modal" onclick="guardarPropuesta();">GUARDAR PROPUESTA</button>
+               <input id="listar_propuestas" style="margin: 10px; cursor: pointer;color: #fff; display: none;" class="btn btn-danger btn-lg" data-toggle="modal" onclick="location.href='./admin_documentos'" value="LISTAR PROPUESTAS"/>
             </div>
          </div>
       </div>

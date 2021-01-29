@@ -364,7 +364,7 @@
                                                 <label class="top-spaced">Unidades producto N° 1</label>
                                                 <input class="form-control form-control-sm" id="unidades_producto_1" nombre="unidades_producto"></input>  
                                                 <label class="top-spaced">Descuento para producto N° 1 (opcional)</label>
-                                                <input class="form-control form-control-sm" id="descuento_producto_1" nombre="descuento_producto"></input>                                                                
+                                                <input class="form-control form-control-sm" onkeyup="validaDescuento(this)" id="descuento_producto_1" nombre="descuento_producto"></input>                                                                
                                              </div>
                                           </div>
                                           <input hidden id="cantidad_divs" cantidad="1"></input>

@@ -43,7 +43,7 @@ $(document).ready(function () {
 				'<label class="top-spaced">Unidades producto N° '+counter+'</label>'+
 				'<input class="form-control" id="unidades_producto_'+counter+'""></input>'+
 				'<label class="top-spaced">Descuento para producto N° '+counter+' (opcional)</label>'+
-				'<input class="form-control" id="descuento_producto_'+counter+'""></input>');
+				'<input type="number" onkeyup="validaDescuento(this)" class="form-control" id="descuento_producto_'+counter+'""></input>');
 				$("#cantidad_divs").attr("cantidad",counter);		
 				newTextBoxDiv.appendTo("#TextBoxesGroup");
 				counter++;
@@ -145,7 +145,7 @@ function mostrarVistaPrevia(){
 	var descuento = 0;
 	var html = "";
 	var tiene_descuento = 0;// 1 si es que tiene
-
+	var descuento_p = 0;
 	for(var k=1; k<=cantidad_divs;k++){
 		if($("#descuento_producto_"+k).val()!=""){
 			tiene_descuento = 1;
@@ -162,7 +162,8 @@ function mostrarVistaPrevia(){
 
 	for(var i=1; i<=cantidad_divs;i++){
 		descuento = parseInt(($("#descuento_producto_"+i).val()=="")? 0 : $("#descuento_producto_"+i).val());
-		total_parcial = parseInt($("#select_producto_"+i+" option:selected").attr("valor_producto"))*parseInt($("#unidades_producto_"+i).val()) - descuento;
+		descuento_p = (100- descuento)/100;
+		total_parcial = Math.round(parseInt($("#select_producto_"+i+" option:selected").attr("valor_producto"))*parseInt($("#unidades_producto_"+i).val()) * descuento_p);
 		tipo_cambio_p = $("#select_producto_"+i+" option:selected").attr("tipo_cambio").toUpperCase();
 		
 		html ='<tr>'+
@@ -174,7 +175,7 @@ function mostrarVistaPrevia(){
 			
 				if($("#descuento_producto_"+i).val()!=""){
 					// se muestra el dato	
-					html = html +'<td><b>'+tipo_cambio_p+'</b> '+descuento+'</td>';
+					html = html +'<td>'+descuento+'<b> %</b> </td>';
 				}else{
 					// se muestra campo vacío para no generar descuadre en la tabla 
 					html = html+'<td>--</td>';
@@ -217,6 +218,7 @@ function editarPDF() {
 	$("#boton_mostrar_pdf").show();
 	$("#guardar_propuesta").show();
 	$("#enviar_propuesta").hide();
+	$("#listar_propuestas").hide();
 	$("#check_envio").hide();		
 	setTimeout(() => {
 		$("#tabla_propuesta_body").html("");
@@ -357,6 +359,7 @@ function actualizaEnBD(){
 		} //esto es necesario, por la validacion de seguridad de laravel
 		  }).done(function (msg) {
 			$("#enviar_propuesta").show();
+			$("#listar_propuestas").show();
 		}).fail(function () {
 		console.log("error en funcion enviarPropuesta");
 		});
@@ -366,6 +369,7 @@ function actualizaEnBD(){
 // envio de correo desde seccion EDITAR
 function enviarPropuesta() {
 	$("#enviar_propuesta").attr("disabled",true);
+	$("#listar_propuestas").attr("disabled",true);
 	$("#cargando_accion").show();
 	$("#modal_editar_propuesta").hide();
 	$("#modalCuerpoCorreoEdit").modal("show");				    
@@ -391,6 +395,7 @@ function enviarCorreo(){
 			setEstadoEnviado(folio);
 			$("#modalEnviando").modal("hide");
 			$("#enviar_propuesta").attr("disabled",false);
+			$("#listar_propuestas").attr("disabled",false);
 			setTimeout(() => {
 				$("#modalExitosa").modal("show");				
 			}, 300);		  
@@ -458,4 +463,14 @@ function setEstadoEnviado(folio){
 function adminVerPropuesta(folio){
 	$("#visor_documento").attr("src","./documentos/"+folio+".pdf");
 	$("#modalVerPropuesta").modal("show");
+}
+
+function validaPorcentaje(e){
+    
+    var value = $(e).val();
+    
+    if ((value !== '') && (value.indexOf('.') === -1)) {
+        
+        $(e).val(Math.max(Math.min(value, 100), -100));
+    }
 }

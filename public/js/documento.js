@@ -48,8 +48,8 @@ $(document).ready(function () {
 				'</select>'+
 				'<label class="top-spaced">Unidades producto N° '+counter+'</label>'+
 				'<input class="form-control" id="unidades_producto_'+counter+'""></input>'+
-				'<label class="top-spaced">Descuento para producto N° '+counter+' (opcional)</label>'+
-				'<input class="form-control" id="descuento_producto_'+counter+'""></input>');
+				'<label class="top-spaced">% Descuento para producto N° '+counter+' (opcional)</label>'+
+				'<input type="number" onkeyup="validaPorcentaje(this)" class="form-control" id="descuento_producto_'+counter+'""></input>');
 				$("#cantidad_divs").attr("cantidad",counter);		
 				newTextBoxDiv.appendTo("#TextBoxesGroup");
 				counter++;
@@ -196,7 +196,7 @@ function vistaPreviaPDF() {
 		var descuento = 0;
 		var html = "";
 		var tiene_descuento = 0;// 1 si es que tiene
-
+		var descuento_p = 0;
 		for(var k=1; k<=cantidad_divs;k++){
 			if($("#descuento_producto_"+k).val()!=""){
 				tiene_descuento = 1;
@@ -212,8 +212,9 @@ function vistaPreviaPDF() {
 
 
 		for(var i=1; i<=cantidad_divs;i++){
-			descuento = parseInt(($("#descuento_producto_"+i).val()=="")? 0 : $("#descuento_producto_"+i).val());
-			total_parcial = parseInt($("#select_producto_"+i+" option:selected").attr("valor_producto"))*parseInt($("#unidades_producto_"+i).val()) - descuento;
+			descuento = (parseInt(($("#descuento_producto_"+i).val()=="")? 0 : $("#descuento_producto_"+i).val()));
+			descuento_p = (100-descuento)/100;
+			total_parcial = Math.round(parseInt($("#select_producto_"+i+" option:selected").attr("valor_producto"))*parseInt($("#unidades_producto_"+i).val()) * descuento_p);
 			tipo_cambio_p = $("#select_producto_"+i+" option:selected").attr("tipo_cambio").toUpperCase();
 			
 			html ='<tr>'+
@@ -225,7 +226,7 @@ function vistaPreviaPDF() {
 				
 					if($("#descuento_producto_"+i).val()!=""){
 						// se muestra el dato	
-						html = html +'<td><b>'+tipo_cambio_p+'</b> '+descuento+'</td>';
+						html = html +'<td>'+descuento+'<b> %</b> </td>';
 					}else{
 						// se muestra campo vacío para no generar descuadre en la tabla 
 						html = html+'<td>--</td>';
@@ -261,6 +262,7 @@ function vistaPreviaPDF() {
 function editarPDF() {
 	$("#guardar_propuesta").show();
 	$("#enviar_propuesta").hide();
+	$("#listar_propuestas").hide();
 	setTimeout(() => {
 		$("#tabla_propuesta_body").html("");
 		$("#plantilla_documento").hide();
@@ -388,6 +390,7 @@ function guardarEnBD(){
 		} //esto es necesario, por la validacion de seguridad de laravel
 		  }).done(function (msg) {
 			$("#enviar_propuesta").show();
+			$("#listar_propuestas").show();
 		}).fail(function () {
 		console.log("error en funcion enviarPropuesta");
 		});
@@ -476,7 +479,7 @@ function cargarRegiones() {
 	// code here  
 	var costo = parseInt($("#costo").val());
 	var margen = parseInt($("#margen").val());
-	var precio = Math.round((costo) * (margen/100));
+	var precio = costo + Math.round((costo) * (margen/100));
 	$("#valor_venta").attr("disabled",true);
 	$("#valor_venta").val(precio);
   
@@ -487,7 +490,7 @@ function cargarRegiones() {
 	// code here  
 	var costo = parseInt($("#costo").val());
 	var margen = parseInt($("#margen").val());
-	var precio = Math.round((costo) * (margen/100));
+	var precio = costo + Math.round((costo) * (margen/100));
 	if($("#margen").val()!=""){    
 	  $("#valor_venta").attr("disabled",true);
 	  $("#valor_venta").val(precio);
@@ -734,4 +737,14 @@ function visarUnidades(){
 	  });		
 }
 
+
+function validaPorcentaje(e){
+    
+    var value = $(e).val();
+    
+    if ((value !== '') && (value.indexOf('.') === -1)) {
+        
+        $(e).val(Math.max(Math.min(value, 100), -100));
+    }
+}
 

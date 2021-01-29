@@ -191,7 +191,7 @@ margen.addEventListener("blur", function() {
   // code here  
   var costo = parseInt($("#costo").val());
   var margen = parseInt($("#margen").val());
-  var precio = Math.round((costo) * (margen/100));
+  var precio = costo + Math.round((costo) * (margen/100));
   $("#valor_venta").attr("disabled",true);
   $("#valor_venta").val(precio);
 
@@ -202,7 +202,7 @@ costo.addEventListener("blur", function() {
   // code here  
   var costo = parseInt($("#costo").val());
   var margen = parseInt($("#margen").val());
-  var precio = Math.round((costo) * (margen/100));
+  var precio = costo + Math.round((costo) * (margen/100));
   if($("#margen").val()!=""){    
     $("#valor_venta").attr("disabled",true);
     $("#valor_venta").val(precio);
