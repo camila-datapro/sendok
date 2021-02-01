@@ -474,3 +474,7 @@ function validaPorcentaje(e){
         $(e).val(Math.max(Math.min(value, 100), -100));
     }
 }
+
+$('body').on('hidden.bs.modal', '.modal', function () {
+	$(this).removeData('bs.modal');
+});
