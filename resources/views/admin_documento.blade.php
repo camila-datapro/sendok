@@ -513,7 +513,10 @@
       <script src="{{ asset('/assets/js/shared/misc.js') }}"></script>
       <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
-      <script src="{{ asset('/js/admin_documento.js') }}"></script>
+      <?php 
+            echo "<script src='".asset('/js/admin_documento.js?ver='.rand())."'></script>";
+      ?>
+      
       <script src="https://unpkg.com/@popperjs/core@2"></script>
       <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>   
       <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   
