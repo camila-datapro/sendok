@@ -117,6 +117,7 @@ function guardarPropuesta() {
 			}).done(function (msg) {
 				guardarEnBD();
 				$("#guardar_propuesta").hide();
+				$("#editar_propuesta").hide();
 			}).fail(function () {				
 				console.log("Error en descarga del documento");
 			});
@@ -164,7 +165,7 @@ function vistaPreviaPDF() {
 		}).done(function (msg) {
 			
 			var folio_propuesta = "PC"+id_cliente+"_"+(parseInt(msg[0].numero_folio)+1);
-			$("#folio_propuesta").text(folio_propuesta);
+			$("#folio_propuesta").text(folio_propuesta+"-1");
 		}).fail(function () {				
 			console.log("Error en propuestaLastId");
 		});

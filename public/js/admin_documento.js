@@ -43,7 +43,7 @@ $(document).ready(function () {
 				'<label class="top-spaced">Unidades producto N° '+counter+'</label>'+
 				'<input class="form-control" id="unidades_producto_'+counter+'""></input>'+
 				'<label class="top-spaced">Descuento para producto N° '+counter+' (opcional)</label>'+
-				'<input type="number" onkeyup="validaDescuento(this)" class="form-control" id="descuento_producto_'+counter+'""></input>');
+				'<input type="number" onkeyup="validaPorcentaje(this)" class="form-control" id="descuento_producto_'+counter+'""></input>');
 				$("#cantidad_divs").attr("cantidad",counter);		
 				newTextBoxDiv.appendTo("#TextBoxesGroup");
 				counter++;
@@ -70,9 +70,12 @@ function adminEditarPropuesta(propuesta){
 	var nombres_producto = JSON.parse(propuesta.nombre_producto);
 	var ids_producto = JSON.parse(propuesta.id_producto);
 	var unidades_producto = JSON.parse(propuesta.unidades);
-	var descuento_producto = JSON.parse(propuesta.descuento);
+	var descuento_producto = JSON.parse(propuesta.descuento);	
+	var version_anterior = (propuesta.folio_propuesta).split("-");
+	console.log(version_anterior);
+	var version_actual = parseInt(version_anterior[1])+1;
 
-	$("#folio_propuesta").text(propuesta.folio_propuesta);
+	$("#folio_propuesta").text(version_anterior[0]+"-"+version_actual);
 	//seteo el primer div
 	document.getElementById("select_producto_1").selectedIndex = document.getElementById(ids_producto[0]).index;
 	$("#unidades_producto_1").val(unidades_producto[0]);
@@ -285,7 +288,9 @@ function guardarPropuesta() {
 
 function actualizaEnBD(){
 	// se almacena la propuesta en base de datos
-	var folio = $("#folio_propuesta").text();
+	var folio_completo = ($("#folio_propuesta").text()).split("-");
+	var folio = folio_completo[0];
+	var nuevo_folio = $("#folio_propuesta").text();
 	var cantidad_divs = $("#cantidad_divs").attr("cantidad");
 	var nombre_cliente = $("#nombre_cliente").text();
 	var email_destino =$("#email_cliente").text();
@@ -346,7 +351,8 @@ function actualizaEnBD(){
 		fono_cliente,
 		nombre_cliente,
 		folio,
-		json_descuento
+		json_descuento,
+		nuevo_folio
 	];
 
 	$("#modalCargando").modal('hide');

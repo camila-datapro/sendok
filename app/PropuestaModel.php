@@ -116,6 +116,7 @@ class PropuestaModel extends Model
          $tipo_cambio=$datos[0];  
          $folio_propuesta = $datos[14];  
          $descuento = $datos[15];
+         $nuevo_folio = $datos[16];
  
          $results = DB::update("update
            propuesta_comercial
@@ -133,8 +134,9 @@ class PropuestaModel extends Model
              nombre_producto='".$nombre_producto."',
              tipo_cambio='".$tipo_cambio."',
              fecha_modificacion=NOW(),
-             descuento = '".$descuento."'           
-             where folio_propuesta='".$folio_propuesta."'");
+             descuento = '".$descuento."',
+             folio_propuesta = '".$nuevo_folio."'           
+             where upper(folio_propuesta) like upper('".$folio_propuesta."%')");
          return $results;
      }
 
