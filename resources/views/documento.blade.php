@@ -363,7 +363,7 @@
                            </div>
                            <div style="padding-left: 0px !important;" class="form-group col-md-12">
                               <label> % Margen</label>
-                              <input type="number" maxlength="10" class="form-control form-control-sm" aria-label="margen" id="margen">
+                              <input type="number" maxlength="10" onkeyup="validaPorcentaje(this)" class="form-control form-control-sm" aria-label="margen" id="margen">
                            </div>
                            <div style="padding-left: 0px !important;" class="form-group col-md-12">
                               <label>Valor venta</label>

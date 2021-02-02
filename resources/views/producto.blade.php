@@ -68,11 +68,16 @@
                                  <label>Unidades disponibles</label>
                                  <input id="stock" maxlength="15" name="stock" type="number" class="form-control form-control-sm" aria-label="Stock">
                               </div>
+                              <div style="padding-left: 0px !important; display:none;" class="form-group col-md-12" id="div_ficha_tecnica">
+                                 <label>Ficha técnica</label>
+                                 <input class="form-control form-control-sm" type="file" accept="application/pdf" />
+                              </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Tipo de Cambio</label>
                                  <select class="form-control" id="select_cambio">
                                     <option id="_blank">Elija Uno</option>
                                     <option id="clp">CLP</option>
+                                    
                                     <option id="usd">USD</option>
                                     <option id="uf">UF</option>
                                  </select>
@@ -83,7 +88,7 @@
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>% Margen</label>
-                                 <input type="number" maxlength="10" class="form-control form-control-sm" aria-label="margen" id="margen">
+                                 <input type="number" maxlength="3" onkeyup="validaPorcentaje(this)" class="form-control form-control-sm" aria-label="margen" id="margen">
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Valor venta</label>

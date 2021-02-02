@@ -6,8 +6,10 @@ function visarUnidades(){
   var opcion = $("#tipo_producto option:selected").attr("id");
   if(opcion=="producto"){
     $("#div_unidades").show();
+    $("#div_ficha_tecnica").show();
   }else{
     $("#div_unidades").hide();
+    $("#div_ficha_tecnica").hide();
   }
 }
 
@@ -208,3 +210,13 @@ costo.addEventListener("blur", function() {
     $("#valor_venta").val(precio);
   }
 });
+
+function validaPorcentaje(e){
+    
+  var value = $(e).val();
+  
+  if ((value !== '') && (value.indexOf('.') === -1)) {
+      
+      $(e).val(Math.max(Math.min(value, 100), -100));
+  }
+}
