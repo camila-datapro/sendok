@@ -60,6 +60,10 @@
                                  <label>N° Interno</label>
                                  <input id="numero_interno" maxlength="20" name="numero_interno" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
                               </div>
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12" id="div_ficha_tecnica">
+                                    <label>Ficha técnica (requiere número interno)</label>                                                                 
+                                    <input disabled id="ficha_tecnica" class="form-control form-control-sm" type="file" accept="application/pdf" onchange="guardarPDFProducto()"/>
+                              </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Descripción Producto</label>
                                  <input id="descripcion_producto" maxlength="250" name="descripcion_producto" type="text" class="form-control form-control-sm" aria-label="Descripción de Producto">
@@ -68,13 +72,11 @@
                                  <label>Unidades disponibles</label>
                                  <input id="stock" maxlength="15" name="stock" type="number" class="form-control form-control-sm" aria-label="Stock">
                               </div>
-                              <div style="padding-left: 0px !important; display:none;" class="form-group col-md-12" id="div_ficha_tecnica">
-                                 <label>Ficha técnica</label>
-                                 <input class="form-control form-control-sm" type="file" accept="application/pdf" />
-                              </div>
+                         
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Tipo de Cambio</label>
                                  <select class="form-control" id="select_cambio">
+
                                     <option id="_blank">Elija Uno</option>
                                     <option id="clp">CLP</option>
                                     
@@ -183,6 +185,7 @@
       <script src="{{ asset('/assets/js/shared/misc.js') }}"></script>
       <script src="{{ asset('/js/producto.js') }}"></script>
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
+      <script src="{{ asset('/generaPDF/dist/html2pdf.bundle.min.js') }}"></script>
    </body>
 </html>
 @endsection

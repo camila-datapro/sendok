@@ -36,4 +36,12 @@ class DocumentoController extends Controller
         return "OK";
 
     }
+
+    public function guardarPDFProducto(Request $request){
+        $bpdf = $request["pdf"];
+        $nombre_doc = $request["nombre_doc"];
+        file_put_contents('./productos/'.$nombre_doc, base64_decode($bpdf));
+        return "OK";
+
+    }
 }

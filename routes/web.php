@@ -20,6 +20,8 @@ Route::get('/', function () {
 Auth::routes();
 //urls de navegacion
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/plantilla', 'PlantillaController@index')->name('plantilla');
 Route::get('/producto','ProductoController@index')->name('producto');
 Route::get('/cliente','ClienteController@index')->name('cliente');
 Route::get('/documento','DocumentoController@index')->name('documento');
@@ -47,6 +49,8 @@ Route::post('/enviarPropuesta', 'DocumentoController@enviarPropuesta')->name('en
 
 Route::post('/guardarPDF', 'DocumentoController@guardarPDF')->name('guardarPDF');
 
+Route::post('/guardarPDFProducto', 'DocumentoController@guardarPDFProducto')->name('guardarPDFProducto');
+
 Route::post('/setPropuesta', 'PropuestaController@setPropuesta')->name('setPropuesta');
 Route::post('/updatePropuesta', 'PropuestaController@updatePropuesta')->name('updatePropuesta');
 Route::post('/setEstadoEnviado', 'PropuestaController@setEstadoEnviado')->name('setEstadoEnviado');
@@ -54,3 +58,4 @@ Route::post('/propuestaLastId', 'PropuestaController@getLastId')->name('propuest
 
 
 
+Route::post('/almacenaPDF','ProductoController@almacenaPDF')->name('almacenaPDF');

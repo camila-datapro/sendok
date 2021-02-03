@@ -71,6 +71,8 @@ function cargarTiposDeProducto(){
         }
       });
 
+      guardarPDFProducto();
+
       var clase = $("#tipo_producto option:selected").attr('id');
       var nombre_producto = $("#nombre_producto").val();
       var valor_producto = $("#valor_venta").val();
@@ -220,3 +222,50 @@ function validaPorcentaje(e){
       $(e).val(Math.max(Math.min(value, 100), -100));
   }
 }
+
+
+function guardarPDFProducto(){
+  var element = $("#ficha_tecnica");
+  var numero_fabricacion = $("#numero_interno").val();
+  if(element.val!=""){
+    var file = element.prop('files')[0];
+    var reader = new FileReader();
+
+    reader.onload = function(readerEvt) {
+        var binaryString = readerEvt.target.result;
+        base64String = btoa(binaryString);
+        
+        // alert(base64String);
+        // Do additional stuff
+       // callback(base64String);
+
+       $.ajax({
+				type: "POST",
+				url: url_prev + '/guardarPDFProducto',
+				data: {
+					pdf: base64String,
+					nombre_doc: 'producto_'+numero_fabricacion+'.pdf',
+					_token: $('input[name="_token"]').val()
+				} //esto es necesario, por la validacion de seguridad de laravel
+			}).done(function (msg) {
+				
+			}).fail(function () {				
+				console.lof("Error en almacenamiento de ficha tecnica de producto");
+			});
+
+    };
+
+    reader.readAsBinaryString(file);
+  }
+
+}
+
+numero_interno.addEventListener("blur", function() {
+  // code here  
+	if($("#numero_interno").val()==""){
+    $("#ficha_tecnica").attr("disabled",true);
+  }else{
+    $("#ficha_tecnica").removeAttr("disabled");
+  }
+
+});
