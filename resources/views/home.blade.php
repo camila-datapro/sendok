@@ -44,9 +44,9 @@
                               <div class="col-lg-3 col-md-6">
                                  <div class="d-flex">
                                     <div class="wrapper">
-                                       <h3 class="mb-0 font-weight-semibold">32,451</h3>
-                                       <h5 class="mb-0 font-weight-medium text-primary">Visits</h5>
-                                       <p class="mb-0 text-muted">+14.00(+0.50%)</p>
+                                       <h3 class="mb-0 font-weight-semibold" id="creadas_total">{{ intval($propuestas_total[0]->est) }}</h3>
+                                       <h5 class="mb-0 font-weight-medium text-primary">Total de</h5>
+                                       <p class="mb-0 font-weight-medium text-primary">propuestas creadas</p>
                                     </div>
                                     <div class="wrapper my-auto ml-auto ml-lg-4">
                                        <canvas height="50" width="100" id="stats-line-graph-1"></canvas>
@@ -56,9 +56,9 @@
                               <div class="col-lg-3 col-md-6 mt-md-0 mt-4">
                                  <div class="d-flex">
                                     <div class="wrapper">
-                                       <h3 class="mb-0 font-weight-semibold">15,236</h3>
-                                       <h5 class="mb-0 font-weight-medium text-primary">Impressions</h5>
-                                       <p class="mb-0 text-muted">+138.97(+0.54%)</p>
+                                       <h3 class="mb-0 font-weight-semibold" id="enviadas_total">{{ intval($propuestas_enviadas[0]->est) }}</h3>
+                                       <h5 class="mb-0 font-weight-medium text-primary">Total de</h5>
+                                       <p class="mb-0 font-weight-medium text-primary">propuestas enviadas</p>
                                     </div>
                                     <div class="wrapper my-auto ml-auto ml-lg-4">
                                        <canvas height="50" width="100" id="stats-line-graph-2"></canvas>
@@ -68,9 +68,9 @@
                               <div class="col-lg-3 col-md-6 mt-md-0 mt-4">
                                  <div class="d-flex">
                                     <div class="wrapper">
-                                       <h3 class="mb-0 font-weight-semibold">7,688</h3>
-                                       <h5 class="mb-0 font-weight-medium text-primary">Conversation</h5>
-                                       <p class="mb-0 text-muted">+57.62(+0.76%)</p>
+                                       <h3 class="mb-0 font-weight-semibold" id="creadas_30">{{ intval($propuestas_30_dias[0]->est) }}</h3>
+                                       <h5 class="mb-0 font-weight-medium text-primary">Propuestas creadas</h5>
+                                       <p class="mb-0 font-weight-medium text-primary">en los últimos 30 días</p>
                                     </div>
                                     <div class="wrapper my-auto ml-auto ml-lg-4">
                                        <canvas height="50" width="100" id="stats-line-graph-3"></canvas>
@@ -80,9 +80,9 @@
                               <div class="col-lg-3 col-md-6 mt-md-0 mt-4">
                                  <div class="d-flex">
                                     <div class="wrapper">
-                                       <h3 class="mb-0 font-weight-semibold">1,553</h3>
-                                       <h5 class="mb-0 font-weight-medium text-primary">Downloads</h5>
-                                       <p class="mb-0 text-muted">+138.97(+0.54%)</p>
+                                       <h3 class="mb-0 font-weight-semibold" id="enviadas_30">{{ intval($enviadas_30_dias[0]->est) }}</h3>
+                                       <h5 class="mb-0 font-weight-medium text-primary">Propuestas enviadas</h5>
+                                       <p class="mb-0 text-muted">en los últimos 30 días</p>
                                     </div>
                                     <div class="wrapper my-auto ml-auto ml-lg-4">
                                        <canvas height="50" width="100" id="stats-line-graph-4"></canvas>
@@ -96,60 +96,16 @@
                </div>
                <!--fin row-->
                <!-- inicio row-->
-               <div class="row">
-                  <div class="col-md-8 grid-margin stretch-card">
-                     <div class="card">
-                        <div class="card-body">
-                           <h4 class="card-title mb-0">Sales Statistics Overview</h4>
-                           <div class="d-flex flex-column flex-lg-row">
-                              <p>Lorem ipsum is placeholder text commonly used</p>
-                              <ul class="nav nav-tabs sales-mini-tabs ml-lg-auto mb-4 mb-md-0" role="tablist">
-                                 <li class="nav-item">
-                                    <a class="nav-link active" id="sales-statistics_switch_1" data-toggle="tab" role="tab" aria-selected="true">1D</a>
-                                 </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" id="sales-statistics_switch_2" data-toggle="tab" role="tab" aria-selected="false">5D</a>
-                                 </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" id="sales-statistics_switch_3" data-toggle="tab" role="tab" aria-selected="false">1M</a>
-                                 </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" id="sales-statistics_switch_4" data-toggle="tab" role="tab" aria-selected="false">1Y</a>
-                                 </li>
-                              </ul>
-                           </div>
-                           <div class="d-flex flex-column flex-lg-row">
-                              <div class="data-wrapper d-flex mt-2 mt-lg-0">
-                                 <div class="wrapper pr-5">
-                                    <h5 class="mb-0">Total Cost</h5>
-                                    <div class="d-flex align-items-center">
-                                       <h4 class="font-weight-semibold mb-0">15,263</h4>
-                                       <small class="ml-2 text-gray d-none d-lg-block"><b>89.5%</b> of 20,000 Total</small>
-                                    </div>
-                                 </div>
-                                 <div class="wrapper">
-                                    <h5 class="mb-0">Total Revenue</h5>
-                                    <div class="d-flex align-items-center">
-                                       <h4 class="font-weight-semibold mb-0">$753,098</h4>
-                                       <small class="ml-2 text-gray d-none d-lg-block"><b>10.5%</b> of 20,000 Total</small>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="ml-lg-auto" id="sales-statistics-legend"></div>
-                           </div>
-                           <canvas class="mt-5" height="120" id="sales-statistics-overview"></canvas>
-                        </div>
-                     </div>
-                  </div>
+   
+
                   <div class="col-md-4 grid-margin stretch-card">
                      <div class="card">
                         <div class="card-body d-flex flex-column">
                            <div class="wrapper">
-                              <h4 class="card-title mb-0">Net Profit Margin</h4>
-                              <p>Started collecting data from February 2019</p>
-                              <div class="mb-4" id="net-profit-legend"></div>
+                           <h4 class="card-title mb-0">Gráfico de torta</h4>
+                              <id id="pie-chart-legend" class="mr-4"><div class="chartjs-legend"><ul><li><span style="background-color:#54C3BE"></span>Enviadas</li><li><span style="background-color:#EF726F"></span>Pendientes</li></ul></div></id>
                            </div>
-                           <canvas class="my-auto mx-auto" height="250" id="net-profit"></canvas>
+                           <canvas class="my-auto chartjs-render-monitor" id="pieChart" height="191" width="442" style="display: block; width: 442px; height: 191px;"></canvas>
                         </div>
                      </div>
                   </div>
@@ -163,6 +119,7 @@
       <script src="{{ asset('/assets/js/shared/off-canvas.js') }}"></script>
       <script src="{{ asset('/assets/js/shared/misc.js') }}"></script>
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
+      <script src="{{ asset('/js/charts.js') }}"></script>
    </body>
 </html>
 @endsection

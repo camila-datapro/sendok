@@ -151,4 +151,27 @@ class PropuestaModel extends Model
         $results = DB::update($query);
         return $results;
     }
+
+    public static function getEstEnviadas(){
+        $query = "select count(*) as est from propuesta_comercial where upper(estado_envio) = upper('enviado')";
+        $results = DB::select($query);
+        return $results;
+    }
+
+    public static function getEstTotales(){
+        $query = "select count(*) as est from propuesta_comercial";
+        $results = DB::select($query);
+        return $results;
+    }
+
+    public static function getEstUltimosTreinta(){
+        $query = "select count(*) as est from propuesta_comercial where fecha_modificacion > DATE_SUB(NOW(), INTERVAL 1 MONTH)";
+        $results = DB::select($query);
+        return $results;
+    }
+    public static function getEstEnviadasUltimosTreinta(){
+        $query = "select count(*) as est from propuesta_comercial where fecha_modificacion > DATE_SUB(NOW(), INTERVAL 1 MONTH) and upper(estado_envio) = upper('enviado')";
+        $results = DB::select($query);
+        return $results;
+    }
 }

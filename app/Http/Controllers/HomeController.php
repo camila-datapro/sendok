@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\PropuestaModel;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home')
+        ->with("propuestas_30_dias", PropuestaModel::getEstUltimosTreinta())
+        ->with("propuestas_total", PropuestaModel::getEstTotales())
+        ->with("propuestas_enviadas", PropuestaModel::getEstEnviadas())
+        ->with("enviadas_30_dias", PropuestaModel::getEstEnviadasUltimosTreinta());
     }
 }
