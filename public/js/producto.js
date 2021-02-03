@@ -72,8 +72,8 @@ function cargarTiposDeProducto(){
       });
 
       guardarPDFProducto();
-
-      var clase = $("#tipo_producto option:selected").attr('id');
+      setTimeout(() => {
+        var clase = $("#tipo_producto option:selected").attr('id');
       var nombre_producto = $("#nombre_producto").val();
       var valor_producto = $("#valor_venta").val();
       var descripcion_producto = $("#descripcion_producto").val();
@@ -125,6 +125,8 @@ function cargarTiposDeProducto(){
               $("#modalError").modal('show');
           }, 500);
       });
+      }, 300);
+      
     }else{
       $("#info_validacion").html(msg_info);
 		  $("#modalInfo").modal("show");
