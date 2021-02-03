@@ -60,7 +60,7 @@
                                  <label>N° Interno</label>
                                  <input id="numero_interno" maxlength="20" name="numero_interno" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
                               </div>
-                              <div style="padding-left: 0px !important;" class="form-group col-md-12" id="div_ficha_tecnica">
+                              <div style="padding-left: 0px !important; display:none;" class="form-group col-md-12" id="div_ficha_tecnica">
                                     <label>Ficha técnica (requiere número interno)</label>                                                                 
                                     <input disabled id="ficha_tecnica" class="form-control form-control-sm" type="file" accept="application/pdf" onchange="guardarPDFProducto()"/>
                               </div>
