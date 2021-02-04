@@ -300,15 +300,32 @@ $(function () {
       });
       document.getElementById('area-traffic-legend').innerHTML = lineChart.generateLegend();
     }
+
+    // BAR CHART
     if ($("#barChart").length) {
       var barChartCanvas = $("#barChart").get(0).getContext("2d");
+      var total_1 = parseInt(($("#total_1").attr("total_mes"))!=undefined? $("#total_1").attr("total_mes"): "0");
+      console.log(total_1);
+      console.log(total_2);
+      var total_2 = parseInt(($("#total_2").attr("total_mes"))!=undefined? $("#total_2").attr("total_mes"): "0");
+      var total_3 = parseInt(($("#total_3").attr("total_mes"))!=undefined? $("#total_3").attr("total_mes"): "0");
+      var total_4 = parseInt(($("#total_4").attr("total_mes"))!=undefined? $("#total_4").attr("total_mes"): "0");
+      var total_5 = parseInt(($("#total_5").attr("total_mes"))!=undefined? $("#total_5").attr("total_mes"): "0");
+      var total_6 = parseInt(($("#total_6").attr("total_mes"))!=undefined? $("#total_6").attr("total_mes"): "0");
+      var total_7 = parseInt(($("#total_7").attr("total_mes"))!=undefined? $("#total_7").attr("total_mes"): "0");
+      var total_8 = parseInt(($("#total_8").attr("total_mes"))!=undefined? $("#total_8").attr("total_mes"): "0");
+      var total_9 = parseInt(($("#total_9").attr("total_mes"))!=undefined? $("#total_9").attr("total_mes"): "0");
+      var total_10 = parseInt(($("#total_10").attr("total_mes"))!=undefined? $("#total_10").attr("total_mes"): "0");
+      var total_11 = parseInt(($("#total_11").attr("total_mes"))!=undefined? $("#total_11").attr("total_mes"): "0");
+      var total_12 = parseInt(($("#total_12").attr("total_mes"))!=undefined? $("#total_12").attr("total_mes"): "0");
+
       var barChart = new Chart(barChartCanvas, {
         type: 'bar',
         data: {
           labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
           datasets: [{
-            label: 'Profit',
-            data: [15, 28, 14, 22, 38, 30, 40, 70, 85, 50, 23, 20],
+            label: 'USD mensual',
+            data: [total_1, total_2, total_3, total_4, total_5, total_6, total_7, total_8, total_9, total_10, total_11, total_12],
             backgroundColor: ChartColor[0],
             borderColor: ChartColor[0],
             borderWidth: 0
@@ -330,15 +347,15 @@ $(function () {
               display: true,
               scaleLabel: {
                 display: true,
-                labelString: 'Sales by year',
+                labelString: 'Mes',
                 fontSize: 12,
                 lineHeight: 2
               },
               ticks: {
                 fontColor: '#bfccda',
-                stepSize: 50,
+                stepSize: 100000,
                 min: 0,
-                max: 150,
+                max: 1000000,
                 autoSkip: true,
                 autoSkipPadding: 15,
                 maxRotation: 0,
@@ -355,7 +372,7 @@ $(function () {
               display: true,
               scaleLabel: {
                 display: true,
-                labelString: 'revenue by sales',
+                labelString: 'Total USD',
                 fontSize: 12,
                 lineHeight: 2
               },
@@ -364,9 +381,9 @@ $(function () {
                 autoSkip: false,
                 maxRotation: 0,
                 fontColor: '#bfccda',
-                stepSize: 50,
+                stepSize: 100000,
                 min: 0,
-                max: 150
+                max: 1000000
               },
               gridLines: {
                 drawBorder: false
@@ -579,14 +596,12 @@ $(function () {
       var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
       var doughnutPieData = {
         datasets: [{
-          data: [20, 80, 83],
+          data: [parseInt($("#creadas_total").text()), parseInt($("#enviadas_total").text())],
           backgroundColor: [
-            ChartColor[0],
             ChartColor[1],
             ChartColor[2]
           ],
           borderColor: [
-            ChartColor[0],
             ChartColor[1],
             ChartColor[2]
           ],
@@ -594,9 +609,8 @@ $(function () {
   
         // These labels appear in the legend and in the tooltips when hovering different arcs
         labels: [
+          'Creadas',
           'Enviadas',
-          'Profit',
-          'Return',
         ]
       };
       var doughnutPieOptions = {

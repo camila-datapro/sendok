@@ -174,4 +174,13 @@ class PropuestaModel extends Model
         $results = DB::select($query);
         return $results;
     }
+
+    public static function getEstTotalesMes(){
+        $query = "select DATE_FORMAT(fecha_modificacion ,'%m') as mes, sum(total) as cantidad from propuesta_comercial where 
+        DATE_FORMAT(sysdate() ,'%Y') = DATE_FORMAT(fecha_modificacion ,'%Y')
+        and DATE_FORMAT(fecha_modificacion ,'%m') in ('01','02','03','04','05','06','07','08','09','10','11','12')
+        group by DATE_FORMAT(fecha_modificacion ,'%m')";
+        $results = DB::select($query);
+        return $results;
+    }
 }

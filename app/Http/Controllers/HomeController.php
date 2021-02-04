@@ -27,6 +27,7 @@ class HomeController extends Controller
         ->with("propuestas_30_dias", PropuestaModel::getEstUltimosTreinta())
         ->with("propuestas_total", PropuestaModel::getEstTotales())
         ->with("propuestas_enviadas", PropuestaModel::getEstEnviadas())
-        ->with("enviadas_30_dias", PropuestaModel::getEstEnviadasUltimosTreinta());
+        ->with("enviadas_30_dias", PropuestaModel::getEstEnviadasUltimosTreinta())
+        ->with("totalMes", PropuestaModel::getEstTotalesMes());
     }
 }
