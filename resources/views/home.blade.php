@@ -35,12 +35,12 @@
                   </div>
                </div>
                <?php
-                  echo "<input hidden id='cantidad_mes'>".sizeOf($totalMes)."</input>";
+                  echo "<input hidden id='cantidad_mes' value='".sizeOf($totalMes)."'></input>";
                   for($i=0; $i<sizeOf($totalMes); $i++){
                      echo "<input hidden id='total_".($i+1)."' id_mes='".$totalMes[$i]->mes."' total_mes='".$totalMes[$i]->cantidad."'></input>";
                   }
                ?>
-               <!-- inicio row-->
+               <!-- inicio row--> 
                <!-- Page Title Header Ends-->
                <div class="row">
                   <div class="col-md-12 grid-margin">
