@@ -42,6 +42,11 @@ $(document).ready(function () {
 					' padding: 12px; padding-top: 0px;');
 
 				newTextBoxDiv.after().html('<label class="top-spaced">Seleccione producto N° ' + counter + ' : </label>'+
+				'<div class="row">'+
+				'<div class="form-check">'+
+				   '<input type="checkbox" class="checkbox" id="adjuntar_ficha_'+counter+'"> <label style="margin-top:4px;">Adjuntar Ficha Técnica</label></input>'+
+				'</div>'+
+			 '</div>'+
 				'<select id="select_producto_'+counter+'" class="form-control">'+
 					'<option id="0">Elija Uno</option>'
 					+opciones+
@@ -105,7 +110,6 @@ function guardarPropuesta() {
 			// This logs the right base64
 			$("#modalCargando").modal("hide");
 			var bpdf = btoa(pdf);
-
 			$.ajax({
 				type: "POST",
 				url: url_prev + '/guardarPDF',
