@@ -322,7 +322,7 @@ $(function () {
       var barChart = new Chart(barChartCanvas, {
         type: 'bar',
         data: {
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          labels: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
           datasets: [{
             label: 'USD mensual',
             data: [total_1, total_2, total_3, total_4, total_5, total_6, total_7, total_8, total_9, total_10, total_11, total_12],
