@@ -32,7 +32,7 @@ function cargarTiposDeProducto(){
   
   function crearProducto(){
     var msg_info = "";
-
+    var tiene_folleto = 0;
     if($("#tipo_producto").val()=="Elija Uno"){
       msg_info += "- Debe ingresar Tipo de producto.</br>"
     }
@@ -74,7 +74,8 @@ function cargarTiposDeProducto(){
       
       var element = $("#ficha_tecnica");
   var numero_fabricacion = $("#numero_interno").val();
-  if(element.val!=""){
+  if($("#ficha_tecnica").val()!=""){
+    tiene_folleto = 1;
     var file = element.prop('files')[0];
     var reader = new FileReader();
 
@@ -130,7 +131,8 @@ function cargarTiposDeProducto(){
         costo: costo,
         margen: margen,
         numero_interno: numero_interno,
-        numero_fabricacion: numero_fabricacion
+        numero_fabricacion: numero_fabricacion,
+        tiene_folleto: tiene_folleto
       });
     
       var json_datos = JSON.stringify(array_datos);

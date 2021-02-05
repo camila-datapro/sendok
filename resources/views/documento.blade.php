@@ -85,6 +85,11 @@
                                  <div id='TextBoxesGroup'>
                                     <div id="TextBoxDiv1" style="margin-bottom: 20px; border: 1px solid; border-color: #dee2e6; background-color: #e0e4ff; padding: 12px; padding-top: 0px;">
                                        <label class="top-spaced">Seleccione producto N° 1: </label>
+                                       <div class="row">
+                                          <div class="form-check">
+                                             <input type="checkbox" class="checkbox" id="adjuntar_ficha_1"> <label style="margin-top:4px;">Adjuntar Ficha Técnica</label></input>
+                                          </div>
+                                       </div>
                                        <select class="form-control" name="textbox1"  type='textbox' id='select_producto_1' >
                                           <option id="0">Elija Uno</option>
                                           <?php 
@@ -93,6 +98,7 @@
                                              }
                                              ?>
                                        </select>
+                                       
                                        <label class="top-spaced">Unidades producto N° 1</label>
                                        <input class="form-control form-control-sm" id="unidades_producto_1" nombre="unidades_producto"></input>  
                                        <label class="top-spaced"> % Descuento para producto N° 1 (opcional)</label>
