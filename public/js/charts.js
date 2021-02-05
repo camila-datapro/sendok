@@ -304,17 +304,17 @@ $(function () {
     // BAR CHART
     if ($("#barChart").length) {
       var barChartCanvas = $("#barChart").get(0).getContext("2d");
-      var total_1 = parseInt(($("#total_1").attr("total_mes"))!=undefined? $("#total_1").attr("total_mes"): "0");
+      var total_1 = parseInt(($("#total_01").attr("total_mes"))!=undefined? $("#total_01").attr("total_mes"): "0");
       console.log(total_1);
       console.log(total_2);
-      var total_2 = parseInt(($("#total_2").attr("total_mes"))!=undefined? $("#total_2").attr("total_mes"): "0");
-      var total_3 = parseInt(($("#total_3").attr("total_mes"))!=undefined? $("#total_3").attr("total_mes"): "0");
-      var total_4 = parseInt(($("#total_4").attr("total_mes"))!=undefined? $("#total_4").attr("total_mes"): "0");
-      var total_5 = parseInt(($("#total_5").attr("total_mes"))!=undefined? $("#total_5").attr("total_mes"): "0");
-      var total_6 = parseInt(($("#total_6").attr("total_mes"))!=undefined? $("#total_6").attr("total_mes"): "0");
-      var total_7 = parseInt(($("#total_7").attr("total_mes"))!=undefined? $("#total_7").attr("total_mes"): "0");
-      var total_8 = parseInt(($("#total_8").attr("total_mes"))!=undefined? $("#total_8").attr("total_mes"): "0");
-      var total_9 = parseInt(($("#total_9").attr("total_mes"))!=undefined? $("#total_9").attr("total_mes"): "0");
+      var total_2 = parseInt(($("#total_02").attr("total_mes"))!=undefined? $("#total_02").attr("total_mes"): "0");
+      var total_3 = parseInt(($("#total_03").attr("total_mes"))!=undefined? $("#total_03").attr("total_mes"): "0");
+      var total_4 = parseInt(($("#total_04").attr("total_mes"))!=undefined? $("#total_04").attr("total_mes"): "0");
+      var total_5 = parseInt(($("#total_05").attr("total_mes"))!=undefined? $("#total_05").attr("total_mes"): "0");
+      var total_6 = parseInt(($("#total_06").attr("total_mes"))!=undefined? $("#total_06").attr("total_mes"): "0");
+      var total_7 = parseInt(($("#total_07").attr("total_mes"))!=undefined? $("#total_07").attr("total_mes"): "0");
+      var total_8 = parseInt(($("#total_08").attr("total_mes"))!=undefined? $("#total_08").attr("total_mes"): "0");
+      var total_9 = parseInt(($("#total_09").attr("total_mes"))!=undefined? $("#total_09").attr("total_mes"): "0");
       var total_10 = parseInt(($("#total_10").attr("total_mes"))!=undefined? $("#total_10").attr("total_mes"): "0");
       var total_11 = parseInt(($("#total_11").attr("total_mes"))!=undefined? $("#total_11").attr("total_mes"): "0");
       var total_12 = parseInt(($("#total_12").attr("total_mes"))!=undefined? $("#total_12").attr("total_mes"): "0");

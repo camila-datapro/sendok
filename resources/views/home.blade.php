@@ -38,7 +38,7 @@
                   echo "<input hidden id='cantidad_mes' value='".sizeOf($totalMes)."'></input>";
                   echo var_dump($totalMes);
                   for($i=0; $i<sizeOf($totalMes); $i++){
-                     echo "<input hidden id='total_".($i+1)."' id_mes='".$totalMes[$i]->mes."' total_mes='".$totalMes[$i]->cantidad."'></input>";
+                     echo "<input hidden id='total_".$totalMes[$i]->mes."' id_mes='".$totalMes[$i]->mes."' total_mes='".$totalMes[$i]->cantidad."'></input>";
                   }
                ?>
                <!-- inicio row--> 
