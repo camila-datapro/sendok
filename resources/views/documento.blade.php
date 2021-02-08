@@ -85,19 +85,21 @@
                                  <div id='TextBoxesGroup'>
                                     <div id="TextBoxDiv1" style="margin-bottom: 20px; border: 1px solid; border-color: #dee2e6; background-color: #e0e4ff; padding: 12px; padding-top: 0px;">
                                        <label class="top-spaced">Seleccione producto N° 1: </label>
-                                       <div class="row">
-                                          <div class="form-check">
-                                             <input type="checkbox" class="checkbox" id="adjuntar_ficha_1"> <label style="margin-top:4px;">Adjuntar Ficha Técnica</label></input>
-                                          </div>
-                                       </div>
-                                       <select class="form-control" name="textbox1"  type='textbox' id='select_producto_1' >
+                                     
+                                       <select class="form-control" name="textbox1"  type='textbox' id='select_producto_1' onchange="mostrarAdjunto(this)" >
                                           <option id="0">Elija Uno</option>
                                           <?php 
                                              for($i=0;$i<sizeOf($productos); $i++){
-                                                echo "<option id=".$productos[$i]->id_producto." nombre_producto='".$productos[$i]->nombre_producto."' valor_producto='".$productos[$i]->valor_producto."' tipo_cambio='".$productos[$i]->tipo_cambio."'>".$productos[$i]->nombre_producto." (".$productos[$i]->tipo_cambio." ".$productos[$i]->valor_producto.")"."</option>";
+                                                echo "<option tiene_folleto=".$productos[$i]->tiene_folleto." id=".$productos[$i]->id_producto." nombre_producto='".$productos[$i]->nombre_producto."' valor_producto='".$productos[$i]->valor_producto."' tipo_cambio='".$productos[$i]->tipo_cambio."'>".$productos[$i]->nombre_producto." (".$productos[$i]->tipo_cambio." ".$productos[$i]->valor_producto.")"."</option>";
                                              }
                                              ?>
                                        </select>
+
+                                       <div class="row">
+                                          <div style="display:none;" class="form-check" id="check_1">
+                                             <input type="checkbox" class="checkbox" id="adjuntar_ficha_1"> <label style="margin-top:4px;">Adjuntar Ficha Técnica</label></input>
+                                          </div>
+                                       </div>
                                        
                                        <label class="top-spaced">Unidades producto N° 1</label>
                                        <input class="form-control form-control-sm" id="unidades_producto_1" nombre="unidades_producto"></input>  

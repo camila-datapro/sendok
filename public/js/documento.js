@@ -29,7 +29,7 @@ $(document).ready(function () {
 
 				var opciones = "";				
 					for(var i=0; i<productos.length; i++){
-						opciones =opciones+'<option id="'+productos[i].id_producto+'" nombre_producto="'+productos[i].nombre_producto+'" tipo_cambio="'+productos[i].tipo_cambio+'" valor_producto="'+productos[i].valor_producto+'">'+productos[i].nombre_producto+' ('+productos[i].tipo_cambio+' '+productos[i].valor_producto+')'+'</option>';
+						opciones =opciones+'<option tiene_folleto= "'+productos[i].tiene_folleto+'" id="'+productos[i].id_producto+'" nombre_producto="'+productos[i].nombre_producto+'" tipo_cambio="'+productos[i].tipo_cambio+'" valor_producto="'+productos[i].valor_producto+'">'+productos[i].nombre_producto+' ('+productos[i].tipo_cambio+' '+productos[i].valor_producto+')'+'</option>';
 					}
 
 
@@ -41,16 +41,16 @@ $(document).ready(function () {
 					'background-color: #e0e4ff;'+
 					' padding: 12px; padding-top: 0px;');
 
-				newTextBoxDiv.after().html('<label class="top-spaced">Seleccione producto N° ' + counter + ' : </label>'+
-				'<div class="row">'+
-				'<div class="form-check">'+
-				   '<input type="checkbox" class="checkbox" id="adjuntar_ficha_'+counter+'"> <label style="margin-top:4px;">Adjuntar Ficha Técnica</label></input>'+
-				'</div>'+
-			 '</div>'+
-				'<select id="select_producto_'+counter+'" class="form-control">'+
+				newTextBoxDiv.after().html('<label class="top-spaced">Seleccione producto N° ' + counter + ' : </label>'+				
+				'<select id="select_producto_'+counter+'" class="form-control" onchange="mostrarAdjunto(this)">'+
 					'<option id="0">Elija Uno</option>'
 					+opciones+
 				'</select>'+
+				'<div class="row">'+
+				'<div style="display:none;" class="form-check" id="check_'+counter+'">'+
+				   '<input  type="checkbox" class="checkbox" id="adjuntar_ficha_'+counter+'"> <label style="margin-top:4px;">Adjuntar Ficha Técnica</label></input>'+
+				'</div>'+
+			 '</div>'+
 				'<label class="top-spaced">Unidades producto N° '+counter+'</label>'+
 				'<input class="form-control" id="unidades_producto_'+counter+'""></input>'+
 				'<label class="top-spaced">% Descuento para producto N° '+counter+' (opcional)</label>'+
@@ -753,3 +753,14 @@ function validaPorcentaje(e){
     }
 }
 
+function mostrarAdjunto(element){
+	
+	var id_adjunto = element.id;
+	var id_div = (id_adjunto).replace("select_producto_","");
+	
+	var tiene_folleto = $("#select_producto_"+id_div+" option:selected").attr("tiene_folleto");
+	if(tiene_folleto == 1){
+		$("#check_"+id_div).show();
+	}
+
+}
