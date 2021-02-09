@@ -25,7 +25,8 @@ class DocumentoController extends Controller
         $destinatario = $request["destinatario"];
         $nombre_doc = $request["nombre_doc"];
         $contenido = $request["contenido"];
-        Mail::to($destinatario)->send( new MensajeRecibido($nombre_doc, $contenido));        
+        $folletos = $request["folletos"];
+        Mail::to($destinatario)->send( new MensajeRecibido($nombre_doc, $contenido, $folletos));        
         return 'Mensaje enviado';
     }
 
@@ -38,6 +39,7 @@ class DocumentoController extends Controller
     }
 
     public function guardarPDFProducto(Request $request){
+        
         $bpdf = $request["pdf"];
         $nombre_doc = $request["nombre_doc"];
         file_put_contents('./productos/'.$nombre_doc, base64_decode($bpdf));
