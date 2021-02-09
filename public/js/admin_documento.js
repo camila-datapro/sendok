@@ -471,7 +471,9 @@ function sendMailFromList(propuestas){
 	var indice = $("#id_propuesta_hidden").attr("indice_propuesta");
 	var propuesta = propuestas[indice];
 	var contenido = $("#cuerpo_correo").val();
+	var id_productos_folleto = [];	
 
+	id_productos_folleto = JSON.parse(propuesta.fichas_tecnicas);
 	
 	$("#modalEnviando").modal("show");
 	var folio = propuesta.folio_propuesta;
@@ -483,6 +485,7 @@ function sendMailFromList(propuestas){
 	  data: {
 		destinatario: destinatario,
 		contenido: contenido,
+		folletos: id_productos_folleto,
 		nombre_doc: folio+'.pdf',
 		_token: $('input[name="_token"]').val()
 	  } //esto es necesario, por la validacion de seguridad de laravel
