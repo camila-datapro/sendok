@@ -26,8 +26,9 @@ class PropuestaModel extends Model
        // fono cliente -> $datos[12]
        // nombre cliente -> $datos[13]
        // folio propuesta -> $datos[14]
+       // fichas tecnicas -> $datos[16]
 
-        $id_ejecutivo = $datos[9]; //ok
+        $id_ejecutivo = $datos[9]; 
         $id_cliente = $datos[10];
         $email_destino= $datos[11];
         $nombre_cliente= $datos[13];
@@ -42,6 +43,7 @@ class PropuestaModel extends Model
         $tipo_cambio=$datos[0];  
         $folio_propuesta = $datos[14];  
         $descuento = $datos[15];
+        $fichas_tecnicas = $datos[16];
 
         $results = DB::insert("insert
          into propuesta_comercial
@@ -60,7 +62,8 @@ class PropuestaModel extends Model
             tipo_cambio,
             folio_propuesta,
             fecha_modificacion,
-            descuento
+            descuento,
+            fichas_tecnicas
          ) 
          VALUES
          (
@@ -78,7 +81,8 @@ class PropuestaModel extends Model
             '".$tipo_cambio."',
             '".$folio_propuesta."',
             NOW(),
-            '".$descuento."'
+            '".$descuento."',
+            '".$fichas_tecnicas."'
          )");
         return $results;
     }
@@ -100,6 +104,7 @@ class PropuestaModel extends Model
         // fono cliente -> $datos[12]
         // nombre cliente -> $datos[13]
         // folio propuesta -> $datos[14]
+        
  
          $id_ejecutivo = $datos[9]; //ok
          $id_cliente = $datos[10];
@@ -117,7 +122,8 @@ class PropuestaModel extends Model
          $folio_propuesta = $datos[14];  
          $descuento = $datos[15];
          $nuevo_folio = $datos[16];
- 
+         $folletos = $datos[17];
+         
          $results = DB::update("update
            propuesta_comercial
            SET
@@ -135,7 +141,8 @@ class PropuestaModel extends Model
              tipo_cambio='".$tipo_cambio."',
              fecha_modificacion=NOW(),
              descuento = '".$descuento."',
-             folio_propuesta = '".$nuevo_folio."'           
+             folio_propuesta = '".$nuevo_folio."',
+             fichas_tecnicas = '".$folletos."'                    
              where upper(folio_propuesta) like upper('".$folio_propuesta."%')");
          return $results;
      }
