@@ -23,7 +23,7 @@ $(document).ready(function () {
 
 				var opciones = "";				
 					for(var i=0; i<productos.length; i++){
-						opciones =opciones+'<option id="'+productos[i].id_producto+'" nombre_producto="'+productos[i].nombre_producto+'" tipo_cambio="'+productos[i].tipo_cambio+'" valor_producto="'+productos[i].valor_producto+'">'+productos[i].nombre_producto+' ('+productos[i].tipo_cambio+' '+productos[i].valor_producto+')'+'</option>';
+						opciones =opciones+'<option id_interno="'+productos[i].numero_interno+'" tiene_folleto= "'+productos[i].tiene_folleto+'" id="'+productos[i].id_producto+'" nombre_producto="'+productos[i].nombre_producto+'" tipo_cambio="'+productos[i].tipo_cambio+'" valor_producto="'+productos[i].valor_producto+'">'+productos[i].nombre_producto+' ('+productos[i].tipo_cambio+' '+productos[i].valor_producto+')'+'</option>';
 					}
 
 
@@ -36,10 +36,15 @@ $(document).ready(function () {
 					' padding: 12px; padding-top: 0px;');
 
 				newTextBoxDiv.after().html('<label class="top-spaced">Seleccione producto N° ' + counter + ' : </label>'+
-				'<select id="select_producto_'+counter+'" class="form-control">'+
+				'<select id="select_producto_'+counter+'" class="form-control" onchange="mostrarAdjunto(this)">'+
 					'<option id="0">Elija Uno</option>'
 					+opciones+
 				'</select>'+
+				'<div class="row">'+
+				'<div style="display:none;" class="form-check" id="check_'+counter+'">'+
+				   '<input  type="checkbox" class="checkbox" id="adjuntar_ficha_'+counter+'"> <label style="margin-top:4px;">Adjuntar Ficha Técnica</label></input>'+
+				'</div>'+
+			 '</div>'+
 				'<label class="top-spaced">Unidades producto N° '+counter+'</label>'+
 				'<input class="form-control" id="unidades_producto_'+counter+'""></input>'+
 				'<label class="top-spaced">Descuento para producto N° '+counter+' (opcional)</label>'+
@@ -72,21 +77,34 @@ function adminEditarPropuesta(propuesta){
 	var unidades_producto = JSON.parse(propuesta.unidades);
 	var descuento_producto = JSON.parse(propuesta.descuento);	
 	var version_anterior = (propuesta.folio_propuesta).split("-");
-	console.log(version_anterior);
+	//console.log(ids_producto);
 	var version_actual = parseInt(version_anterior[1])+1;
-
 	$("#folio_propuesta").text(version_anterior[0]+"-"+version_actual);
-	//seteo el primer div
-	document.getElementById("select_producto_1").selectedIndex = document.getElementById(ids_producto[0]).index;
-	$("#unidades_producto_1").val(unidades_producto[0]);
-	$("#descuento_producto_1").val(descuento_producto[0]);
-	// descuento se deja para despues 
 	var cantidad_divs = ids_producto.length;
-	for(var i=1; i<cantidad_divs; i++){
+	
+
+	$('#select_producto_1 option').filter(function(){
+		return this.id == ids_producto[0]
+	}).prop('selected', true);
+	if($("#select_producto_1 option:selected").attr("id_interno")){
+		$("#check_1").show();	
+	}
+		$("#unidades_producto_1").val(unidades_producto[0]);
+		$("#descuento_producto_1").val(descuento_producto[0]);
+		
+	for(var i=2; i<=cantidad_divs; i++){
 		$("#addButton").click();
-		document.getElementById("select_producto_"+(i+1)).selectedIndex = document.getElementById(ids_producto[i]).index;
-		$("#unidades_producto_"+(i+1)).val(unidades_producto[i]);
-		$("#descuento_producto"+(i+1)).val(descuento_producto[i]);
+		document.getElementById("select_producto_"+i).selectedIndex = ids_producto[i-1];
+		$('#select_producto_'+i+' option').filter(function(){
+			return this.id == ids_producto[i-1]
+		}).prop('selected', true);
+		if($("#select_producto_"+i+" option:selected").attr("tiene_folleto")==1){
+			$("#check_"+i).show();	
+		}
+		
+
+		$("#unidades_producto_"+i).val(unidades_producto[i-1]);
+		$("#descuento_producto_"+i).val(descuento_producto[i-1]);
 
 	}
 
@@ -295,7 +313,21 @@ function actualizaEnBD(){
 	var nombre_cliente = $("#nombre_cliente").text();
 	var email_destino =$("#email_cliente").text();
 	var id_ejecutivo = $("#id_usuario").text();
-	var id_cliente = $("#id_cliente").text();		
+	var id_cliente = $("#id_cliente").text();
+	
+	var id_productos_folleto = [];	
+	var id_interno="";	
+	var tiene_folleto = false;
+	
+	for(i=1;i<=cantidad_divs; i++){
+		tiene_folleto =  $('#adjuntar_ficha_'+i).is(":checked");
+		if(tiene_folleto == true){				
+			id_interno = $("#select_producto_"+i+" option:selected").attr("id_interno");
+			id_productos_folleto.push("producto_"+id_interno+".pdf");
+		}			
+	}
+
+	var json_folletos = JSON.stringify(id_productos_folleto);
 	
 	var array_tipo_cambio = [];
 	var array_id_producto = [];
@@ -352,7 +384,8 @@ function actualizaEnBD(){
 		nombre_cliente,
 		folio,
 		json_descuento,
-		nuevo_folio
+		nuevo_folio,
+		json_folletos
 	];
 
 	$("#modalCargando").modal('hide');
@@ -387,13 +420,27 @@ function enviarCorreo(){
 		var folio = $("#folio_propuesta").text();
 		var destinatario = $("#email_cliente").text();
 		var cuerpo = $("#cuerpo_correo_edit").val();
-		console.log("el cuerpo de correo es:"+cuerpo);
+		
+		var cantidad_divs = $("#cantidad_divs").attr("cantidad");
+		var id_productos_folleto = [];	
+		var id_interno="";	
+		var tiene_folleto = false;
+		
+		for(i=1;i<=cantidad_divs; i++){
+			tiene_folleto =  $('#adjuntar_ficha_'+i).is(":checked");
+			if(tiene_folleto == true){				
+				id_interno = $("#select_producto_"+i+" option:selected").attr("id_interno");
+				id_productos_folleto.push("producto_"+id_interno+".pdf");
+			}			
+		}
+
 		$.ajax({
 		  type: "POST",
 		  url: url_prev + '/enviarPropuesta',
 		  data: {
 			destinatario: destinatario,
 			contenido: cuerpo,
+			folletos: id_productos_folleto,
 			nombre_doc: folio+'.pdf',
 			_token: $('input[name="_token"]').val()
 		  } //esto es necesario, por la validacion de seguridad de laravel
@@ -484,3 +531,15 @@ function validaPorcentaje(e){
 $('body').on('hidden.bs.modal', '.modal', function () {
 	$(this).removeData('bs.modal');
 });
+
+function mostrarAdjunto(element){
+	
+	var id_adjunto = element.id;
+	var id_div = (id_adjunto).replace("select_producto_","");
+	
+	var tiene_folleto = $("#select_producto_"+id_div+" option:selected").attr("tiene_folleto");
+	if(tiene_folleto == 1){
+		$("#check_"+id_div).show();
+	}
+
+}

@@ -29,7 +29,7 @@ $(document).ready(function () {
 
 				var opciones = "";				
 					for(var i=0; i<productos.length; i++){
-						opciones =opciones+'<option tiene_folleto= "'+productos[i].tiene_folleto+'" id="'+productos[i].id_producto+'" nombre_producto="'+productos[i].nombre_producto+'" tipo_cambio="'+productos[i].tipo_cambio+'" valor_producto="'+productos[i].valor_producto+'">'+productos[i].nombre_producto+' ('+productos[i].tipo_cambio+' '+productos[i].valor_producto+')'+'</option>';
+						opciones =opciones+'<option id_interno="'+productos[i].numero_interno+'" tiene_folleto= "'+productos[i].tiene_folleto+'" id="'+productos[i].id_producto+'" nombre_producto="'+productos[i].nombre_producto+'" tipo_cambio="'+productos[i].tipo_cambio+'" valor_producto="'+productos[i].valor_producto+'">'+productos[i].nombre_producto+' ('+productos[i].tipo_cambio+' '+productos[i].valor_producto+')'+'</option>';
 					}
 
 
@@ -292,16 +292,39 @@ function enviarPropuesta(propuesta) {
 function enviarCorreo(){
 	$("#modalCuerpoCorreo").modal("hide");
 	$("#modalCargando").modal('show');
+
+
 		// envio de propuesta
 		var folio = $("#folio_propuesta").text();
 		var destinatario = $("#email_cliente").text();
 		var cuerpo = $("#cuerpo_correo").val();
+
+		var cantidad_divs = $("#cantidad_divs").attr("cantidad");
+		var id_productos_folleto = [];	
+		var id_interno="";	
+		var tiene_folleto = false;
+		
+		for(i=1;i<=cantidad_divs; i++){
+			tiene_folleto =  $('#adjuntar_ficha_'+i).is(":checked");
+			if(tiene_folleto == true){				
+				id_interno = $("#select_producto_"+i+" option:selected").attr("id_interno");
+				id_productos_folleto.push("producto_"+id_interno+".pdf");
+			}			
+		}
+
+		
+	
+	
+
+		
+
 		$.ajax({
 		  type: "POST",
 		  url: url_prev + '/enviarPropuesta',
 		  data: {
 			destinatario: destinatario,
 			contenido: cuerpo,
+			folletos: id_productos_folleto,
 			nombre_doc: folio+'.pdf',
 			_token: $('input[name="_token"]').val()
 		  } //esto es necesario, por la validacion de seguridad de laravel
@@ -324,7 +347,23 @@ function guardarEnBD(){
 	var nombre_cliente = $("#nombre_cliente").text();
 	var email_destino =$("#email_cliente").text();
 	var id_ejecutivo = $("#id_usuario").text();
-	var id_cliente = $("#id_cliente").text();		
+	var id_cliente = $("#id_cliente").text();	
+	
+	
+	var id_productos_folleto = [];	
+	var id_interno="";	
+	var tiene_folleto = false;
+	
+	for(i=1;i<=cantidad_divs; i++){
+		tiene_folleto =  $('#adjuntar_ficha_'+i).is(":checked");
+		if(tiene_folleto == true){				
+			id_interno = $("#select_producto_"+i+" option:selected").attr("id_interno");
+			id_productos_folleto.push("producto_"+id_interno+".pdf");
+		}			
+	}
+	
+	
+
 	
 	var array_tipo_cambio = [];
 	var array_id_producto = [];
@@ -356,6 +395,8 @@ function guardarEnBD(){
 	var json_descuento = JSON.stringify(array_descuento);
 	var json_valor_unitario_producto = JSON.stringify(array_valor_unitario_producto);
 	var json_subtotal_producto = JSON.stringify(array_subtotal_producto);
+	var json_folletos = JSON.stringify(id_productos_folleto);
+	
 
 	var total_s_iva = parseInt($("#subtotal").text().substr(3).trim());
 
@@ -382,7 +423,8 @@ function guardarEnBD(){
 		fono_cliente,
 		nombre_cliente,
 		folio,
-		json_descuento
+		json_descuento,
+		json_folletos
 	];
 
 	$("#modalCargando").modal('hide');

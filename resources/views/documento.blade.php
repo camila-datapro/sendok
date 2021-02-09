@@ -90,7 +90,7 @@
                                           <option id="0">Elija Uno</option>
                                           <?php 
                                              for($i=0;$i<sizeOf($productos); $i++){
-                                                echo "<option tiene_folleto=".$productos[$i]->tiene_folleto." id=".$productos[$i]->id_producto." nombre_producto='".$productos[$i]->nombre_producto."' valor_producto='".$productos[$i]->valor_producto."' tipo_cambio='".$productos[$i]->tipo_cambio."'>".$productos[$i]->nombre_producto." (".$productos[$i]->tipo_cambio." ".$productos[$i]->valor_producto.")"."</option>";
+                                                echo "<option id_interno=".$productos[$i]->numero_interno." tiene_folleto=".$productos[$i]->tiene_folleto." id=".$productos[$i]->id_producto." nombre_producto='".$productos[$i]->nombre_producto."' valor_producto='".$productos[$i]->valor_producto."' tipo_cambio='".$productos[$i]->tipo_cambio."'>".$productos[$i]->nombre_producto." (".$productos[$i]->tipo_cambio." ".$productos[$i]->valor_producto.")"."</option>";
                                              }
                                              ?>
                                        </select>
