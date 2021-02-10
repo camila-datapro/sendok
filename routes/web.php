@@ -45,6 +45,8 @@ Route::post('/listProductos','ProductoController@listProductos')->name('listProd
 // admin documento
 Route::get('/admin_documentos', 'AdminDocumentoController@index')->name('admin_documentos');
 
+Route::get('/ingreso_masivo', 'IngresoMasivoController@index')->name('ingreso_masivo');
+
 Route::post('/enviarPropuesta', 'DocumentoController@enviarPropuesta')->name('enviarPropuesta');
 
 Route::post('/guardarPDF', 'DocumentoController@guardarPDF')->name('guardarPDF');

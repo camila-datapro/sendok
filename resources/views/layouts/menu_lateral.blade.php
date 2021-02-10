@@ -84,6 +84,9 @@
          </a>
          <div class="collapse" id="menu_productos">
             <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+                  <a class="nav-link" href="./ingreso_masivo">Ingreso Masivo</a>
+               </li>
                <li class="nav-item">
                   <a class="nav-link" href="./producto">Crear nuevo</a>
                </li>
