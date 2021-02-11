@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ProductoModel;
+use Illuminate\Support\Facades\Log;
 class ProductoController extends Controller
 {
 
@@ -19,6 +20,12 @@ class ProductoController extends Controller
         $json_datos = str_replace("]","",$json_datos);
         $datos = json_decode($json_datos);
         $response = ProductoModel::crearProducto($datos);
+        return $response;
+    }
+
+    public function insertarProductos(Request $request){
+        $array_productos = $request["productos"];
+        $response = ProductoModel::insertarProductos($array_productos);
         return $response;
     }
 
@@ -38,4 +45,5 @@ class ProductoController extends Controller
         return ProductoModel::listProductos();
 
     }
+
 }

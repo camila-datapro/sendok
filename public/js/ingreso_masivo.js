@@ -1,3 +1,6 @@
+const url_prev = location.origin+'/desarrollo/public';
+
+
 function construirTabla(){
     var data = $('#contenido_ingreso').val();
     if(data!=""){
@@ -43,4 +46,54 @@ function limpiarContenido(){
 
 function limpiarTabla(){
     $("#tabla_contenido").html("");
+}
+
+function importarTabla(){
+    var array = [];
+    var headers = [];
+    var vacios = "";
+    var fila = 0;
+    $("#modalCargando").modal("show");
+    $('#tabla_contenido th').each(function(index, item) {
+        headers[index] = $(item).html();
+    });
+    $('#tabla_contenido tr').has('td').each(function() {
+        fila++;
+        var arrayItem = {};
+        $('td', $(this)).each(function(index, item) {
+            arrayItem[headers[index]] = $(item).html();
+            if(($(item).html()=="") && (fila<($("#tabla_contenido tr").length-1))){ 
+                vacios = vacios+"- Fila: "+fila+" columna: "+(index+1)+"</br>";
+            }
+        });
+        
+        array.push(arrayItem);
+        
+    });
+    
+    
+    
+    if(vacios==""){
+        $.ajax({
+            type: "POST",
+            url: url_prev + '/insertarProductos',
+            data: {
+            productos: array,         
+            _token: $('input[name="_token"]').val()
+            } //esto es necesario, por la validacion de seguridad de laravel
+        }).done(function (msg) {	
+            
+          
+            setTimeout(() => {
+                $("#modalCargando").modal("hide");
+                $("#modalExitoso").modal("show");
+            }, 600);
+            
+        }).fail(function () {
+            console.log("error en funcion insertarProductos");
+        });			
+    }else{
+        $("#info_validacion").html("Debe rellenar los siguientes campos para continuar: </br>"+vacios);
+        $("#modalInfo").modal("show");
+    }
 }

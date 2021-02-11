@@ -58,7 +58,7 @@
                                  </div>
                                  <div class="row" id="div_opciones" style="display:none;">
                                     <button id="boton_limpiar"onclick="limpiarTabla();" class="btn btn-warning"><i class="fas fa-undo-alt"></i> Limpiar</button>
-                                    <button id="boton_importar" style="margin-left:20px;" class="btn btn-success"><i class="fas fa-file-import"></i> Importar</button>
+                                    <button id="boton_importar" style="margin-left:20px;" class="btn btn-success" onclick="importarTabla();"><i class="fas fa-file-import"></i> Importar</button>
                                  </div>
                               </div>
                               
@@ -76,7 +76,7 @@
          <!-- page-body-wrapper ends -->
       </div>
       <!-- Modal -->
-      <div class="modal fade" id="modalExitosa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="modalExitoso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
@@ -86,10 +86,10 @@
                   </button>
                </div>
                <div class="modal-body">
-                  Se ha creado el nuevo producto de forma exitosa
+                  Se han creado los nuevos productos de forma exitosa
                </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.reload();">OK</button>
+               <div class="modal-footer">                  
+                  <a href="./admin_producto" class="button">Ir a listado de productos</a>
                </div>
             </div>
          </div>

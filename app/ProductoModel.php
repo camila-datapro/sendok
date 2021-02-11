@@ -59,6 +59,53 @@ class ProductoModel extends Model
         return $results;
     }
 
+
+    public static function insertarProductos($productos){
+
+        for($i=0;$i<(sizeOf($productos)-1);$i++){
+        $clase = "producto";
+        $nombre = $productos[$i]["nombre_producto"];
+        $valor = $productos[$i]["valor_producto"];
+        $descripcion = $productos[$i]["descripcion_producto"];
+        $tipo_cambio = "usd";
+        $stock = $productos[$i]["stock"];
+        $costo = $productos[$i]["costo"];
+        $margen = $productos[$i]["margen"];
+        $numero_interno = $productos[$i]["numero_interno"];
+        $numero_fabricacion = $productos[$i]["numero_fabricacion"];
+        $tiene_folleto = 0;
+
+        $query = "insert into producto (
+            clase,
+            nombre_producto,
+            valor_producto,
+            descripcion_producto,
+            tipo_cambio,
+            stock,
+            costo,
+            margen,
+            numero_interno,
+            numero_fabricacion,
+            tiene_folleto
+            ) VALUES (
+                '".$clase."',
+                '".$nombre."',   
+                ".intval($valor).",      
+                '".$descripcion."',
+                '".$tipo_cambio."',
+                ".intval($stock).",
+                ".intval($costo).",
+                ".intval($margen).",
+                '".$numero_interno."',
+                '".$numero_fabricacion."',
+                ".intval($tiene_folleto)."
+            )"; 
+        $results = DB::insert($query);  
+        }       
+        return $results;
+    }
+
+
     public static function eliminarProducto($id_producto){       
         $results = DB::delete("delete from producto 
         where id_producto = '".$id_producto."';");            
