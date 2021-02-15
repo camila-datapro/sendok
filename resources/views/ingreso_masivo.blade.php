@@ -16,6 +16,13 @@
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
       <link rel="shortcut icon" href="{{ asset('/assets/images/favicon.png') }}" />
       <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
+      <style>
+         table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+         }
+      </style>
    </head>
    @endsection
    @section('body1')
