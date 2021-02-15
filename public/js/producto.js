@@ -176,8 +176,6 @@ function cargarTiposDeProducto(){
   function confirmarEliminacion(producto){
     id_boton = producto.id_producto;
     nombre_producto = producto.nombre_producto;
-  
-    console.log("id boton: "+id_boton+"nombre producto:"+ nombre_producto);
     var id_producto = parseInt(id_boton);
     $("#modal_eliminar_nombre").text(nombre_producto);
     $("#modal_eliminar").removeAttr("id_producto");
