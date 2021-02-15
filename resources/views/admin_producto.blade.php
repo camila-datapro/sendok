@@ -49,9 +49,9 @@
                                  <table class="table table-hover tabla_productos display nowrap" cellspacing="0" id="tabla_productos">
                                     <thead>
                                        <tr>
-                                          <th scope="col">Nombre</th>
-                                          <th scope="col">N° Fabricacion</th>
-                                          <th scope="col">Cód. interno</th>
+                                          <th scope="col">Nombre</th>                                          
+                                          <th scope="col">SKU</th>
+                                          <th scope="col">Proveedor</th>
                                           <th scope="col">Costo</th>
                                           <th scope="col">% Margen</th>
                                           <th scope="col">Precio</th>
@@ -67,8 +67,8 @@
                                              );
                                              echo "<tr>                                                      
                                              <td>".$productos[$i]->nombre_producto."</td>                                                      
-                                             <td>".$productos[$i]->numero_fabricacion."</td>
                                              <td>".$productos[$i]->numero_interno."</td>                                                      
+                                             <td>".$productos[$i]->proveedor."</td>
                                              <td><b>".strtoupper($productos[$i]->tipo_cambio)."</b> ".$productos[$i]->costo."</td>
                                              <td> % ".$productos[$i]->margen."</td>                                                      
                                              <td><b>".strtoupper($productos[$i]->tipo_cambio)."</b> ".$productos[$i]->valor_producto."</td>

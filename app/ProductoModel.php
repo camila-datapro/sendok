@@ -29,6 +29,7 @@ class ProductoModel extends Model
         $numero_interno = $json_datos->numero_interno;
         $numero_fabricacion = $json_datos->numero_fabricacion;
         $tiene_folleto = $json_datos->tiene_folleto;
+        $nombre_proveedor = $json_datos->nombre_proveedor;
 
         $query = "insert into producto (
             clase,
@@ -41,7 +42,8 @@ class ProductoModel extends Model
             margen,
             numero_interno,
             numero_fabricacion,
-            tiene_folleto
+            tiene_folleto,
+            proveedor
             ) VALUES (
                 '".$clase."',
                 '".$nombre."',   
@@ -53,7 +55,8 @@ class ProductoModel extends Model
                 ".intval($margen).",
                 '".$numero_interno."',
                 '".$numero_fabricacion."',
-                ".intval($tiene_folleto)."
+                ".intval($tiene_folleto).",
+                '".$nombre_proveedor."'
             )"; 
         $results = DB::insert($query);         
         return $results;

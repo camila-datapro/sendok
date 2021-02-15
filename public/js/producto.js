@@ -113,12 +113,14 @@ function cargarTiposDeProducto(){
       var nombre_producto = $("#nombre_producto").val();
       var valor_producto = $("#valor_venta").val();
       var descripcion_producto = $("#descripcion_producto").val();
+      
       var tipo_cambio = $("#select_cambio option:selected").attr("id");
       var stock = $("#stock").val();
       var costo = $("#costo").val();
       var margen = $("#margen").val();
       var numero_interno = $("#numero_interno").val();
       var numero_fabricacion = $("#numero_fabricacion").val();
+      var nombre_proveedor = $("#nombre_proveedor").val();
       var array_datos = [];
       var token = $('input[name="_token"]').val();
       array_datos.push({
@@ -132,7 +134,8 @@ function cargarTiposDeProducto(){
         margen: margen,
         numero_interno: numero_interno,
         numero_fabricacion: numero_fabricacion,
-        tiene_folleto: tiene_folleto
+        tiene_folleto: tiene_folleto,
+        nombre_proveedor: nombre_proveedor
       });
     
       var json_datos = JSON.stringify(array_datos);
@@ -171,6 +174,7 @@ function cargarTiposDeProducto(){
   }
 
   function confirmarEliminacion(id_boton, nombre_producto){
+    console.log("id boton: "+id_boton+"nombre producto:"+ nombre_producto);
     var id_producto = parseInt(id_boton.replace('eliminar_',''));
     $("#modal_eliminar_nombre").text(nombre_producto);
     $("#modal_eliminar").removeAttr("id_producto");

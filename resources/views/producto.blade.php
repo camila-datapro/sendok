@@ -53,11 +53,15 @@
                                  <input id="nombre_producto" maxlength="20" name="nombre_producto" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                                 <label>Proveedor</label>
+                                 <input id="nombre_proveedor" maxlength="20" name="nombre_proveedor" type="text" class="form-control form-control-sm" aria-label="Nombre proveedor">
+                              </div>
+                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>N° Fabricacion</label>
                                  <input id="numero_fabricacion" maxlength="20" name="numero_fabricacion" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                                 <label>N° Interno</label>
+                                 <label>SKU</label>
                                  <input id="numero_interno" maxlength="20" name="numero_interno" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
                               </div>
                               <div style="padding-left: 0px !important; display:none;" class="form-group col-md-12" id="div_ficha_tecnica">
