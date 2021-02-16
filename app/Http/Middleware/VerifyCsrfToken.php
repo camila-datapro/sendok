@@ -16,5 +16,7 @@ class VerifyCsrfToken extends Middleware
         'foo/*',
         'http://localhost/desarrollo/public/*',
         'http://http://sendok.cl/desarrollo/public/*',
+        'sendok.cl/desarrollo/public/*',
+        'www.sendok.cl/desarrollo/public/*'
     ];
 }
