@@ -1,3 +1,5 @@
+
+
 const url_prev = location.origin+'/desarrollo/public';
 
 
@@ -98,7 +100,7 @@ function cargarTiposDeProducto(){
 			}).done(function (msg) {
 				
 			}).fail(function () {				
-				console.lof("Error en almacenamiento de ficha tecnica de producto");
+				console.log("Error en almacenamiento de ficha tecnica de producto");
 			});
 
     };
@@ -213,15 +215,15 @@ function cargarTiposDeProducto(){
   }
 
 
-$(document).ready(function() {
+/*$(document).ready(function() {
   var windowsize = $(window).width();
-    if(windowsize<1100){
+    if(windowsize<1500){
       setTimeout(() => {  
           $("td.sorting_1").click();
         }, 100);
       
     }
-});
+});*/
 
 
 function verProducto(producto){
@@ -282,3 +284,4 @@ numero_interno.addEventListener("blur", function() {
   }
 
 });
+

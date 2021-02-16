@@ -46,4 +46,9 @@ class ProductoController extends Controller
 
     }
 
+    public function listProductosOptimized(Request $request){
+        return ProductoModel::listProductosOptimized();
+
+    }
+
 }

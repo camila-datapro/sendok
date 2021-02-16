@@ -11,6 +11,12 @@ class ProductoModel extends Model
         $results = DB::select("select * from producto" );
         return $results;
     }
+
+    public static function listProductosOptimized(){
+        $results = DB::select("select * from producto" );
+        return json_encode($results);
+    }
+
     public static function obtenerProducto($idProducto){
         $results = DB::select("select * from producto where id_producto = ".$idProducto."" );
         return $results;

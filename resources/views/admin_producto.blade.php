@@ -8,6 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>Sendok</title>
       <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
+      
       <link rel="stylesheet" href=" {{ asset('/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/iconfonts/ionicons/css/ionicons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/iconfonts/typicons/src/font/typicons.css') }}">
@@ -18,8 +19,25 @@
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
       <link rel="shortcut icon" href="{{ asset('/assets/images/favicon.png') }}" />
       <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-      <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+    <!--  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">-->
       <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
+      <style>
+      .wrapper2{width: 100%; border: none 0px RED;
+overflow-x: scroll; overflow-y:hidden;}
+
+.wrapper2{}
+
+.div2 {width:100%;
+overflow: auto;}
+
+.big_text
+{
+ max-width: 0;
+ overflow-x: scroll;
+ 
+ white-space: nowrap;
+}
+      </style>
    </head>
    @endsection
    @section('body1')
@@ -46,10 +64,19 @@
                         <div class="container">
                            <div class="row">
                               <div class="col-lg-12">
-                                 <table class="table table-hover tabla_productos display nowrap" cellspacing="0" id="tabla_productos">
+                             
+                               
+                              <div class="div2">
+                                 <div id="div_cargando" class="row">
+                                    
+                                     <img id="cargando" style="margin-left: 30px;"  width="30px" src="{{ asset('img/loading.gif') }}"/>
+                                     <label style="margin-left: 10px;">Cargando lista de productos...</label>
+                                 </div>
+    
+                                 <table class="table table-hover tabla_productos display nowrap" cellspacing="0" id="tabla_productos" style="display:none;">
                                     <thead>
                                        <tr>
-                                          <th scope="col">Nombre</th>                                          
+                                          <th scope="col" style="max-width: 100px;">Nombre</th>                                          
                                           <th scope="col">SKU</th>
                                           <th scope="col">Proveedor</th>
                                           <th scope="col">Costo</th>
@@ -59,14 +86,15 @@
                                        </tr>
                                     </thead>
                                     <tbody>
-                                       <?php                  
+                                       <?php              
+                                       $productos = json_decode($productos);
                                           for($i=0;$i<sizeOf($productos);$i++){
                                              $array_datos= array(
                                                 "nombre" => $productos[$i]->nombre_producto,
                                                 "descripcion" => $productos[$i]->descripcion_producto
                                              );
                                              echo "<tr>                                                      
-                                             <td>".$productos[$i]->nombre_producto."</td>                                                      
+                                             <td style='max-width: 100px;' class='big_text'>".$productos[$i]->nombre_producto."</td>                                                      
                                              <td>".$productos[$i]->numero_interno."</td>                                                      
                                              <td>".$productos[$i]->proveedor."</td>
                                              <td><b>".strtoupper($productos[$i]->tipo_cambio)."</b> ".$productos[$i]->costo."</td>
@@ -85,6 +113,9 @@
                                           ?>  
                                     </tbody>
                                  </table>
+                                
+                           </div>
+                           <!--add-->
                               </div>
                            </div>
                         </div>
@@ -196,16 +227,19 @@
       <script src="{{ asset('/assets/js/shared/off-canvas.js') }}"></script>
       <script src="{{ asset('/assets/js/shared/misc.js') }}"></script>
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
-      <script src="{{ asset('/js/producto.js') }}"></script>
+      <!--<script src="{{ asset('/js/producto.js') }}"></script>-->
+      <script src="{{ asset('/js/admin_producto.js') }}"></script>
       <script src="https://unpkg.com/@popperjs/core@2"></script>
       <script src="{{ asset('/js/dataTables.js')}}"></script>   
-      <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   
+     <!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   -->
       <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
       <!-- End custom js for this page-->
       <script>
          $(document).ready(function() {
+            $("#div_cargando").hide();
+            $("#tabla_productos").show();
             $(".tabla_productos").DataTable({
-                responsive: true
+                //responsive: true
             });
          });
       </script>

@@ -9,6 +9,6 @@ class AdminProductoController extends Controller
 {
     public function index(){
         return view('admin_producto')
-        ->with('productos',ProductoModel::listProductos());
+        ->with('productos',ProductoModel::listProductosOptimized());
     }
 }

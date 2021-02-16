@@ -41,6 +41,8 @@ Route::post('/crearProducto','ProductoController@setProducto')->name('crearProdu
 Route::post('/eliminarProducto','ProductoController@removeProducto')->name('eliminarProducto');
 Route::post('/getProducto','ProductoController@getProducto')->name('getProducto');
 Route::post('/listProductos','ProductoController@listProductos')->name('listProductos');
+
+Route::post('/listProductosOptimized','ProductoController@listProductosOptimized')->name('listProductosOptimized');
 Route::post('/insertarProductos','ProductoController@insertarProductos')->name('insertarProductos');
 
 // admin documento
