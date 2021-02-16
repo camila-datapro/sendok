@@ -16,7 +16,7 @@
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.base.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.addons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/shared/style.css') }}">
-      <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
       <link rel="shortcut icon" href="{{ asset('/assets/images/favicon.png') }}" />
       <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
     <!--  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">-->
@@ -37,6 +37,19 @@ overflow: auto;}
  
  white-space: nowrap;
 }
+table {
+        border-collapse: collapse;
+        table-layout: fixed;
+        width: 310px;
+      }
+      table td {
+        width: 110px;
+        word-wrap: break-word;
+      }
+
+      .table td{
+         white-space: normal;
+      }
       </style>
    </head>
    @endsection
@@ -73,10 +86,10 @@ overflow: auto;}
                                      <label style="margin-left: 10px;">Cargando lista de productos...</label>
                                  </div>
     
-                                 <table class="table table-hover tabla_productos display nowrap" cellspacing="0" id="tabla_productos" style="display:none;">
+                                 <table class="table table-hover tabla_productos" id="tabla_productos" style="display:none;">
                                     <thead>
                                        <tr>
-                                          <th scope="col" style="max-width: 100px;">Nombre</th>                                          
+                                          <th scope="col"">Nombre</th>                                          
                                           <th scope="col">SKU</th>
                                           <th scope="col">Proveedor</th>
                                           <th scope="col">Costo</th>
@@ -94,7 +107,7 @@ overflow: auto;}
                                                 "descripcion" => $productos[$i]->descripcion_producto
                                              );
                                              echo "<tr>                                                      
-                                             <td style='max-width: 100px;' class='big_text'>".$productos[$i]->nombre_producto."</td>                                                      
+                                             <td style='max-width: 100px;' class='BreakWord'>".$productos[$i]->nombre_producto."</td>                                                      
                                              <td>".$productos[$i]->numero_interno."</td>                                                      
                                              <td>".$productos[$i]->proveedor."</td>
                                              <td><b>".strtoupper($productos[$i]->tipo_cambio)."</b> ".$productos[$i]->costo."</td>
