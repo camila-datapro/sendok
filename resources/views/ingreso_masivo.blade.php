@@ -43,6 +43,7 @@
                      </div>
                   </div>
                </div>
+               <input type="hidden" name="_token" value="{{ csrf_token() }}">
                <!-- Page Title Header Ends-->
                <div class="row">
                   <div class="col-md-12 grid-margin">
