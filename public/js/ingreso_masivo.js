@@ -79,7 +79,7 @@ function importarTabla(){
             url: url_prev + '/insertarProductos',
             data: {
             productos: array,         
-            _token: $('input[name="_token"]').val()
+            _token:  $("meta[name='csrf-token']").attr("content")
             } //esto es necesario, por la validacion de seguridad de laravel
         }).done(function (msg) {	
             

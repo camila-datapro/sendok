@@ -5,6 +5,7 @@
    <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="csrf-token" content="{{ csrf_token() }}">
       <title>Sendok</title>
       <link rel="stylesheet" href="{{ asset('/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/iconfonts/ionicons/css/ionicons.css') }}">
@@ -57,16 +58,18 @@
                                        <button style="margin-left: 10px;" class="btn btn-primary" id="descargar_ejemplo" type="submit"><i class="fas fa-download"></i> Descargar archivo ejemplo</button>
                                     </form>
                                     <button style="margin-left: 10px;" class="btn btn-danger" id="borrar_contenido" onclick="limpiarContenido();"><i class="fas fa-trash-alt"></i> Borrar contenido</button>
+                                    <div id="div_opciones" style="position: absolute; right: 40px; display:none;">
+                                    <button id="boton_limpiar"onclick="limpiarTabla();" class="btn btn-warning"><i class="fas fa-undo-alt"></i> Limpiar Tabla</button>
+                                    <button id="boton_importar" style="margin-left:20px;" class="btn btn-success" onclick="importarTabla();"><i class="fas fa-file-import"></i> Importar</button>
                                  </div>
+                                 </div>
+                                
                                  <div class="row" style="margin-top: 20px;  width: 100%; height: 120px;">
                                     <textarea  onchange="construirTabla();" style=" width: 100%; height: 100px;" id="contenido_ingreso" placeholder="Pegue aqui la tabla de excel, incluyendo las cabeceras con los nombres de las columnas."></textarea>
                                  </div>
                                  <div class="row" id="div_table">
                                  </div>
-                                 <div class="row" id="div_opciones" style="display:none;">
-                                    <button id="boton_limpiar"onclick="limpiarTabla();" class="btn btn-warning"><i class="fas fa-undo-alt"></i> Limpiar</button>
-                                    <button id="boton_importar" style="margin-left:20px;" class="btn btn-success" onclick="importarTabla();"><i class="fas fa-file-import"></i> Importar</button>
-                                 </div>
+                               
                               </div>
                               
                            </div>
