@@ -63,8 +63,9 @@ class ProductoModel extends Model
     }
 
 
-    public static function insertarProductos($productos){
-
+    public static function insertarProductos($productos_json){
+        $productos = json_decode($productos_json,true);
+        Log::debug($productos);
         for($i=0;$i<(sizeOf($productos)-1);$i++){
         $clase = "producto";
         $nombre = $productos[$i]["nombre_producto"];

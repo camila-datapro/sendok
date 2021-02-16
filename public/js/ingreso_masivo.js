@@ -71,14 +71,14 @@ function importarTabla(){
         
     });
     
-    
+    var json_array = JSON.stringify(array);
     
     if(vacios==""){
         $.ajax({
             type: "POST",
             url: url_prev + '/insertarProductos',
             data: {
-            productos: array,         
+            productos: json_array,         
             _token: $('input[name="_token"]').val()
             } //esto es necesario, por la validacion de seguridad de laravel
         }).done(function (msg) {	
