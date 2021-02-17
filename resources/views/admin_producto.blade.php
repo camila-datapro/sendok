@@ -22,30 +22,20 @@
     <!--  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">-->
       <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
       <style>
-      .wrapper2{width: 100%; border: none 0px RED;
-overflow-x: scroll; overflow-y:hidden;}
+  
 
-.wrapper2{}
 
-.div2 {width:100%;
-overflow: auto;}
 
-.big_text
-{
- max-width: 0;
- overflow-x: scroll;
- 
- white-space: nowrap;
-}
 table {
         border-collapse: collapse;
         table-layout: fixed;
-        width: 310px;
+        
       }
-      table td {
-        width: 110px;
+
+      table td {        
         word-wrap: break-word;
       }
+
 
       .table td{
          white-space: normal;
@@ -91,8 +81,6 @@ table {
                                        <tr>
                                           <th scope="col"">Nombre</th>                                          
                                           <th scope="col">SKU</th>
-                                          <th scope="col">Proveedor</th>
-                                          <th scope="col">Costo</th>
                                           <th scope="col">% Margen</th>
                                           <th scope="col">Precio</th>
                                           <th scope="col">Acciones</th>
@@ -109,8 +97,6 @@ table {
                                              echo "<tr>                                                      
                                              <td style='max-width: 100px;' class='BreakWord'>".$productos[$i]->nombre_producto."</td>                                                      
                                              <td>".$productos[$i]->numero_interno."</td>                                                      
-                                             <td>".$productos[$i]->proveedor."</td>
-                                             <td><b>".strtoupper($productos[$i]->tipo_cambio)."</b> ".$productos[$i]->costo."</td>
                                              <td> % ".$productos[$i]->margen."</td>                                                      
                                              <td><b>".strtoupper($productos[$i]->tipo_cambio)."</b> ".$productos[$i]->valor_producto."</td>
                                              <td>
@@ -255,6 +241,7 @@ table {
                 //responsive: true
             });
          });
+
       </script>
    </body>
 </html>
