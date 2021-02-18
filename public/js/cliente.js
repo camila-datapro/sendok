@@ -213,3 +213,13 @@ $(document).ready(function() {
       
     }
 });
+
+function editarCliente(cliente){  
+
+  
+  $("#modalEditarCliente").modal("show");
+
+}
+function editarClienteBD(){
+  alert("funcionalidad en desarrollo");
+}

@@ -38,6 +38,7 @@ Route::post('/getCliente','ClienteController@getCliente')->name('getCliente');
 //creacion de producto
 Route::get('/obtenerTiposDeProducto','TipoProductoController@getTiposDeProducto')->name('obtenerTiposDeProducto');
 Route::post('/crearProducto','ProductoController@setProducto')->name('crearProducto');
+Route::post('/editarProducto','ProductoController@editarProducto')->name('editarProducto');
 Route::post('/eliminarProducto','ProductoController@removeProducto')->name('eliminarProducto');
 Route::post('/getProducto','ProductoController@getProducto')->name('getProducto');
 Route::post('/listProductos','ProductoController@listProductos')->name('listProductos');

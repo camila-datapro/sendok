@@ -51,4 +51,9 @@ class ProductoController extends Controller
 
     }
 
+    public function editarProducto(Request $request){
+        $datos = $request["json_datos"];
+        return ProductoModel::editarProducto($datos);
+    }
+
 }

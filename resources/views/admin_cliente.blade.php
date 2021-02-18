@@ -70,7 +70,7 @@
                                                 <button class='btn btn-danger' id='eliminar_".$clientes[$i]->id_cliente."' onclick=confirmarEliminacion(this.id,'".$clientes[$i]->nombre_cliente."'); >
                                                 <i class='fas fa-trash-alt'></i>
                                                 </button> 
-                                                <button disabled class='btn btn-warning' id='editar_".$clientes[$i]->id_cliente."'>
+                                                <button class='btn btn-warning' id='editar_".$clientes[$i]->id_cliente."' onclick='editarCliente(".$clientes[$i].");' >
                                                 <i class='fas fa-edit'></i>
                                                 </button>
                                              </td>
@@ -161,6 +161,131 @@
                </div>
                <div class="modal-body align-items-center text-center">
                   <img width="100px" src="{{ asset('img/loading.gif') }}"/>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="modal fade" id="modalEditarCliente" tabindex="-1" role="dialog" aria-labelledby="modalEditarCliente" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="modalEditarCliente">Editar Cliente</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <form class="forms-sample">
+                        <input type="hidden" id="id_cliente" />
+                        <h4 class="card-title" style="color: #001fff9e;">Datos empresa</h4>
+                        <div class="margined-left">
+                           <div class="form-group">
+                              <div class="col-md-12">
+                                 <div class="form-group row">
+                                    <label for="exampleInputName1" class="col-md-2">Nombre</label>
+                                    <div class="col-md-4">
+                                       <input type="text" maxlength="20" class="form-control" id="nombre">
+                                    </div>
+                                    <label for="exampleInputName1" class="col-md-2">Rut</label>
+                                    <div class="col-md-4">
+                                       <input type="text" maxlength="15" class="form-control" id="rut">
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="form-group">
+                              <div class="col-md-12">
+                                 <div class="form-group row">
+                                    <label for="region" class="col-md-2">Región</label>
+                                    <div class="col-md-10">
+                                       <select class="form-control" id="region" onchange="getProvinciasRegion();">
+                                          <option _blank="">Elija Una</option>
+                                          <?php                  
+                                             for($i=0;$i<sizeOf($regiones);$i++){
+                                                echo "<option value='".$regiones[$i]->id."'>".$regiones[$i]->region."</option>";
+                                             }
+                                             ?> 
+                                       </select>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+
+
+                   
+                           <div class="form-group">
+                              <div class="col-md-12">
+                                 <div class="form-group row">
+                                    <label for="provincia" class="col-md-2">Provincia</label>
+                                    <div class="col-md-4">
+                                       <select class="form-control" id="provincia" onchange="getComunasProvincia();">
+                                          <option id="_blank">Elija Una </option>
+                                       </select>
+                                    </div>
+                                    <label for="comuna" class="col-md-2">Comuna</label>
+                                    <div class="col-md-4">
+                                       <select class="form-control" id="comuna">
+                                          <option id="_blank">Elija Una </option>
+                                       </select>
+                                    </div>
+                                 </div>
+                              </div>     
+                           </div>
+                           <div class="form-group">
+                              <div class="col-md-12">
+                                 <div class="form-group row">
+                                    <label for="exampleInputName1" class="col-md-2">Dirección</label>
+                                    <div class="col-md-10">
+                                       <input type="text" maxlength="30" class="form-control" id="direccion">
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <h4 class="card-title" style="color: #001fff9e;">Datos contacto</h4>
+                        <!-- datos de contacto-->
+                        <div class="margined-left">
+                           <div class="form-group">
+                              <div class="col-md-12">
+                                 <div class="form-group row">
+                                    <label class="col-md-2" for="nombre_contacto">Nombre</label>
+                                    <div class="col-md-4">
+                                       <input type="email" class="form-control" id="nombre_contacto">
+                                    </div>
+                                    <label class="col-md-2" for="nombre_contacto">Cargo</label>
+                                    <div class="col-md-4">
+                                       <input type="email" class="form-control" id="cargo_contacto">
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                            
+                              
+                           </div>
+                           <div class="form-group">
+                              <div class="col-md-12">
+                                 <div class="form-group row">
+                                    <label for="exampleInputEmail3" class="col-md-1">Email</label>
+                                    <div class="col-md-5">
+                                       <input type="email" class="form-control" id="email">
+                                    </div>
+                                    <label for="exampleInputName1" class="col-md-1">Fono</label>
+                                    <div class="col-md-5">
+                                       <input type="number" maxlength="12" class="form-control" id="telefono">
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+              
+                        </div>
+                  </form>
+               </div>
+               <div class="modal-footer">
+               <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+               <button type="button" class="btn btn-success" onclick="editarClienteBD();">Editar</button>
                </div>
             </div>
          </div>
