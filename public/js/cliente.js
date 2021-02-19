@@ -215,11 +215,32 @@ $(document).ready(function() {
 });
 
 function editarCliente(cliente){  
+  cliente = JSON.stringify(cliente);
+  cliente = JSON.parse(cliente);
+  console.log(cliente);
 
-  
+
+      $("#nombre").val(cliente.nombre_cliente);
+      
+      $("#rut").val(cliente.rut_cliente);
+      $("#telefono").val(cliente.fono_cliente);
+      $("#email").val(cliente.email_cliente);
+      $("#region").find('option[value="'+(cliente.id_region_cliente)+'"]').prop('selected', true); 
+      //$("#idProvincia").find('option[id="'+(cliente.id_region_cliente)+'"]').prop('selected', true); 
+      $("#comuna").find('option[value="'+(cliente.id_comuna_cliente)+'"]').prop('selected', true); 
+      //$("#region").val());
+      //var idProvincia = parseInt($("#provincia option:selected").attr('id_provincia'));
+      //var idComuna = parseInt($("#comuna option:selected").attr('id_comuna'));
+      $("#direccion").val(cliente.direccion_cliente);
+      $("#nombre_contacto").val(cliente.nombre_contacto);
+      $("#cargo_contacto").val(cliente.cargo_contacto);
+      
+
   $("#modalEditarCliente").modal("show");
 
 }
 function editarClienteBD(){
+
+  
   alert("funcionalidad en desarrollo");
 }

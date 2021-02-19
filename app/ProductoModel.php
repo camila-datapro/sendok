@@ -69,6 +69,43 @@ class ProductoModel extends Model
     }
 
 
+    
+    public static function editarProducto($json_datos){
+        $array_datos = json_decode($json_datos,true);
+        $array_datos = $array_datos[0];
+        $nombre = $array_datos["nombre_producto"];
+        $valor = $array_datos["valor_producto"];
+        $descripcion = $array_datos["descripcion_producto"];
+        $tipo_cambio = $array_datos["tipo_cambio"];
+        $stock = $array_datos["stock"];
+        $costo = $array_datos["costo"];
+        $margen = $array_datos["margen"];
+        $numero_interno = $array_datos["numero_interno"];
+        $numero_fabricacion = $array_datos["numero_fabricacion"];
+        $tiene_folleto = $array_datos["tiene_folleto"];
+        $nombre_proveedor = $array_datos["nombre_proveedor"];
+        $id_producto = $array_datos["id_producto"];
+
+        $query = "update producto 
+        set           
+            nombre_producto = '".$nombre."', 
+            valor_producto = ".intval($valor).",   
+            descripcion_producto =  '".$descripcion."',
+            tipo_cambio = '".$tipo_cambio."',
+            stock =".intval($stock).",
+            costo = ".intval($costo).",
+            margen = ".intval($margen).",
+            numero_interno = '".$numero_interno."',
+            numero_fabricacion = '".$numero_fabricacion."',
+            tiene_folleto = ".intval($tiene_folleto).",
+            proveedor = '".$nombre_proveedor."'
+        where id_producto = ".intval($id_producto)."";
+        Log::debug($query);
+        $results = DB::update($query);         
+        return $results;
+    }
+
+
     public static function insertarProductos($productos_json){
         $productos = json_decode($productos_json,true);
         Log::debug($productos);
