@@ -78,7 +78,9 @@ function verProducto(producto){
 
 function editarProducto(producto){
   
-  
+  disable();
+  $("#botonEditar").hide();
+  $("#botonMostrar").show();
   
   $("#nombre_producto").val(producto.nombre_producto);
   $("#descripcion_producto").val(producto.descripcion_producto);
@@ -286,3 +288,37 @@ numero_interno.addEventListener("blur", function() {
 
 });
 
+function enable() {
+  $("#titulo_editar").text("Editar Cliente");
+  $('#modalEditar input').each(function () {
+    $(this).prop('disabled', false);
+ });
+ $('#modalEditar select').each(function () {
+  $(this).prop('disabled', false);
+});
+}
+
+function disable() {
+  $("#titulo_editar").text("Editar Cliente");
+  $('#modalEditar input').each(function () {
+    $(this).prop('disabled', true);
+ });
+ $('#modalEditar select').each(function () {
+  $(this).prop('disabled', true);
+});
+}
+
+function mostrarEditarProducto(){
+
+  $("#botonMostrar").hide();
+  enable();
+  $("#botonEditar").show();
+}
+
+
+
+$("#form_producto").on("submit", function (e) {
+  //do your form submission logic here
+  e.preventDefault();
+  editarBDProducto();
+});

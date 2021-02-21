@@ -20,6 +20,7 @@ function limpiarSeleccion() {
 
 
 function getProvinciasRegion() {
+  
   var idRegion = parseInt($("#region").val());
   $.ajaxSetup({
     headers: {
@@ -166,8 +167,9 @@ function crearCliente() {
 }
 
 
-function confirmarEliminacion(id_boton,nombre_cliente){
-  var id_cliente = parseInt(id_boton.replace('eliminar_',''));
+function confirmarEliminacion(cliente){
+  var id_cliente = cliente.id_cliente;
+  var nombre_cliente = cliente.nombre_cliente;
   $("#modal_eliminar_nombre").text(nombre_cliente);
   $("#modal_eliminar").removeAttr("id_cliente");
    $("#modal_eliminar").attr("id_cliente",id_cliente);
@@ -215,32 +217,198 @@ $(document).ready(function() {
 });
 
 function editarCliente(cliente){  
+  disable();
+  $("#btn_guardar").hide();
+  
+  $("#btn_editar").show();
   cliente = JSON.stringify(cliente);
   cliente = JSON.parse(cliente);
-  console.log(cliente);
+  
 
 
-      $("#nombre").val(cliente.nombre_cliente);
+  $("#nombre").val(cliente.nombre_cliente);
       
-      $("#rut").val(cliente.rut_cliente);
-      $("#telefono").val(cliente.fono_cliente);
-      $("#email").val(cliente.email_cliente);
-      $("#region").find('option[value="'+(cliente.id_region_cliente)+'"]').prop('selected', true); 
-      //$("#idProvincia").find('option[id="'+(cliente.id_region_cliente)+'"]').prop('selected', true); 
-      $("#comuna").find('option[value="'+(cliente.id_comuna_cliente)+'"]').prop('selected', true); 
-      //$("#region").val());
-      //var idProvincia = parseInt($("#provincia option:selected").attr('id_provincia'));
-      //var idComuna = parseInt($("#comuna option:selected").attr('id_comuna'));
-      $("#direccion").val(cliente.direccion_cliente);
-      $("#nombre_contacto").val(cliente.nombre_contacto);
-      $("#cargo_contacto").val(cliente.cargo_contacto);
-      
+  $("#rut").val(cliente.rut_cliente);
+  $("#telefono").val(cliente.fono_cliente);
+  $("#email").val(cliente.email_cliente);
+  $("#id_cliente").val(cliente.id_cliente);
+  $("#region").find('option[value="'+(cliente.id_region_cliente)+'"]').prop('selected', true); 
+  if($("#region").val()!="Elija Una"){
+    getProvinciasRegion();      
+  }
 
-  $("#modalEditarCliente").modal("show");
+
+
+
+  setTimeout(() => {
+    if($("#provincia option").length>1){
+      $("#provincia").find('option[id_provincia='+(cliente.id_provincia_cliente)+']').prop('selected', true); 
+
+      getComunasProvincia(); 
+      setTimeout(() => {
+        if($("#comuna option").length>1){
+          $("#comuna").find('option[id_comuna='+(cliente.id_comuna_cliente)+']').prop('selected', true); 
+        }  
+      }, 200);
+    }  
+  }, 600);
+  
+  
+    
+  
+  
+    
+  
+        
+     
+  
+      
+       
+       
+        //$("#comuna").find('option[value="'+(cliente.id_comuna_cliente)+'"]').prop('selected', true); 
+        //$("#region").val());
+        //var idProvincia = parseInt($("#provincia option:selected").attr('id_provincia'));
+        //var idComuna = parseInt($("#comuna option:selected").attr('id_comuna'));
+        $("#direccion").val(cliente.direccion_cliente);
+        $("#nombre_contacto").val(cliente.nombre_contacto);
+        $("#cargo_contacto").val(cliente.cargo_contacto);
+        
+  
+    $("#modalEditarCliente").modal("show");
+      
+      
+    
 
 }
 function editarClienteBD(){
 
+  var msj_info = "";
+
+  if($("#nombre").val()==""){
+    msj_info+= "- Debe ingresar Nombre de Empresa. </br>";
+  }
+
+  if($("#rut").val()==""){
+    msj_info+= "- Debe ingresar RUT. </br>";
+  }
+
+  if($("#telefono").val()==""){
+    msj_info+= "- Debe ingresar Teléfono. </br>";
+  }
+
+  if($("#email").val()==""){
+    msj_info+= "- Debe ingresar Email. </br>";
+  }
+  if($("#region").val()=="Elija Una"){
+    msj_info+= "- Debe seleccionar Region. </br>";
+  }
+  if($("#provincia").val()=="Elija Una"){
+    msj_info+= "- Debe seleccionar Provincia. </br>";
+  }
+  if($("#comuna").val()=="Elija Una"){
+    msj_info+= "- Debe seleccionar Comuna. </br>";
+  }
+  if($("#direccion").val()==""){
+    msj_info+= "- Debe ingresar Direccion. </br>";
+  }
+  if($("#nombre_contacto").val()==""){
+    msj_info+= "- Debe ingresar Nombre de contacto. </br>";
+  }
+
+  if($("#cargo_contacto").val()==""){
+    msj_info+= "- Debe ingresar Cargo de contacto. </br>";
+  }
+
+  if(msj_info==""){
+      var nombre = $("#nombre").val();
+      var id_cliente = $("#id_cliente").val();
+      var rut = $("#rut").val();
+      var fono = parseInt($("#telefono").val());
+      var email = $("#email").val();
+      var idRegion = parseInt($("#region").val());
+      var idProvincia = parseInt($("#provincia option:selected").attr('id_provincia'));
+      var idComuna = parseInt($("#comuna option:selected").attr('id_comuna'));
+      var direccion = $("#direccion").val();
+      var nombre_contacto = $("#nombre_contacto").val();
+      var cargo_contacto = $("#cargo_contacto").val();
+      var array_datos = [];
+      var token = $('input[name="_token"]').val();
+
+      array_datos.push({
+        nombre: nombre,
+        rut: rut,
+        fono: fono,
+        email: email,
+        id_region: idRegion,
+        id_provincia: idProvincia,
+        id_comuna: idComuna,
+        direccion: direccion,
+        nombre_contacto: nombre_contacto,
+        cargo_contacto : cargo_contacto,
+        id_cliente : id_cliente
+      });
+
+      var json_datos = JSON.stringify(array_datos);
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
+        }
+      });
+      $("#modalEditarCliente").modal("hide");
+
+      $.ajax({
+        type: "POST",
+        url: url_prev + '/editarCliente',
+        data: {
+          json_datos: json_datos,
+          _token: token
+        } //esto es necesario, por la validacion de seguridad de laravel
+      }).done(function(msg) {
+          $("#modalExitosa").modal('show');
+        
+      }).fail(function() {
+        setTimeout(() => {  
+            $("#modalError").modal('show');
+        }, 200);
+      });
+  }else{
+    $("#modalEditarCliente").modal("show");
+    $("#info_validacion").html(msj_info);
+		$("#modalInfo").modal("show");
+  }
   
-  alert("funcionalidad en desarrollo");
 }
+
+function enable() {
+  $("#titulo_editar").text("Editar Cliente");
+    $('#modalEditarCliente input').each(function () {
+      $(this).prop('disabled', false);
+  });
+  $('#modalEditarCliente select').each(function () {
+    $(this).prop('disabled', false);
+  });
+}
+
+function disable() {
+  $("#titulo_editar").text("Editar Cliente");
+  $('#modalEditarCliente input').each(function () {
+      $(this).prop('disabled', true);
+  });
+  $('#modalEditarCliente select').each(function () {
+    $(this).prop('disabled', true);
+  });
+}
+
+function mostrarEditarCliente(){
+
+  $("#btn_editar").hide();
+  enable();
+  $("#btn_guardar").show();
+}
+
+$("#form_cliente").on("submit", function (e) {
+  //do your form submission logic here
+  e.preventDefault();
+  editarClienteBD();
+});

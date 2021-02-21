@@ -32,6 +32,7 @@ Route::get('/obtenerRegiones','RegionController@getRegiones')->name('obtenerRegi
 Route::post('/obtenerProvincias','ProvinciaController@getProvincias')->name('obtenerProvincias');
 Route::post('/obtenerComunas','ComunaController@getComunas')->name('obtenerComunas');
 Route::post('/crearCliente','ClienteController@setCliente')->name('crearCliente');
+Route::post('/editarCliente','ClienteController@editarCliente')->name('editarCliente');
 Route::post('/eliminarCliente','ClienteController@removeCliente')->name('eliminarCliente');
 Route::post('/getCliente','ClienteController@getCliente')->name('getCliente');
 

@@ -41,4 +41,9 @@ class ClienteController extends Controller
         $id_cliente = $request['id_cliente'];
         return ClienteModel::eliminarCliente($id_cliente);
     }
+
+    public function editarCliente(Request $request){
+        $datos = $request["json_datos"];
+        return ClienteModel::editarCliente($datos);
+    }
 }
