@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Contraseña no válida, intente nuevamente.',
+    'failed' => 'Combinacion usuario contraseña inválida, intente nuevamente.',
     'throttle' => 'Se han producido muchos intentos de inicio de sesión, porfavor espere :seconds segundos.',
 
 ];
