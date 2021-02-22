@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class ComunaController extends Controller
 {    
+    public function __construct()
+{
+    $this->middleware('auth');
+}
+
     public function getComunas(Request $request){
         $idProvincia = $request['id'];
          return json_encode(ComunaModel::getComunasByProvincia($idProvincia));

@@ -8,6 +8,11 @@ use App\PropuestaModel;
 
 class PropuestaController extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
+
     public function setPropuesta(Request $request){
         $datos= $request["datos_envio"];
         return PropuestaModel::setPropuesta($datos);

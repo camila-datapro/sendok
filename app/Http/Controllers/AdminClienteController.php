@@ -10,6 +10,11 @@ use App\ComunaModel;
 
 class AdminClienteController extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
+
     public function index()
     {
         return view('admin_cliente')

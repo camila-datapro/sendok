@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class IngresoMasivoController extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
+
     public function index()
     {
         return view('ingreso_masivo');
