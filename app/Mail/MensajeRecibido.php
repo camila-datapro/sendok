@@ -35,9 +35,7 @@ class MensajeRecibido extends Mailable
     {
        $nombre = $this->nombre;
        $contenido = $this->contenido;
-       $folletos = $this->folletos;
-
-       Log::debug($folletos);
+       $folletos = $this->folletos;       
 
        if($contenido==""){
             $contenido = "Estimado/a Cliente:

@@ -100,7 +100,6 @@ class ProductoModel extends Model
             tiene_folleto = ".intval($tiene_folleto).",
             proveedor = '".$nombre_proveedor."'
         where id_producto = ".intval($id_producto)."";
-        Log::debug($query);
         $results = DB::update($query);         
         return $results;
     }
@@ -108,7 +107,6 @@ class ProductoModel extends Model
 
     public static function insertarProductos($productos_json){
         $productos = json_decode($productos_json,true);
-        Log::debug($productos);
         for($i=0;$i<(sizeOf($productos)-1);$i++){
         $clase = "producto";
         $nombre = $productos[$i]["nombre_producto"];

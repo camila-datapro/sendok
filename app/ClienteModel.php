@@ -91,7 +91,7 @@ class ClienteModel extends Model
             nombre_contacto ='".$contacto_nombre."',
             cargo_contacto ='".$contacto_cargo."'
             where id_cliente = '".intval($id_cliente)."'";
-        Log::debug($query);
+
         $results = DB::update($query);                            
         return $results;
     }
