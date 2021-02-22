@@ -289,7 +289,7 @@ numero_interno.addEventListener("blur", function() {
 });
 
 function enable() {
-  $("#titulo_editar").text("Editar Cliente");
+  $("#titulo_editar").text("Editar Producto");
   $('#modalEditar input').each(function () {
     $(this).prop('disabled', false);
  });
@@ -299,7 +299,7 @@ function enable() {
 }
 
 function disable() {
-  $("#titulo_editar").text("Editar Cliente");
+  $("#titulo_editar").text("Ver Producto");
   $('#modalEditar input').each(function () {
     $(this).prop('disabled', true);
  });

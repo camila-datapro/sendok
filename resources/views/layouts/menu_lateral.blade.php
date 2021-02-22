@@ -18,7 +18,7 @@
                   <p class="mb-1 mt-3 font-weight-semibold">{{ Auth::user()->name }}</p>
                   <p class="font-weight-light text-muted mb-0">{{ Auth::user()->email }}</p>
                </div>
-               <a class="dropdown-item disabled" style="color:gray">Mi perfil</a>
+               <a class="dropdown-item" href="./admin_usuario">Mi perfil</a>
                <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                   <span class="nav__name">Cerrar Sesión</span>
                   <form id="logout-form-2" action="{{ route('logout') }}" method="POST" class="d-none">
