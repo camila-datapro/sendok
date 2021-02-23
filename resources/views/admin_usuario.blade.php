@@ -46,6 +46,7 @@
                            <div class="row">
                               <div class="col-lg-12">
                                  <form id="datos_usuario" class="forms-sample">
+                                 <input type="hidden" id="id_usuario" value="{{Auth::user()->id }}"/>
                                     <input type="hidden" id="nombre_hidden" value="{{Auth::user()->name }}"/>
                                     <input type="hidden" id="email_hidden" value="{{Auth::user()->email }}"/>
                                     <input type="hidden" id="cargo_hidden" value="{{Auth::user()->cargo }}"/>
@@ -69,7 +70,7 @@
                                     <div class="form-group row">               
                                        <label class="col-md-2">Fono</label>
                                        <div class="form-group col-md-4">                                        
-                                          <input disabled required type="number" maxlength="11"  class="form-control form-control-sm" aria-label="fono" id="fono" value="{{ Auth::user()->name}}">
+                                          <input disabled required type="number" maxlength="11"  class="form-control form-control-sm" aria-label="fono" id="fono" value="{{ Auth::user()->fono}}">
                                        </div>
                                     </div>
                                     <div class="row">                                    
@@ -94,6 +95,24 @@
          <!-- page-body-wrapper ends -->
       </div>
       <!-- seccion modales-->
+      <div class="modal fade" id="modalExitosa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Operación exitosa</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  Se ha realizado la operación de forma exitosa.
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.reload();">OK</button>
+               </div>
+            </div>
+         </div>
+      </div>
       <!-- Modal -->
      
       <!-- fin seccion modales-->

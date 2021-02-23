@@ -43,6 +43,34 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="cargo" class="col-md-4 col-form-label text-md-right">{{ __('Cargo') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="cargo" type="text" class="form-control @error('cargo') is-invalid @enderror" name="cargo" value="{{ old('cargo') }}" required autocomplete="cargo">
+
+                                @error('cargo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="fono" class="col-md-4 col-form-label text-md-right">{{ __('Fono') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="fono" type="number" class="form-control @error('fono') is-invalid @enderror" name="fono" value="{{ old('fono') }}" required autocomplete="fono">
+
+                                @error('fono')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
                             <div class="col-md-6">

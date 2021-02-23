@@ -61,6 +61,7 @@ Route::post('/guardarPDFProducto', 'DocumentoController@guardarPDFProducto')->na
 
 Route::post('/setPropuesta', 'PropuestaController@setPropuesta')->name('setPropuesta');
 Route::post('/updatePropuesta', 'PropuestaController@updatePropuesta')->name('updatePropuesta');
+Route::post('/editarUsuario', 'AdminUsuario@editarUsuario')->name('editarUsuario');
 Route::post('/setEstadoEnviado', 'PropuestaController@setEstadoEnviado')->name('setEstadoEnviado');
 Route::post('/propuestaLastId', 'PropuestaController@getLastId')->name('propuestaLastId');
 

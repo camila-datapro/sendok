@@ -203,7 +203,7 @@ function editarBDProducto(){
       id_producto : id_producto
     });
 
-    console.log(array_datos[0]);
+    
   
     var json_datos = JSON.stringify(array_datos);
 

@@ -1,3 +1,5 @@
+const url_prev = location.origin+'/desarrollo/public';
+
 function mostrarAcciones(){
 	$("#btn_editar").hide();
 	$("#btn_guardar").show();
@@ -46,5 +48,34 @@ function enable() {
   });
   
   function editarBDUsuario(){
-	  alert("funcionalidad en desarrollo");
+	$.ajaxSetup({
+		headers: {
+		  'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
+		}
+	  });
+
+	
+	  var array_datos = [];
+	  array_datos.push({
+		nombre: $("#nombre").val(),
+		email: $("#email").val(),
+		cargo: $("#cargo").val(),
+		fono: $("#fono").val(),
+		id_usuario: $("#id_usuario").val()
+	  });
+  	  	
+	  var json_datos = JSON.stringify(array_datos);
+
+	  $.ajax({
+		type: "POST",
+		url: url_prev + '/editarUsuario',
+		data: {
+		  json_datos: json_datos,
+		  _token: $('input[name="_token"]').val()
+		} //esto es necesario, por la validacion de seguridad de laravel
+	  }).done(function (msg) {
+		$("#modalExitosa").modal("show");
+	  }).fail(function () {				
+		console.log("Error al editar usuario");
+	  });
   }
