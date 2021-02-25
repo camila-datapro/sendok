@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
+   <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>Sendok</title>
@@ -15,7 +16,6 @@
       <link href="{{ asset('/css/select_buscador.css') }}" rel="stylesheet" />
       <link rel="stylesheet" href="{{ asset('/assets/css/shared/style.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
-      <link rel="shortcut icon" href="{{ asset('/assets/images/favicon.png') }}" />
       <style>
          .select2-container--default .select2-selection--single {
          background-color: #fff;

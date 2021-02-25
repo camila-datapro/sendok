@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
+   <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
       <meta name="csrg-token" content="{{ csrf_token() }}" />
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +16,6 @@
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.addons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/shared/style.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
-      <link rel="shortcut icon" href="{{ asset('/assets/images/favicon.png') }}" />
       <style>
          .margined-left{
          margin-left: 12px;
