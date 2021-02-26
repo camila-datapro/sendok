@@ -1,0 +1,33 @@
+Hola!
+
+Te contaré aspectos necesarios para que puedas trabajar en esta aplicación, o bien, entenderla.
+Este desarrollo MVC está creado con LARAVEL versión 7.x, por lo que la estructura del backend está toda en PHP 7.
+
+Debes estar atent@ a los cambios que php haga en sus funciones si se desea cambiar de versión. 
+Favor revisar la documentación del sitio oficial: https://www.php.net/docs.php
+
+A nivel de base de datos se cuenta con MySQL como motor principal, el modelo relacional se encuentra documentado.
+Las tablas poseen sus constraint de relaciones, por lo que tu mism@ podrás generar los diagramas a través de herramientas
+como MYSQL WorkBench. 
+
+*Se debe tener instalado npm y php artisan.
+
+Para el desarrollo se utilizó Visual Studio Code, y para crear Modelos y Controladores, la Terminal
+que provee el editor, a través de los siguientes comandos puedes crear automáticamente la estructura de 
+un controlador nuevo o modelo (los Modelos contienen las interacciones a BD , los Controladores interactúan con el Javascript,
+y este último a su vez con las Vistas hechas con plantillas Blade):
+
+>> php artisan make:controller NOMBREDECONTROLADOR
+>> php artisan make:model NOMBREDEMODELO
+
+PHPDocumentor2 (el unico disponible para trabajar con php 7):
+https://blog.devsense.com/2019/phpdoc-php7
+https://github.com/phpDocumentor/phpDocumentor/releases
+>> npm install graphviz
+
+La carpeta con php documentor se encontrara en la carpeta /vendor/bin/phpDocumentor
+* Nos ubicamos en consola en la carpeta phpDocumentor
+>> php phpDocumentor.phar
+
+
+

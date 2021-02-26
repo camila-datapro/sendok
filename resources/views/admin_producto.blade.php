@@ -3,13 +3,12 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-   <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
+      <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
       <meta name="csrg-token" content="{{ csrf_token() }}" />
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>Sendok</title>
       <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
-      
       <link rel="stylesheet" href=" {{ asset('/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/iconfonts/ionicons/css/ionicons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/iconfonts/typicons/src/font/typicons.css') }}">
@@ -17,51 +16,34 @@
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.base.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.addons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/shared/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
+      <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
       <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-    <!--  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">-->
+      <!--  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">-->
       <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
       <style>
-  
-
-
-
-table {
-        border-collapse: collapse;
-        table-layout: fixed;
-        
-      }
-
-    
-
-      .table td{
+         table {
+         border-collapse: collapse;
+         table-layout: fixed;
+         }
+         .table td{
          white-space: normal;
-      }
-
-
-
-      .div2{}
-      @media screen and (max-width: 1080px) {
+         }
+         .div2{}
+         @media screen and (max-width: 1080px) {
          .div2{width: 100%; border: none 0px RED;
          overflow-x: scroll; overflow-y:hidden;}
-
          table td {        
-        word-wrap: none;
-        width: 50px;
-      }
-
-      table th {        
-        word-wrap: none;
-        width: 50px;
-      }
-
-   }
-
-   .control-label{
-      margin-top: 10px;
-   }
-
-   
+         word-wrap: none;
+         width: 50px;
+         }
+         table th {        
+         word-wrap: none;
+         width: 50px;
+         }
+         }
+         .control-label{
+         margin-top: 10px;
+         }
       </style>
    </head>
    @endsection
@@ -89,54 +71,49 @@ table {
                         <div class="container">
                            <div class="row">
                               <div class="col-lg-12">
-                             
-                               
-                              <div class="div2">
-                                 <div id="div_cargando" class="row">
-                                    
-                                     <img id="cargando" style="margin-left: 30px;"  width="30px" src="{{ asset('img/loading.gif') }}"/>
-                                     <label style="margin-left: 10px;">Cargando lista de productos...</label>
+                                 <div class="div2">
+                                    <div id="div_cargando" class="row">
+                                       <img id="cargando" style="margin-left: 30px;"  width="30px" src="{{ asset('img/loading.gif') }}"/>
+                                       <label style="margin-left: 10px;">Cargando lista de productos...</label>
+                                    </div>
+                                    <table class="table table-hover tabla_productos" id="tabla_productos" style="display:none;">
+                                       <thead>
+                                          <tr>
+                                             <th scope="col"">Nombre</th>
+                                             <th scope="col">SKU</th>
+                                             <th scope="col">% Margen</th>
+                                             <th scope="col">Precio</th>
+                                             <th scope="col">Acciones</th>
+                                          </tr>
+                                       </thead>
+                                       <tbody>
+                                          <?php              
+                                             $productos = json_decode($productos);
+                                                for($i=0;$i<sizeOf($productos);$i++){
+                                                   $array_datos= array(
+                                                      "nombre" => $productos[$i]->nombre_producto,
+                                                      "descripcion" => $productos[$i]->descripcion_producto
+                                                   );
+                                                   echo "<tr>                                                      
+                                                   <td style='max-width: 100px;' class='BreakWord'>".$productos[$i]->nombre_producto."</td>                                                      
+                                                   <td>".$productos[$i]->numero_interno."</td>                                                      
+                                                   <td> % ".$productos[$i]->margen."</td>                                                      
+                                                   <td><b>".strtoupper($productos[$i]->tipo_cambio)."</b> ".$productos[$i]->valor_producto."</td>
+                                                   <td>
+                                                      <button class='btn btn-danger' id='eliminar_".$productos[$i]->id_producto."' onclick='confirmarEliminacion(".json_encode($productos[$i]).")' >
+                                                      <i class='fas fa-trash-alt'></i>
+                                                      </button>                   
+                                                      <button class='btn btn-warning' id='editar_".$productos[$i]->id_producto."' onclick='editarProducto(".json_encode($productos[$i]).")' >
+                                                      <i class='fas fa-edit'></i>
+                                                      </button> 
+                                                   </td>
+                                                   </tr>";
+                                                }
+                                                ?>  
+                                       </tbody>
+                                    </table>
                                  </div>
-    
-                                 <table class="table table-hover tabla_productos" id="tabla_productos" style="display:none;">
-                                    <thead>
-                                       <tr>
-                                          <th scope="col"">Nombre</th>                                          
-                                          <th scope="col">SKU</th>
-                                          <th scope="col">% Margen</th>
-                                          <th scope="col">Precio</th>
-                                          <th scope="col">Acciones</th>
-                                       </tr>
-                                    </thead>
-                                    <tbody>
-                                       <?php              
-                                       $productos = json_decode($productos);
-                                          for($i=0;$i<sizeOf($productos);$i++){
-                                             $array_datos= array(
-                                                "nombre" => $productos[$i]->nombre_producto,
-                                                "descripcion" => $productos[$i]->descripcion_producto
-                                             );
-                                             echo "<tr>                                                      
-                                             <td style='max-width: 100px;' class='BreakWord'>".$productos[$i]->nombre_producto."</td>                                                      
-                                             <td>".$productos[$i]->numero_interno."</td>                                                      
-                                             <td> % ".$productos[$i]->margen."</td>                                                      
-                                             <td><b>".strtoupper($productos[$i]->tipo_cambio)."</b> ".$productos[$i]->valor_producto."</td>
-                                             <td>
-                                                <button class='btn btn-danger' id='eliminar_".$productos[$i]->id_producto."' onclick='confirmarEliminacion(".json_encode($productos[$i]).")' >
-                                                <i class='fas fa-trash-alt'></i>
-                                                </button>                   
-                                                <button class='btn btn-warning' id='editar_".$productos[$i]->id_producto."' onclick='editarProducto(".json_encode($productos[$i]).")' >
-                                                <i class='fas fa-edit'></i>
-                                                </button> 
-                                             </td>
-                                             </tr>";
-                                          }
-                                          ?>  
-                                    </tbody>
-                                 </table>
-                                
-                           </div>
-                           <!--add-->
+                                 <!--add-->
                               </div>
                            </div>
                         </div>
@@ -242,8 +219,6 @@ table {
             </div>
          </div>
       </div>
-
-
       <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="modalEditar" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -256,92 +231,81 @@ table {
                <form class="forms-sample" id="form_producto">
                   <div class="modal-body">
                      <!-- formulario de edicion de producto-->
-                              <input type="hidden" id="id_producto" />
-                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                                 <label>Nombre Producto</label>
-                                 <input required disabled id="nombre_producto" maxlength="50" name="nombre_producto" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
+                     <input type="hidden" id="id_producto" />
+                     <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                        <label>Nombre Producto</label>
+                        <input required disabled id="nombre_producto" maxlength="50" name="nombre_producto" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
+                     </div>
+                     <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                        <label>Descripción Producto</label>
+                        <input required disabled id="descripcion_producto" maxlength="250" name="descripcion_producto" type="text" class="form-control form-control-sm" aria-label="Descripción de Producto">
+                     </div>
+                     <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                        <label>Proveedor</label>
+                        <input required disabled id="nombre_proveedor" maxlength="20" name="nombre_proveedor" type="text" class="form-control form-control-sm" aria-label="Nombre proveedor">
+                     </div>
+                     <div class="form-group">
+                        <div class="col-md-12">
+                           <div class="form-group row">
+                              <label for="inputKey" class="col-md-2 control-label">N° Fabricacion</label>
+                              <div class="col-md-4">
+                                 <input required disabled id="numero_fabricacion" maxlength="20" class="form-control"  placeholder="N° Fabricacion">
                               </div>
-                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                                 <label>Descripción Producto</label>
-                                 <input required disabled id="descripcion_producto" maxlength="250" name="descripcion_producto" type="text" class="form-control form-control-sm" aria-label="Descripción de Producto">
+                              <label for="inputValue" class="col-md-2 control-label">SKU</label>
+                              <div class="col-md-4">
+                                 <input required disabled id="numero_interno" maxlength="20" class="form-control" placeholder="SKU">
                               </div>
-                              <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                                 <label>Proveedor</label>
-                                 <input required disabled id="nombre_proveedor" maxlength="20" name="nombre_proveedor" type="text" class="form-control form-control-sm" aria-label="Nombre proveedor">
+                           </div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <div class="col-md-12">
+                           <div class="form-group row">
+                              <label class="col-md-2">Ficha técnica</label>         
+                              <div class="col-md-4" id="div_ficha_tecnica">                                                                                                     
+                                 <input disabled id="ficha_tecnica" class="form-control" type="file" accept="application/pdf" onchange="guardarPDFProducto()"/>
                               </div>
-
-                              
-                                 <div class="form-group">
-                                    <div class="col-md-12">
-                                          <div class="form-group row">
-                                             <label for="inputKey" class="col-md-2 control-label">N° Fabricacion</label>
-                                             <div class="col-md-4">
-                                                <input required disabled id="numero_fabricacion" maxlength="20" class="form-control"  placeholder="N° Fabricacion">
-                                             </div>
-                                             <label for="inputValue" class="col-md-2 control-label">SKU</label>
-                                             <div class="col-md-4">
-                                                <input required disabled id="numero_interno" maxlength="20" class="form-control" placeholder="SKU">
-                                             </div>
-                                          </div>
-                                    </div>
-                                 </div>
-                              
-                              
-                                 <div class="form-group">
-                                    <div class="col-md-12">
-                                       <div class="form-group row">
-                                          <label class="col-md-2">Ficha técnica</label>         
-                                          <div class="col-md-4" id="div_ficha_tecnica">                                                                                                     
-                                             <input disabled id="ficha_tecnica" class="form-control" type="file" accept="application/pdf" onchange="guardarPDFProducto()"/>
-                                          </div>
-                                          <label class="col-md-2">Stock</label>
-                                          <div class="form-group col-md-4" id="div_unidades">                                          
-                                             <input required disabled id="stock" maxlength="15" name="stock" type="number" class="form-control" aria-label="Stock">
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              
-                              
-                                 <div class="form-group">
-                                    <div class="col-md-12">
-                                       <div class="form-group row">                                       
-                                             <label class="col-md-2">Tipo de Cambio</label>
-                                             <div class="col-md-4">
-                                                <select disabled class="form-control" id="select_cambio">
-                                                   <option id="_blank">Elija Uno</option>
-                                                   <option id="CLP">CLP</option>                                                
-                                                   <option id="USD">USD</option>
-                                                   <option id="UF">UF</option>
-                                                </select>
-                                             </div>                                    
-                                             <label class="col-md-2">Costo</label>
-                                             <div class="col-md-4">
-                                                <input required disabled type="number" maxlength="10" class="form-control form-control-sm" aria-label="costo" id="costo">
-                                             </div>                                      
-                                       </div>
-                                    </div>
-                                 </div>
-                              
-                              
-                                 <div class="col-md-12">
-                                    <div class="form-group row">   
-                                       <label class="col-md-2">%Margen</label>
-                                       <div class="form-group col-md-4">                                        
-                                          <input required disabled type="number" maxlength="3" onkeyup="validaPorcentaje(this)" class="form-control form-control-sm" aria-label="margen" id="margen">
-                                       </div>
-                                       
-                                       <label class="col-md-2">Valor venta</label>
-                                       <div class="form-group col-md-4">
-                                          <input required disabled editable type="number" maxlength="10" class="form-control form-control-sm" aria-label="valor_venta" id="valor_venta">
-                                       </div>
-                                    </div>
-                                 </div>
-                              
+                              <label class="col-md-2">Stock</label>
+                              <div class="form-group col-md-4" id="div_unidades">                                          
+                                 <input required disabled id="stock" maxlength="15" name="stock" type="number" class="form-control" aria-label="Stock">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                        <div class="col-md-12">
+                           <div class="form-group row">
+                              <label class="col-md-2">Tipo de Cambio</label>
+                              <div class="col-md-4">
+                                 <select disabled class="form-control" id="select_cambio">
+                                    <option id="_blank">Elija Uno</option>
+                                    <option id="CLP">CLP</option>
+                                    <option id="USD">USD</option>
+                                    <option id="UF">UF</option>
+                                 </select>
+                              </div>
+                              <label class="col-md-2">Costo</label>
+                              <div class="col-md-4">
+                                 <input required disabled type="number" maxlength="10" class="form-control form-control-sm" aria-label="costo" id="costo">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-12">
+                        <div class="form-group row">
+                           <label class="col-md-2">%Margen</label>
+                           <div class="form-group col-md-4">                                        
+                              <input required disabled type="number" maxlength="3" onkeyup="validaPorcentaje(this)" class="form-control form-control-sm" aria-label="margen" id="margen">
+                           </div>
+                           <label class="col-md-2">Valor venta</label>
+                           <div class="form-group col-md-4">
+                              <input required disabled editable type="number" maxlength="10" class="form-control form-control-sm" aria-label="valor_venta" id="valor_venta">
+                           </div>
+                        </div>
+                     </div>
                      <!-- fin formulario de edicion de producto-->
                   </div>
                   <div class="modal-footer">
-                  
                      <button type="button" class="btn btn-primary" id="botonMostrar" onclick="mostrarEditarProducto()">Editar Producto</button>
                      <button style="display:none" type="submit" class="btn btn-success" id="botonEditar">Guardar Cambios</button>
                      <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -350,7 +314,6 @@ table {
             </div>
          </div>
       </div>
-
       <div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="modalinfo" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -379,7 +342,7 @@ table {
       <script src="{{ asset('/js/admin_producto.js') }}"></script>
       <script src="https://unpkg.com/@popperjs/core@2"></script>
       <script src="{{ asset('/js/dataTables.js')}}"></script>   
-     <!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   -->
+      <!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   -->
       <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
       <!-- End custom js for this page-->
       <script>
@@ -390,7 +353,7 @@ table {
                 //responsive: true
             });
          });
-
+         
       </script>
    </body>
 </html>

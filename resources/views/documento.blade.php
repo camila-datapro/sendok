@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-   <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
+      <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>Sendok</title>
@@ -85,7 +85,6 @@
                                  <div id='TextBoxesGroup'>
                                     <div id="TextBoxDiv1" style="margin-bottom: 20px; border: 1px solid; border-color: #dee2e6; background-color: #e0e4ff; padding: 12px; padding-top: 0px;">
                                        <label class="top-spaced">Seleccione producto N° 1: </label>
-                                     
                                        <select class="form-control" name="textbox1"  type='textbox' id='select_producto_1' onchange="mostrarAdjunto(this)" >
                                           <option id="0">Elija Uno</option>
                                           <?php 
@@ -94,13 +93,11 @@
                                              }
                                              ?>
                                        </select>
-
                                        <div class="row">
                                           <div style="display:none;" class="form-check" id="check_1">
                                              <input type="checkbox" class="checkbox" id="adjuntar_ficha_1"> <label style="margin-top:4px;">Adjuntar Ficha Técnica</label></input>
                                           </div>
                                        </div>
-                                       
                                        <label class="top-spaced">Unidades producto N° 1</label>
                                        <input class="form-control form-control-sm" id="unidades_producto_1" nombre="unidades_producto"></input>  
                                        <label class="top-spaced"> % Descuento para producto N° 1 (opcional)</label>
@@ -318,64 +315,90 @@
       </div>
       <!-- Modal -->
       <div class="modal fade" id="modalCrearProducto" role="dialog">
-         <div class="modal-dialog modal-lg">
+         <div class="modal-dialog">
             <div class="modal-content">
                <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">Crear nuevo producto</h5>
                   <button type="button" class="close" data-dismiss="modal" onclick="window.location.reload();">&times;</button>
                </div>
                <div class="modal-body">
-                  <div class="col-md-12 grid-margin stretch-card">
-                     <div class="card">
-                        <div class="card-body">
-                           <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                              <label>Clase</label>
-                              <select class="form-control form-control-md" id="tipo_producto" onchange="visarUnidades();">
-                                 <option _blank="">Elija Uno</option>
-                                 <option id="producto">Producto</option>
-                                 <option id="servicio">Servicio</option>
-                              </select>
+                  <div class="col-md-12">
+                     <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                        <label>Clase</label>
+                        <select class="form-control form-control-md" id="tipo_producto" onchange="visarUnidades();">
+                           <option _blank="">Elija Uno</option>
+                           <option id="producto">Producto</option>
+                           <option id="servicio">Servicio</option>
+                        </select>
+                     </div>
+                     <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                        <label>Nombre Producto</label>
+                        <input id="nombre_producto" maxlength="20" name="nombre_producto" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
+                     </div>
+                     <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                        <label>Descripción Producto</label>
+                        <input id="descripcion_producto" maxlength="250" name="descripcion_producto" type="text" class="form-control form-control-sm" aria-label="Descripción de Producto">
+                     </div>
+                     <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                        <label>Proveedor</label>
+                        <input id="nombre_proveedor" maxlength="20" name="nombre_proveedor" type="text" class="form-control form-control-sm" aria-label="Nombre proveedor">
+                     </div>
+                     <div style="padding-left: 0px !important;" class="form-group col-md-12">
+                       
+                           <div class="form-group row">
+                              <label for="inputKey" class="col-md-2 control-label">N° Fabricacion</label>
+                              <div class="col-md-4">
+                                 <input required  id="numero_fabricacion" maxlength="20" class="form-control"  placeholder="N° Fabricacion">
+                              </div>
+                              <label for="inputValue" class="col-md-2 control-label">SKU</label>
+                              <div class="col-md-4">
+                                 <input required  id="numero_interno" maxlength="20" class="form-control" placeholder="SKU">
+                              </div>
                            </div>
-                           <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                              <label>Nombre Producto</label>
-                              <input id="nombre_producto" maxlength="20" name="nombre_producto" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
+                       
+                     </div>
+                   
+                        <div style="padding-left: 0px !important;" class="col-md-12">
+                           <div class="form-group row">
+                              <label class="col-md-2">Ficha técnica</label>         
+                              <div class="col-md-4" id="div_ficha_tecnica">                                                                                                     
+                                 <input  id="ficha_tecnica" class="form-control" type="file" accept="application/pdf"/>
+                              </div>
+                              <label id="stock_label" style=" display:none;" class="col-md-2">Stock</label>
+                              <div class="form-group col-md-4"  id="div_unidades" style=" display:none;">                                          
+                                 <input id="stock" maxlength="15" name="stock" type="number" class="form-control" aria-label="Stock">
+                              </div>
                            </div>
-                           <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                              <label>N° Fabricacion</label>
-                              <input id="numero_fabricacion" maxlength="20" name="numero_fabricacion" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
+                        </div>
+                   
+                  
+                        <div style="padding-left: 0px !important;" class="col-md-12">
+                           <div class="form-group row">
+                              <label class="col-md-2">Tipo de Cambio</label>
+                              <div class="col-md-4">
+                                 <select class="form-control" id="select_cambio">
+                                    <option id="_blank">Elija Uno</option>
+                                    <option id="CLP">CLP</option>
+                                    <option id="USD">USD</option>
+                                    <option id="UF">UF</option>
+                                 </select>
+                              </div>
+                              <label class="col-md-2">Costo</label>
+                              <div class="col-md-4">
+                                 <input required type="number" maxlength="10" class="form-control form-control-sm" aria-label="costo" id="costo">
+                              </div>
                            </div>
-                           <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                              <label>N° Interno</label>
-                              <input id="numero_interno" maxlength="20" name="numero_interno" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
+                        </div>
+                    
+                     <div style="padding-left: 0px !important;" class="col-md-12">
+                        <div class="form-group row">
+                           <label class="col-md-2">%Margen</label>
+                           <div class="form-group col-md-4">                                        
+                              <input required type="number" maxlength="3" onkeyup="validaPorcentaje(this)" class="form-control form-control-sm" aria-label="margen" id="margen">
                            </div>
-                           <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                              <label>Descripción Producto</label>
-                              <input id="descripcion_producto" maxlength="250" name="descripcion_producto" type="text" class="form-control form-control-sm" aria-label="Descripción de Producto">
-                           </div>
-                           <div style="padding-left: 0px !important; display:none;" class="form-group col-md-12" id="div_unidades">
-                              <label>Unidades disponibles</label>
-                              <input id="stock" maxlength="15" name="stock" type="number" class="form-control form-control-sm" aria-label="Stock">
-                           </div>
-                           <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                              <label>Tipo de Cambio</label>
-                              <select class="form-control" id="select_cambio">
-                                 <option id="_blank">Elija Uno</option>
-                                 <option id="clp">CLP</option>
-                                 <option id="usd">USD</option>
-                                 <option id="uf">UF</option>
-                              </select>
-                           </div>
-                           <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                              <label>Costo</label>
-                              <input type="number" maxlength="10" class="form-control form-control-sm" aria-label="costo" id="costo">
-                           </div>
-                           <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                              <label> % Margen</label>
-                              <input type="number" maxlength="10" onkeyup="validaPorcentaje(this)" class="form-control form-control-sm" aria-label="margen" id="margen">
-                           </div>
-                           <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                              <label>Valor venta</label>
-                              <input type="number" maxlength="10" class="form-control form-control-sm" aria-label="valor_venta" id="valor_venta">
+                           <label class="col-md-2">Valor venta</label>
+                           <div class="form-group col-md-4">
+                              <input required type="number" maxlength="10" class="form-control form-control-sm" aria-label="valor_venta" id="valor_venta">
                            </div>
                         </div>
                      </div>

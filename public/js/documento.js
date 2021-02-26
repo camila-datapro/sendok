@@ -625,8 +625,9 @@ function cargarRegiones() {
 			_token: token
 		} //esto es necesario, por la validacion de seguridad de laravel
 		}).done(function(msg) {
-			$("#modalCrearCliente").modal("hide");
+			
 			setTimeout(() => {
+				$("#modalCrearCliente").modal("hide");
 				$("#modalExitosa").modal('show');	
 			}, 200);
 			
@@ -648,10 +649,10 @@ function cargarRegiones() {
 	}
   }
 
-
   function crearProducto(){
-	var msg_info = "";
-
+    var msg_info = "";
+    var tiene_folleto = 0;
+	$("#modalCrearProducto").modal("hide");
     if($("#tipo_producto").val()=="Elija Uno"){
       msg_info += "- Debe ingresar Tipo de producto.</br>"
     }
@@ -683,74 +684,113 @@ function cargarRegiones() {
       msg_info += "- Debe ingresar Numero fabricación.</br>"
     }
     if(msg_info==""){
-		$.ajaxSetup({
-		headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
-		}
-		});
 
-		var clase = $("#tipo_producto option:selected").attr('id');
-		var nombre_producto = $("#nombre_producto").val();
-		var valor_producto = $("#valor_venta").val();
-		var descripcion_producto = $("#descripcion_producto").val();
-		var tipo_cambio = $("#select_cambio option:selected").attr("id");
-		var stock = $("#stock").val();
-		var costo = $("#costo").val();
-		var margen = $("#margen").val();
-		var numero_interno = $("#numero_interno").val();
-		var numero_fabricacion = $("#numero_fabricacion").val();
-		var array_datos = [];
-		var token = $('input[name="_token"]').val();
-		array_datos.push({
-		clase: clase,
-		nombre_producto: nombre_producto,
-		valor_producto: valor_producto,
-		descripcion_producto: descripcion_producto,
-		tipo_cambio: tipo_cambio,
-		stock: stock,
-		costo: costo,
-		margen: margen,
-		numero_interno: numero_interno,
-		numero_fabricacion: numero_fabricacion
-		});
-	
-		var json_datos = JSON.stringify(array_datos);
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
+        }
+      });
+      $("#modalCargando").modal('show');
+      
+      var element = $("#ficha_tecnica");
+  var numero_fabricacion = $("#numero_interno").val();
+  if($("#ficha_tecnica").val()!=""){
+    tiene_folleto = 1;
+    var file = element.prop('files')[0];
+    var reader = new FileReader();
 
-		$("#modalCargando").modal('show');
-		$.ajax({
-			type: "POST",
-			url: url_prev + '/crearProducto',
-			data: {
-			json_datos: json_datos,
-			_token: token
-			} //esto es necesario, por la validacion de seguridad de laravel
-		}).done(function(msg) {
-			$("#modalCrearProducto").modal('hide');
-			setTimeout(() => {  
-				$("#modalCargando").modal('hide'); 
-			}, 500);
-			setTimeout(() => {  
-				$("#modalExitosa").modal('show');
-			}, 500);
-		
-		}).fail(function() {
-			
-			setTimeout(() => {  
-				$("#modalCargando").modal('hide'); 
-			}, 500);
-			setTimeout(() => {  
-				$("#modalError").modal('show');
-			}, 500);
-		});
-	}else{
-		$("#modalCrearProducto").modal("hide");		
-		setTimeout(() => {
-			$("#info_validacion").html(msg_info);
-			$("#modalInfo").modal("show");	
-		}, 200);
-		$("#modalCrearProducto").modal("show");	
-		
-	}
+    reader.onload = function(readerEvt) {
+        var binaryString = readerEvt.target.result;
+        base64String = btoa(binaryString);
+        
+        // alert(base64String);
+        // Do additional stuff
+       // callback(base64String);
+
+       $.ajax({
+				type: "POST",
+				url: url_prev + '/guardarPDFProducto',
+				data: {
+					pdf: base64String,
+					nombre_doc: 'producto_'+numero_fabricacion+'.pdf',
+					_token: $('input[name="_token"]').val()
+				} //esto es necesario, por la validacion de seguridad de laravel
+			}).done(function (msg) {
+				
+			}).fail(function () {				
+				console.log("Error en almacenamiento de ficha tecnica de producto");
+			});
+
+    };
+
+    reader.readAsBinaryString(file);
+  }
+
+
+
+      setTimeout(() => {
+        var clase = $("#tipo_producto option:selected").attr('id');
+      var nombre_producto = $("#nombre_producto").val();
+      var valor_producto = $("#valor_venta").val();
+      var descripcion_producto = $("#descripcion_producto").val();
+      
+      var tipo_cambio = $("#select_cambio option:selected").attr("id");
+      var stock = $("#stock").val();
+      var costo = $("#costo").val();
+      var margen = $("#margen").val();
+      var numero_interno = $("#numero_interno").val();
+      var numero_fabricacion = $("#numero_fabricacion").val();
+      var nombre_proveedor = $("#nombre_proveedor").val();
+      var array_datos = [];
+      var token = $('input[name="_token"]').val();
+      array_datos.push({
+        clase: clase,
+        nombre_producto: nombre_producto,
+        valor_producto: valor_producto,
+        descripcion_producto: descripcion_producto,
+        tipo_cambio: tipo_cambio,
+        stock: stock,
+        costo: costo,
+        margen: margen,
+        numero_interno: numero_interno,
+        numero_fabricacion: numero_fabricacion,
+        tiene_folleto: tiene_folleto,
+        nombre_proveedor: nombre_proveedor
+      });
+    
+      var json_datos = JSON.stringify(array_datos);
+
+     
+      $.ajax({
+          type: "POST",
+          url: url_prev + '/crearProducto',
+          data: {
+          json_datos: json_datos,
+          _token: token
+          } //esto es necesario, por la validacion de seguridad de laravel
+      }).done(function(msg) {
+          setTimeout(() => {  
+              $("#modalCargando").modal('hide'); 
+          }, 500);
+          setTimeout(() => {  
+              $("#modalExitosa").modal('show');
+          }, 500);
+      
+      }).fail(function() {
+          
+          setTimeout(() => {  
+              $("#modalCargando").modal('hide'); 
+          }, 500);
+          setTimeout(() => {  
+              $("#modalError").modal('show');
+          }, 500);
+      });
+      }, 300);
+      
+    }else{
+      $("#info_validacion").html(msg_info);
+		  $("#modalInfo").modal("show");
+    }
   }
 
 
@@ -764,8 +804,10 @@ function visarUnidades(){
 	var opcion = $("#tipo_producto option:selected").attr("id");
 	if(opcion=="producto"){
 	  $("#div_unidades").show();
+	  $("#stock_label").show();
 	}else{
 	  $("#div_unidades").hide();
+	  $("#stock_label").hide();
 	}
   }
 
