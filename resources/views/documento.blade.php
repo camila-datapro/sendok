@@ -139,8 +139,9 @@
                                  </div>
                                  <input hidden id="cantidad_divs" cantidad="1"></input>
                                  <div>
+                                 <button type='button' class="btn btn-dark" id='removeButton'><i class="fas fa-minus"></i> Ítem</button>
                                     <button type='button'  class="btn btn-dark"  id='addButton'><i class="fas fa-plus"></i> Ítem</button>
-                                    <button type='button' class="btn btn-dark" id='removeButton'><i class="fas fa-trash"></i> Ítem</button>
+                                    
                                     <!--<button type='button' class="btn btn-success" value='Obtener valores' id='getButtonValue'>Comprobar valores</button>-->
                                     <button type="button" onclick="vistaPreviaPDF();" class="btn btn-success float-right" > <i class="fas fa-file-download"></i> Crear Documento</button>
                                  </div>
