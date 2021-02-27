@@ -286,7 +286,7 @@
          <div class="modal-dialog">
             <div class="modal-content">
                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Crear nuevo cliente</h5>
+                  <h5 style="margin-left: 15px; color: #0e1844;" class="modal-title" id="exampleModalLabel"><i class="far fa-building"></i> Crear nuevo cliente</h5>
                   <button type="button" class="close" data-dismiss="modal" onclick="window.location.reload();">&times;</button>
                </div>
                <div class="modal-body">
@@ -374,7 +374,7 @@
                               </div>
                            </form>
                            <div class="modal-footer">
-                              <input type="button" onclick="crearCliente();" class="btn btn-primary btn-md" value="Crear Cliente">
+                              <input type="button" onclick="crearCliente();" class="btn btn-dark" value="Crear Cliente">
                            </div>
                        
                   </div>
@@ -387,7 +387,7 @@
          <div class="modal-dialog">
             <div class="modal-content">
                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Crear nuevo producto</h5>
+                  <h5 class="modal-title" style="margin-left: 15px; color: #0e1844;" id="exampleModalLabel"><i class="fab fa-elementor"></i> Crear nuevo producto</h5>
                   <button type="button" class="close" data-dismiss="modal" onclick="window.location.reload();">&times;</button>
                </div>
                <div class="modal-body">
@@ -477,7 +477,7 @@
                   </div>
                </div>
                <div class="modal-footer">
-                  <input type="button" onclick="crearProducto();" class="btn btn-primary btn-md" value="Crear Producto">
+                  <input type="button" onclick="crearProducto();" class="btn btn-dark" value="Crear Producto">
                </div>
             </div>
          </div>
