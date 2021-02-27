@@ -42,10 +42,14 @@ $(document).ready(function () {
 					' padding: 12px; padding-top: 0px;');
 
 				newTextBoxDiv.after().html('<label class="top-spaced">Seleccione producto N° ' + counter + ' : </label>'+				
-				'<select id="select_producto_'+counter+'" class="form-control" onchange="mostrarAdjunto(this)">'+
-					'<option id="0">Elija Uno</option>'
-					+opciones+
-				'</select>'+
+				'<div class="row">'+
+						'<div class="col-md-2">'+
+							'<button onclick="mostrarFiltros(this)" type="button" id="boton_filtro_producto_'+counter+'" class="btn btn-warning boton_filtro_producto"><i class="fas fa-search"></i> Productos</button>'+
+						'</div>'+
+						'<div class="col-md-10">'+
+							'<input class="form-control" disabled id="select_producto_'+counter+'" placeholder="Buscar producto N°'+counter+'"></input>'+
+						'</div>'+
+				'</div>'+
 				'<div class="row">'+
 				'<div style="display:none;" class="form-check" id="check_'+counter+'">'+
 				   '<input  type="checkbox" class="checkbox" id="adjuntar_ficha_'+counter+'"> <label style="margin-top:4px;">Adjuntar Ficha Técnica</label></input>'+
@@ -147,7 +151,7 @@ function vistaPreviaPDF() {
 
 
 	for(var i=1;i<=parseInt(cantidad_divs);i++){
-		if($("#select_producto_"+i).val()=="Elija Uno"){
+		if($("#select_producto_"+i).val()==""){
 			msg_info += "- Debe seleccionar el producto N°: "+i+".</br>";
 		}
 		if($("#unidades_producto_"+i).val()==""){
@@ -219,13 +223,14 @@ function vistaPreviaPDF() {
 		for(var i=1; i<=cantidad_divs;i++){
 			descuento = (parseInt(($("#descuento_producto_"+i).val()=="")? 0 : $("#descuento_producto_"+i).val()));
 			descuento_p = (100-descuento)/100;
-			total_parcial = Math.round(parseInt($("#select_producto_"+i+" option:selected").attr("valor_producto"))*parseInt($("#unidades_producto_"+i).val()) * descuento_p);
-			tipo_cambio_p = $("#select_producto_"+i+" option:selected").attr("tipo_cambio").toUpperCase();
+			var select_producto = JSON.parse($("#select_producto_"+i).attr("producto"));
+			total_parcial = Math.round(parseInt(select_producto.valor_producto)*parseInt($("#unidades_producto_"+i).val()) * descuento_p);
+			tipo_cambio_p = select_producto.tipo_cambio.toUpperCase();
 			
 			html ='<tr>'+
 				'<td>'+$("#unidades_producto_"+i).val()+'</td>'+
-				'<td>'+$("#select_producto_"+i+" option:selected").attr("nombre_producto")+'</td>'+
-				'<td><b>'+tipo_cambio_p+' </b> '+$("#select_producto_"+i+" option:selected").attr("valor_producto")+'</td>';
+				'<td>'+select_producto.nombre_producto+'</td>'+
+				'<td><b>'+tipo_cambio_p+' </b> '+select_producto.valor_producto+'</td>';
 				//evaluamos si es que tiene descuento y mostramos la columna
 				if(tiene_descuento==1){ // caso que si posea descuento
 				
@@ -337,10 +342,15 @@ function enviarCorreo(){
 			
 		}).fail(function () {
 		  console.log("error en funcion enviarPropuesta");
+		  $("#modalCargando").modal('hide');
+		  setTimeout(() => {				
+			$("#modalError").modal("show");						
+		}, 300);		
 		});					
 }
 
 function guardarEnBD(){
+	
 	// se almacena la propuesta en base de datos
 	var folio = $("#folio_propuesta").text();
 	var cantidad_divs = $("#cantidad_divs").attr("cantidad");
@@ -355,10 +365,11 @@ function guardarEnBD(){
 	var tiene_folleto = false;
 	
 	for(i=1;i<=cantidad_divs; i++){
+		var select_producto = $("#select_producto_"+i).attr("producto");
 		tiene_folleto =  $('#adjuntar_ficha_'+i).is(":checked");
 		if(tiene_folleto == true){				
-			id_interno = $("#select_producto_"+i+" option:selected").attr("id_interno");
-			id_productos_folleto.push("producto_"+id_interno+".pdf");
+			id_interno = select_producto.numero_interno;
+			id_productos_folleto.push("producto_"+numero_interno+".pdf");
 		}			
 	}
 	
@@ -377,11 +388,12 @@ function guardarEnBD(){
 	var subtotal = 0;
 
 	  for(var i=1;i<=cantidad_divs;i++){
-		subtotal = parseInt($("#select_producto_"+i+" option:selected").attr("valor_producto"))*parseInt($("#unidades_producto_"+i).val());				
-		array_tipo_cambio.push($("#select_producto_"+i+" option:selected").attr("tipo_cambio").toUpperCase());
-		array_id_producto.push($("#select_producto_"+i+" option:selected").attr("id"));
-		array_nombre_producto.push($("#select_producto_"+i+" option:selected").attr("nombre_producto"));
-		array_valor_unitario_producto.push($("#select_producto_"+i+" option:selected").attr("valor_producto"));
+		var select_producto =JSON.parse($("#select_producto_"+i).attr("producto"));
+		subtotal = parseInt(select_producto.valor_producto)*parseInt($("#unidades_producto_"+i).val());				
+		array_tipo_cambio.push(select_producto.tipo_cambio.toUpperCase());
+		array_id_producto.push(select_producto.id_producto);
+		array_nombre_producto.push(select_producto.nombre_producto);
+		array_valor_unitario_producto.push(select_producto.valor_producto);
 		array_unidades.push($("#unidades_producto_"+i).val());
 		array_descuento.push(($("#descuento_producto_"+i).val()));
 		array_subtotal_producto.push(subtotal);
@@ -849,15 +861,21 @@ function mostrarAdjunto(element){
 
 }
 
-$("#boton_filtro_producto").click(function(){
+function mostrarFiltros(boton){
+	console.log(boton.id);
+	$("#nombre_filtro").val("");
+	$("#sku_filtro").val("");
+	$("#descripcion_filtro").val("");
+	$("#div_tabla").hide();
+	$("#id_filtro").val(boton.id.replace("boton_filtro_producto_",""));
 	$("#modalFiltrarProducto").modal("show");
-  });
+  }
 
   function filtrarProductos(){
 		var nombre = ($("#nombre_filtro").val()!="")?$("#nombre_filtro").val():"";
 		var sku = ($("#sku_filtro").val()!="")?$("#sku_filtro").val():"";
 		var descripcion = ($("#descripcion_filtro").val()!="")?$("#descripcion_filtro").val():"";
-
+		var id_boton = $("#id_filtro").val();
 		datos_filtro = {
 			nombre : nombre,
 			sku: sku,
@@ -873,31 +891,8 @@ $("#boton_filtro_producto").click(function(){
 			} //esto es necesario, por la validacion de seguridad de laravel
 		  }).done(function (productos) {	
 			
-			  	console.log(productos.length);	 
-				  /*$("#div_tabla_productos").append($("<table style='display:none' id='tabla_productos' class='table table-hover tabla_productos'></table>"));
-				  $("#tabla_productos").append($('<thead>'+
-				  '<tr>'+
-					'<th scope="col"">Nombre</th>'+
-					'<th scope="col">SKU</th>'+
-					'<th scope="col">Descripcion</th>'+
-					'<th scope="col">Seleccionar</th>'+
-					'</tr>'+
-				  '</thead>'));
-				  $(".tabla_productos").DataTable({
-						//responsive: true
-					});
-				  $("#div_tabla_productos").show();
-				for(var i=0; i< productos.length;i++){
-					console.log(productos[i].nombre_producto);
-				}
-				*/
-			/*	$("#div_tabla_productos").append();
-				$("#div_cargando").hide();
-				$("#tabla_productos").show();
-				$(".tabla_productos").DataTable({
-					//responsive: true
-				});*/
-				addTable(productos);
+			  		 
+				addTable(productos,id_boton);
 		  }).fail(function () {
 			console.log("error en funcion filtrarProductos");
 		  });	
@@ -907,52 +902,58 @@ $("#boton_filtro_producto").click(function(){
   $("#formulario_busqueda").on("submit", function (e) {
 	//do your form submission logic here
 	e.preventDefault();
-	filtrarProductos();
+	
   });
 
-  function addTable(productos) {
-	var table = document.getElementById("tabla_productos");
-	$("#tabla_productos thead").remove(); 
-	$("#tabla_productos tr").remove(); 
-	$("#tabla_productos tbody").remove(); 
+  function addTable(productos,id_boton) {
+	$("#tabla_productos").remove();
+	$("#div_tabla_productos").remove();
+	var divTabla = document.getElementById("div_tabla");
+	document.getElementById("div_tabla").innerHTML = "";
+	var div = document.createElement('DIV');
+	div.id = "div_tabla_productos";
+	divTabla.appendChild(div);
+	//var tabla = $('#tabla_productos').DataTable();
+	
+	var table = document.createElement('TABLE');
+	table.setAttribute("onchange","updateTable()");
+	table.className= "table table-hover table-bordered tabla_productos";
 	table.border = '1';
 	table.id = 'tabla_productos';
-  
-
-	
+	divTabla.appendChild(table);
+  	
 	var tableHead = document.createElement('THEAD');
 	table.appendChild(tableHead);
-		var tr = document.createElement('TR');
-		tableHead.appendChild(tr);
+	var tr = document.createElement('TR');
+	tableHead.appendChild(tr);
+
+	var th = document.createElement('TH');
+		  
+	th.appendChild(document.createTextNode("SKU"));
+	tr.appendChild(th);
+
+	var th = document.createElement('TH');
 	
-		var th = document.createElement('TH');
-		  
-		  th.appendChild(document.createTextNode("SKU"));
-		  tr.appendChild(th);
+	th.appendChild(document.createTextNode("Nombre"));
+	tr.appendChild(th);
 
-		  var th = document.createElement('TH');
-		  
-		  th.appendChild(document.createTextNode("Nombre"));
-		  tr.appendChild(th);
+	var th = document.createElement('TH');
+	
+	th.appendChild(document.createTextNode("Descripcion"));
+	tr.appendChild(th);
 
-		  var th = document.createElement('TH');
-		  
-		  th.appendChild(document.createTextNode("Descripcion"));
-		  tr.appendChild(th);
+	var th = document.createElement('TH');
+	
+	th.appendChild(document.createTextNode("Seleccionar"));
+	tr.appendChild(th);
 
-		  var th = document.createElement('TH');
-		  
-		  th.appendChild(document.createTextNode("Seleccionar"));
-		  tr.appendChild(th);
-
-		  // body
-		  var tableBody = document.createElement('TBODY');
+	// body
+	var tableBody = document.createElement('TBODY');
 	table.appendChild(tableBody);
 	for (var i = 0; i < productos.length; i++) {
-	  var tr = document.createElement('TR');
-	  tableBody.appendChild(tr);
-  
-	  
+	  	var tr = document.createElement('TR');
+	  	tableBody.appendChild(tr);
+  	  
 		var td = document.createElement('TD');
 	
 		td.appendChild(document.createTextNode(productos[i].numero_interno));
@@ -972,26 +973,33 @@ $("#boton_filtro_producto").click(function(){
 		
 		var button = document.createElement('BUTTON');
 		button.id = 'producto_'+productos[i].id_producto+'';
-		button.className = 'btn btn-danger boton_seleccionar';
+		button.className = 'btn btn-danger boton_seleccionar';	
 
 		var icon = document.createElement("span");
 		icon.className = 'fas fa-arrow-right';
 		button.appendChild(icon);
 		button.setAttribute('producto', JSON.stringify(productos[i]));
 
+		button.setAttribute('onclick','seleccion_producto('+JSON.stringify(productos[i])+', '+id_boton+')');
+
 		td.appendChild(button);
-		tr.appendChild(td);
-
-
-	  
-	}
-	
-	
-	table.onchange();
-	
+		tr.appendChild(td);  		
+	}		
+	table.onchange();	
+	$("#div_tabla").show();
   }
  
 
-  $(".boton_seleccionar").click(function(){
-	  console.log("test");
-  });
+function seleccion_producto(producto,id_boton){
+	console.log(id_boton);
+	var id_boton = parseInt(id_boton);
+	 $("#select_producto_"+id_boton).attr("producto", JSON.stringify(producto));
+
+	  var producto =  JSON.parse($("#select_producto_"+id_boton).attr("producto"));
+	  var nombre = producto.nombre_producto;
+	  $("#select_producto_"+id_boton).val(nombre);
+	 // console.log(producto.nombre_producto);
+	  
+	  $("#boton_cerrar").click();
+  }
+  

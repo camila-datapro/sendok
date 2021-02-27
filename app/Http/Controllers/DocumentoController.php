@@ -31,6 +31,10 @@ class DocumentoController extends Controller
         $nombre_doc = $request["nombre_doc"];
         $contenido = $request["contenido"];
         $folletos = $request["folletos"];
+        if($folletos==""||$folletos==null){
+            $folletos = array();
+        }
+        Log::debug($folletos);
         Mail::to($destinatario)->send( new MensajeRecibido($nombre_doc, $contenido, $folletos));        
         return 'Mensaje enviado';
     }

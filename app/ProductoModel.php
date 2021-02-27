@@ -18,24 +18,34 @@ class ProductoModel extends Model
     }
 
     public static function filtrarProductos($array_datos){
-        Log::debug($array_datos);
+        
         $nombre = $array_datos["nombre"];
         $sku = $array_datos["sku"];
         $descripcion = $array_datos["descripcion"];
         $query = "select * from producto";
+        $cont = 0;
         if($nombre!=""||$sku!=""||$descripcion!=""){
             $query = $query." where ";
         }
         if($nombre!=""){
             $query = $query." upper(nombre_producto) like upper('%".$nombre."%')";
+            $cont++;
         }
         if($sku!=""){
+            if($cont>0){
+                $query = $query." and";
+            }
             $query = $query." upper(numero_interno) like upper('%".$sku."%')";
+            $cont++;
         }
         if($descripcion!=""){
+            if($cont>0){
+                $query = $query." and";
+            }
             $query = $query." upper(descripcion_producto) like upper('%".$descripcion."%')";
+            $cont++;
         }
-        Log::debug($query);
+        
         $results = DB::select($query);
         
         return $results;
