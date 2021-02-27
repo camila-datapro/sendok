@@ -287,7 +287,7 @@
             <div class="modal-content">
                <div class="modal-header">
                   <h5 style="margin-left: 15px; color: #0e1844;" class="modal-title" id="exampleModalLabel"><i class="far fa-building"></i> Crear nuevo cliente</h5>
-                  <button type="button" class="close" data-dismiss="modal" onclick="window.location.reload();">&times;</button>
+                  <button type="button" class="close" data-dismiss="modal" style="margin-right:5px;">&times;</button>
                </div>
                <div class="modal-body">
                   <div class="col-md-12">
@@ -388,7 +388,7 @@
             <div class="modal-content">
                <div class="modal-header">
                   <h5 class="modal-title" style="margin-left: 15px; color: #0e1844;" id="exampleModalLabel"><i class="fab fa-elementor"></i> Crear nuevo producto</h5>
-                  <button type="button" class="close" data-dismiss="modal" onclick="window.location.reload();">&times;</button>
+                  <button type="button" class="close" data-dismiss="modal" style="margin-right:5px;">&times;</button>
                </div>
                <div class="modal-body">
                   <div class="col-md-12">
@@ -402,13 +402,13 @@
                         </select>
                         </div>
                      
-                        <label class="col-md-2">Nombre Producto</label>
+                        <label class="col-md-2">Nombre</label>
                         <div class="col-md-4">
                            <input id="nombre_producto" maxlength="20" name="nombre_producto" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
                         </div>
                      </div>
                      <div style="padding-left: 0px !important;" class="form-group">
-                        <label>Descripción Producto</label>
+                        <label>Descripción</label>
                         <input id="descripcion_producto" maxlength="250" name="descripcion_producto" type="text" class="form-control form-control-sm" aria-label="Descripción de Producto">
                      </div>
                      <div style="padding-left: 0px !important;" class="form-group">
