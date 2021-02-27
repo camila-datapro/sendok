@@ -38,7 +38,7 @@ $(document).ready(function () {
 					.attr("style", 'border-top: 1px solid; margin-bottom: 20px;'+
 					'border: 1px solid;'+
 					'border-color: #dee2e6;'+
-					'background-color: #e0e4ff;'+
+					'background-color:  #f7f7f7;'+
 					' padding: 12px; padding-top: 0px;');
 
 				newTextBoxDiv.after().html('<label class="top-spaced">Seleccione producto N° ' + counter + ' : </label>'+				
