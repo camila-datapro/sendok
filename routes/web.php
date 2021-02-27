@@ -44,6 +44,7 @@ Route::post('/editarProducto','ProductoController@editarProducto')->name('editar
 Route::post('/eliminarProducto','ProductoController@removeProducto')->name('eliminarProducto');
 Route::post('/getProducto','ProductoController@getProducto')->name('getProducto');
 Route::post('/listProductos','ProductoController@listProductos')->name('listProductos');
+Route::post('/filtrarProductos','ProductoController@filtrarProductos')->name('filtrarProductos');
 
 Route::post('/listProductosOptimized','ProductoController@listProductosOptimized')->name('listProductosOptimized');
 Route::post('/insertarProductos','ProductoController@insertarProductos')->name('insertarProductos');

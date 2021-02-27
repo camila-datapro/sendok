@@ -17,6 +17,30 @@ class ProductoModel extends Model
         return json_encode($results);
     }
 
+    public static function filtrarProductos($array_datos){
+        Log::debug($array_datos);
+        $nombre = $array_datos["nombre"];
+        $sku = $array_datos["sku"];
+        $descripcion = $array_datos["descripcion"];
+        $query = "select * from producto";
+        if($nombre!=""||$sku!=""||$descripcion!=""){
+            $query = $query." where ";
+        }
+        if($nombre!=""){
+            $query = $query." upper(nombre_producto) like upper('%".$nombre."%')";
+        }
+        if($sku!=""){
+            $query = $query." upper(numero_interno) like upper('%".$sku."%')";
+        }
+        if($descripcion!=""){
+            $query = $query." upper(descripcion_producto) like upper('%".$descripcion."%')";
+        }
+        Log::debug($query);
+        $results = DB::select($query);
+        
+        return $results;
+    }
+
     public static function obtenerProducto($idProducto){
         $results = DB::select("select * from producto where id_producto = ".$idProducto."" );
         return $results;

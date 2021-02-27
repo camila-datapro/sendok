@@ -322,3 +322,5 @@ $("#form_producto").on("submit", function (e) {
   e.preventDefault();
   editarBDProducto();
 });
+
+

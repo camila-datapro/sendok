@@ -16,6 +16,8 @@
       <link href="{{ asset('/css/select_buscador.css') }}" rel="stylesheet" />
       <link rel="stylesheet" href="{{ asset('/assets/css/shared/style.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+      <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
       <style>
          .select2-container--default .select2-selection--single {
          background-color: #fff;
@@ -35,7 +37,33 @@
          .modal {
          overflow-y:auto;
          }
+         
+         table {
+         border-collapse: collapse;
+         table-layout: fixed;
+         }
+         .table td{
+         white-space: normal;
+         }
+         .div2{}
+         @media screen and (max-width: 1080px) {
+         .div2{width: 100%; border: none 0px RED;
+         overflow-x: scroll; overflow-y:hidden;}
+         table td {        
+         word-wrap: none;
+         width: 50px;
+         }
+         table th {        
+         word-wrap: none;
+         width: 50px;
+         }
+         }
+         .control-label{
+         margin-top: 10px;
+         }
+      
       </style>
+      
    </head>
    @endsection
    @section('body1')
@@ -85,6 +113,7 @@
                                  <div id='TextBoxesGroup'>
                                     <div id="TextBoxDiv1" style="margin-bottom: 20px; border: 1px solid; border-color: #dee2e6; background-color: #e0e4ff; padding: 12px; padding-top: 0px;">
                                        <label class="top-spaced">Seleccione producto N° 1: </label>
+                                       <button id="boton_filtro_producto">Filtrar productos</button>
                                        <select class="form-control" name="textbox1"  type='textbox' id='select_producto_1' onchange="mostrarAdjunto(this)" >
                                           <option id="0">Elija Uno</option>
                                           <?php 
@@ -428,6 +457,57 @@
             </div>
          </div>
       </div>
+
+      <div class="modal fade" id="modalFiltrarProducto" tabindex="-1" role="dialog" aria-labelledby="modalexito" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="modalexito">Filtrar productos</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                     <form id="formulario_busqueda" class="form-example">
+                        <div class="form-group">
+                           <div class="col-md-12">
+                              <div class="form-group row">
+                                 <label for="inputKey" class="col-md-2 control-label">Nombre</label>
+                                 <div class="col-md-4">
+                                    <input id="nombre_filtro" maxlength="20" class="form-control"  placeholder="Nombre">
+                                 </div>
+                                 <label for="inputValue" class="col-md-2 control-label">SKU</label>
+                                 <div class="col-md-4">
+                                    <input id="sku_filtro" maxlength="20" type="text" class="form-control" placeholder="SKU">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        
+                        <div class="form-group">
+                           <div class="col-md-12">
+                              <div class="form-group row">
+                                 <label for="inputKey" class="col-md-2 control-label">Descripcion</label>
+                                 <div class="col-md-6">
+                                    <input id="descripcion_filtro" type="text" maxlength="50" class="form-control"  placeholder="Nombre">
+                                 </div>
+
+                                 <div class="col-md-4">
+                                    <button id="boton_filtros" class="btn btn-success">Aplicar Filtros</button>
+                                 </div>
+                                 
+                              </div>
+                           </div>
+                        </div>
+                     </form>
+                     <div id="div_tabla_productos" >
+                           <table onchange="updateTable()" id="tabla_productos" class="table table-hover tabla_productos"></table>
+                     </div>                   
+               </div>
+           
+            </div>
+         </div>
+      </div>
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.base.js') }}"></script>
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.addons.js') }}"></script>
       <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
@@ -436,6 +516,28 @@
       <script src="{{ asset('/assets/js/shared/misc.js') }}"></script>
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
       <script src="{{ asset('/generaPDF/dist/html2pdf.bundle.min.js') }}"></script>
+      <script src="https://unpkg.com/@popperjs/core@2"></script>
+      <script src="{{ asset('/js/dataTablesFilter.js')}}"></script>   
+      <!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   -->
+      <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+      <!-- End custom js for this page-->
+               <script>
+                  function updateTable(){
+                     console.log(hasClassName("dataTable","tabla_productos"));
+                     if(!hasClassName("dataTable","tabla_productos")){
+                        $("#tabla_productos").DataTable({
+                              //
+                        });
+                     }
+                  }
+
+                  function hasClassName(classname,id) {
+                     return  String ( ( document.getElementById(id)||{} ) .className )
+                              .split(/\s/)
+                              .indexOf(classname) >= 0;
+                     }
+                  </script>
+
    </body>
 </html>
 @endsection

@@ -50,6 +50,12 @@ class ProductoController extends Controller
 
     }
 
+    public function filtrarProductos(Request $request){
+        $datos = $request["datos_filtro"];
+        return ProductoModel::filtrarProductos($datos);
+
+    }
+
     public function listProductosOptimized(Request $request){
         return ProductoModel::listProductosOptimized();
 

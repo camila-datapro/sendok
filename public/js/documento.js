@@ -848,3 +848,150 @@ function mostrarAdjunto(element){
 	}
 
 }
+
+$("#boton_filtro_producto").click(function(){
+	$("#modalFiltrarProducto").modal("show");
+  });
+
+  function filtrarProductos(){
+		var nombre = ($("#nombre_filtro").val()!="")?$("#nombre_filtro").val():"";
+		var sku = ($("#sku_filtro").val()!="")?$("#sku_filtro").val():"";
+		var descripcion = ($("#descripcion_filtro").val()!="")?$("#descripcion_filtro").val():"";
+
+		datos_filtro = {
+			nombre : nombre,
+			sku: sku,
+			descripcion: descripcion
+		}
+
+		$.ajax({
+			type: "POST",
+			url: url_prev + '/filtrarProductos',
+			data: {
+			  datos_filtro: datos_filtro,
+			  _token: $('input[name="_token"]').val()
+			} //esto es necesario, por la validacion de seguridad de laravel
+		  }).done(function (productos) {	
+			
+			  	console.log(productos.length);	 
+				  /*$("#div_tabla_productos").append($("<table style='display:none' id='tabla_productos' class='table table-hover tabla_productos'></table>"));
+				  $("#tabla_productos").append($('<thead>'+
+				  '<tr>'+
+					'<th scope="col"">Nombre</th>'+
+					'<th scope="col">SKU</th>'+
+					'<th scope="col">Descripcion</th>'+
+					'<th scope="col">Seleccionar</th>'+
+					'</tr>'+
+				  '</thead>'));
+				  $(".tabla_productos").DataTable({
+						//responsive: true
+					});
+				  $("#div_tabla_productos").show();
+				for(var i=0; i< productos.length;i++){
+					console.log(productos[i].nombre_producto);
+				}
+				*/
+			/*	$("#div_tabla_productos").append();
+				$("#div_cargando").hide();
+				$("#tabla_productos").show();
+				$(".tabla_productos").DataTable({
+					//responsive: true
+				});*/
+				addTable(productos);
+		  }).fail(function () {
+			console.log("error en funcion filtrarProductos");
+		  });	
+		
+  }
+
+  $("#formulario_busqueda").on("submit", function (e) {
+	//do your form submission logic here
+	e.preventDefault();
+	filtrarProductos();
+  });
+
+  function addTable(productos) {
+	var table = document.getElementById("tabla_productos");
+	$("#tabla_productos thead").remove(); 
+	$("#tabla_productos tr").remove(); 
+	$("#tabla_productos tbody").remove(); 
+	table.border = '1';
+	table.id = 'tabla_productos';
+  
+
+	
+	var tableHead = document.createElement('THEAD');
+	table.appendChild(tableHead);
+		var tr = document.createElement('TR');
+		tableHead.appendChild(tr);
+	
+		var th = document.createElement('TH');
+		  
+		  th.appendChild(document.createTextNode("SKU"));
+		  tr.appendChild(th);
+
+		  var th = document.createElement('TH');
+		  
+		  th.appendChild(document.createTextNode("Nombre"));
+		  tr.appendChild(th);
+
+		  var th = document.createElement('TH');
+		  
+		  th.appendChild(document.createTextNode("Descripcion"));
+		  tr.appendChild(th);
+
+		  var th = document.createElement('TH');
+		  
+		  th.appendChild(document.createTextNode("Seleccionar"));
+		  tr.appendChild(th);
+
+		  // body
+		  var tableBody = document.createElement('TBODY');
+	table.appendChild(tableBody);
+	for (var i = 0; i < productos.length; i++) {
+	  var tr = document.createElement('TR');
+	  tableBody.appendChild(tr);
+  
+	  
+		var td = document.createElement('TD');
+	
+		td.appendChild(document.createTextNode(productos[i].numero_interno));
+		tr.appendChild(td);
+
+		var td = document.createElement('TD');
+	
+		td.appendChild(document.createTextNode(productos[i].nombre_producto));
+		tr.appendChild(td);
+
+		var td = document.createElement('TD');
+		
+		td.appendChild(document.createTextNode(productos[i].descripcion_producto));
+		tr.appendChild(td);
+
+		var td = document.createElement('TD');
+		
+		var button = document.createElement('BUTTON');
+		button.id = 'producto_'+productos[i].id_producto+'';
+		button.className = 'btn btn-danger boton_seleccionar';
+
+		var icon = document.createElement("span");
+		icon.className = 'fas fa-arrow-right';
+		button.appendChild(icon);
+		button.setAttribute('producto', JSON.stringify(productos[i]));
+
+		td.appendChild(button);
+		tr.appendChild(td);
+
+
+	  
+	}
+	
+	
+	table.onchange();
+	
+  }
+ 
+
+  $(".boton_seleccionar").click(function(){
+	  console.log("test");
+  });
