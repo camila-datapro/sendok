@@ -1,3 +1,3 @@
-/public/documentos/
-/storage/logs/
+/public/documentos/*
+/storage/logs/*
 .env
