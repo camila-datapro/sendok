@@ -99,7 +99,7 @@
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label style="margin-top:7px;"><b>Seleccion de Cliente </b></label>
-                                 <button style="margin-right: 13px;" class="btn btn-light float-right" onclick="crearClienteDocumento();"><i class="fas fa-plus"></i> Nuevo Cliente</button>
+                                 <button style="margin-right: 13px;" class="btn btn-success float-right" onclick="crearClienteDocumento();"><i class="fas fa-plus"></i> Nuevo Cliente</button>
                                  <select class=" js-example-basic-single form-control" name="select_cliente" id="select_cliente">
                                     <option id="0">Elija Uno</option>
                                     <?php 
@@ -112,7 +112,7 @@
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                 
                                     <label style="margin-top:7px;"><b>Seleccion de Productos </b></label>
-                                       <button class="btn btn-light float-right" onclick="crearProductoDocumento();"><i class="fas fa-plus"></i> Nuevo Producto </button>
+                                       <button class="btn btn-success float-right" onclick="crearProductoDocumento();"><i class="fas fa-plus"></i> Nuevo Producto </button>
                                 
                                  <div id='TextBoxesGroup'>
                                     <div class="col-md-12" id="TextBoxDiv1" style="margin-bottom: 20px; border: 1px solid; border-color: #dee2e6; background-color: #f7f7f7; padding: 12px; padding-top: 0px;">
@@ -139,8 +139,8 @@
                                  </div>
                                  <input hidden id="cantidad_divs" cantidad="1"></input>
                                  <div>
-                                 <button type='button' class="btn btn-dark" id='removeButton'><i class="fas fa-minus"></i> Ítem</button>
-                                    <button type='button'  class="btn btn-dark"  id='addButton'><i class="fas fa-plus"></i> Ítem</button>
+                                 <button type='button' class="btn btn-danger" id='removeButton'><i class="fas fa-minus"></i> Ítem</button>
+                                    <button type='button'  class="btn btn-success"  id='addButton'><i class="fas fa-plus"></i> Ítem</button>
                                     
                                     <!--<button type='button' class="btn btn-success" value='Obtener valores' id='getButtonValue'>Comprobar valores</button>-->
                                     <button type="button" onclick="vistaPreviaPDF();" class="btn btn-success float-right" > <i class="fas fa-file-download"></i> Crear Documento</button>
@@ -538,7 +538,7 @@
                                  </div>
 
                                  <div class="col-md-4">
-                                    <button id="boton_filtros" onclick="filtrarProductos()" class="btn btn-success">Aplicar Filtros</button>
+                                    <button id="boton_filtros" onclick="filtrarProductos()" class="btn btn-warning"><i class="fas fa-search"></i> Buscar</button>
                                  </div>
                                  
                               </div>

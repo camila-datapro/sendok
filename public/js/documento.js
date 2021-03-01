@@ -973,10 +973,11 @@ function mostrarFiltros(boton){
 		
 		var button = document.createElement('BUTTON');
 		button.id = 'producto_'+productos[i].id_producto+'';
-		button.className = 'btn btn-danger boton_seleccionar';	
+		button.className = 'btn btn-success boton_seleccionar';	
 
 		var icon = document.createElement("span");
-		icon.className = 'fas fa-arrow-right';
+		
+		icon.className = 'fas fa-plus';
 		button.appendChild(icon);
 		button.setAttribute('producto', JSON.stringify(productos[i]));
 
