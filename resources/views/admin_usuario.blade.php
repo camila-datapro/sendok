@@ -58,25 +58,80 @@
                            </div>
                            <br>
                            <div class="row" id="div_plantilla_correo" style="display:none;">
-                              <div class="col-md-12" >
+                              <div class="col-md-12">
                                      <h4>¿Que desea hacer?</h4>
                                      <br>
                                     <div class="row">
-                                          <input style="margin-left:20px;" type="checkbox" class="radio" value="1" name="fooby[2][]">Crear plantilla</input>
+                                          <label><input style="margin-left:20px;" type="checkbox" class="radio" value="1"  id="check_crear_plantilla" name="fooby[2][]"></input> Crear plantilla</label>
                                        
-                                          <input style="margin-left:50px;" type="checkbox" class="radio" value="1" name="fooby[2][]">Visar plantillas</input>
+                                          <label><input style="margin-left:50px;" type="checkbox" class="radio" value="1" id="check_visar_plantilla" name="fooby[2][]"></input> Visar plantillas</label>
                                           <br>
                                           </div>
                                           <br>
                                     <div class="row">
-                                    <button type="button" class="btn btn-success" onclick="continuar_operacion()">Continuar</button>
+                                    <button disabled="true" id="btn_continuar_operacion" type="button" class="btn btn-success" onclick="continuar_operacion()">Continuar</button>
                                     </div>
                               </div>
                            </div>
+                           <div id="div_crear_plantilla" class="col-md-12" style="display:none;">
+                           
+                                    <form>
+                                       <div class="row form-group">
+                                          <label> Nombre plantilla</label>                                          
+                                          <input class="form-control" type="text" id="nombre_plantilla" placeholder="Nombre de plantilla a crear"></input>                                          
+                                       </div>
+                                       <div class="row form-group">
+                                          <label> Asunto correo</label>                                          
+                                          <input class="form-control" type="text" id="asunto_correo" placeholder="Asunto correo"></input>                                          
+                                       </div>
+                                       <div class="row form-group">
+                                          <label> Cuerpo correo</label>                                          
+                                          <textarea placeholder="Ingrese cuerpo de correo" class="form-control" type="text"></textarea>
+                                       </div>
+                                       <br>
+                                       <button id="boton_guardar_plantilla" class="btn btn-success float-right">Guardar</button>
+                                    </form>
+                           </div>
+                           <div id="div_visar_plantillas" class="col-md-12" style="display:none">
+                              <table class="table table-bordered">
+                                 <thead>
+                                    <tr>
+                                       <th>Nombre plantilla</th>
+                                       <th>Asunto</th>
+                                       <th>Cuerpo resumido</th>
+                                       <th>Accion</th>
+                                    </tr>
+                                    <tbody>
+                                       <tr>
+                                          <td>Plantilla 1</td>
+                                          <td>Asunto 1</td>
+                                          <td>Cuerpo 1</td>
+                                          <td>
+                                             <button class="btn btn-warning"><i class="far fa-eye"></i></button>
+                                             <button class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                                             <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </thead>
+                              </table>
+                           </div>
                            <div class="row" id="div_firma_correo" style="display:none;">
                               <div class="col-md-12" >
+                                 <form id="form_firma">
+                                    <div class="row">
+                                       <label>Pie de firma en texto</label>
+                                       <textarea disabled="true" id="texto_pie_firma" class="form-control" placeholder="Ingrese pie de firma en texto"></textarea>
+                                    </div><br>
+                                    <div class="row">
+                                       <label>Pie de firma como imagen</label>
+                                       <input disabled="true" class="form-control" type="file"></input>
+                                    </div>
+                                    <br>
+                                    <button type="button" id="btn_editar_pie_firma" class="btn btn-primary" onclick="editarFirma();">Editar</button>
 
-                                    <text> Editor de firma de correo en desarrollo... </text>
+                                    <button type="button" id="btn_cancelar_cambios" class="btn btn-warning" style="display:none;" onclick="cancelarEdicionFirma();">Cancelar</button>
+                                 </form>
                               </div>
                            </div>
                            <div class="row" id="div_datos_usuario">

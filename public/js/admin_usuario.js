@@ -81,7 +81,8 @@ function enable() {
   }
 
   $("#a_datos_usuario").click(function () {
-	 
+	 $("#div_visar_plantillas").hide();
+	 $("#div_crear_plantilla").hide();
 	document.getElementById("a_plantilla_correo").classList.remove('active');
 	document.getElementById("a_firma").classList.remove('active');
 
@@ -104,6 +105,8 @@ function enable() {
   });
 
   $("#a_plantilla_correo").click(function () {	
+	$("#div_visar_plantillas").hide();
+	$("#div_crear_plantilla").hide();
 	document.getElementById("a_firma").classList.remove('btn-primary');
 	document.getElementById("a_datos_usuario").classList.remove('btn-primary');
 
@@ -126,7 +129,8 @@ function enable() {
 });
 
 $("#a_firma").click(function () {
-	
+	$("#div_visar_plantillas").hide();
+	$("#div_crear_plantilla").hide();
 	document.getElementById("a_plantilla_correo").classList.remove('active');
 	document.getElementById("a_datos_usuario").classList.remove('active');
 	
@@ -151,6 +155,7 @@ $("#a_firma").click(function () {
 });
 
 $("input:checkbox").on('click', function() {
+	$("#btn_continuar_operacion").prop('disabled',false);
 	// in the handler, 'this' refers to the box clicked on
 	var $box = $(this);
 	if ($box.is(":checked")) {
@@ -163,9 +168,57 @@ $("input:checkbox").on('click', function() {
 	  $box.prop("checked", true);
 	} else {
 	  $box.prop("checked", false);
-	}
+	}	
+
   });
 
   function continuar_operacion(){
-	  alert("funcionalidad en desarrollo");
+	  
+	  if($("#check_crear_plantilla").is(":checked")){
+		$("#div_plantilla_correo").hide();
+		$("#div_crear_plantilla").show();
+	  }
+	  if($("#check_visar_plantilla").is(":checked")){
+		$("#div_plantilla_correo").hide();
+		$("#div_visar_plantillas").show();
+	  }
   }
+
+
+  function enable_firma() {
+	$('#form_firma textarea').each(function () {
+	  $(this).prop('disabled', false);
+   });
+   $('#form_firma input').each(function () {
+	$(this).prop('disabled', false);
+ });
+
+  }
+  
+  function disable_firma() {
+
+	$('#form_firma input').each(function () {
+	  $(this).prop('disabled', true);
+   });
+
+   $('#form_firma textarea').each(function () {
+	$(this).prop('disabled', true);
+ });
+
+  }
+
+  function editarFirma(){
+	  $("#btn_cancelar_cambios").show();
+	  enable_firma();
+  }
+
+  function cancelarEdicionFirma(){
+	  
+	$("#btn_cancelar_cambios").hide();
+	disable_firma();
+}
+
+$("#form_firma").on("submit", function (e) {
+	//do your form submission logic here
+	e.preventDefault();
+  });
