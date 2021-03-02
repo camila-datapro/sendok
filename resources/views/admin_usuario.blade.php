@@ -44,23 +44,33 @@
                      <div class="col-md-12 grid-margin stretch-card">
                         <div class="container">
                            <div class="row">
-                              <ul class="nav nav-tabs">
+                              <ul class="nav nav-tabs" style="border-bottom: 2px solid;border-color: #cdd6dc;">
                                  <li class="nav-item">
-                                    <a class="nav-link active" id="a_datos_usuario">Datos Usuario</a>
+                                    <button class="nav-link active btn-primary" id="a_datos_usuario">Datos Usuario</button>
                                  </li>
                                  <li class="nav-item">
-                                    <a class="nav-link" id="a_plantilla_correo">Plantilla Correo</a>
+                                    <button class="nav-link btn-light" id="a_plantilla_correo">Plantillas de Correo</button>
                                  </li>
                                  <li class="nav-item">
-                                    <a class="nav-link" id="a_firma">Firma</a>
+                                    <button class="nav-link btn-light" id="a_firma">Firma</button>
                                  </li>
                               </ul>
                            </div>
                            <br>
                            <div class="row" id="div_plantilla_correo" style="display:none;">
                               <div class="col-md-12" >
-
-                                    <text> Editor de plantilla de correo en desarrollo... </text>
+                                     <h4>¿Que desea hacer?</h4>
+                                     <br>
+                                    <div class="row">
+                                          <input style="margin-left:20px;" type="checkbox" class="radio" value="1" name="fooby[2][]">Crear plantilla</input>
+                                       
+                                          <input style="margin-left:50px;" type="checkbox" class="radio" value="1" name="fooby[2][]">Visar plantillas</input>
+                                          <br>
+                                          </div>
+                                          <br>
+                                    <div class="row">
+                                    <button type="button" class="btn btn-success" onclick="continuar_operacion()">Continuar</button>
+                                    </div>
                               </div>
                            </div>
                            <div class="row" id="div_firma_correo" style="display:none;">
@@ -70,7 +80,7 @@
                               </div>
                            </div>
                            <div class="row" id="div_datos_usuario">
-                              <div class="col-lg-12">
+                              <div class="col-md-12">
 
 
                                  <form id="datos_usuario" class="forms-sample">
