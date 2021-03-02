@@ -73,23 +73,26 @@
                                     </div>
                               </div>
                            </div>
+                           <input hidden type="hidden" id="id_usuario" style="display:none;" value="{{Auth::user()->id}}"/>
                            <div id="div_crear_plantilla" class="col-md-12" style="display:none;">
+                           <input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
                            
-                                    <form>
+                                    <form id="form_datos_plantilla" class="forms-sample">
+                                       
                                        <div class="row form-group">
                                           <label> Nombre plantilla</label>                                          
-                                          <input class="form-control" type="text" id="nombre_plantilla" placeholder="Nombre de plantilla a crear"></input>                                          
+                                          <input required class="form-control" type="text" id="nombre_plantilla" placeholder="Nombre de plantilla a crear"></input>                                          
                                        </div>
                                        <div class="row form-group">
                                           <label> Asunto correo</label>                                          
-                                          <input class="form-control" type="text" id="asunto_correo" placeholder="Asunto correo"></input>                                          
+                                          <input required class="form-control" type="text" id="asunto_plantilla" placeholder="Asunto correo"></input>                                          
                                        </div>
                                        <div class="row form-group">
                                           <label> Cuerpo correo</label>                                          
-                                          <textarea placeholder="Ingrese cuerpo de correo" class="form-control" type="text"></textarea>
+                                          <textarea required id="cuerpo_plantilla" placeholder="Ingrese cuerpo de correo" class="form-control" type="text"></textarea>
                                        </div>
                                        <br>
-                                       <button id="boton_guardar_plantilla" class="btn btn-success float-right">Guardar</button>
+                                       <button id="boton_guardar_plantilla" type="submit" class="btn btn-success float-right" type="button">Guardar</button>
                                     </form>
                            </div>
                            <div id="div_visar_plantillas" class="col-md-12" style="display:none">
@@ -99,7 +102,7 @@
                                        <th>Nombre plantilla</th>
                                        <th>Asunto</th>
                                        <th>Cuerpo resumido</th>
-                                       <th>Accion</th>
+                                       <th>Acciones</th>
                                     </tr>
                                     <tbody>
                                        <tr>
@@ -136,7 +139,7 @@
                                     <br>
                                     <button type="button" id="btn_editar_pie_firma" class="btn btn-primary float-right" onclick="editarFirma();" style="margin-right:10px;">Editar</button>                                    
                                     <button type="button" id="btn_cancelar_cambios" class="btn btn-warning float-right" style="display:none; margin-right:10px;" onclick="cancelarEdicionFirma();">Cancelar</button>
-                                    <button type="button" id="btn_guardar_firma" class="btn btn-success float-right" style="display:none; margin-right:10px;" onclick="guardarFirma();">Guardar</button>
+                                    <button type="submit" id="btn_guardar_firma" class="btn btn-success float-right" style="display:none; margin-right:10px;" onclick="guardarFirma();">Guardar</button>
 
                                     
                                  </form>

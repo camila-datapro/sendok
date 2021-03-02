@@ -226,6 +226,43 @@ $("#form_firma").on("submit", function (e) {
 	e.preventDefault();
   });
 
+  $("#form_datos_plantilla").on("submit", function (e) {
+	//do your form submission logic here
+	e.preventDefault();
+	guardarNuevaPlantilla();
+  });
+
+  // tras edicion de firma
   function guardarFirma(){
 	  alert("funcionalidad en desarrollo ");
+  }
+
+  function guardarNuevaPlantilla(){
+	$.ajaxSetup({
+		headers: {
+		  'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
+		}
+	  });
+	  var array_datos = [];
+	  array_datos.push({
+		nombre: $("#nombre_plantilla").val(),
+		asunto: $("#asunto_plantilla").val(),
+		cuerpo: $("#cuerpo_plantilla").val(),
+		id_usuario: parseInt($("#id_usuario").val())
+	  });
+  	  	
+	  var json_datos = JSON.stringify(array_datos);
+	  console.log(json_datos);
+	  $.ajax({
+		type: "POST",
+		url: url_prev + '/crearPlantilla',
+		data: {
+		  json_datos: json_datos,
+		  _token: $("#token").val()
+		} //esto es necesario, por la validacion de seguridad de laravel
+	  }).done(function (msg) {
+		$("#modalExitosa").modal("show");
+	  }).fail(function () {				
+		console.log("Error al crear plantilla");
+	  });
   }

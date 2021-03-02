@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\UsuarioModel;
+use App\PlantillaModel;
+use Illuminate\Support\Facades\Log;
 
 class AdminUsuario extends Controller
 {
@@ -14,6 +16,7 @@ class AdminUsuario extends Controller
     }
 
     public function index(){
+        Log::debug("admin usuario");
         return view('admin_usuario')
         ;
     }
@@ -21,5 +24,12 @@ class AdminUsuario extends Controller
     public function editarUsuario(Request $request){
         $datos = $request["json_datos"];
         return UsuarioModel::editarUsuario($datos);
+    }
+
+    public function crearPlantilla(Request $request){
+        Log::debug("entro a crearPlantilla");
+        $datos = $request["json_datos"];
+        return PlantillaModel::crearPlantilla($datos);
+
     }
 }

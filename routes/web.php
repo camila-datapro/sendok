@@ -28,6 +28,10 @@ Route::get('/documento','DocumentoController@index')->name('documento');
 Route::get('/admin_cliente', 'AdminClienteController@index')->name('admin_cliente');
 Route::get('/admin_producto', 'AdminProductoController@index')->name('admin_producto');
 Route::get('/admin_usuario', 'AdminUsuario@index')->name('admin_usuario');
+
+
+
+
 //creacion de cliente
 Route::get('/obtenerRegiones','RegionController@getRegiones')->name('obtenerRegiones');
 Route::post('/obtenerProvincias','ProvinciaController@getProvincias')->name('obtenerProvincias');
@@ -69,3 +73,4 @@ Route::post('/propuestaLastId', 'PropuestaController@getLastId')->name('propuest
 
 
 Route::post('/almacenaPDF','ProductoController@almacenaPDF')->name('almacenaPDF');
+Route::post('/crearPlantilla', 'AdminUsuario@crearPlantilla')->name('crearPlantilla');
