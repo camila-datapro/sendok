@@ -208,6 +208,8 @@ $("input:checkbox").on('click', function() {
   }
 
   function editarFirma(){
+	  $("#btn_editar_pie_firma").hide();
+	  $("#btn_guardar_firma").show();
 	  $("#btn_cancelar_cambios").show();
 	  enable_firma();
   }
@@ -222,3 +224,7 @@ $("#form_firma").on("submit", function (e) {
 	//do your form submission logic here
 	e.preventDefault();
   });
+
+  function guardarFirma(){
+	  alert("funcionalidad en desarrollo ");
+  }

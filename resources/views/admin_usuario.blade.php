@@ -125,12 +125,20 @@
                                     </div><br>
                                     <div class="row">
                                        <label>Pie de firma como imagen</label>
+                                       
+                                    </div>
+                                    <div class="row">
+                                       <img style="width:400px" src="{{ asset('assets/images/firmas/firma_example.jpg') }}"></img>
+                                    </div>
+                                    <div class="row">
                                        <input disabled="true" class="form-control" type="file"></input>
                                     </div>
                                     <br>
-                                    <button type="button" id="btn_editar_pie_firma" class="btn btn-primary" onclick="editarFirma();">Editar</button>
+                                    <button type="button" id="btn_editar_pie_firma" class="btn btn-primary float-right" onclick="editarFirma();" style="margin-right:10px;">Editar</button>                                    
+                                    <button type="button" id="btn_cancelar_cambios" class="btn btn-warning float-right" style="display:none; margin-right:10px;" onclick="cancelarEdicionFirma();">Cancelar</button>
+                                    <button type="button" id="btn_guardar_firma" class="btn btn-success float-right" style="display:none; margin-right:10px;" onclick="guardarFirma();">Guardar</button>
 
-                                    <button type="button" id="btn_cancelar_cambios" class="btn btn-warning" style="display:none;" onclick="cancelarEdicionFirma();">Cancelar</button>
+                                    
                                  </form>
                               </div>
                            </div>
