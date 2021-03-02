@@ -34,7 +34,7 @@
                <div class="row page-title-header">
                   <div class="col-12">
                      <div class="page-header">
-                        <h4 class="page-title" id="titulo_usuario">Datos de Usuario</h4>
+                        <h4 class="page-title" id="titulo_usuario">Mi Perfil</h4>
                      </div>
                   </div>
                </div>
@@ -44,7 +44,35 @@
                      <div class="col-md-12 grid-margin stretch-card">
                         <div class="container">
                            <div class="row">
+                              <ul class="nav nav-tabs">
+                                 <li class="nav-item">
+                                    <a class="nav-link active" id="a_datos_usuario">Datos Usuario</a>
+                                 </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" id="a_plantilla_correo">Plantilla Correo</a>
+                                 </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" id="a_firma">Firma</a>
+                                 </li>
+                              </ul>
+                           </div>
+                           <br>
+                           <div class="row" id="div_plantilla_correo" style="display:none;">
+                              <div class="col-md-12" >
+
+                                    <text> Editor de plantilla de correo en desarrollo... </text>
+                              </div>
+                           </div>
+                           <div class="row" id="div_firma_correo" style="display:none;">
+                              <div class="col-md-12" >
+
+                                    <text> Editor de firma de correo en desarrollo... </text>
+                              </div>
+                           </div>
+                           <div class="row" id="div_datos_usuario">
                               <div class="col-lg-12">
+
+
                                  <form id="datos_usuario" class="forms-sample">
                                  <input type="hidden" id="id_usuario" value="{{Auth::user()->id }}"/>
                                     <input type="hidden" id="nombre_hidden" value="{{Auth::user()->name }}"/>

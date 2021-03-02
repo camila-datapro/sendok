@@ -99,7 +99,7 @@
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label style="margin-top:7px;"><b>Seleccion de Cliente </b></label>
-                                 <button style="margin-right: 13px;" class="btn btn-success float-right" onclick="crearClienteDocumento();"><i class="fas fa-plus"></i> Nuevo Cliente</button>
+                                 <button style="width: 155px;" class="btn btn-success float-right" onclick="crearClienteDocumento();"><i class="fas fa-plus"></i> Nuevo Cliente</button>
                                  <select class=" js-example-basic-single form-control" name="select_cliente" id="select_cliente">
                                     <option id="0">Elija Uno</option>
                                     <?php 
