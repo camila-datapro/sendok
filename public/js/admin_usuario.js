@@ -215,8 +215,9 @@ $("input:checkbox").on('click', function() {
   }
 
   function cancelarEdicionFirma(){
-	  
+	$("#btn_guardar_firma").hide();
 	$("#btn_cancelar_cambios").hide();
+	$("#btn_editar_pie_firma").show();
 	disable_firma();
 }
 
