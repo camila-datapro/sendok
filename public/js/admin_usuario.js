@@ -14,6 +14,7 @@ function mostrarAcciones(){
 }
 
 function cancelarAcciones(){
+
 	disable();
 	$("#nombre").val($("#nombre_hidden").val());
 	$("#email").val($("#email_hidden").val());
@@ -208,6 +209,8 @@ $("input:checkbox").on('click', function() {
   }
 
   function editarFirma(){
+	  $("#vista_previa_firma_texto").hide();
+	  $("#wiziwig").show();
 	  $("#btn_editar_pie_firma").hide();
 	  $("#btn_guardar_firma").show();
 	  $("#btn_cancelar_cambios").show();
