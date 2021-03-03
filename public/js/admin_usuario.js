@@ -268,20 +268,55 @@ $("#form_firma").on("submit", function (e) {
   }
 
   function verPlantilla(id){
-	  console.log(id);
+	$("#modal_ver_nombre").text("Ver Plantilla");
+	$("#btn_editar_ver_plantilla").show();
+	$("#btn_editar_guardar_plantilla").hide();
+	disable_ver_plantilla();
 	var nombre = $("#td_nombre_"+id).text();
 	var asunto = $("#td_asunto_"+id).text();
-
+	$("#moda_ver_cuerpo_id").val(id);
 	var contenido = $("#td_cuerpo_"+id).text();
-	$("#modal_ver_nombre").text(nombre);
-	$("#modal_ver_cuerpo").text(`nombre: ${nombre} asunto: ${asunto} \n contenido: ${contenido}`);
+	
+	$("#modal_ver_cuerpo_nombre").val(asunto);
+	$("#modal_ver_cuerpo_asunto").val(asunto);
+	$("#modal_ver_cuerpo_contenido").val(contenido);
+	//$("#modal_ver_cuerpo").text(`nombre: ${nombre} asunto: ${asunto} \n contenido: ${contenido}`);
 	$("#modalVerPlantilla").modal("show");
   }
 
-  function editarPlantilla(id){
-	console.log("hola");
+  function editarPlantilla(){
+	$("#modal_ver_nombre").text("Editar Plantilla");
+	enable_ver_plantilla();
+	  $("#btn_editar_ver_plantilla").hide();
+	  $("#btn_editar_guardar_plantilla").show();
+	var id = $("#moda_ver_cuerpo_id").val();
+	var nombre = $("#modal_ver_cuerpo_nombre").val();
+	var asunto = $("#modal_ver_cuerpo_asunto").val();
+	var contenido = $("#modal_ver_cuerpo_contenido").val();
   }
   function eliminarPlantilla(id){
 	console.log("hola2");
   }
   
+
+  function enable_ver_plantilla() {
+	$('#datos_ver_editar_plantilla input').each(function () {
+	  $(this).prop('disabled', false);
+   });
+
+   $('#datos_ver_editar_plantilla textarea').each(function () {
+	$(this).prop('disabled', false);
+ });
+
+  }
+  
+  function disable_ver_plantilla() {
+	$('#datos_ver_editar_plantilla input').each(function () {
+	  $(this).prop('disabled', true);
+   });
+
+   $('#datos_ver_editar_plantilla textarea').each(function () {
+	$(this).prop('disabled', true);
+ });
+
+  }

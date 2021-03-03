@@ -18,6 +18,7 @@
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.addons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/shared/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
       <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
    </head>
    @endsection
@@ -119,9 +120,10 @@
                                           echo "<td id='td_asunto_{$id}'>{$asunto}</td>";
                                           echo "<td id='td_cuerpo_{$id}'>{$cuerpo}</td>";
                                           echo "<td>";
-                                            echo "<button class='btn btn-warning' id='ver_plantilla_{$id}' onclick='verPlantilla({$id});' ><i class='far fa-eye'></i></button>";
-                                            echo " <button disabled class='btn btn-primary' id='editar_plantilla_{$id}' onclick='editarPlantilla({$id});' ><i class='fas fa-edit'></i></button>";
-                                            echo " <button disabled class='btn btn-danger' id='eliminar_plantilla_{$id}' onclick='eliminarPlantilla({$id});' ><i class='fas fa-trash'></i></button>";
+                                          echo " <button disabled class='btn btn-danger' id='eliminar_plantilla_{$id}' onclick='eliminarPlantilla({$id});' ><i class='fas fa-trash'></i></button>";
+                                            echo " <button class='btn btn-warning' id='ver_plantilla_{$id}' onclick='verPlantilla({$id});' ><i class='fas fa-edit'></i></button>";
+                                            
+                                            
                                           echo "</td>";
                                        echo "</tr>";
                                        } ?>
@@ -228,20 +230,42 @@
          </div>
       </div>
 
-      <div class="modal fade" id="modalVerPlantilla" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="modalVerPlantilla" tabindex="-1" role="dialog"  aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
-                  <h4 class="modal-title" id="exampleModalLabel" id="modal_ver_nombre"></h4>
+                  <h5 class="modal-title" id="modal_ver_nombre"></h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>
                </div>
-               <div class="modal-body">
-                  <h5 id="modal_ver_cuerpo"></h5>
+               <div class="modal-body">                  
+                  <div class="col-md-12" id="datos_ver_editar_plantilla">
+                     <input type="hidden" style="display:none" id="modal_ver_cuerpo_id"/>
+                     <div class="row form-group">
+                        <label style="margin-top: 3px;" class="col-md-3">Nombre Plantilla</label>
+                        <div class="col-md-9">
+                           <input disabled="true" class="form-control" id="modal_ver_cuerpo_nombre"></input>
+                        </div>
+                     </div>
+                     <div class="row form-group">
+                        <label style="margin-top: 3px;" class="col-md-3">Asunto correo</label>
+                        <div class="col-md-9">
+                           <input disabled="true" class="form-control" id="modal_ver_cuerpo_asunto"></input>
+                        </div>
+                     </div>
+                     <div class="row form-group">
+                        <label style="margin-top: 3px;" class="col-md-3">Cuerpo correo</label>
+                        <div class="col-md-9">
+                           <textarea disabled="true" class="form-control" id="modal_ver_cuerpo_contenido"></textarea>
+                        </div>
+                     </div>
+                  </div>   
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+                  <button style="display:none" id="btn_editar_guardar_plantilla" type="button" class="btn btn-success">Guardar</button>
+                  <button  id="btn_editar_ver_plantilla" type="button" class="btn btn-primary" onclick="editarPlantilla()">Editar</button>
+                  <button id="btn_cerrar_ver_plantilla" type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                </div>
             </div>
          </div>
@@ -257,8 +281,19 @@
       <!--<script src="{{ asset('/js/producto.js') }}"></script>-->
       <script src="{{ asset('/js/admin_usuario.js') }}"></script>
       <script src="https://unpkg.com/@popperjs/core@2"></script>
+      <script src="{{ asset('/js/dataTables.js')}}"></script>  
      <!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   -->
+     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
       <!-- End custom js for this page-->
+      <script>
+         $(document).ready(function() {
+        
+            $("#tabla_plantillas").DataTable({
+                //responsive: true
+            });
+         });
+         
+      </script>
    </body>
 </html>
 @endsection

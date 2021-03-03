@@ -48,8 +48,8 @@ class PlantillaModel extends Model
         return $results;
     }
 
-    public static function listPlantillas(){
-        $results = DB::select("select * from plantilla_correo");
+    public static function listPlantillasByUser($id_usuario){
+        $results = DB::select("select * from plantilla_correo where id_usuario_plantilla =".intval($id_usuario)."");
         return $results;
     }
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\UsuarioModel;
 use App\PlantillaModel;
 use Illuminate\Support\Facades\Log;
+use Auth;
 
 class AdminUsuario extends Controller
 {
@@ -18,7 +19,7 @@ class AdminUsuario extends Controller
     public function index(){
         Log::debug("admin usuario");
         return view('admin_usuario')
-        ->with("plantillas",PlantillaModel::listPlantillas());
+        ->with("plantillas",PlantillaModel::listPlantillasByUser(Auth::user()->id));
         ;
     }
 
