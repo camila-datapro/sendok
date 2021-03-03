@@ -18,6 +18,7 @@ class AdminUsuario extends Controller
     public function index(){
         Log::debug("admin usuario");
         return view('admin_usuario')
+        ->with("plantillas",PlantillaModel::listPlantillas());
         ;
     }
 
@@ -32,4 +33,5 @@ class AdminUsuario extends Controller
         return PlantillaModel::crearPlantilla($datos);
 
     }
+
 }

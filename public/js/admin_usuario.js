@@ -266,3 +266,22 @@ $("#form_firma").on("submit", function (e) {
 		console.log("Error al crear plantilla");
 	  });
   }
+
+  function verPlantilla(id){
+	  console.log(id);
+	var nombre = $("#td_nombre_"+id).text();
+	var asunto = $("#td_asunto_"+id).text();
+
+	var contenido = $("#td_cuerpo_"+id).text();
+	$("#modal_ver_nombre").text(nombre);
+	$("#modal_ver_cuerpo").text(`nombre: ${nombre} asunto: ${asunto} \n contenido: ${contenido}`);
+	$("#modalVerPlantilla").modal("show");
+  }
+
+  function editarPlantilla(id){
+	console.log("hola");
+  }
+  function eliminarPlantilla(id){
+	console.log("hola2");
+  }
+  

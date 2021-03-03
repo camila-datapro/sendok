@@ -74,3 +74,4 @@ Route::post('/propuestaLastId', 'PropuestaController@getLastId')->name('propuest
 
 Route::post('/almacenaPDF','ProductoController@almacenaPDF')->name('almacenaPDF');
 Route::post('/crearPlantilla', 'AdminUsuario@crearPlantilla')->name('crearPlantilla');
+Route::post('/listarPlantillas', 'AdminUsuario@listarPlantillas')->name('listarPlantillas');

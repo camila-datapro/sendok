@@ -30,4 +30,32 @@ class PlantillaModel extends Model
         )" );
         return $results;
     }
+
+    public static function editarPlantilla($json_datos){
+        $array_datos = json_decode($json_datos,true);
+        $array_datos = $array_datos[0];
+        $nombre = $array_datos["nombre"];
+        $asunto = $array_datos["asunto"];
+        $cuerpo = $array_datos["cuerpo"];
+        $id_plantilla = $array_datos["id_plantilla"];
+        $results = DB::update("update plantilla_correo
+        set 
+            nombre_plantilla ='".$nombre."',
+            asunto = '".$asunto."',
+            cuerpo_mensaje = '".$cuerpo."'
+        ) 
+       where id = ".intval($id_plantilla)."" );
+        return $results;
+    }
+
+    public static function listPlantillas(){
+        $results = DB::select("select * from plantilla_correo");
+        return $results;
+    }
+
+    public static function eliminarPlantilla($id_plantilla){       
+        $results = DB::delete("delete from plantilla_correo 
+        where id = '".$id_plantilla."';");            
+    return $results;
+    }
 }

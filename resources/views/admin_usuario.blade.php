@@ -96,7 +96,8 @@
                                     </form>
                            </div>
                            <div id="div_visar_plantillas" class="col-md-12" style="display:none">
-                              <table class="table table-bordered">
+
+                              <table class="table table-bordered" id="tabla_plantillas">
                                  <thead>
                                     <tr>
                                        <th>Nombre plantilla</th>
@@ -105,16 +106,25 @@
                                        <th>Acciones</th>
                                     </tr>
                                     <tbody>
-                                       <tr>
-                                          <td>Plantilla 1</td>
-                                          <td>Asunto 1</td>
-                                          <td>Cuerpo 1</td>
-                                          <td>
-                                             <button class="btn btn-warning"><i class="far fa-eye"></i></button>
-                                             <button class="btn btn-primary"><i class="fas fa-edit"></i></button>
-                                             <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                          </td>
-                                       </tr>
+                                       <?php 
+                                       $plantillas = json_decode(json_encode($plantillas), true);
+                                       for($i=0;$i<sizeOf($plantillas);$i++){ 
+                                          $id = intval($plantillas[$i]['id']);
+                                          $nombre = strval($plantillas[$i]['nombre_plantilla']);
+                                          $asunto = strval($plantillas[$i]['asunto']);
+                                          $cuerpo = strval($plantillas[$i]['cuerpo_mensaje']);
+                                          echo ("<input id='td_id_".$id."' type='hidden' name='browser' value='".$id."'");
+                                          echo "<tr>";
+                                          echo "<td id='td_nombre_{$id}'>{$nombre}</td>";
+                                          echo "<td id='td_asunto_{$id}'>{$asunto}</td>";
+                                          echo "<td id='td_cuerpo_{$id}'>{$cuerpo}</td>";
+                                          echo "<td>";
+                                            echo "<button class='btn btn-warning' id='ver_plantilla_{$id}' onclick='verPlantilla({$id});' ><i class='far fa-eye'></i></button>";
+                                            echo " <button disabled class='btn btn-primary' id='editar_plantilla_{$id}' onclick='editarPlantilla({$id});' ><i class='fas fa-edit'></i></button>";
+                                            echo " <button disabled class='btn btn-danger' id='eliminar_plantilla_{$id}' onclick='eliminarPlantilla({$id});' ><i class='fas fa-trash'></i></button>";
+                                          echo "</td>";
+                                       echo "</tr>";
+                                       } ?>
                                     </tbody>
                                  </thead>
                               </table>
@@ -213,6 +223,25 @@
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.reload();">OK</button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="modal fade" id="modalVerPlantilla" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title" id="exampleModalLabel" id="modal_ver_nombre"></h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <h5 id="modal_ver_cuerpo"></h5>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
                </div>
             </div>
          </div>
