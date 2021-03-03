@@ -17,7 +17,6 @@ class AdminUsuario extends Controller
     }
 
     public function index(){
-        Log::debug("admin usuario");
         return view('admin_usuario')
         ->with("plantillas",PlantillaModel::listPlantillasByUser(Auth::user()->id));
         ;
@@ -29,9 +28,23 @@ class AdminUsuario extends Controller
     }
 
     public function crearPlantilla(Request $request){
-        Log::debug("entro a crearPlantilla");
+        
         $datos = $request["json_datos"];
         return PlantillaModel::crearPlantilla($datos);
+
+    }
+
+    public function editarPlantilla(Request $request){
+        
+        $datos = $request["json_datos"];
+        return PlantillaModel::editarPlantilla($datos);
+
+    }
+    public function eliminarPlantilla(Request $request){
+        
+        $id = $request["id"];
+        Log::debug("El id a eliminar es: ".$id);
+        return PlantillaModel::eliminarPlantilla($id);
 
     }
 

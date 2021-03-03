@@ -36,15 +36,15 @@ class PlantillaModel extends Model
         $array_datos = $array_datos[0];
         $nombre = $array_datos["nombre"];
         $asunto = $array_datos["asunto"];
-        $cuerpo = $array_datos["cuerpo"];
+        $contenido = $array_datos["contenido"];
         $id_plantilla = $array_datos["id_plantilla"];
-        $results = DB::update("update plantilla_correo
+        $query = "update plantilla_correo
         set 
             nombre_plantilla ='".$nombre."',
             asunto = '".$asunto."',
-            cuerpo_mensaje = '".$cuerpo."'
-        ) 
-       where id = ".intval($id_plantilla)."" );
+            cuerpo_mensaje = '".$contenido."' 
+       where id = ".intval($id_plantilla)."";
+        $results = DB::update($query);
         return $results;
     }
 
@@ -53,9 +53,10 @@ class PlantillaModel extends Model
         return $results;
     }
 
-    public static function eliminarPlantilla($id_plantilla){       
-        $results = DB::delete("delete from plantilla_correo 
-        where id = '".$id_plantilla."';");            
-    return $results;
+    public static function eliminarPlantilla($id_plantilla){           
+       $query = "delete from plantilla_correo 
+        where id = ".intval($id_plantilla).";";  
+        $results = DB::delete($query);            
+    return 1;
     }
 }

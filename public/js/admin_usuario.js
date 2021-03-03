@@ -274,7 +274,7 @@ $("#form_firma").on("submit", function (e) {
 	disable_ver_plantilla();
 	var nombre = $("#td_nombre_"+id).text();
 	var asunto = $("#td_asunto_"+id).text();
-	$("#moda_ver_cuerpo_id").val(id);
+	$("#modal_ver_cuerpo_id").val(id);
 	var contenido = $("#td_cuerpo_"+id).text();
 	
 	$("#modal_ver_cuerpo_nombre").val(asunto);
@@ -289,15 +289,33 @@ $("#form_firma").on("submit", function (e) {
 	enable_ver_plantilla();
 	  $("#btn_editar_ver_plantilla").hide();
 	  $("#btn_editar_guardar_plantilla").show();
-	var id = $("#moda_ver_cuerpo_id").val();
-	var nombre = $("#modal_ver_cuerpo_nombre").val();
-	var asunto = $("#modal_ver_cuerpo_asunto").val();
-	var contenido = $("#modal_ver_cuerpo_contenido").val();
+
   }
-  function eliminarPlantilla(id){
-	console.log("hola2");
+  function confirmarEliminacion(id,nombre){
+	  $("#modal_id_eliminar").val(id);
+	  console.log(nombre);
+	  $("#modal_eliminar_nombre").text(nombre);
+	  $("#modal_eliminar").modal("show");
   }
   
+  function eliminarPlantilla(){
+	  
+	var id = parseInt($("#modal_id_eliminar").val());
+	$("#modal_eliminar").modal("hide");
+
+	$.ajax({
+		type: "POST",
+		url: url_prev + '/eliminarPlantilla',
+		data: {
+		  id: id,
+		  _token: $("#token").val()
+		} //esto es necesario, por la validacion de seguridad de laravel
+	  }).done(function (msg) {
+		$("#modalExitosa").modal("show");
+	  }).fail(function () {				
+		console.log("Error al borrar plantilla");
+	  });
+  }
 
   function enable_ver_plantilla() {
 	$('#datos_ver_editar_plantilla input').each(function () {
@@ -320,3 +338,42 @@ $("#form_firma").on("submit", function (e) {
  });
 
   }
+
+  function guardarEdicionPlantilla(){
+	  $("#modalVerPlantilla").modal("hide");
+	$.ajaxSetup({
+		headers: {
+		  'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
+		}
+	  });
+
+	  var id = $("#modal_ver_cuerpo_id").val();
+	  var nombre = $("#modal_ver_cuerpo_nombre").val();
+	  var asunto = $("#modal_ver_cuerpo_asunto").val();
+	  var contenido = $("#modal_ver_cuerpo_contenido").val();
+
+	  var array_datos = [];
+	  array_datos.push({
+		nombre: nombre,
+		asunto: asunto,
+		contenido: contenido,
+		id_plantilla: parseInt(id)
+	  });
+  	  	
+	  var json_datos = JSON.stringify(array_datos);
+	  console.log(json_datos);
+	  $.ajax({
+		type: "POST",
+		url: url_prev + '/editarPlantilla',
+		data: {
+		  json_datos: json_datos,
+		  _token: $("#token").val()
+		} //esto es necesario, por la validacion de seguridad de laravel
+	  }).done(function (msg) {
+		$("#modalExitosa").modal("show");
+	  }).fail(function () {				
+		console.log("Error al editar plantilla");
+	  });
+  }
+
+  

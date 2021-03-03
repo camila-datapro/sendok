@@ -120,7 +120,7 @@
                                           echo "<td id='td_asunto_{$id}'>{$asunto}</td>";
                                           echo "<td id='td_cuerpo_{$id}'>{$cuerpo}</td>";
                                           echo "<td>";
-                                          echo " <button disabled class='btn btn-danger' id='eliminar_plantilla_{$id}' onclick='eliminarPlantilla({$id});' ><i class='fas fa-trash'></i></button>";
+                                          echo " <button class='btn btn-danger' id='eliminar_plantilla_{$id}' onclick='confirmarEliminacion({$id},`{$nombre}`);' ><i class='fas fa-trash'></i></button>";
                                             echo " <button class='btn btn-warning' id='ver_plantilla_{$id}' onclick='verPlantilla({$id});' ><i class='fas fa-edit'></i></button>";
                                             
                                             
@@ -191,7 +191,7 @@
                                     </div>
                                     <div class="row">                                    
                                        <button id="btn_editar" class="btn btn-primary" onclick="mostrarAcciones()" type="button">Editar datos</button>
-                                       <button style="display:none; " id="btn_guardar" type="submit" class="btn btn-success">Guardar cambios</button>
+                                       <button style="display:none; " id="btn_guardar" type="submit" class="btn btn-success">Guardar</button>
                                        <button style="display:none; margin-left:10px;" id="btn_cancelar" onclick="cancelarAcciones()" class="btn btn-danger" type="button">Cancelar</button>
                                     </div>
                                  </form>                        
@@ -263,9 +263,33 @@
                   </div>   
                </div>
                <div class="modal-footer">
-                  <button style="display:none" id="btn_editar_guardar_plantilla" type="button" class="btn btn-success">Guardar</button>
+                  <button style="display:none" id="btn_editar_guardar_plantilla" type="button" class="btn btn-success" onclick="guardarEdicionPlantilla()">Guardar</button>
                   <button  id="btn_editar_ver_plantilla" type="button" class="btn btn-primary" onclick="editarPlantilla()">Editar</button>
                   <button id="btn_cerrar_ver_plantilla" type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="modal fade" id="modal_eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="text-center content-justify-center">
+                     <input type="hidden" id="modal_id_eliminar" style="display:none;"/>
+                     <h4>¿Está seguro de eliminar el elemento? : </h4>
+                     <h4 id="modal_eliminar_nombre"></h4>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                  <button type="button" class="btn btn-primary" id="eliminar_plantilla" onclick="eliminarPlantilla();">Si, eliminar</button>
                </div>
             </div>
          </div>
