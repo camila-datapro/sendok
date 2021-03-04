@@ -130,6 +130,7 @@ function enable() {
 });
 
 $("#a_firma").click(function () {
+	$("#btn_editar_pie_firma").click();
 	$("#div_visar_plantillas").hide();
 	$("#div_crear_plantilla").hide();
 	document.getElementById("a_plantilla_correo").classList.remove('active');
@@ -187,6 +188,27 @@ $("input:checkbox").on('click', function() {
 
 
   function enable_firma() {
+	$(".cke_editable").hide();
+	$.ajax({
+		type: "POST",
+		url: url_prev + '/obtenerHTML',
+		data: {
+		  _token: $('input[name="_token"]').val()
+		} //esto es necesario, por la validacion de seguridad de laravel
+	  }).done(function (msg) {
+		console.log(msg);
+		$("#cke_33").click();
+		$(".cke_editable").val(msg);
+		setTimeout(() => {
+			$("#cke_33").click();	
+			$(".cke_editable").show();
+		}, 50);
+		
+	  }).fail(function () {				
+		console.log("Error al guardar archivo html");
+	  });
+	
+
 	$('#form_firma textarea').each(function () {
 	  $(this).prop('disabled', false);
    });
@@ -237,8 +259,36 @@ $("#form_firma").on("submit", function (e) {
 
   // tras edicion de firma
   function guardarFirma(){
-	  alert("funcionalidad en desarrollo ");
+	//var html = $("#summernote").val();
+	var html = CKEDITOR.instances.summernote.getData();
+	$.ajax({
+		type: "POST",
+		url: url_prev + '/guardarHTML',
+		data: {
+			html: html,
+		  _token: $('input[name="_token"]').val()
+		} //esto es necesario, por la validacion de seguridad de laravel
+	  }).done(function (msg) {
+			$("#modalExitosa").modal("show");
+	  }).fail(function () {				
+		console.log("Error al guardar archivo html");
+	  });
+	
   }
+
+  function download(filename, text) {
+	var element = document.createElement('a');
+	element.setAttribute('href', 'data:text/plain;charset=utf-8,' +
+		encodeURIComponent(text));
+	element.setAttribute('download', filename);
+
+	element.style.display = 'none';
+	document.body.appendChild(element);
+
+	element.click();
+
+	document.body.removeChild(element);
+}
 
   function guardarNuevaPlantilla(){
 	$.ajaxSetup({

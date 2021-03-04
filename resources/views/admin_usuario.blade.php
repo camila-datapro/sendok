@@ -18,6 +18,7 @@
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.addons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/shared/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
+    
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
     
 
@@ -136,26 +137,16 @@
                            <div class="row" id="div_firma_correo" style="display:none;">
                               <div class="col-md-12" >
                                  <form id="form_firma">
-                                   <div class="row">                                   
-                                       <label>Pie de firma en texto</label>                                   
-                                    </div>
+      
                                     <div class="row" id="vista_previa_firma_texto">
                                           
                                     </div>
                                     <div class="row" id="wiziwig" style="display:none;">                                       
                                        
-                                          <textarea maxlength="10" id="summernote" name="editordata"></textarea>
+                                          <textarea placeholder="Diseñe o copie y pegue su firma de correo electrónico" name="summernote" id="summernote" ></textarea>
                                        
                                     </div><br>
-                                    <div class="row">
-                                       <label>Pie de firma como imagen</label>                                       
-                                    </div>
-                                    <div class="row">
-                                       <img style="width:400px" src="{{ asset('assets/images/firmas/firma_example.jpg') }}"></img>
-                                    </div>
-                                    <div class="row">
-                                       <input disabled="true" class="form-control" type="file"></input>
-                                    </div>
+                                  
                                     <br>
                                     <button type="button" id="btn_editar_pie_firma" class="btn btn-primary float-right" onclick="editarFirma();" style="margin-right:10px;">Editar</button>                                    
                                     <button type="button" id="btn_cancelar_cambios" class="btn btn-warning float-right" style="display:none; margin-right:10px;" onclick="cancelarEdicionFirma();">Cancelar</button>
@@ -313,10 +304,10 @@
       <!--<script src="{{ asset('/js/producto.js') }}"></script>-->
       <script src="{{ asset('/js/admin_usuario.js') }}"></script>
       <script src="https://unpkg.com/@popperjs/core@2"></script>
-      <script src="{{ asset('/js/dataTables.js')}}"></script>  
+      <script src="{{ asset('/js/dataTables.js')}}"></script>
+      <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>  
       <!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
      <!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   -->
      
      
@@ -327,19 +318,13 @@
             $("#tabla_plantillas").DataTable({
                 //responsive: true
             });
-            $('#summernote').summernote({
-               toolbar: [
-                  // [groupName, [list of button]]
-                  ['fontname',['fontname']],
-                  ['style', ['bold', 'italic', 'underline', 'clear']],
-                  ['fontsize', ['fontsize']],
-                  ['color', ['color']],
-                  ['para', ['ul', 'ol', 'paragraph']],
-                  ['height', ['height']],
-                  ['codeview',['codeview']]
-               ]
-               });
-             
+
+            CKEDITOR.replace( 'summernote' ,{
+               width: '100%',
+               placeholder : "Diseñe o copie y pegue su firma de correo electrónico"
+            });
+            
+            
          });
 
       </script>

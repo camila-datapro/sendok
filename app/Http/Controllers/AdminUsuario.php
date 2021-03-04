@@ -48,4 +48,28 @@ class AdminUsuario extends Controller
 
     }
 
+    public function guardarHTML(Request $request){
+        
+        $html = $request["html"];
+        $user_id = Auth::user()->id;
+        Log::debug($html);
+        Log::debug("guardarHTML".$user_id);
+
+        file_put_contents('./firmas/html/firma_'.$user_id.'.html', $html);
+
+        return 1;
+
+    }
+
+    public function obtenerHTML(Request $request){
+        
+        $user_id = Auth::user()->id;
+        Log::debug("obtener".$user_id);
+
+        $archivo = file_get_contents('./firmas/html/firma_'.$user_id.'.html');
+
+        return $archivo;
+
+    }
+
 }

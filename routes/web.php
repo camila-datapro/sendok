@@ -79,3 +79,5 @@ Route::post('/crearPlantilla', 'AdminUsuario@crearPlantilla')->name('crearPlanti
 Route::post('/listarPlantillas', 'AdminUsuario@listarPlantillas')->name('listarPlantillas');
 Route::post('/editarPlantilla', 'AdminUsuario@editarPlantilla')->name('editarPlantilla');
 Route::post('/eliminarPlantilla', 'AdminUsuario@eliminarPlantilla')->name('eliminarPlantilla');
+Route::post('/guardarHTML', 'AdminUsuario@guardarHTML')->name('guardarHTML');
+Route::post('/obtenerHTML', 'AdminUsuario@obtenerHTML')->name('obtenerHTML');
