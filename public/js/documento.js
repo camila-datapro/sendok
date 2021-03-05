@@ -86,7 +86,9 @@ $(document).ready(function () {
 
 function guardarPropuesta() {
 	const elemento = document.getElementById('propuesta_detalle');
-	
+	$("#guardar_propuesta").hide();
+	$("#editar_propuesta").hide();
+	$("#cargando_accion").show();
 	var folio = $("#folio_propuesta").text();
 	html2pdf()
 		.set({
@@ -352,7 +354,8 @@ function enviarCorreo(){
 }
 
 function guardarEnBD(){
-	
+
+
 	// se almacena la propuesta en base de datos
 	var folio = $("#folio_propuesta").text();
 	var cantidad_divs = $("#cantidad_divs").attr("cantidad");
@@ -450,6 +453,7 @@ function guardarEnBD(){
 		  _token: $('input[name="_token"]').val()
 		} //esto es necesario, por la validacion de seguridad de laravel
 		  }).done(function (msg) {
+			$("#cargando_accion").hide();
 			$("#enviar_propuesta").show();
 			$("#listar_propuestas").show();
 		}).fail(function () {
