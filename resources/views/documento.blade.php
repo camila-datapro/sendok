@@ -61,6 +61,15 @@
          .control-label{
          margin-top: 10px;
          }
+
+         .vista_previa_plantilla{         
+            border: 1px solid #dee2e6;
+            margin-top: 15px;
+            width: 96%;
+            margin-left: 2%;
+            margin-right: 2%;
+            background: #dee2e6;
+         }
       
       </style>
       
@@ -268,16 +277,26 @@
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
-                  <h5 class="modal-title" id="modalcuerpo">Ingrese Contenido del mensaje</h5>
+                  <h5 class="modal-title" id="modalcuerpo">Seleccione plantilla de texto de correo</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>
                </div>
                <div class="modal-body">
-                  <textarea class="form-control" id="cuerpo_correo"></textarea>
+                  
+                  <select class="form-control" id="select_plantilla">
+                     <option id="0">Elija una</option>
+                     <?php 
+                     for($i=0;$i<sizeOf($plantillas);$i++){
+                        echo '<option id="'.$plantillas[$i]->id.'" asunto="'.$plantillas[$i]->asunto.'" contenido="'.$plantillas[$i]->cuerpo_mensaje.'" onclick="representarPlantilla('.json_encode($plantillas[$i]).')">'.$plantillas[$i]->nombre_plantilla.'</option>';
+                     }
+                     ?>
+                  </select>
+                  <div id="representacion_plantilla" class="vista_previa_plantilla">
+                  </div>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="enviarCorreo();" >OK</button>
+                  <button type="button" class="btn btn-success" data-dismiss="modal" onclick="enviarCorreo();" >Continuar</button>
                </div>
             </div>
          </div>

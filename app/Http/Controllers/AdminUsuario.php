@@ -64,7 +64,7 @@ class AdminUsuario extends Controller
     public function obtenerHTML(Request $request){
         
         $user_id = Auth::user()->id;
-        Log::debug("obtener".$user_id);
+        
 
         $archivo = file_get_contents('./firmas/html/firma_'.$user_id.'.html');
 

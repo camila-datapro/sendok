@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ClienteModel;
 use App\ProductoModel;
+use App\PlantillaModel;
 use App\Mail\MensajeRecibido;
 use App\RegionModel;
+use Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 
@@ -23,7 +25,8 @@ class DocumentoController extends Controller
         return view('documento')
         ->with("clientes", ClienteModel::all())
         ->with("productos", ProductoModel::listProductos())
-        ->with("regiones", RegionModel::all());
+        ->with("regiones", RegionModel::all())
+        ->with("plantillas",PlantillaModel::listPlantillasByUser(Auth::user()->id));
     }
 
     public function enviarPropuesta(Request $request){        
@@ -31,11 +34,12 @@ class DocumentoController extends Controller
         $nombre_doc = $request["nombre_doc"];
         $contenido = $request["contenido"];
         $folletos = $request["folletos"];
+        $asunto = ($request["asunto"])?$request["asunto"]:"Envío de documento";
         if($folletos==""||$folletos==null){
             $folletos = array();
         }
         Log::debug($folletos);
-        Mail::to($destinatario)->send( new MensajeRecibido($nombre_doc, $contenido, $folletos));        
+        Mail::to($destinatario)->send( new MensajeRecibido($nombre_doc, $contenido, $folletos, $asunto));        
         return 'Mensaje enviado';
     }
 

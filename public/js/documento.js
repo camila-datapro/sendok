@@ -302,7 +302,8 @@ function enviarCorreo(){
 		// envio de propuesta
 		var folio = $("#folio_propuesta").text();
 		var destinatario = $("#email_cliente").text();
-		var cuerpo = $("#cuerpo_correo").val();
+		var cuerpo = $("#select_plantilla option:selected").attr("contenido");
+		var asunto = $("#select_plantilla option:selected").attr("asunto");
 
 		var cantidad_divs = $("#cantidad_divs").attr("cantidad");
 		var id_productos_folleto = [];	
@@ -330,6 +331,7 @@ function enviarCorreo(){
 			destinatario: destinatario,
 			contenido: cuerpo,
 			folletos: id_productos_folleto,
+			asunto: asunto,
 			nombre_doc: folio+'.pdf',
 			_token: $('input[name="_token"]').val()
 		  } //esto es necesario, por la validacion de seguridad de laravel
@@ -1004,3 +1006,10 @@ function seleccion_producto(producto,id_boton){
 	  $("#boton_cerrar").click();
   }
   
+  $('#select_plantilla').on('change', function() {
+	  console.log("ingreso a select");
+	var cuerpo = $("#select_plantilla option:selected").attr("contenido");
+	var asunto = $("#select_plantilla option:selected").attr("asunto");
+	$("#representacion_plantilla").html(cuerpo);
+  });
+ 

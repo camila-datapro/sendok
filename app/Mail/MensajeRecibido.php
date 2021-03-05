@@ -7,6 +7,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+use Auth;
+
 
 class MensajeRecibido extends Mailable
 {
@@ -19,11 +21,13 @@ class MensajeRecibido extends Mailable
      *
      * @return void
      */
-    public function __construct(String $nombre, String $contenido, Array $folletos)
+    public function __construct(String $nombre, String $contenido, Array $folletos, String $asunto)
     {
         $this->nombre = $nombre;
         $this->contenido = $contenido;
         $this->folletos = $folletos;
+        $this->asunto = $asunto;
+        $this->subject = $asunto; 
     }
 
     /**
@@ -42,6 +46,12 @@ class MensajeRecibido extends Mailable
             Hacemos llegar a usted nuestra propuesta comercial.
             Saludos y gracias por su preferencia.";
        }
+        $user_id = Auth::user()->id;
+        $firma = file_get_contents('./firmas/html/firma_'.$user_id.'.html');
+        if($firma=="" || $firma ==null){
+            $firma =="";
+        }
+        $contenido = $contenido."\n".$firma;
         $email = $this->view('emails.envio-documento')->with("contenido",$contenido);
         $email->attachData(file_get_contents('./documentos/'.$nombre),$nombre,[
             'mime' => 'application/pdf',
@@ -51,6 +61,8 @@ class MensajeRecibido extends Mailable
                 'mime' => 'application/pdf',
             ]);
         }
+
+        Log::debug("Asunto:\n".$this->asunto."\n\n"."Contenido:\n".$contenido);
         
     }
 }
