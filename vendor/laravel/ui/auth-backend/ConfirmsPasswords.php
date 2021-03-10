@@ -10,8 +10,9 @@ trait ConfirmsPasswords
     use RedirectsUsers;
 
     /**
+     * showConfirmForm
      * Display the password confirmation view.
-     *
+     * @group ConfirmsPasswords
      * @return \Illuminate\View\View
      */
     public function showConfirmForm()
@@ -20,8 +21,9 @@ trait ConfirmsPasswords
     }
 
     /**
+     * confirm
      * Confirm the given user's password.
-     *
+     * @group ConfirmsPasswords
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
@@ -37,8 +39,9 @@ trait ConfirmsPasswords
     }
 
     /**
+     * resetPasswordConfirmationTimeout
      * Reset the password confirmation timeout.
-     *
+     * @group ConfirmsPasswords
      * @param  \Illuminate\Http\Request  $request
      * @return void
      */
@@ -48,8 +51,9 @@ trait ConfirmsPasswords
     }
 
     /**
+     * rules
      * Get the password confirmation validation rules.
-     *
+     * @group ConfirmsPasswords
      * @return array
      */
     protected function rules()
@@ -60,8 +64,9 @@ trait ConfirmsPasswords
     }
 
     /**
+     * validationErrorMessages
      * Get the password confirmation validation error messages.
-     *
+     * @group ConfirmsPasswords
      * @return array
      */
     protected function validationErrorMessages()

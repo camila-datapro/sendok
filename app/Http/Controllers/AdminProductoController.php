@@ -11,7 +11,11 @@ class AdminProductoController extends Controller
 {
     $this->middleware('auth');
 }
-
+    /**
+     * index
+     * Carga vista de administrador de documento con precarga de consulta a base de datos de productos
+     * @group AdminProductoController
+     */
     public function index(){
         return view('admin_producto')
         ->with('productos',ProductoModel::listProductosOptimized());

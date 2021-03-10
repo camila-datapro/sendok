@@ -12,6 +12,7 @@ trait RegistersUsers
     use RedirectsUsers;
 
     /**
+     * showRegistrationForm
      * Show the application registration form.
      *
      * @return \Illuminate\View\View
@@ -22,6 +23,7 @@ trait RegistersUsers
     }
 
     /**
+     * register
      * Handle a registration request for the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -45,6 +47,7 @@ trait RegistersUsers
     }
 
     /**
+     * guard
      * Get the guard to be used during registration.
      *
      * @return \Illuminate\Contracts\Auth\StatefulGuard
@@ -55,6 +58,7 @@ trait RegistersUsers
     }
 
     /**
+     * registered
      * The user has been registered.
      *
      * @param  \Illuminate\Http\Request  $request

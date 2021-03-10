@@ -16,6 +16,7 @@ trait ResetsPasswords
     use RedirectsUsers;
 
     /**
+     * showResetForm
      * Display the password reset view for the given token.
      *
      * If no token is present, display the link request form.
@@ -32,6 +33,7 @@ trait ResetsPasswords
     }
 
     /**
+     * reset
      * Reset the given user's password.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -59,6 +61,7 @@ trait ResetsPasswords
     }
 
     /**
+     * rules
      * Get the password reset validation rules.
      *
      * @return array
@@ -73,6 +76,7 @@ trait ResetsPasswords
     }
 
     /**
+     * validationErrorMessages
      * Get the password reset validation error messages.
      *
      * @return array
@@ -83,6 +87,7 @@ trait ResetsPasswords
     }
 
     /**
+     * credentials
      * Get the password reset credentials from the request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -96,6 +101,7 @@ trait ResetsPasswords
     }
 
     /**
+     * resetPassword
      * Reset the given user's password.
      *
      * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
@@ -116,6 +122,7 @@ trait ResetsPasswords
     }
 
     /**
+     * setUserPassword
      * Set the user's password.
      *
      * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
@@ -128,6 +135,7 @@ trait ResetsPasswords
     }
 
     /**
+     * sendResetResponse
      * Get the response for a successful password reset.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -145,6 +153,7 @@ trait ResetsPasswords
     }
 
     /**
+     * sendResetFailedResponse
      * Get the response for a failed password reset.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -165,6 +174,7 @@ trait ResetsPasswords
     }
 
     /**
+     * broker
      * Get the broker to be used during password reset.
      *
      * @return \Illuminate\Contracts\Auth\PasswordBroker
@@ -175,6 +185,7 @@ trait ResetsPasswords
     }
 
     /**
+     * guard
      * Get the guard to be used during password reset.
      *
      * @return \Illuminate\Contracts\Auth\StatefulGuard

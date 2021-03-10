@@ -14,7 +14,11 @@ class AdminClienteController extends Controller
 {
     $this->middleware('auth');
 }
-
+    /**
+     * index
+     * Carga vista de administrador de cliente con precarga de consulta a base de datos de clientes , regiones y provincias
+     * @group AdminClienteController
+     */
     public function index()
     {
         return view('admin_cliente')

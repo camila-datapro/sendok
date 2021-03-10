@@ -12,7 +12,12 @@ class ComunaController extends Controller
 {
     $this->middleware('auth');
 }
-
+    /**
+     * getComunas
+     * Permite obtener todas las columnas asociadas a un identificador de provincia
+     * @bodyParam request array identificador de provincia
+     * @group ComunaController
+     */
     public function getComunas(Request $request){
         $idProvincia = $request['id'];
          return json_encode(ComunaModel::getComunasByProvincia($idProvincia));

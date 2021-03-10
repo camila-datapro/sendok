@@ -12,6 +12,11 @@ class IngresoMasivoController extends Controller
     $this->middleware('auth');
 }
 
+    /**
+     * index
+     * Carga vista de creacion de ingreso masivo de productos
+     * @group IngresoMasivoController
+     */
     public function index()
     {
         return view('ingreso_masivo');

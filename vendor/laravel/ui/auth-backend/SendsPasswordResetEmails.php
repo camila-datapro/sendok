@@ -10,6 +10,7 @@ use Illuminate\Validation\ValidationException;
 trait SendsPasswordResetEmails
 {
     /**
+     * showLinkRequestForm
      * Display the form to request a password reset link.
      *
      * @return \Illuminate\View\View
@@ -20,6 +21,7 @@ trait SendsPasswordResetEmails
     }
 
     /**
+     * sendResetLinkEmail
      * Send a reset link to the given user.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -42,6 +44,7 @@ trait SendsPasswordResetEmails
     }
 
     /**
+     * validateEmail
      * Validate the email for the given request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -53,6 +56,7 @@ trait SendsPasswordResetEmails
     }
 
     /**
+     * credentials
      * Get the needed authentication credentials from the request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -64,6 +68,7 @@ trait SendsPasswordResetEmails
     }
 
     /**
+     * sendResetLinkResponse
      * Get the response for a successful password reset link.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -78,6 +83,7 @@ trait SendsPasswordResetEmails
     }
 
     /**
+     * sendResetLinkFailedResponse
      * Get the response for a failed password reset link.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -100,6 +106,7 @@ trait SendsPasswordResetEmails
     }
 
     /**
+     * broker
      * Get the broker to be used during password reset.
      *
      * @return \Illuminate\Contracts\Auth\PasswordBroker

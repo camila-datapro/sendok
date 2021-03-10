@@ -20,6 +20,11 @@ class DocumentoController extends Controller
         $this->middleware('auth');
     }
     
+    /**
+     * index
+     * Carga vista de creacion de documento con precarga de consulta a base de datos de clientes, productos , regiones y plantillas
+     * @group DocumentoController
+     */
     public function index()
     {
         return view('documento')
@@ -29,6 +34,13 @@ class DocumentoController extends Controller
         ->with("plantillas",PlantillaModel::listPlantillasByUser(Auth::user()->id));
     }
 
+    /**
+     * enviarPropuesta
+     * Permite enviar un email al cliente con la propuesta creada, además de adjuntar los documentos asociados al proceso.
+     * @group DocumentoController
+     * @bodyParam request array datos de destinatario, nombre documento, contenido, folletos y asunto
+     * @return String string texto de Mensaje enviado
+     */
     public function enviarPropuesta(Request $request){        
         $destinatario = $request["destinatario"];
         $nombre_doc = $request["nombre_doc"];
@@ -38,11 +50,18 @@ class DocumentoController extends Controller
         if($folletos==""||$folletos==null){
             $folletos = array();
         }
-        Log::debug($folletos);
+        
         Mail::to($destinatario)->send( new MensajeRecibido($nombre_doc, $contenido, $folletos, $asunto));        
         return 'Mensaje enviado';
     }
 
+    /**
+     * guardarPDF
+     * Permite guardar el documento PDF de la creacion de propuesta en la carpeta ../public/documentos/
+     * @group DocumentoController
+     * @bodyParam request array con nombre único de documento
+     * @return String string estado OK
+     */
     public function guardarPDF(Request $request){
         $bpdf = $request["pdf"];
         $nombre_doc = $request["nombre_doc"];
@@ -51,6 +70,13 @@ class DocumentoController extends Controller
 
     }
 
+    /**
+     * guardarPDF
+     * Permite guardar el documento PDF de la ficha tecnica de un producto en la carpeta ../public/productos/
+     * @group DocumentoController
+     * @bodyParam request array con nombre único de ficha tecnica
+     * @return String string estado OK
+     */
     public function guardarPDFProducto(Request $request){
         
         $bpdf = $request["pdf"];

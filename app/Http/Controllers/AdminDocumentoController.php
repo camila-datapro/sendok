@@ -13,7 +13,11 @@ class AdminDocumentoController extends Controller
 {
     $this->middleware('auth');
 }
-
+    /**
+     * index
+     * Carga vista de administrador de documento con precarga de consulta a base de datos de clientes , propuestas y productos
+     * @group AdminDocumentoController
+     */
     public function index(){
         return view('admin_documento')
         ->with("propuestas", PropuestaModel::all())

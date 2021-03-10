@@ -6,15 +6,30 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * Clase de acceso a tabla de base de datos clientes
+ */
+
 class ClienteModel extends Model
 {
     protected $table = 'cliente_destino';
 
+    /**
+     * Permite obtener el cliente
+     * @param int $id_cliente identificador de cliente en tabla
+     * @return array
+     * 
+     */
     public static function obtenerCliente($id_cliente){
         $results = DB::select("select * from cliente_destino where id_cliente = '".$id_cliente."'" );
         return $results;
     }
 
+    /**
+     * @param mixed $json_datos
+     * 
+     * @return [type]
+     */
     public static function crearCliente($json_datos){    
 
 
@@ -56,6 +71,11 @@ class ClienteModel extends Model
         return $results;
     }
 
+    /**
+     * @param mixed $id_cliente
+     * 
+     * @return [type]
+     */
     public static function eliminarCliente($id_cliente){       
         $results = DB::delete("delete from cliente_destino 
         where id_cliente = '".$id_cliente."';");            
@@ -63,6 +83,11 @@ class ClienteModel extends Model
     }
 
 
+    /**
+     * @param mixed $json_datos
+     * 
+     * @return [type]
+     */
     public static function editarCliente($json_datos){    
         $array_datos = json_decode($json_datos,true);
         $json_datos = $array_datos[0];

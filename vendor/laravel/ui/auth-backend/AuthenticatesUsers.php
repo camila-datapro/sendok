@@ -12,6 +12,7 @@ trait AuthenticatesUsers
     use RedirectsUsers, ThrottlesLogins;
 
     /**
+     * showLoginForm
      * Show the application's login form.
      *
      * @return \Illuminate\View\View
@@ -22,6 +23,7 @@ trait AuthenticatesUsers
     }
 
     /**
+     * login
      * Handle a login request to the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -56,6 +58,7 @@ trait AuthenticatesUsers
     }
 
     /**
+     * validateLogin
      * Validate the user login request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -72,6 +75,7 @@ trait AuthenticatesUsers
     }
 
     /**
+     * attemptLogin
      * Attempt to log the user into the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -85,6 +89,7 @@ trait AuthenticatesUsers
     }
 
     /**
+     * credentials
      * Get the needed authorization credentials from the request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -96,6 +101,7 @@ trait AuthenticatesUsers
     }
 
     /**
+     * sendLoginResponse
      * Send the response after the user was authenticated.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -117,6 +123,7 @@ trait AuthenticatesUsers
     }
 
     /**
+     * authenticated
      * The user has been authenticated.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -129,6 +136,7 @@ trait AuthenticatesUsers
     }
 
     /**
+     * sendFailedLoginResponse
      * Get the failed login response instance.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -144,6 +152,7 @@ trait AuthenticatesUsers
     }
 
     /**
+     * username
      * Get the login username to be used by the controller.
      *
      * @return string
@@ -154,6 +163,7 @@ trait AuthenticatesUsers
     }
 
     /**
+     * logout
      * Log the user out of the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -177,6 +187,7 @@ trait AuthenticatesUsers
     }
 
     /**
+     * loggedOut
      * The user has logged out of the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -188,6 +199,7 @@ trait AuthenticatesUsers
     }
 
     /**
+     * guard
      * Get the guard to be used during authentication.
      *
      * @return \Illuminate\Contracts\Auth\StatefulGuard

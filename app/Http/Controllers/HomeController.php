@@ -8,7 +8,7 @@ class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
+     * @group HomeController
      * @return void
      */
     public function __construct()
@@ -17,8 +17,9 @@ class HomeController extends Controller
     }
 
     /**
+     * index
      * Show the application dashboard.
-     *
+     * @group HomeController
      * @return \Illuminate\Contracts\Support\Renderable
      */
     

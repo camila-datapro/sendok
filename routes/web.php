@@ -21,7 +21,6 @@ Auth::routes();
 //urls de navegacion
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/plantilla', 'PlantillaController@index')->name('plantilla');
 Route::get('/producto','ProductoController@index')->name('producto');
 Route::get('/cliente','ClienteController@index')->name('cliente');
 Route::get('/documento','DocumentoController@index')->name('documento');
@@ -29,6 +28,8 @@ Route::get('/admin_cliente', 'AdminClienteController@index')->name('admin_client
 Route::get('/admin_producto', 'AdminProductoController@index')->name('admin_producto');
 Route::get('/admin_usuario', 'AdminUsuario@index')->name('admin_usuario');
 
+
+Route::get('/documentacion', 'PHPDocumentador@index')->name('documentacion');
 
 
 
