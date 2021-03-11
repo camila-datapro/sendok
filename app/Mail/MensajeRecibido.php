@@ -51,7 +51,7 @@ class MensajeRecibido extends Mailable
         if($firma=="" || $firma ==null){
             $firma =="";
         }
-        $contenido = $contenido."\n".$firma;
+        $contenido = "<text>".$contenido."</text><br>--".$firma;
         $email = $this->view('emails.envio-documento')->with("contenido",$contenido);
         $email->attachData(file_get_contents('./documentos/'.$nombre),$nombre,[
             'mime' => 'application/pdf',
@@ -62,7 +62,7 @@ class MensajeRecibido extends Mailable
             ]);
         }
 
-        Log::debug("Asunto:\n".$this->asunto."\n\n"."Contenido:\n".$contenido);
+        //Log::debug("Asunto:\n".$this->asunto."\n\n"."Contenido:\n".$contenido);
         
     }
 }

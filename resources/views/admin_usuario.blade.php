@@ -305,7 +305,7 @@
       <script src="{{ asset('/js/admin_usuario.js') }}"></script>
       <script src="https://unpkg.com/@popperjs/core@2"></script>
       <script src="{{ asset('/js/dataTables.js')}}"></script>
-      <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>  
+      <script src="https://cdn.ckeditor.com/4.16.0/standard-all/ckeditor.js"></script>  
       <!-- include summernote css/js -->
 
      <!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   -->
@@ -318,10 +318,11 @@
             $("#tabla_plantillas").DataTable({
                 //responsive: true
             });
-
+            CKEDITOR.addCss('.cke_editable p { margin: 0 !important; }');
             CKEDITOR.replace( 'summernote' ,{
                width: '100%',
-               placeholder : "Diseñe o copie y pegue su firma de correo electrónico"
+               placeholder : "Diseñe o copie y pegue su firma de correo electrónico",
+               extraPlugins: 'colorbutton'
             });
             
             
