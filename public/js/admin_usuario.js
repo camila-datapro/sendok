@@ -196,11 +196,12 @@ $("input:checkbox").on('click', function() {
 		  _token: $('input[name="_token"]').val()
 		} //esto es necesario, por la validacion de seguridad de laravel
 	  }).done(function (msg) {
-		console.log(msg);
-		$("#cke_33").click();
-		$(".cke_editable").val(msg);
+		
+		  $("#cke_35").click();
+		$(".cke_source").val(msg);
+		//$(".cke_editable").val(msg);
 		setTimeout(() => {
-			$("#cke_33").click();	
+			$("#cke_35").click();	
 			$(".cke_editable").show();
 		}, 50);
 		
