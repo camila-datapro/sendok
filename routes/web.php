@@ -17,6 +17,12 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
+Route::get('/clear-cache', function() {
+    $output = [];
+    \Artisan::call('cache:clear', $output);
+    dd($output);
+});
+
 Auth::routes();
 //urls de navegacion
 Route::get('/home', 'HomeController@index')->name('home');
