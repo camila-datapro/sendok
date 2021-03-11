@@ -14,6 +14,7 @@ trait AuthenticatesUsers
     /**
      * showLoginForm
      * Show the application's login form.
+     * @group AuthenticatesUsers
      *
      * @return \Illuminate\View\View
      */
@@ -25,7 +26,7 @@ trait AuthenticatesUsers
     /**
      * login
      * Handle a login request to the application.
-     *
+     * @group AuthenticatesUsers
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
      *
@@ -63,7 +64,7 @@ trait AuthenticatesUsers
      *
      * @param  \Illuminate\Http\Request  $request
      * @return void
-     *
+     * @group AuthenticatesUsers
      * @throws \Illuminate\Validation\ValidationException
      */
     protected function validateLogin(Request $request)
@@ -77,7 +78,7 @@ trait AuthenticatesUsers
     /**
      * attemptLogin
      * Attempt to log the user into the application.
-     *
+     * @group AuthenticatesUsers
      * @param  \Illuminate\Http\Request  $request
      * @return bool
      */
@@ -91,7 +92,7 @@ trait AuthenticatesUsers
     /**
      * credentials
      * Get the needed authorization credentials from the request.
-     *
+     * @group AuthenticatesUsers
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
@@ -103,7 +104,7 @@ trait AuthenticatesUsers
     /**
      * sendLoginResponse
      * Send the response after the user was authenticated.
-     *
+     * @group AuthenticatesUsers
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
@@ -125,7 +126,7 @@ trait AuthenticatesUsers
     /**
      * authenticated
      * The user has been authenticated.
-     *
+     * @group AuthenticatesUsers
      * @param  \Illuminate\Http\Request  $request
      * @param  mixed  $user
      * @return mixed
@@ -138,7 +139,7 @@ trait AuthenticatesUsers
     /**
      * sendFailedLoginResponse
      * Get the failed login response instance.
-     *
+     * @group AuthenticatesUsers
      * @param  \Illuminate\Http\Request  $request
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -154,7 +155,7 @@ trait AuthenticatesUsers
     /**
      * username
      * Get the login username to be used by the controller.
-     *
+     * @group AuthenticatesUsers
      * @return string
      */
     public function username()
@@ -165,7 +166,7 @@ trait AuthenticatesUsers
     /**
      * logout
      * Log the user out of the application.
-     *
+     * @group AuthenticatesUsers
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
@@ -189,7 +190,7 @@ trait AuthenticatesUsers
     /**
      * loggedOut
      * The user has logged out of the application.
-     *
+     * @group AuthenticatesUsers
      * @param  \Illuminate\Http\Request  $request
      * @return mixed
      */
@@ -201,7 +202,7 @@ trait AuthenticatesUsers
     /**
      * guard
      * Get the guard to be used during authentication.
-     *
+     * @group AuthenticatesUsers
      * @return \Illuminate\Contracts\Auth\StatefulGuard
      */
     protected function guard()

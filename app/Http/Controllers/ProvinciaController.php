@@ -14,7 +14,12 @@ class ProvinciaController extends Controller
     $this->middleware('auth');
 }
 
-
+    /**
+     * index
+     * Permite obtener todo el listado de provincias desde base de datos
+     * @group ProvinciaController
+     * @return array array Listado de provincias
+     */
     public function index(){
         return $this->getProvincias();
     }
@@ -23,6 +28,13 @@ class ProvinciaController extends Controller
         return ProvinciaModel::all();
     }
 
+    /**
+     * getProvincias
+     * Permite obtener el listado de provincias asociados a un identificador único de region
+     * @bodyParam request array array que contiene los datos de request y el id de region
+     * @group ProvinciaController
+     * @return array array Listado de provincias
+     */
     public function getProvincias(Request $request){
        $idRegion = $request['id'];
         return json_encode(ProvinciaModel::getProvinciasByRegion($idRegion));

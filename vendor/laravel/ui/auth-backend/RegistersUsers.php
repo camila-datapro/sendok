@@ -13,8 +13,8 @@ trait RegistersUsers
 
     /**
      * showRegistrationForm
-     * Show the application registration form.
-     *
+     * Show the apiplication regstration form.
+     * @group RegistersUsers
      * @return \Illuminate\View\View
      */
     public function showRegistrationForm()
@@ -25,7 +25,7 @@ trait RegistersUsers
     /**
      * register
      * Handle a registration request for the application.
-     *
+     * @group RegistersUsers
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
@@ -49,7 +49,7 @@ trait RegistersUsers
     /**
      * guard
      * Get the guard to be used during registration.
-     *
+     * @group RegistersUsers
      * @return \Illuminate\Contracts\Auth\StatefulGuard
      */
     protected function guard()
@@ -60,7 +60,7 @@ trait RegistersUsers
     /**
      * registered
      * The user has been registered.
-     *
+     * @group RegistersUsers
      * @param  \Illuminate\Http\Request  $request
      * @param  mixed  $user
      * @return mixed

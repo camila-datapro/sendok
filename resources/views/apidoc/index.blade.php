@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>Guía para desarrolladores</title>
 
     <link rel="stylesheet" href="{{ asset('/docs/css/style.css') }}" />
     <script src="{{ asset('/docs/js/all.js') }}"></script>
@@ -36,16 +36,195 @@
             <ul class="search-results"></ul>
               <div id="toc">
       </div>
-                    <ul class="toc-footer">
-                                  <li><a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a></li>
-                            </ul>
             </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
           <!-- START_INFO -->
-<h1>Info</h1>
-<p>Bienvenido/a a la documentación interna de Sendok.</p>
+<h1>Bienvenida</h1>
+<p>
+<b>¡Bienvenido/a a la documentación interna de Sendok!</b><br>
+Éste entorno documental ha sido generado en base al proyecto beyondco, para más información visite: <a href="https://beyondco.de/docs/laravel-apidoc-generator/getting-started/installation">Documentación de beyondco</a><br>
+-- <br>
+Recuerda que para generar documentación, necesitas poseer un entorno en Laravel 7.3. <br>
+Para más información de Laravel visite : 
+<a href="https://laravel.com/docs/7.x/installation">Documentación oficial de Laravel</a><br>
+-- <br>
+Para aplicar los nuevos comentarios y que se reflejen en esta mini aplicación, debe ingresar por terminal el siguiente comando : <br> <b>php artisan apidoc:generate</b>
+</p>
+<h2 style="color:#4545f3;"><b>¿Primera vez que usas Laravel? Algunos tips que te podrían ser útiles...</b></h2>
+<p style="color:#41838a; text-align: justify;">
+Hola!
+
+Te contaré aspectos necesarios para que puedas trabajar en esta aplicación, o bien, entenderla si es que no tienes 
+mucha experiencia con Laravel, si es que ya tienes el dominio necesario, no te preocupes. <br>
+
+Este desarrollo MVC está creado con LARAVEL versión 7.x, por lo que la estructura del backend está toda en PHP 7. Para más información sobre PHP visita la <a href="https://www.php.net/docs.php">Documentación oficial de PHP</a> .
+<br>
+Debes estar atent@ a los cambios que php haga en sus funciones si se desea cambiar de versión. 
+Favor revisar la documentación del sitio oficial: https://www.php.net/docs.php
+<br>
+A nivel de base de datos se cuenta con MySQL como motor principal, el modelo relacional se encuentra documentado
+en la carpeta de Flujos y diagramas de DATAPRO.<br>
+Las tablas poseen sus constraint de relaciones, por lo que tu mism@ podrás generar los diagramas a través de herramientas
+como MYSQL WorkBench. Si deseas mejorar el modelo, puedes hacerlo, pero lo ideal es que cuando crees las tablas
+estas queden referenciadas con constraint en el caso de que se utilicen claves foráneas.
+<br><br>
+<b>* Se debe tener instalado npm y php artisan en el equipo donde se vaya a desarrollar.</b>
+<br><br>
+
+Para el desarrollo se utilizó Visual Studio Code, y para crear Modelos y Controladores, la Terminal
+que provee el editor, a través de los siguientes comandos puedes crear automáticamente la estructura de 
+un controlador nuevo o modelo (los Modelos contienen las interacciones a BD , los Controladores interactúan con el Javascript,
+y este último a su vez con las Vistas hechas con plantillas Blade):
+<br><br>
+<span style="color: #2a8629">
+<b>
+>> php artisan make:controller NOMBREDECONTROLADOR<br>
+>> php artisan make:model NOMBREDEMODELO <br>
+</b>
+</span>
+<br>
+Es muy importante que una vez que crees el modelo , le asignes la variable "protected $table = 'NOMBREDETABLA';"
+y además le importes la clase DB -> "use DB". Si necesitas saber como, mira los modelos que ya existen.
+<br>
+Todas las rutas POST Y GET se definen en la carpeta app/routes/web.php
+<br>
+Los controladores están divididos por vistas, es decir para cada vista que se vaya a cargar hay un Controlador
+que "carga" una view, a esa view se le pueden pasar parámetros, y es así como se generan dinámicamente las
+diferentes tablas que se utilizan en el sistema.
+<br>
+Si por X motivo, necesitas debuggear lo que llega a un controlador, puedes importar el Facade de Log,
+en la sección de usos del controlador (zona superior), declarar lo siguiente:
+<br>
+<span style="color: #2a8629">
+<b>use Illuminate\Support\Facades\Log;</b>
+</span>
+<br>
+Y luego en la funcion que desees debuggear, podrás hacer log de la siguiente forma:
+Log::debug(VARIABLE O TEXTO QUE QUIERAS PROBAR);
+<br>
+La salida , o el log en sí, quedará en la carpeta: <b>app\storage\logs\laravel.log </b>
+(preocupate de que una vez que esté listo , borrar esos debugs, para no saturar el archivo log del servidor)
+<br>
+Los datos que posteriormente se listan en las tablas, se cargan a través de una consulta al modelo de base de datos.
+Hay funciones de obtencion de datos que retornan , un array. Y hay otras que retornan un JSON.
+Lo ideal es que todas retornen JSON para más adelante, así se mejora el rendimiento de la página web, no es lo mismo
+cargar un array de 1000 espacios, que un json, el json en si , tiene menos peso como variable.
+<br>
+----------------------------------------------------<br>
+<b>En resumen con ejemplo:</b>  <br>Si deseas hacer un listado de productos en una DataTable, debes primero, crear una vista
+con el nombre que tu quieras pero con formato .blade.php (idealmente que sea solo minúsculas y guiones bajo por convencion)
+Entonces copias y pegas la estructura de una de las vistas y le quitas el contenido.
+<br>
+Considera que el navbar se encuentra en otro archivo (Esto es para no esribir el mismo codigo N veces), así que 
+una vez creada tu view, deberás crear un controlador que cargue esa view (a través de consola con php artisan 
+make:controller NOMBRE DE CONTROLADOR), deberás cargar la vista en dicho controlador, de está forma incluir en el interior
+de la clase del controlador nuevo una funcion index():
+<br><br>
+<text style="color: #2a8629;">
+<b>
+  public function index() <br>
+    {<br>
+        return view('NOMBRE_DE_TU_VIEW')<br>
+    }</b><br>
+    </text>
+    <br>
+
+Y supongamos que quieres añadirle el listado de productos, entonces a esa funcion index deberás agregarle un "with":
+pero antes de eso se debe crear el modelo de producto (para consultar a la base de datos), en consola con el comando :
+<br><b>>> php artisan make:model ProductoModel </b> (es un nombre de referencia tu puedes ponerle como quieras)
+<br>
+Deberas dirigirte al nuevo modelo que creaste "ProductoModel" y en la sección de usos, declarar:
+use DB; 
+<br>
+Además se tendrá que definir la variable protegida con el nombre de la tabla dentro de la clase del modelo:
+<br>
+<span style="color: #2a8629">protected $table = "productos"; 
+<br>
+// suponiendo que la tabla que creaste en base de datos se llama productos
+</span>
+<br>
+y luego en el modelo puedes definir los diferentes metodos de consulta y modificacion a la base de datos
+<br><br>
+<span style="color: green;">
+<b>
+public function index()<br>
+    {<br>
+        return view('NOMBRE_DE_TU_VIEW')<br>
+        ->with("productos", ProductoModel::all())<br> 
+    } </b><br>
+        <span style="color: orange;">// laravel tiene una funcion por defecto que se llama "all" <br>
+        //que retorna todos los resultados de una tabla<br>
+        // pero en el caso de que sea otra funcion que tu quieras crear, solo hay que reemplazar el "all()" por<br>
+        // "NOMBRE_DE_TU_METODO()"</span>
+
+    </span>
+    <br>
+===
+Para la documentacion se utilizo apidoc  en su versión 3.* , para más información visite el <a href="https://beyondco.de/docs/laravel-apidoc-generator/getting-started/installation"> Manual de instalación de apidoc </a>
+<br>
+Para su instalación es necesario que tengas instalado composer en tu computador, para más información de como instalar composer , visite la <a href="https://getcomposer.org/doc/"> Documentación oficial de composer </a><br>
+Luego desde terminal debe situarse en el proyecto y ejecutar el siguiente comando: <br><br>
+<span style="color: #2a8629;"> 
+<b>
+>> composer require mpociot/laravel-apidoc-generator</b>
+</span>
+<br>
+
+</p>
+<p style="color:#41838a;">
+<br>
+Para la primera vez que se crea la documentación, también deberá publicar el Provider: <br><br>
+<span style="color: #2a8629;">
+<b>
+>> php artisan vendor:publish --provider="Mpociot\ApiDoc\ApiDocGeneratorServiceProvider" --tag=apidoc-config
+</b>
+</span>
+<br><br>
+Y cada vez que se desee compilar la doc, se debe ejecutar el siguiente comando por consola (no olvidar que hay que estar situado en la ubicacion del proyecto):<br>
+<span style="color: #2a8629;">
+<b>
+>> php artisan apidoc:generate
+</b>
+</span>
+</p>
+<h1>Modelo de datos</h1>
+<p  style="color:#41838a;">
+Debido a que esta plataforma posee una arquitectura MVC, es necesario conocer, la relación que existe en su base de datos, para ello, puedes revisar la siguiente imagen (o si prefieres puedes acudir al siguiente <a href="http://localhost/desarrollo/public/img/modelo_er.png" download>enlace de descarga de imagen </a>):
+<br>
+
+<img src="http://localhost/desarrollo/public/img/modelo_er.png"></img>
+<br>
+Para cada tabla existente en la base de datos (que no sea autogenerada por Laravel), existe un modelo, a través del cual se harán las Querys para interactuar con la base de datos.<br>
+Estas funciones deben ser estáticas, ya que la lógica de obtención de datos es sincrónica.
+
+<h2>Tablas de base de datos</h2>
+
+<p>Para el adecuado respaldo de los datos, lo conveniente es dejar una versión estable de la base de datos MySQL con el formato de nombre YYYYMMDD_Desarrollador.sql en la parpeta ../database/sql/ </p>
+
+<h3> cliente_destino </h3>
+
+<p>Tabla que almacena los datos de cliente , ellos serán los destinatarios del documento, por lo que es fundamental que se almacene tanto su nombre, como su correo, cargo y dirección.</p>
+
+<h3> producto </h3>
+<p>Tabla que almacena los datos de producto, cada uno de estos puede poseer una ficha tecnica asociada.</p>
+
+<h3> propuesta_comercial </h3>
+
+<p>Tabla que almacena el registro completo del documento de propuesta comercial que se crea, cada elemento se identifica por un número de folio único.</p>
+
+<h3> ejecutivo_venta</h3>
+<p>Tabla que contiene los datos del ejecutivo que inicia sesión en la plataforma, y el usuario que le corresponde, además almacena la ruta o el nombre del pie de firma personal de correo electrónico.
+</p>
+<h3> region </h3>
+<p>Tabla que contiene el listado de regiones.</p>
+<h3> provincia </h3>
+<p>Tabla que almacena el listado de provincias e indica las asociaciones de region y comuna.</p>
+<h3> comuna </h3>
+<p>Tabla que almacena el listado de comunas que están asociadas a una provincia en particular.</p>
+
+</p>
 <!-- END_INFO -->
 <h1>AdminClienteController</h1>
 <!-- START_0cbaa4ebe38ea695e7a08d88a013d4f8 -->
@@ -196,7 +375,7 @@ fetch(url, {
     "http://localhost/editarUsuario" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"array":"et"}'
+    -d '{"array":"suscipit"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/editarUsuario"
@@ -208,7 +387,7 @@ let headers = {
 };
 
 let body = {
-    "array": "et"
+    "array": "suscipit"
 }
 
 fetch(url, {
@@ -375,6 +554,95 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>POST obtenerHTML</code></p>
 <!-- END_94d29c8dbd73bcb5cf48c44658ac7cac -->
+<h1>AuthenticatesUsers</h1>
+<!-- START_66e08d3cc8222573018fed49e121e96d -->
+<h2>showLoginForm</h2>
+<p>Show the application&#039;s login form.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/login" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/login"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET login</code></p>
+<!-- END_66e08d3cc8222573018fed49e121e96d -->
+<!-- START_ba35aa39474cb98cfb31829e70eb8b74 -->
+<h2>login</h2>
+<p>Handle a login request to the application.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/login" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/login"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST login</code></p>
+<!-- END_ba35aa39474cb98cfb31829e70eb8b74 -->
+<!-- START_e65925f23b9bc6b93d9356895f29f80c -->
+<h2>logout</h2>
+<p>Log the user out of the application.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/logout" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/logout"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST logout</code></p>
+<!-- END_e65925f23b9bc6b93d9356895f29f80c -->
 <h1>ClienteController</h1>
 <!-- START_e805c275840cde2fcd30613645581cd2 -->
 <h2>index</h2>
@@ -1013,6 +1281,40 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET ingreso_masivo</code></p>
 <!-- END_c622e38ed4b796d6c784c0c36ab5a778 -->
+<h1>PHPDocumentador</h1>
+<!-- START_f4bd8405349785155398b8293c772f60 -->
+<h2>index</h2>
+<p>Permite cargar la vista de documentación de la aplicación generada por la clase Writer.php ubicada en .</p>
+<p>./vendor/mpociot/laravel-apidoc-generator/src/Writing/Writer.php</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/documentacion" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/documentacion"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET documentacion</code></p>
+<!-- END_f4bd8405349785155398b8293c772f60 -->
 <h1>ProductoController</h1>
 <!-- START_eabe21f3e41e5879be978bd5046bc0e5 -->
 <h2>index</h2>
@@ -1097,7 +1399,7 @@ fetch(url, {
 <td><code>request</code></td>
 <td>array</td>
 <td>optional</td>
-<td>datos de producto obtenidos por formulario.</td>
+<td>Arreglo con datos de producto obtenidos por formulario.</td>
 </tr>
 </tbody>
 </table>
@@ -1151,7 +1453,7 @@ fetch(url, {
 <td><code>array</code></td>
 <td>array</td>
 <td>optional</td>
-<td>Array con datos de producto a actualizar</td>
+<td>Arreglo con datos de producto a actualizar</td>
 </tr>
 </tbody>
 </table>
@@ -1205,7 +1507,7 @@ fetch(url, {
 <td><code>request</code></td>
 <td>array</td>
 <td>optional</td>
-<td>con identificador unico de producto</td>
+<td>Arreglo con identificador unico de producto</td>
 </tr>
 </tbody>
 </table>
@@ -1259,7 +1561,7 @@ fetch(url, {
 <td><code>request</code></td>
 <td>array</td>
 <td>optional</td>
-<td>con identificador unico de producto</td>
+<td>Arreglo con identificador unico de producto</td>
 </tr>
 </tbody>
 </table>
@@ -1341,7 +1643,7 @@ fetch(url, {
 <td><code>array</code></td>
 <td>array</td>
 <td>optional</td>
-<td>Array que contiene filtros ingresados por el usuario.</td>
+<td>Arreglo que contiene filtros ingresados por el usuario.</td>
 </tr>
 </tbody>
 </table>
@@ -1423,24 +1725,296 @@ fetch(url, {
 <td><code>request</code></td>
 <td>array</td>
 <td>optional</td>
-<td>datos de productos obtenidos por formulario.</td>
+<td>Arreglo con datos de productos obtenidos por formulario.</td>
 </tr>
 </tbody>
 </table>
 <!-- END_31548ef293cfeb9652b9b8f6947c2e97 -->
-<h1>general</h1>
-<!-- START_66e08d3cc8222573018fed49e121e96d -->
-<h2>showLoginForm</h2>
-<p>Show the application&#039;s login form.</p>
+<h1>PropuestaController</h1>
+<!-- START_583653251be9f44a6ae2f267bd3deb49 -->
+<h2>setPropuesta</h2>
+<p>Permite crear un nuevo registro de propuesta comercial en base de datos</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/setPropuesta" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"array":[]}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/setPropuesta"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "array": []
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST setPropuesta</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>array</code></td>
+<td>array</td>
+<td>optional</td>
+<td>Array con datos de propuesta, ejecutivo y cliente</td>
+</tr>
+</tbody>
+</table>
+<!-- END_583653251be9f44a6ae2f267bd3deb49 -->
+<!-- START_cf1788bbae98f963dc9fb31c18b9c1e1 -->
+<h2>updatePropuesta</h2>
+<p>Permite actualizar los datos de un registro de tabla propuesta_comercial a partir de su identificador, además asigna un número correlativo para versionar el documento posterior a la modificacion</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/updatePropuesta" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"array":[]}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/updatePropuesta"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "array": []
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST updatePropuesta</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>array</code></td>
+<td>array</td>
+<td>optional</td>
+<td>Array con datos de propuesta, ejecutivo y cliente</td>
+</tr>
+</tbody>
+</table>
+<!-- END_cf1788bbae98f963dc9fb31c18b9c1e1 -->
+<!-- START_f55a6358b03b78db39fe7e4d0e7c7e5d -->
+<h2>setEstadoEnviado</h2>
+<p>Cuando un documento es enviado vía correo electrónico, esta función actualizará el campo de base de datos de estado de envio, a partir del número de folio y correlativo único de propuesta.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/setEstadoEnviado" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"array":[]}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/setEstadoEnviado"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "array": []
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST setEstadoEnviado</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>array</code></td>
+<td>array</td>
+<td>optional</td>
+<td>array con numero de folio único de propuesta</td>
+</tr>
+</tbody>
+</table>
+<!-- END_f55a6358b03b78db39fe7e4d0e7c7e5d -->
+<!-- START_3143b93222f97a8def7af2af22c1a4f6 -->
+<h2>getLastId</h2>
+<p>Permite obtener el identificador del último registro insertado en tabla de base de datos &quot;propuesta&quot;, esto se utiliza para la asignación de nombre del archivo pdf que se va a almacenar. Para que el método funcione correctamente, es necesario que exista previamente un registro dummy de propuesta comercial en tabla.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/propuestaLastId" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"array":[]}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/propuestaLastId"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "array": []
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST propuestaLastId</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>array</code></td>
+<td>array</td>
+<td>optional</td>
+<td>Array con datos de propuesta, ejecutivo y cliente</td>
+</tr>
+</tbody>
+</table>
+<!-- END_3143b93222f97a8def7af2af22c1a4f6 -->
+<h1>ProvinciaController</h1>
+<!-- START_4960fd3cb6742ec54c3f6893e530bb16 -->
+<h2>getProvincias</h2>
+<p>Permite obtener el listado de provincias asociados a un identificador único de region</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/obtenerProvincias" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -d '{"request":[]}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/obtenerProvincias"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "request": []
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST obtenerProvincias</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>request</code></td>
+<td>array</td>
+<td>optional</td>
+<td>array que contiene los datos de request y el id de region</td>
+</tr>
+</tbody>
+</table>
+<!-- END_4960fd3cb6742ec54c3f6893e530bb16 -->
+<h1>RegionController</h1>
+<!-- START_2a1827e1a539118fe47bc2a78b290066 -->
+<h2>getRegiones</h2>
+<p>Permite obtener el listado de regiones desde el modelo de Region</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/login" \
+    -G "http://localhost/obtenerRegiones" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/login"
+    "http://localhost/obtenerRegiones"
 );
 
 let headers = {
@@ -1455,71 +2029,18 @@ fetch(url, {
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <blockquote>
-<p>Example response (200):</p>
+<p>Example response (401):</p>
 </blockquote>
-<pre><code class="language-json">null</code></pre>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
 <h3>HTTP Request</h3>
-<p><code>GET login</code></p>
-<!-- END_66e08d3cc8222573018fed49e121e96d -->
-<!-- START_ba35aa39474cb98cfb31829e70eb8b74 -->
-<h2>login</h2>
-<p>Handle a login request to the application.</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/login" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/login"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST login</code></p>
-<!-- END_ba35aa39474cb98cfb31829e70eb8b74 -->
-<!-- START_e65925f23b9bc6b93d9356895f29f80c -->
-<h2>logout</h2>
-<p>Log the user out of the application.</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/logout" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/logout"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST logout</code></p>
-<!-- END_e65925f23b9bc6b93d9356895f29f80c -->
+<p><code>GET obtenerRegiones</code></p>
+<!-- END_2a1827e1a539118fe47bc2a78b290066 -->
+<h1>RegistersUsers</h1>
 <!-- START_ff38dfb1bd1bb7e1aa24b4e1792a9768 -->
 <h2>showRegistrationForm</h2>
-<p>Show the application registration form.</p>
+<p>Show the apiplication regstration form.</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -1577,6 +2098,69 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>POST register</code></p>
 <!-- END_d7aad7b5ac127700500280d511a3db01 -->
+<h1>ResetsPasswords</h1>
+<p>If no token is present, display the link request form.</p>
+<!-- START_e1605a6e5ceee9d1aeb7729216635fd7 -->
+<h2>showResetForm</h2>
+<p>Display the password reset view for the given token.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/password/reset/1" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/password/reset/1"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET password/reset/{token}</code></p>
+<!-- END_e1605a6e5ceee9d1aeb7729216635fd7 -->
+<!-- START_cafb407b7a846b31491f97719bb15aef -->
+<h2>reset</h2>
+<p>Reset the given user&#039;s password.</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/password/reset" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/password/reset"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST password/reset</code></p>
+<!-- END_cafb407b7a846b31491f97719bb15aef -->
+<h1>SendsPasswordResetEmails</h1>
 <!-- START_d72797bae6d0b1f3a341ebb1f8900441 -->
 <h2>showLinkRequestForm</h2>
 <p>Display the form to request a password reset link.</p>
@@ -1637,160 +2221,10 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>POST password/email</code></p>
 <!-- END_feb40f06a93c80d742181b6ffb6b734e -->
-<!-- START_e1605a6e5ceee9d1aeb7729216635fd7 -->
-<h2>showResetForm</h2>
-<p>Display the password reset view for the given token.</p>
-<p>If no token is present, display the link request form.</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/password/reset/1" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/password/reset/1"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (200):</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET password/reset/{token}</code></p>
-<!-- END_e1605a6e5ceee9d1aeb7729216635fd7 -->
-<!-- START_cafb407b7a846b31491f97719bb15aef -->
-<h2>reset</h2>
-<p>Reset the given user&#039;s password.</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/password/reset" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/password/reset"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST password/reset</code></p>
-<!-- END_cafb407b7a846b31491f97719bb15aef -->
-<!-- START_f4bd8405349785155398b8293c772f60 -->
-<h2>documentacion</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/documentacion" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/documentacion"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (200):</p>
-</blockquote>
-<pre><code class="language-json">null</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET documentacion</code></p>
-<!-- END_f4bd8405349785155398b8293c772f60 -->
-<!-- START_2a1827e1a539118fe47bc2a78b290066 -->
-<h2>obtenerRegiones</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X GET \
-    -G "http://localhost/obtenerRegiones" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/obtenerRegiones"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<blockquote>
-<p>Example response (401):</p>
-</blockquote>
-<pre><code class="language-json">{
-    "message": "Unauthenticated."
-}</code></pre>
-<h3>HTTP Request</h3>
-<p><code>GET obtenerRegiones</code></p>
-<!-- END_2a1827e1a539118fe47bc2a78b290066 -->
-<!-- START_4960fd3cb6742ec54c3f6893e530bb16 -->
-<h2>obtenerProvincias</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/obtenerProvincias" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/obtenerProvincias"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST obtenerProvincias</code></p>
-<!-- END_4960fd3cb6742ec54c3f6893e530bb16 -->
+<h1>TipoProductoController</h1>
 <!-- START_9331f6916f3f6b6009bc2e4c2e6c539c -->
-<h2>obtenerTiposDeProducto</h2>
+<h2>getTiposDeProducto</h2>
+<p>Permite obtener todos los tipos de producto existente en caso de que se utilice la tabla para alguna funcionalidad</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -1822,114 +2256,6 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET obtenerTiposDeProducto</code></p>
 <!-- END_9331f6916f3f6b6009bc2e4c2e6c539c -->
-<!-- START_583653251be9f44a6ae2f267bd3deb49 -->
-<h2>setPropuesta</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/setPropuesta" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/setPropuesta"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST setPropuesta</code></p>
-<!-- END_583653251be9f44a6ae2f267bd3deb49 -->
-<!-- START_cf1788bbae98f963dc9fb31c18b9c1e1 -->
-<h2>updatePropuesta</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/updatePropuesta" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/updatePropuesta"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST updatePropuesta</code></p>
-<!-- END_cf1788bbae98f963dc9fb31c18b9c1e1 -->
-<!-- START_f55a6358b03b78db39fe7e4d0e7c7e5d -->
-<h2>setEstadoEnviado</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/setEstadoEnviado" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/setEstadoEnviado"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST setEstadoEnviado</code></p>
-<!-- END_f55a6358b03b78db39fe7e4d0e7c7e5d -->
-<!-- START_3143b93222f97a8def7af2af22c1a4f6 -->
-<h2>propuestaLastId</h2>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/propuestaLastId" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/propuestaLastId"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST propuestaLastId</code></p>
-<!-- END_3143b93222f97a8def7af2af22c1a4f6 -->
       </div>
       <div class="dark-box">
                         <div class="lang-selector">

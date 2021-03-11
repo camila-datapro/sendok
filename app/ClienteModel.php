@@ -15,9 +15,11 @@ class ClienteModel extends Model
     protected $table = 'cliente_destino';
 
     /**
-     * Permite obtener el cliente
-     * @param int $id_cliente identificador de cliente en tabla
-     * @return array
+     * obtenerCliente
+     * Permite obtener el cliente a través de un identificador unico
+     * @group Modelo de datos
+     * @bodyParam int $id_cliente identificador de cliente en tabla
+     * @return array array Arreglo con datos de cliente
      * 
      */
     public static function obtenerCliente($id_cliente){

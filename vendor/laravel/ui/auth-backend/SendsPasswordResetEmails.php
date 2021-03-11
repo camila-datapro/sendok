@@ -12,7 +12,7 @@ trait SendsPasswordResetEmails
     /**
      * showLinkRequestForm
      * Display the form to request a password reset link.
-     *
+     * @group SendsPasswordResetEmails
      * @return \Illuminate\View\View
      */
     public function showLinkRequestForm()
@@ -23,7 +23,7 @@ trait SendsPasswordResetEmails
     /**
      * sendResetLinkEmail
      * Send a reset link to the given user.
-     *
+     * @group SendsPasswordResetEmails
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
@@ -46,7 +46,7 @@ trait SendsPasswordResetEmails
     /**
      * validateEmail
      * Validate the email for the given request.
-     *
+     * @group SendsPasswordResetEmails
      * @param  \Illuminate\Http\Request  $request
      * @return void
      */
@@ -58,7 +58,7 @@ trait SendsPasswordResetEmails
     /**
      * credentials
      * Get the needed authentication credentials from the request.
-     *
+     * @group SendsPasswordResetEmails
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
@@ -70,7 +70,7 @@ trait SendsPasswordResetEmails
     /**
      * sendResetLinkResponse
      * Get the response for a successful password reset link.
-     *
+     * @group SendsPasswordResetEmails
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $response
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
@@ -85,7 +85,7 @@ trait SendsPasswordResetEmails
     /**
      * sendResetLinkFailedResponse
      * Get the response for a failed password reset link.
-     *
+     * @group SendsPasswordResetEmails
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $response
      * @return \Illuminate\Http\RedirectResponse
@@ -108,7 +108,7 @@ trait SendsPasswordResetEmails
     /**
      * broker
      * Get the broker to be used during password reset.
-     *
+     * @group SendsPasswordResetEmails
      * @return \Illuminate\Contracts\Auth\PasswordBroker
      */
     public function broker()

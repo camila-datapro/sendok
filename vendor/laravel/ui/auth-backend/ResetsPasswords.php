@@ -18,7 +18,7 @@ trait ResetsPasswords
     /**
      * showResetForm
      * Display the password reset view for the given token.
-     *
+     * @group ResetsPasswords
      * If no token is present, display the link request form.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,7 +35,7 @@ trait ResetsPasswords
     /**
      * reset
      * Reset the given user's password.
-     *
+     * @group ResetsPasswords
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
@@ -63,7 +63,7 @@ trait ResetsPasswords
     /**
      * rules
      * Get the password reset validation rules.
-     *
+     * @group ResetsPasswords
      * @return array
      */
     protected function rules()
@@ -78,7 +78,7 @@ trait ResetsPasswords
     /**
      * validationErrorMessages
      * Get the password reset validation error messages.
-     *
+     * @group ResetsPasswords
      * @return array
      */
     protected function validationErrorMessages()
@@ -89,7 +89,7 @@ trait ResetsPasswords
     /**
      * credentials
      * Get the password reset credentials from the request.
-     *
+     * @group ResetsPasswords
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
@@ -103,7 +103,7 @@ trait ResetsPasswords
     /**
      * resetPassword
      * Reset the given user's password.
-     *
+     * @group ResetsPasswords
      * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
      * @param  string  $password
      * @return void
@@ -124,7 +124,7 @@ trait ResetsPasswords
     /**
      * setUserPassword
      * Set the user's password.
-     *
+     * @group ResetsPasswords
      * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
      * @param  string  $password
      * @return void
@@ -137,7 +137,7 @@ trait ResetsPasswords
     /**
      * sendResetResponse
      * Get the response for a successful password reset.
-     *
+     * @group ResetsPasswords
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $response
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
@@ -155,7 +155,7 @@ trait ResetsPasswords
     /**
      * sendResetFailedResponse
      * Get the response for a failed password reset.
-     *
+     * @group ResetsPasswords
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $response
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
@@ -176,7 +176,7 @@ trait ResetsPasswords
     /**
      * broker
      * Get the broker to be used during password reset.
-     *
+     * @group ResetsPasswords
      * @return \Illuminate\Contracts\Auth\PasswordBroker
      */
     public function broker()
@@ -187,7 +187,7 @@ trait ResetsPasswords
     /**
      * guard
      * Get the guard to be used during password reset.
-     *
+     * @group ResetsPasswords
      * @return \Illuminate\Contracts\Auth\StatefulGuard
      */
     protected function guard()

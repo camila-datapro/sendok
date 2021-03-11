@@ -99,7 +99,8 @@ Y cada vez que se desee compilar la doc:
 php artisan apidoc:generate
 
 
-
+Despues de cambiar los smtp es necesario poner en consola:
+php artisan config:cache
 
 
 
