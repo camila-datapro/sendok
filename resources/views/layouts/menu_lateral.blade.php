@@ -45,8 +45,8 @@
                <div class="dot-indicator bg-success"></div>
             </div>
             <div class="text-wrapper">
-               <p class="profile-name">{{ Auth::user()->name }}</p>
-               <p class="designation">{{ Auth::user()->empresa }}</p>
+               <!--<p class="profile-name">{{ Auth::user()->name }}</p>-->
+               <p class="profile-name">{{ Auth::user()->empresa }}</p>
             </div>
          </a>
       </li>
