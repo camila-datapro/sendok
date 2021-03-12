@@ -2683,14 +2683,14 @@ CREATE TABLE `users` (
   `email_smtp` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `password_smtp` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `host_smtp` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `escriptacion_smtp` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `encriptacion_smtp` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `fono`, `cargo`, `firma_textual`, `firma_img`, `empresa`, `nombre_smtp`, `email_smtp`, `password_smtp`, `host_smtp`, `escriptacion_smtp`) VALUES
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `fono`, `cargo`, `firma_textual`, `firma_img`, `empresa`, `nombre_smtp`, `email_smtp`, `password_smtp`, `host_smtp`, `encriptacion_smtp`) VALUES
 (10, 'Camila Figueroa', 'cfigueroa@datapro.cl', NULL, '$2y$10$KHf2HoR3OzBT7KqF6Cc91efz9NtpMff6enbwIZ3mRCXRPh4YNrxzG', NULL, '2021-03-02 22:37:07', '2021-03-02 22:37:07', '112233', 'Desarrolladora', NULL, NULL, 'DATAPRO', NULL, NULL, NULL, NULL, NULL),
 (11, 'Sasha Stifel', 'sstifel@datapro.cl', NULL, '$2y$10$mLc3W8M9iLCVlqzaeFXJ4eB3Bk4xFerlmRudTnJ25lAM5ZkwLHwQS', NULL, '2021-03-04 02:13:45', '2021-03-04 02:13:45', '112233', 'Gerente General', NULL, NULL, 'DATAPRO', NULL, NULL, NULL, NULL, NULL),
 (12, 'Mitchel Plaza', 'web@datapro.cl', NULL, '$2y$10$W5SBn7IfWnfXLnTxR223CeOGN/niLdvbJqkiS1.1D3hDtzfOSeIm2', NULL, '2021-03-11 21:33:22', '2021-03-11 21:33:22', '978758187', 'Diseño', NULL, NULL, 'DATAPRO', NULL, NULL, NULL, NULL, NULL);

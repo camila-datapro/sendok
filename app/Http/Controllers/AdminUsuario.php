@@ -108,4 +108,10 @@ class AdminUsuario extends Controller
 
     }
 
+    public function modificarSMTP(Request $request){
+        $datos = $request["json_datos"];
+        return UsuarioModel::modificarSMTP($datos);
+
+    }
+
 }

@@ -47,6 +47,12 @@ function enable() {
 	e.preventDefault();
 	editarBDUsuario();
   });
+
+  $("#form_datos_smtp").on("submit", function (e) {
+	//do your form submission logic here
+	e.preventDefault();
+	guardarSMTP();
+  });
   
   function editarBDUsuario(){
 	$.ajaxSetup({
@@ -495,5 +501,37 @@ function dirigirListadoPlantila(){
 }
 
 function guardarSMTP() {
+	var nombre = $("#nombre_smtp").val();
+	var email = $("#email_smtp").val();
+	var host = $("#host_smtp").val();
+	var password = $("#password_smtp").val();
+	var encriptacion = $("#encriptacion_smtp option:selected").val();
+	var id_usuario = $("#id_usuario").val();
+	var array_datos = [];
+	array_datos.push({
+		nombre: nombre,
+		email: email,
+		host: host,
+		password: password,
+		encriptacion: encriptacion,
+		id_usuario: id_usuario
+	});
 	
+	
+	var json_datos = JSON.stringify(array_datos);
+	console.log("json : "+ json_datos);
+	$.ajax({
+		type: "POST",
+		url: url_prev + '/modificarSMTP',
+		data: {
+		  json_datos: json_datos,
+		  _token: $("#token").val()
+		} //esto es necesario, por la validacion de seguridad de laravel
+	}).done(function (msg) {
+		console.log("paso la funcion ajax");
+		$("#modalExitosa").modal("show");
+	  }).fail(function () {				
+		console.log("Error al guardar smtp");
+	  });
+
 }

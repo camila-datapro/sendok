@@ -206,7 +206,7 @@
                                           </select> 
                                        </div>
                                        <br>
-                                       <button id="boton_guardar_smtp" type="submit" class="btn btn-success float-right" type="button" onclick="guardarSMTP();">Guardar</button>
+                                       <button id="boton_guardar_smtp" type="submit" class="btn btn-success float-right" type="button">Guardar</button>
                                     </form>
                            </div>
                         </div>

@@ -88,3 +88,5 @@ Route::post('/editarPlantilla', 'AdminUsuario@editarPlantilla')->name('editarPla
 Route::post('/eliminarPlantilla', 'AdminUsuario@eliminarPlantilla')->name('eliminarPlantilla');
 Route::post('/guardarHTML', 'AdminUsuario@guardarHTML')->name('guardarHTML');
 Route::post('/obtenerHTML', 'AdminUsuario@obtenerHTML')->name('obtenerHTML');
+
+Route::post('/modificarSMTP', 'AdminUsuario@modificarSMTP')->name('modificarSMTP');
