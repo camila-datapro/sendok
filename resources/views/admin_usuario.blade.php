@@ -4,24 +4,25 @@
 <html lang="en">
    <head>
    <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
-      <meta name="csrg-token" content="{{ csrf_token() }}" />
+   <meta name="csrg-token" content="{{ csrf_token() }}" />
       <meta charset="utf-8">
+      <meta http-equiv="Expires" content="0">
+      <meta http-equiv="Last-Modified" content="0">
+      <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+      <meta http-equiv="Pragma" content="no-cache">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>Sendok</title>
-      <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
-      
       <link rel="stylesheet" href=" {{ asset('/assets/vendors/iconfonts/mdi/css/materialdesignicons.min.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/iconfonts/ionicons/css/ionicons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/iconfonts/typicons/src/font/typicons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.base.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.addons.css') }}">
+      <link href="{{ asset('/css/select_buscador.css') }}" rel="stylesheet" />
       <link rel="stylesheet" href="{{ asset('/assets/css/shared/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
-    
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-    
-
+      <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
       <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
    </head>
    @endsection
@@ -58,6 +59,9 @@
                                  <li class="nav-item">
                                     <button class="nav-link btn-light" id="a_firma">Firma</button>
                                  </li>
+                                 <li class="nav-item">
+                                    <button class="nav-link btn-light" id="a_smtp">Configurar SMTP</button>
+                                 </li>
                               </ul>
                            </div>
                            <br>
@@ -78,29 +82,10 @@
                               </div>
                            </div>
                            <input hidden type="hidden" id="id_usuario" style="display:none;" value="{{Auth::user()->id}}"/>
-                           <div id="div_crear_plantilla" class="col-md-12" style="display:none;">
-                           <input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
-                           
-                                    <form id="form_datos_plantilla" class="forms-sample">
-                                       
-                                       <div class="row form-group">
-                                          <label> Nombre plantilla</label>                                          
-                                          <input required class="form-control" type="text" id="nombre_plantilla" placeholder="Nombre de plantilla a crear"></input>                                          
-                                       </div>
-                                       <div class="row form-group">
-                                          <label> Asunto correo</label>                                          
-                                          <input required class="form-control" type="text" id="asunto_plantilla" placeholder="Asunto correo"></input>                                          
-                                       </div>
-                                       <div class="row form-group">
-                                          <label> Cuerpo correo</label>                                          
-                                          <textarea required id="cuerpo_plantilla" placeholder="Ingrese cuerpo de correo" class="form-control" type="text"></textarea>
-                                       </div>
-                                       <br>
-                                       <button id="boton_guardar_plantilla" type="submit" class="btn btn-success float-right" type="button">Guardar</button>
-                                    </form>
-                           </div>
-                           <div id="div_visar_plantillas" class="col-md-12" style="display:none">
 
+                       
+                           <div id="div_visar_plantillas" class="col-md-12" style="display:none">
+                              <button class="btn btn-success float-left" onclick="$('#modal_crear_plantilla').modal('show');">Nueva Plantilla</button>
                               <table class="table table-bordered" id="tabla_plantillas">
                                  <thead>
                                     <tr>
@@ -141,18 +126,13 @@
                                     <div class="row" id="vista_previa_firma_texto">
                                           
                                     </div>
-                                    <div class="row" id="wiziwig" style="display:none;">                                       
-                                       
-                                          <textarea placeholder="Diseñe o copie y pegue su firma de correo electrónico" name="summernote" id="summernote" ></textarea>
-                                       
-                                    </div><br>
-                                  
+                                    <div class="row" id="wiziwig" style="display:none;">                                                                              
+                                          <textarea placeholder="Diseñe o copie y pegue su firma de correo electrónico" name="summernote" id="summernote" ></textarea>                                       
+                                    </div><br>                                  
                                     <br>
                                     <button type="button" id="btn_editar_pie_firma" class="btn btn-primary float-right" onclick="editarFirma();" style="margin-right:10px;">Editar</button>                                    
                                     <button type="button" id="btn_cancelar_cambios" class="btn btn-warning float-right" style="display:none; margin-right:10px;" onclick="cancelarEdicionFirma();">Cancelar</button>
-                                    <button type="submit" id="btn_guardar_firma" class="btn btn-success float-right" style="display:none; margin-right:10px;" onclick="guardarFirma();">Guardar</button>
-
-                                    
+                                    <button type="submit" id="btn_guardar_firma" class="btn btn-success float-right" style="display:none; margin-right:10px;" onclick="guardarFirma();">Guardar</button>                                    
                                  </form>
                               </div>
                            </div>
@@ -197,6 +177,38 @@
                            <!--add-->
                               </div>
                            </div>
+                           <!-- form de smtp de correo -->
+                           <div id="div_configura_smtp" class="col-md-12" style="display:none;">
+                              <input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">                           
+                                    <form id="form_datos_smtp" class="forms-sample">
+                                    <div class="row form-group">
+                                          <label> Nombre </label>                                          
+                                          <input required class="form-control" type="text" id="nombre_smtp" placeholder="Nombre"></input>                                          
+                                       </div>
+                                       <div class="row form-group">
+                                          <label> Email </label>                                          
+                                          <input required class="form-control" type="text" id="email_smtp" placeholder="Email"></input>                                          
+                                       </div>
+                                       <div class="row form-group">
+                                          <label> Password </label>                                          
+                                          <input required class="form-control" type="text" id="password_smtp" placeholder="Password"></input>                                          
+                                       </div>
+                                       <div class="row form-group">
+                                          <label> Host</label>                                          
+                                          <input required class="form-control" type="text" id="host_smtp" placeholder="smtp.example.com"></input>                                          
+                                       </div>
+                                       <div class="row form-group">
+                                          <label> Encriptacion</label>                                          
+                                          <select class="form-control" id="encriptacion_smtp">
+                                             <option id="0">Elija uno</option>
+                                             <option id="ssl">ssl</option>
+                                             <option id="tls">tls</option>                                             
+                                          </select> 
+                                       </div>
+                                       <br>
+                                       <button id="boton_guardar_smtp" type="submit" class="btn btn-success float-right" type="button" onclick="guardarSMTP();">Guardar</button>
+                                    </form>
+                           </div>
                         </div>
                      </div>
                   </div>
@@ -224,6 +236,25 @@
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.reload();">OK</button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="modal fade" id="modalCreacionExitosaPlantilla" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Creación exitosa</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  Se ha realizado la operación de forma exitosa.
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="dirigirListadoPlantila();">OK</button>
                </div>
             </div>
          </div>
@@ -270,6 +301,51 @@
          </div>
       </div>
 
+      <div class="modal fade" id="modal_crear_plantilla" tabindex="-1" role="dialog" aria-labelledby="nueva_plantilla" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="nueva_plantilla">Crear nueva plantilla</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="text-center content-justify-center">
+                  <div id="div_crear_plantilla" class="col-md-12">
+                           <input type="hidden" id="token" name="_token" value="{{ csrf_token() }}">
+                           
+                                    <form id="form_datos_plantilla" class="forms-sample">
+                                       
+                                       <div class="row form-group">
+                                          <label> Nombre plantilla</label>                                          
+                                          <input required class="form-control" type="text" id="nombre_plantilla" placeholder="Nombre de plantilla a crear"></input>                                          
+                                       </div>
+                                       <div class="row form-group">
+                                          <label> Asunto correo</label>                                          
+                                          <input required class="form-control" type="text" id="asunto_plantilla" placeholder="Asunto correo"></input>                                          
+                                       </div>
+                                       <div class="row form-group">
+                                          <label> Cuerpo correo</label>                                          
+                                          <textarea required id="cuerpo_plantilla" placeholder="Ingrese cuerpo de correo" class="form-control" type="text"></textarea>
+                                       </div>
+                                       <br>
+                                       <button type="button" class="btn btn-danger float-right"  data-dismiss="modal">Cerrar</button>
+                                       <button id="boton_guardar_plantilla" type="submit" class="btn btn-success float-right" style="margin-right: 15px">Guardar</button>
+                                       
+                                    </form>
+                           </div>
+                  </div>
+               </div>
+   
+            </div>
+         </div>
+      </div>
+
+<!--contenido modal crear nueva plantilla-->
+
+<!-- fin contenido modal crear nueva plantilla-->
+
       <div class="modal fade" id="modal_eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -305,6 +381,7 @@
       <script src="{{ asset('/js/admin_usuario.js') }}"></script>
       <script src="https://unpkg.com/@popperjs/core@2"></script>
       <script src="{{ asset('/js/dataTables.js')}}"></script>
+      <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
       <script src="https://cdn.ckeditor.com/4.16.0/standard-all/ckeditor.js"></script>  
       <!-- include summernote css/js -->
 

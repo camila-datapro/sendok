@@ -82,20 +82,24 @@ function enable() {
   }
 
   $("#a_datos_usuario").click(function () {
-	 $("#div_visar_plantillas").hide();
-	 $("#div_crear_plantilla").hide();
+	$("#div_visar_plantillas").hide();
+	$("#div_configura_smtp").hide();
 	document.getElementById("a_plantilla_correo").classList.remove('active');
 	document.getElementById("a_firma").classList.remove('active');
+	document.getElementById("a_smtp").classList.remove('active');
 
 	document.getElementById("a_plantilla_correo").classList.remove('btn-primary');
 	document.getElementById("a_firma").classList.remove('btn-primary');
+	document.getElementById("a_smtp").classList.remove('btn-primary');
 
 	document.getElementById("a_plantilla_correo").classList.remove('btn-light');
 	document.getElementById("a_firma").classList.remove('btn-light');
 	document.getElementById("a_datos_usuario").classList.remove('btn-light');
+	document.getElementById("a_smtp").classList.remove('btn-light');
 
 	document.getElementById("a_plantilla_correo").classList.add('btn-light');
 	document.getElementById("a_firma").classList.add('btn-light');
+	document.getElementById("a_smtp").classList.add('btn-light');
 
 	document.getElementById("a_datos_usuario").classList.add('active');
 	
@@ -106,45 +110,55 @@ function enable() {
   });
 
   $("#a_plantilla_correo").click(function () {	
-	$("#div_visar_plantillas").hide();
-	$("#div_crear_plantilla").hide();
+	  $("#div_visar_plantillas").show();
+	  $("#div_plantilla_correo").hide();
+	  
+	  $("#div_configura_smtp").hide();
 	document.getElementById("a_firma").classList.remove('btn-primary');
 	document.getElementById("a_datos_usuario").classList.remove('btn-primary');
+	
 
 	document.getElementById("a_firma").classList.remove('btn-light');
 	document.getElementById("a_datos_usuario").classList.remove('btn-light');
 	document.getElementById("a_plantilla_correo").classList.remove('btn-light');
+	document.getElementById("a_smtp").classList.remove('btn-light');
 
 	document.getElementById("a_firma").classList.add('btn-light');
 	document.getElementById("a_datos_usuario").classList.add('btn-light');
-
+	  document.getElementById("a_smtp").classList.add('btn-light');
+	  
 	document.getElementById("a_firma").classList.remove('active');
 	document.getElementById("a_datos_usuario").classList.remove('active');
+	document.getElementById("a_smtp").classList.remove('active');
 
 	document.getElementById("a_plantilla_correo").classList.add('btn-primary');
 	document.getElementById("a_plantilla_correo").classList.add('active');
 	$("#div_datos_usuario").hide();
 	$("#div_firma_correo").hide();
-	$("#div_plantilla_correo").show();
 	
 });
 
 $("#a_firma").click(function () {
 	$("#btn_editar_pie_firma").click();
 	$("#div_visar_plantillas").hide();
-	$("#div_crear_plantilla").hide();
+	
+	$("#div_configura_smtp").hide();
 	document.getElementById("a_plantilla_correo").classList.remove('active');
 	document.getElementById("a_datos_usuario").classList.remove('active');
+	document.getElementById("a_smtp").classList.remove('active');
 	
 	document.getElementById("a_plantilla_correo").classList.remove('btn-primary');	
 	document.getElementById("a_datos_usuario").classList.remove('btn-primary');
+	document.getElementById("a_smtp").classList.remove('btn-primary');
 
 	document.getElementById("a_plantilla_correo").classList.remove('btn-light');	
 	document.getElementById("a_datos_usuario").classList.remove('btn-light');
 	document.getElementById("a_firma").classList.remove('btn-light');
+	document.getElementById("a_smtp").classList.remove('btn-light');
 
 	document.getElementById("a_plantilla_correo").classList.add('btn-light');	
 	document.getElementById("a_datos_usuario").classList.add('btn-light');
+	document.getElementById("a_smtp").classList.add('btn-light');
 
 	document.getElementById("a_firma").classList.add('btn-primary');
 
@@ -155,6 +169,39 @@ $("#a_firma").click(function () {
 	$("#div_firma_correo").show();
 	
 });
+
+$("#a_smtp").click(function () {
+	$("#div_plantilla_correo").hide();
+	$("#div_datos_usuario").hide();
+	$("#div_firma_correo").hide();	
+	$("#div_visar_plantillas").hide();	
+	
+	
+	document.getElementById("a_plantilla_correo").classList.remove('active');
+	document.getElementById("a_datos_usuario").classList.remove('active');
+	document.getElementById("a_firma").classList.remove('active');
+
+	document.getElementById("a_plantilla_correo").classList.remove('btn-primary');	
+	document.getElementById("a_datos_usuario").classList.remove('btn-primary');
+	document.getElementById("a_firma").classList.remove('btn-primary');
+
+	document.getElementById("a_plantilla_correo").classList.remove('btn-light');	
+	document.getElementById("a_datos_usuario").classList.remove('btn-light');
+	document.getElementById("a_firma").classList.remove('btn-light');
+	document.getElementById("a_smtp").classList.remove('btn-light');
+
+	document.getElementById("a_plantilla_correo").classList.add('btn-light');	
+	document.getElementById("a_datos_usuario").classList.add('btn-light');
+	document.getElementById("a_firma").classList.add('btn-light');
+
+	document.getElementById("a_smtp").classList.add('btn-primary');
+	document.getElementById("a_smtp").classList.add('active');
+
+	$("#div_configura_smtp").show();
+	
+});
+
+
 
 $("input:checkbox").on('click', function() {
 	$("#btn_continuar_operacion").prop('disabled',false);
@@ -178,7 +225,7 @@ $("input:checkbox").on('click', function() {
 	  
 	  if($("#check_crear_plantilla").is(":checked")){
 		$("#div_plantilla_correo").hide();
-		$("#div_crear_plantilla").show();
+		
 	  }
 	  if($("#check_visar_plantilla").is(":checked")){
 		$("#div_plantilla_correo").hide();
@@ -315,7 +362,11 @@ $("#form_firma").on("submit", function (e) {
 		  _token: $("#token").val()
 		} //esto es necesario, por la validacion de seguridad de laravel
 	  }).done(function (msg) {
-		$("#modalExitosa").modal("show");
+		  setTimeout(() => {
+			$("#modal_crear_plantilla").modal("hide");	  
+		  }, 200);
+		  
+		$("#modalCreacionExitosaPlantilla").modal("show");
 	  }).fail(function () {				
 		console.log("Error al crear plantilla");
 	  });
@@ -430,4 +481,19 @@ $("#form_firma").on("submit", function (e) {
 	  });
   }
 
-  
+function dirigirListadoPlantila(){
+	
+	setTimeout(() => {
+		window.location.reload();	
+	}, 400);
+
+	setTimeout(() => {
+		console.log("test");
+		$('#a_plantilla_correo').click();
+	}, 400);
+	
+}
+
+function guardarSMTP() {
+	
+}
