@@ -1,3 +1,5 @@
 /.env
 .env
 storage/logs/laravel.log
+config/database.php
+config/mail.php
