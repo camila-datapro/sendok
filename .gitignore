@@ -1,5 +1,7 @@
 /.env
 .env
+/.env.desa
+.env.desa
 storage/logs/laravel.log
 config/database.php
 config/mail.php
