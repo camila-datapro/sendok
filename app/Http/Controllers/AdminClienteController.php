@@ -22,7 +22,7 @@ class AdminClienteController extends Controller
     public function index()
     {
         return view('admin_cliente')
-            ->with('clientes', ClienteModel::all())
+            ->with('clientes', ClienteModel::listarClientes())
             ->with('regiones', RegionModel::all())
             ->with('provincias', ProvinciaModel::all())
             ->with('comunas', ComunaModel::all());

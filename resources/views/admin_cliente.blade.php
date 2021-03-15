@@ -61,16 +61,16 @@
                                        <?php                  
                                           for($i=0;$i<sizeOf($clientes);$i++){
                                              echo "<tr>                                                      
-                                             <td >".$clientes[$i]->nombre_cliente."</td>                                                      
-                                             <td>".$clientes[$i]->fono_cliente."</td>
-                                             <td> ".$clientes[$i]->nombre_contacto." -- ".$clientes[$i]->cargo_contacto."</td>
-                                             <td> ".$clientes[$i]->email_cliente."</td>
+                                             <td >".$clientes[$i]["nombre_cliente"]."</td>                                                      
+                                             <td>".$clientes[$i]["fono_cliente"]."</td>
+                                             <td> ".$clientes[$i]["nombre_contacto"]." -- ".$clientes[$i]["cargo_contacto"]."</td>
+                                             <td> ".$clientes[$i]["email_cliente"]."</td>
                                            
                                              <td>
-                                                <button class='btn btn-danger' id='eliminar_".$clientes[$i]->id_cliente."' onclick='confirmarEliminacion(".$clientes[$i].");' >
+                                                <button class='btn btn-danger' id='eliminar_".$clientes[$i]["id_cliente"]."' onclick='confirmarEliminacion(".json_encode($clientes[$i]).");' >
                                                 <i class='fas fa-trash-alt'></i>
                                                 </button> 
-                                                <button class='btn btn-warning' id='editar_".$clientes[$i]->id_cliente."' onclick='editarCliente(".$clientes[$i].");' >
+                                                <button class='btn btn-warning' id='editar_".$clientes[$i]["id_cliente"]."' onclick='editarCliente(".json_encode($clientes[$i]).");' >
                                                 <i class='fas fa-edit'></i>
                                                 </button>
                                              </td>

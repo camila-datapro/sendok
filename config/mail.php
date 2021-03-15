@@ -1,5 +1,6 @@
 <?php
 
+
 return [
 
     /*
@@ -13,7 +14,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => base64_decode(env('MAIL_MAILER')),
 
     /*
     |--------------------------------------------------------------------------
@@ -36,11 +37,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            'host' => base64_decode(env('MAIL_HOST')),
+            'port' => base64_decode(env('MAIL_PORT')),
+            'encryption' => base64_decode(env('MAIL_ENCRYPTION')),
+            'username' => base64_decode(env('MAIL_USERNAME')),
+            'password' => base64_decode(env('MAIL_PASSWORD')),
             'timeout' => null,
             'auth_mode' => null,
         ],
