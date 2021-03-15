@@ -36,7 +36,7 @@ class ClienteController extends Controller
      * @return array array Array de clientes
      */
     private function getClientes(){
-        return ClienteModel::all();
+        return ClienteModel::listarClientes();
     }
 
     /**

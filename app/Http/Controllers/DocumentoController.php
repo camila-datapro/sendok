@@ -28,7 +28,7 @@ class DocumentoController extends Controller
     public function index()
     {
         return view('documento')
-        ->with("clientes", ClienteModel::all())
+        ->with("clientes", ClienteModel::listarClientes())
         ->with("productos", ProductoModel::listProductos())
         ->with("regiones", RegionModel::all())
         ->with("plantillas",PlantillaModel::listPlantillasByUser(Auth::user()->id));

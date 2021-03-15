@@ -21,7 +21,7 @@ class AdminDocumentoController extends Controller
     public function index(){
         return view('admin_documento')
         ->with("propuestas", PropuestaModel::all())
-        ->with("clientes", ClienteModel::all())
+        ->with("clientes", ClienteModel::listarClientes())
         ->with("productos", ProductoModel::listProductos());
     }
 

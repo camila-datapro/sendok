@@ -89,9 +89,9 @@
                                              $nombre_empresa ="";
                                              $nombre_contacto= "";
                                              for($x=0;$x<sizeOf($clientes);$x++){
-                                                   if($clientes[$x]->id_cliente == $propuestas[$i]->id_cliente){
-                                                         $nombre_empresa = $clientes[$x]->nombre_cliente;
-                                                         $nombre_contacto = $clientes[$x]->nombre_contacto;
+                                                   if($clientes[$x]["id_cliente"] == $propuestas[$i]["id_cliente"]){
+                                                         $nombre_empresa = $clientes[$x]["nombre_cliente"];
+                                                         $nombre_contacto = $clientes[$x]["nombre_contacto"];
                                                          $x = sizeOf($clientes);
                                                    }
                                              }
@@ -216,7 +216,7 @@
                                  <?php 
                                  
                                     for($i=0;$i<sizeOf($clientes); $i++){                                          
-                                       echo "<option id=".$clientes[$i]->id_cliente." fono_cliente='".$clientes[$i]->fono_cliente."' nombre_cliente='".$clientes[$i]->nombre_cliente."' email_cliente='".$clientes[$i]->email_cliente."' contacto_nombre='".$clientes[$i]->nombre_contacto."' contacto_cargo='".$clientes[$i]->cargo_contacto."' >".$clientes[$i]->nombre_cliente."</option>";
+                                       echo "<option id=".$clientes[$i]["id_cliente"]." fono_cliente='".$clientes[$i]["fono_cliente"]."' nombre_cliente='".$clientes[$i]["nombre_cliente"]."' email_cliente='".$clientes[$i]["email_cliente"]."' contacto_nombre='".$clientes[$i]["nombre_contacto"]."' contacto_cargo='".$clientes[$i]["cargo_contacto"]."' >".$clientes[$i]["nombre_cliente"]."</option>";
                                     }
                                     ?>
                               </select>
