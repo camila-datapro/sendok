@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 
 class LoginController extends Controller
 {
@@ -20,6 +23,7 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    
 
     /**
      * Where to redirect users after login.
@@ -37,4 +41,28 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function validateLogin(Request $request)
+    {
+        Log::debug($request);
+        $rules = ['captcha' => 'required|captcha_api:'.$request['captcha'] . ',default'];
+        Log::debug("reglas : ");
+        Log::debug($rules);
+        //$validator = validator()->make($request, $rules);
+        /*if ($validator->fails()) {
+            Log::debug("Falla el validador : ".$request['captcha']);
+    
+        } else {
+         Log::debug("cayo el el ELSE");
+        }*/
+
+        $this->validate($request, [
+            $this->username() => 'required',
+            'password' => 'required',
+            'captcha' => 'required|captcha'
+            // new rules here
+        ]);
+        
+    }
+
 }

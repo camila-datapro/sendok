@@ -32,7 +32,7 @@ return [
     | Supported: "smtp", "sendmail", "mailgun", "ses",
     |            "postmark", "log", "array"
     |
-    */
+    */  
 
     'mailers' => [
         'smtp' => [
@@ -82,8 +82,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS'),
-        'name' => env('MAIL_FROM_NAME'),
+        'address' => base64_decode(env('MAIL_FROM_ADDRESS')),
+        'name' => base64_decode(env('MAIL_FROM_NAME')),
    ],
 
     /*

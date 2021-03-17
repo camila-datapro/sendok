@@ -31,13 +31,6 @@ class ClienteModel extends Model
      * 
      */
     public static function listarClientes(){
-        Log::debug("Email:".Crypt::encryptString("mail.sendok.cl"));
-        Log::debug("smtp:".Crypt::encryptString("smtp"));
-        Log::debug("puerto:".Crypt::encryptString("465"));
-        Log::debug("Email:".Crypt::encryptString("documentos@sendok.cl"));
-        Log::debug("Password: ".Crypt::encryptString("datapro2020"));
-        Log::debug("Sendok: ".Crypt::encryptString("Sendok"));
-
 
         $results = DB::select("select * from cliente_destino");
         $results = json_decode(json_encode($results), TRUE);

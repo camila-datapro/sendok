@@ -5,7 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use DB;
-
+use Illuminate\Support\Facades\Crypt;
+/**
+ * Para escriptar los string debe utilizar
+ * Crypt::encryptString())
+ * 
+ * Para desencriptar
+ * Crypt::decryptString()
+ */
 class UsuarioModel extends Model
 {
     protected $table = "users";
@@ -43,14 +50,34 @@ class UsuarioModel extends Model
 
         $query = "update users
         set
-            nombre_smtp = '".$nombre."',
-            email_smtp = '".$email."',
-            password_smtp = '".$password."',
-            host_smtp = '".$host."',
-            encriptacion_smtp = '".$encriptacion."'
+            nombre_smtp = '".Crypt::encryptString($nombre)."',
+            email_smtp = '".Crypt::encryptString($email)."',
+            password_smtp = '".Crypt::encryptString($password)."',
+            host_smtp = '".Crypt::encryptString($host)."',
+            encriptacion_smtp = '".Crypt::encryptString($encriptacion)."'
             where id = ".intval($id_usuario)."";
 
         $results = DB::update($query);
         return $results;
+    }
+
+    public static function crearUsuario($datos){
+        $query = "insert into users(
+            name,
+            email,
+            cargo,
+            fono,
+            password
+        ) values(
+            '".$datos["name"]."',
+            '".$datos["email"]."',
+            '".$datos["cargo"]."',
+            ".intval($datos["fono"]).",
+            '".$datos["password"]."'
+        )";
+
+        $results = DB::insert($query);
+        return $results;
+
     }
 }
