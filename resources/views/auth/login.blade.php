@@ -55,7 +55,7 @@
                                 <input id="captcha" type="text" class="form-control @error('captcha') is-invalid @enderror" name="captcha" required autocomplete="current-captcha">
                                 @error('captcha')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ 'Captcha no válido, intente nuevamente' }}</strong>
                                     </span>
                                 @enderror
                             </div>
