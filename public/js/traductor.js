@@ -16,3 +16,7 @@ function generaConfiguracion() {
     $("#nueva_config").text(texto);
 
 }
+
+$("input[type=text]").change(function() {
+    $(this).css("background","rgb(154 255 157)");
+});

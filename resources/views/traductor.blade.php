@@ -13,15 +13,14 @@
     <div class="container">
         <a class="button btn btn-dark btn-sm float-right" style="margin-top: 10px;" href="./home"><i class="fas fa-home" ></i> Home</a>
         <h1>Configure y encripte sus variables de entorno</h1>
-        <h5 style="color:green;">1 - Modifique los parámetros que requiera en los inputs de la columna ENV desencriptado</h5>
+        <h5 style="color:green;">1 - Modifique los parámetros que requiera en los inputs de la columna "Valor"</h5>
         <div class="row">
             <div class="col-md-9" >
                 <table class="table table-hover table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Parámetro</th>
-                            <th>ENV encriptado</th>
-                            <th>ENV desencriptado</th>
+                            <th>Valor</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,8 +29,7 @@
                             for($i=0; $i< (sizeOf($parametros)); $i++){
                                 echo "<tr>";
                                 echo "<td id='parametro_".$i."'>".$parametros[$i]."</td>";
-                                echo "<td>".$encriptados[$i]."</td>";
-                                echo "<td> <input id='desencriptado_".$i."' class='form-control' value='".$desencriptados[$i]."'></input></td>";
+                                echo "<td> <input type='text' id='desencriptado_".$i."' class='form-control' value='".$desencriptados[$i]."'></input></td>";
                                 echo "</tr>";
                         }
                             ?>
