@@ -11,11 +11,12 @@
 </head>
 <body>
     <div class="container">
+        <a class="button btn btn-dark btn-sm float-right" style="margin-top: 10px;" href="./home"><i class="fas fa-home" ></i> Home</a>
         <h1>Configure y encripte sus variables de entorno</h1>
-        <h5>1 - Modifique los parámetros que requiera en los inputs de la columna ENV desencriptado</h5>
+        <h5 style="color:green;">1 - Modifique los parámetros que requiera en los inputs de la columna ENV desencriptado</h5>
         <div class="row">
             <div class="col-md-9" >
-                <table class="table table-hover table-bordered">
+                <table class="table table-hover table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>Parámetro</th>
@@ -41,13 +42,13 @@
             
             <div class="col-md-3">
                 <input type="hidden" class="hidden" id="cantidad_parametros" name="cantidad_parametros" value="{{sizeOf($parametros)}}"/>
-                <button class="btn btn-success" style="margin-top: 30px;" onclick="generaConfiguracion()">2 - Generar nueva configuracion</button>
+                <button class="btn btn-success btn-sm" style="margin-top: 30px;" onclick="generaConfiguracion()">2 - Generar nueva configuracion</button>
 
-                <p>Copie y reemplace en su archivo .env la nueva configuracion</p>
-                <button class="btn btn-sm btn-primary float-right" onclick="copy()">3 - Copiar </button>
-                <textarea id="nueva_config" class="form-control" rows="10"></textarea>
-                <p>4 - Reemplace los valores en la primera sección de archivo .env, asegurese de guardar los cambios</p>
-                <button class="btn btn-danger" onclick="window.location.reload(true);">5 - Recargar página</button>
+                <p>Genere las nuevas credenciales encriptadas</p>
+                <button class="btn btn-sm btn-success" onclick="copy()">3 - Copiar </button>
+                <textarea id="nueva_config" class="form-control" rows="10" style="margin-top: 10px;"></textarea>
+                <p style="color:green;">4 - Reemplace los valores en la primera sección de archivo .env, <b>asegurese de guardar los cambios</b></p>
+                <button class="btn btn-danger btn-sm" onclick="window.location.reload(true);">5 - Recargar página</button>
             </div>
         </div>
     </div>
