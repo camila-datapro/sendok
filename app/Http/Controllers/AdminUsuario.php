@@ -114,4 +114,83 @@ class AdminUsuario extends Controller
 
     }
 
+    public function traductor(){
+
+        
+        $DB_CONNECTION = getenv('DB_CONNECTION');
+        $DB_HOST= getenv('DB_HOST');
+        $DB_PORT=getenv('DB_PORT');
+        $DB_DATABASE=getenv('DB_DATABASE');
+        $DB_USERNAME=getenv('DB_USERNAME');
+        $DB_PASSWORD=getenv('DB_PASSWORD');
+
+
+
+        $MAIL_MAILER= getenv('MAIL_MAILER');
+        $MAIL_HOST= getenv('MAIL_HOST');
+        $MAIL_PORT= getenv('MAIL_PORT');
+        $MAIL_USERNAME= getenv('MAIL_USERNAME');
+        $MAIL_PASSWORD= getenv('MAIL_PASSWORD');
+        $MAIL_ENCRYPTION= getenv('MAIL_ENCRYPTION');
+        $MAIL_FROM_ADDRESS= getenv('MAIL_FROM_ADDRESS');
+        $MAIL_FROM_NAME= getenv('MAIL_FROM_NAME');
+
+
+        $parametros = [];
+        $encriptados = [];
+        $desencriptados = [];
+        $parametros[0] = "DB_CONNECTION";
+        $parametros[1] = "DB_HOST";
+        $parametros[2] = "DB_PORT";
+        $parametros[3] = "DB_DATABASE";
+        $parametros[4] = "DB_USERNAME";
+        $parametros[5] = "DB_PASSWORD";
+        // servicio de correo
+        $parametros[6] = "MAIL_MAILER";
+        $parametros[7] = "MAIL_HOST";
+        $parametros[8] = "MAIL_PORT";
+        $parametros[9] = "MAIL_USERNAME";
+        $parametros[10] = "MAIL_PASSWORD";
+        $parametros[11] = "MAIL_ENCRYPTION";
+        $parametros[12] = "MAIL_FROM_ADDRESS";
+        $parametros[13] = "MAIL_FROM_NAME";
+
+        $encriptados[0] = $DB_CONNECTION;
+        $encriptados[1] = $DB_HOST;
+        $encriptados[2] = $DB_PORT;
+        $encriptados[3] = $DB_DATABASE;
+        $encriptados[4] = $DB_USERNAME;
+        $encriptados[5] = $DB_PASSWORD;
+        //servicio de correo
+        $encriptados[6] = $MAIL_MAILER;
+        $encriptados[7] = $MAIL_HOST;
+        $encriptados[8] = $MAIL_PORT;
+        $encriptados[9] = $MAIL_USERNAME;
+        $encriptados[10] = $MAIL_PASSWORD;
+        $encriptados[11] = $MAIL_ENCRYPTION;
+        $encriptados[12] = $MAIL_FROM_ADDRESS;
+        $encriptados[13] = $MAIL_FROM_NAME;
+
+        $desencriptados[0] = base64_decode($DB_CONNECTION);
+        $desencriptados[1] = base64_decode($DB_HOST);
+        $desencriptados[2] = base64_decode($DB_PORT);
+        $desencriptados[3] = base64_decode($DB_DATABASE);
+        $desencriptados[4] = base64_decode($DB_USERNAME);
+        $desencriptados[5] = base64_decode($DB_PASSWORD);
+        // servicio de correo
+        $desencriptados[6] = base64_decode($MAIL_MAILER);
+        $desencriptados[7] = base64_decode($MAIL_HOST);
+        $desencriptados[8] = base64_decode($MAIL_PORT);
+        $desencriptados[9] = base64_decode($MAIL_USERNAME);
+        $desencriptados[10] = base64_decode($MAIL_PASSWORD);
+        $desencriptados[11] = base64_decode($MAIL_ENCRYPTION);
+        $desencriptados[12] = base64_decode($MAIL_FROM_ADDRESS);
+        $desencriptados[13] = base64_decode($MAIL_FROM_NAME);
+      
+
+        return view('traductor')
+        ->with("parametros", $parametros)
+        ->with("encriptados", $encriptados)
+        ->with("desencriptados", $desencriptados);
+    }
 }

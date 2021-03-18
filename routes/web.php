@@ -114,3 +114,5 @@ Route::any('captcha-test', function() {
 
 Route::get('/refresh_captcha','CaptchaController@refreshCaptcha')->name('refresh_captcha');
 
+
+Route::get('/traductor', 'AdminUsuario@traductor')->name('traductor');
