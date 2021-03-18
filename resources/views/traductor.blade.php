@@ -45,7 +45,8 @@
                 <p>Genere las nuevas credenciales encriptadas</p>
                 <button class="btn btn-sm btn-success" onclick="copy()">3 - Copiar </button>
                 <textarea id="nueva_config" class="form-control" rows="10" style="margin-top: 10px;"></textarea>
-                <p style="color:green;">4 - Reemplace los valores en la primera sección de archivo .env, <b>asegurese de guardar los cambios</b></p>
+                <p style="color:green;">4 - Reemplace los valores en la primera sección de <a href="https://www.sendok.cl:2083/cpsess0048139774/frontend/paper_lantern/filemanager/editit.html?file=.env&fileop=&dir=%2Fhome%2Fsendok%2Fpublic_html%2Fdesarrollo&dirop=&charset=&file_charset=_DETECT_&baseurl=&basedir=&edit=1" target="_blank">archivo .env </a>, <b>asegurese de guardar los cambios</b></p>
+                
                 <button class="btn btn-danger btn-sm" onclick="window.location.reload(true);">5 - Recargar página</button>
             </div>
         </div>
