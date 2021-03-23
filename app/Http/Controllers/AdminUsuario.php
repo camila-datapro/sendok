@@ -8,6 +8,7 @@ use App\UsuarioModel;
 use App\PlantillaModel;
 use Illuminate\Support\Facades\Log;
 use Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class AdminUsuario extends Controller
 {
@@ -23,8 +24,9 @@ class AdminUsuario extends Controller
      */
     public function index(){
         return view('admin_usuario')
-        ->with("plantillas",PlantillaModel::listPlantillasByUser(Auth::user()->id));
-        ;
+        ->with("plantillas",PlantillaModel::listPlantillasByUser(Auth::user()->id))
+        ->with("usuarioSMTP",UsuarioModel::obtenerDatosSMTPUsuario(Auth::user()->id));
+        
     }
 
     /**

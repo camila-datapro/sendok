@@ -49,7 +49,7 @@
                             <div class="col-md-6">
                                 <div class="captcha">
                                     <span>{!! captcha_img() !!}</span>
-                                    <button type="button" class="btn btn-outline-primary btn-refresh btn-sm"><i class="fas fa-redo-alt"></i></button>
+                                    <button type="button" class="btn btn-primary btn-refresh btn-sm"><i class="fas fa-sync"></i></button>
                                 </div>
                                 <br>
                                 <input id="captcha" type="text" class="form-control @error('captcha') is-invalid @enderror" name="captcha" required autocomplete="current-captcha">

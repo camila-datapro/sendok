@@ -33,7 +33,7 @@ Route::get('/documento','DocumentoController@index')->name('documento');
 Route::get('/admin_cliente', 'AdminClienteController@index')->name('admin_cliente');
 Route::get('/admin_producto', 'AdminProductoController@index')->name('admin_producto');
 Route::get('/admin_usuario', 'AdminUsuario@index')->name('admin_usuario');
-
+Route::get('/admin_usuarios', 'AdminUsuariosGeneral@index')->name('admin_usuarios');
 
 Route::get('/documentacion', 'PHPDocumentador@index')->name('documentacion');
 
@@ -116,3 +116,9 @@ Route::get('/refresh_captcha','CaptchaController@refreshCaptcha')->name('refresh
 
 
 Route::get('/traductor', 'AdminUsuario@traductor')->name('traductor');
+
+    //Route::get('/mail', 'DocumentoController@test_mail')->middleware('mail');
+
+
+        Route::get('/mail', 'DocumentoController@test_mail')->middleware('mail');
+  

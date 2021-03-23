@@ -65,22 +65,7 @@
                               </ul>
                            </div>
                            <br>
-                           <div class="row" id="div_plantilla_correo" style="display:none;">
-                              <div class="col-md-12">
-                                     <h4>¿Que desea hacer?</h4>
-                                     <br>
-                                    <div class="row">
-                                          <label><input style="margin-left:20px;" type="checkbox" class="radio" value="1"  id="check_crear_plantilla" name="fooby[2][]"></input> Crear plantilla</label>
-                                       
-                                          <label><input style="margin-left:50px;" type="checkbox" class="radio" value="1" id="check_visar_plantilla" name="fooby[2][]"></input> Visar plantillas</label>
-                                          <br>
-                                          </div>
-                                          <br>
-                                    <div class="row">
-                                    <button disabled="true" id="btn_continuar_operacion" type="button" class="btn btn-success" onclick="continuar_operacion()">Continuar</button>
-                                    </div>
-                              </div>
-                           </div>
+
                            <input hidden type="hidden" id="id_usuario" style="display:none;" value="{{Auth::user()->id}}"/>
 
                        
@@ -183,26 +168,33 @@
                                     <form id="form_datos_smtp" class="forms-sample">
                                     <div class="row form-group">
                                           <label> Nombre </label>                                          
-                                          <input required class="form-control" type="text" id="nombre_smtp" placeholder="Nombre"></input>                                          
+                                          <input required class="form-control" type="text" id="nombre_smtp" placeholder="Nombre" value="{{$usuarioSMTP['nombre_smtp']}}"></input>                                          
                                        </div>
                                        <div class="row form-group">
                                           <label> Email </label>                                          
-                                          <input required class="form-control" type="text" id="email_smtp" placeholder="Email"></input>                                          
+                                          <input required class="form-control" type="text" id="email_smtp" placeholder="Email" value="{{$usuarioSMTP['email_smtp']}}"></input>                                          
                                        </div>
                                        <div class="row form-group">
                                           <label> Password </label>                                          
-                                          <input required class="form-control" type="text" id="password_smtp" placeholder="Password"></input>                                          
+                                          <input required class="form-control" type="text" id="password_smtp" placeholder="Password" value="{{$usuarioSMTP['password_smtp']}}"></input>                                          
                                        </div>
                                        <div class="row form-group">
                                           <label> Host</label>                                          
-                                          <input required class="form-control" type="text" id="host_smtp" placeholder="smtp.example.com"></input>                                          
+                                          
+                                          <input required class="form-control" type="text" id="host_smtp" placeholder="smtp.example.com" value="{{$usuarioSMTP['host_smtp']}}"></input>                                          
                                        </div>
+                                       <div class="row form-group">
+                                          <label> Puerto</label>                                          
+                                          
+                                          <input required class="form-control" type="text" id="port_smtp"  value="{{$usuarioSMTP['port_smtp']}}"></input>                                          
+                                       </div>
+                                       <input type="hidden" id="tipo_encriptacion" style="display:none;" value="{{$usuarioSMTP['encriptacion_smtp']}}"></input>
                                        <div class="row form-group">
                                           <label> Encriptacion</label>                                          
                                           <select class="form-control" id="encriptacion_smtp">
                                              <option id="0">Elija uno</option>
-                                             <option id="ssl">ssl</option>
-                                             <option id="tls">tls</option>                                             
+                                             <option id="ssl" value="ssl">ssl</option>
+                                             <option id="tls" value="tls">tls</option>                                             
                                           </select> 
                                        </div>
                                        <br>
@@ -221,6 +213,7 @@
          </div>
          <!-- page-body-wrapper ends -->
       </div>
+
       <!-- seccion modales-->
       <div class="modal fade" id="modalExitosa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
@@ -392,6 +385,9 @@
       <script>
          $(document).ready(function() {
         
+            var tipo_encriptacion = $("#tipo_encriptacion").val();
+            document.getElementById('encriptacion_smtp').value=tipo_encriptacion;
+
             $("#tabla_plantillas").DataTable({
                 //responsive: true
             });

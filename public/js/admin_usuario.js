@@ -504,6 +504,7 @@ function guardarSMTP() {
 	var nombre = $("#nombre_smtp").val();
 	var email = $("#email_smtp").val();
 	var host = $("#host_smtp").val();
+	var port = $("#port_smtp").val();
 	var password = $("#password_smtp").val();
 	var encriptacion = $("#encriptacion_smtp option:selected").val();
 	var id_usuario = $("#id_usuario").val();
@@ -512,6 +513,7 @@ function guardarSMTP() {
 		nombre: nombre,
 		email: email,
 		host: host,
+		port: port,
 		password: password,
 		encriptacion: encriptacion,
 		id_usuario: id_usuario

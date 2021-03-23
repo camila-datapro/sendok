@@ -46,8 +46,6 @@ class LoginController extends Controller
     {
         Log::debug($request);
         $rules = ['captcha' => 'required|captcha_api:'.$request['captcha'] . ',default'];
-        Log::debug("reglas : ");
-        Log::debug($rules);
         //$validator = validator()->make($request, $rules);
         /*if ($validator->fails()) {
             Log::debug("Falla el validador : ".$request['captcha']);

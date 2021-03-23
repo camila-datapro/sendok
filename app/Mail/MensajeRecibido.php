@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Auth;
-
+use Illuminate\Support\Facades\Crypt;
 
 class MensajeRecibido extends Mailable
 {
@@ -52,6 +52,7 @@ class MensajeRecibido extends Mailable
             $firma =="";
         }
         $contenido = "<text>".$contenido."</text><br>--".$firma;
+
         $email = $this->view('emails.envio-documento')->with("contenido",$contenido);
         $email->attachData(file_get_contents('./documentos/'.$nombre),$nombre,[
             'mime' => 'application/pdf',
@@ -61,8 +62,10 @@ class MensajeRecibido extends Mailable
                 'mime' => 'application/pdf',
             ]);
         }
+        
+        
 
         //Log::debug("Asunto:\n".$this->asunto."\n\n"."Contenido:\n".$contenido);
-        
+        return $this->from(Crypt::decryptString(Auth::user()->email_smtp));
     }
 }

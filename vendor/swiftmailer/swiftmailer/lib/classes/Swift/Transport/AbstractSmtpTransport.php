@@ -1,5 +1,5 @@
 <?php
-
+use Log;
 /*
  * This file is part of SwiftMailer.
  * (c) 2004-2009 Chris Corbyn
@@ -481,6 +481,7 @@ abstract class Swift_Transport_AbstractSmtpTransport implements Swift_Transport
     /** Send an email to the given recipients from the given reverse path */
     private function doMailTransaction($message, $reversePath, array $recipients, array &$failedRecipients)
     {
+        Log::debug("doMailTransaction vendor/swiftmailer/lib/classes/Swift/Transport/AbstractSmtpTransport");
         $sent = 0;
         $this->doMailFromCommand($reversePath);
         foreach ($recipients as $forwardPath) {
@@ -513,7 +514,7 @@ abstract class Swift_Transport_AbstractSmtpTransport implements Swift_Transport
         if (empty($to)) {
             return 0;
         }
-
+        
         return $this->doMailTransaction($message, $reversePath, array_keys($to),
             $failedRecipients);
     }

@@ -21,7 +21,11 @@ use Swift_DependencyContainer;
 use Swift_Mailer;
 use Swift_SendmailTransport as SendmailTransport;
 use Swift_SmtpTransport as SmtpTransport;
+//added
+use Auth;
+use Illuminate\Support\Facades\Crypt;
 
+use Illuminate\Support\Facades\Log;
 /**
  * @mixin \Illuminate\Mail\Mailer
  */
@@ -183,6 +187,24 @@ class MailManager implements FactoryContract
      */
     protected function createSmtpTransport(array $config)
     {
+
+        if(isset(Auth::user()->id)){
+            $username = Crypt::decryptString(Auth::user()->email_smtp);
+            $host = Crypt::decryptString(Auth::user()->host_smtp);
+            $port = Crypt::decryptString(Auth::user()->port_smtp);
+            $encryption = Crypt::decryptString(Auth::user()->encriptacion_smtp);
+            $password = Crypt::decryptString(Auth::user()->password_smtp);
+            $config['host'] = $host;
+            $config['port'] = $port;
+            $config['encryption'] = $encryption;
+            $config['username'] = $username;
+            $config['password'] = $password;
+        }
+   
+      
+   
+        
+     
         // The Swift SMTP transport instance will allow us to use any SMTP backend
         // for delivering mail such as Sendgrid, Amazon SES, or a custom server
         // a developer has available. We will just pass this configured host.
@@ -203,6 +225,8 @@ class MailManager implements FactoryContract
 
             $transport->setPassword($config['password']);
         }
+        Log::debug("Configuracion de mail: ");
+        Log::debug($config);
 
         return $this->configureSmtpTransport($transport, $config);
     }
