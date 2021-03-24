@@ -14,12 +14,11 @@ $('region').on('change', function() {
 
 function limpiarSeleccion() {
   var opcion = "<option id='0'> Elija Una </option>";
-  $('#provincia').find('option').remove().end().append(opcion);
   $('#comuna').find('option').remove().end().append(opcion);
 }
 
 
-function getProvinciasRegion() {
+function getComunasRegion() {
   
   var idRegion = parseInt($("#region").val());
   $.ajaxSetup({
@@ -29,34 +28,9 @@ function getProvinciasRegion() {
   });
   $.ajax({
     type: "POST",
-    url: url_prev + '/obtenerProvincias',
-    data: {
-      id: idRegion,
-      _token: $('input[name="_token"]').val()
-    } //esto es necesario, por la validacion de seguridad de laravel
-  }).done(function(msg) {
-    // se incorporan las opciones en la provincia
-    var json = JSON.parse(msg);
-    var opciones = "<option id='0'> Elija Una </option>";
-    for (var i = 0; i < json.length; i++) {
-      opciones = opciones + "<option id='" + json[i].id + "' id_provincia='" + json[i].id + "'>" + json[i].provincia + "</option>";
-    }
-    $('#provincia').find('option').remove().end().append(opciones);
-  });
-}
-
-function getComunasProvincia() {
-  var idProvincia = $("#provincia option:selected").attr('id_provincia');
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
-    }
-  });
-  $.ajax({
-    type: "POST",
     url: url_prev + '/obtenerComunas',
     data: {
-      id: idProvincia,
+      id: idRegion,
       _token: $('input[name="_token"]').val()
     } //esto es necesario, por la validacion de seguridad de laravel
   }).done(function(msg) {
@@ -64,11 +38,12 @@ function getComunasProvincia() {
     var json = JSON.parse(msg);
     var opciones = "<option id='0'> Elija Una </option>";
     for (var i = 0; i < json.length; i++) {
-      opciones = opciones + "<option id=" + json[i].id + " id_comuna= '" + json[i].id + "'>" + json[i].comuna + "</option>";
+      opciones = opciones + "<option id='" + json[i].id + "' id_comuna='" + json[i].id + "'>" + json[i].comuna + "</option>";
     }
     $('#comuna').find('option').remove().end().append(opciones);
   });
 }
+
 
 function crearCliente() {
 
@@ -92,9 +67,7 @@ function crearCliente() {
   if($("#region").val()=="Elija Una"){
     msj_info+= "- Debe seleccionar Region. </br>";
   }
-  if($("#provincia").val()=="Elija Una"){
-    msj_info+= "- Debe seleccionar Provincia. </br>";
-  }
+
   if($("#comuna").val()=="Elija Una"){
     msj_info+= "- Debe seleccionar Comuna. </br>";
   }
@@ -116,7 +89,7 @@ function crearCliente() {
       var fono = parseInt($("#telefono").val());
       var email = $("#email").val();
       var idRegion = parseInt($("#region").val());
-      var idProvincia = parseInt($("#provincia option:selected").attr('id_provincia'));
+      
       var idComuna = parseInt($("#comuna option:selected").attr('id_comuna'));
       var direccion = $("#direccion").val();
       var nombre_contacto = $("#nombre_contacto").val();
@@ -130,7 +103,6 @@ function crearCliente() {
         fono: fono,
         email: email,
         id_region: idRegion,
-        id_provincia: idProvincia,
         id_comuna: idComuna,
         direccion: direccion,
         nombre_contacto: nombre_contacto,
@@ -234,41 +206,16 @@ function editarCliente(cliente){
   $("#id_cliente").val(cliente.id_cliente);
   $("#region").find('option[value="'+(cliente.id_region_cliente)+'"]').prop('selected', true); 
   if($("#region").val()!="Elija Una"){
-    getProvinciasRegion();      
+    getComunasRegion();      
   }
-
-
-
-
+  
   setTimeout(() => {
-    if($("#provincia option").length>1){
-      $("#provincia").find('option[id_provincia='+(cliente.id_provincia_cliente)+']').prop('selected', true); 
-
-      getComunasProvincia(); 
-      setTimeout(() => {
-        if($("#comuna option").length>1){
-          $("#comuna").find('option[id_comuna='+(cliente.id_comuna_cliente)+']').prop('selected', true); 
-        }  
-      }, 200);
+    if($("#comuna option").length>1){
+      $("#comuna").find('option[id_comuna='+(cliente.id_comuna_cliente)+']').prop('selected', true); 
     }  
-  }, 600);
-  
-  
+  }, 200);
     
-  
-  
-    
-  
-        
      
-  
-      
-       
-       
-        //$("#comuna").find('option[value="'+(cliente.id_comuna_cliente)+'"]').prop('selected', true); 
-        //$("#region").val());
-        //var idProvincia = parseInt($("#provincia option:selected").attr('id_provincia'));
-        //var idComuna = parseInt($("#comuna option:selected").attr('id_comuna'));
         $("#direccion").val(cliente.direccion_cliente);
         $("#nombre_contacto").val(cliente.nombre_contacto);
         $("#cargo_contacto").val(cliente.cargo_contacto);
@@ -302,9 +249,6 @@ function editarClienteBD(){
   if($("#region").val()=="Elija Una"){
     msj_info+= "- Debe seleccionar Region. </br>";
   }
-  if($("#provincia").val()=="Elija Una"){
-    msj_info+= "- Debe seleccionar Provincia. </br>";
-  }
   if($("#comuna").val()=="Elija Una"){
     msj_info+= "- Debe seleccionar Comuna. </br>";
   }
@@ -325,8 +269,7 @@ function editarClienteBD(){
       var rut = $("#rut").val();
       var fono = parseInt($("#telefono").val());
       var email = $("#email").val();
-      var idRegion = parseInt($("#region").val());
-      var idProvincia = parseInt($("#provincia option:selected").attr('id_provincia'));
+      var idRegion = parseInt($("#region").val());      
       var idComuna = parseInt($("#comuna option:selected").attr('id_comuna'));
       var direccion = $("#direccion").val();
       var nombre_contacto = $("#nombre_contacto").val();
@@ -339,8 +282,7 @@ function editarClienteBD(){
         rut: rut,
         fono: fono,
         email: email,
-        id_region: idRegion,
-        id_provincia: idProvincia,
+        id_region: idRegion,        
         id_comuna: idComuna,
         direccion: direccion,
         nombre_contacto: nombre_contacto,

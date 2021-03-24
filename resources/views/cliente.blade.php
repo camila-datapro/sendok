@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="form-group">
                                        <label for="region">Región</label>
-                                       <select class="form-control" id="region" onchange="getProvinciasRegion();">
+                                       <select class="form-control" id="region" onchange="getComunasRegion();">
                                           <option _blank="">Elija Una</option>
                                           <?php                  
                                              for($i=0;$i<sizeOf($regiones);$i++){
@@ -69,13 +69,7 @@
                                        </select>
                                     </div>
                                     <div class="form-group">
-                                       <label for="provincia">Provincia</label>
-                                       <select class="form-control" id="provincia" onchange="getComunasProvincia();">
-                                          <option id="_blank">Elija Una </option>
-                                       </select>
-                                    </div>
-                                    <div class="form-group">
-                                       <label for="comuna">Comuna</label>
+                                       <label for="provincia">Comuna</label>
                                        <select class="form-control" id="comuna">
                                           <option id="_blank">Elija Una </option>
                                        </select>

@@ -19,7 +19,7 @@ class ComunaController extends Controller
      * @group ComunaController
      */
     public function getComunas(Request $request){
-        $idProvincia = $request['id'];
-         return json_encode(ComunaModel::getComunasByProvincia($idProvincia));
+        $idRegion = $request['id'];
+         return json_encode(ComunaModel::getComunasByRegion($idRegion));
      }
 }

@@ -201,7 +201,7 @@
                                  <div class="form-group row">
                                     <label for="region" class="col-md-2">Región</label>
                                     <div class="col-md-10">
-                                       <select disabled class="form-control" id="region" onchange="getProvinciasRegion();">
+                                       <select disabled class="form-control" id="region" onchange="getComunasRegion();">
                                           <option _blank="">Elija Una</option>
                                           <?php                  
                                              for($i=0;$i<sizeOf($regiones);$i++){
@@ -219,14 +219,8 @@
                            <div class="form-group">
                               <div class="col-md-12">
                                  <div class="form-group row">
-                                    <label for="provincia" class="col-md-2">Provincia</label>
-                                    <div class="col-md-4">
-                                       <select disabled class="form-control" id="provincia" onchange="getComunasProvincia();">
-                                          <option id="_blank">Elija Una </option>
-                                       </select>
-                                    </div>
                                     <label for="comuna" class="col-md-2">Comuna</label>
-                                    <div class="col-md-4">
+                                    <div class="col-md-10">
                                        <select disabled class="form-control" id="comuna">
                                           <option id="_blank">Elija Una </option>
                                        </select>
