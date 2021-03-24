@@ -7,10 +7,13 @@ use App\ClienteModel;
 use App\ProductoModel;
 use App\PlantillaModel;
 use App\Mail\MensajeRecibido;
+use App\UsuarioModel;
 use App\RegionModel;
 use Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Config;
+use App;
 
 class DocumentoController extends Controller
 {
@@ -84,5 +87,10 @@ class DocumentoController extends Controller
         file_put_contents('./productos/'.$nombre_doc, base64_decode($bpdf));
         return "OK";
 
+    }
+
+    public function test_mail(Request $request){
+        $folletos = [];
+        Mail::to("cfigueroa@datapro.cl")->send( new MensajeRecibido("PC16_11.pdf", "testmail contenido", $folletos, "test"));    
     }
 }
