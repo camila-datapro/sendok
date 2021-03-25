@@ -521,6 +521,27 @@
          </div>
       </div>
 
+      
+
+      <div class="modal fade" id="modalSinCredenciales" tabindex="-1" role="dialog" aria-labelledby="modalSinCredenciales" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="modalCredencial">Sin credenciales de SMTP</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  Para efectuar el envío de correo, debe tener configuradas sus credenciales SMTP
+               </div>
+               <div class="modal-footer">
+                  <a type="button" class="btn btn-secondary" href="./admin_usuario" >Configurar SMTP</a>
+               </div>
+            </div>
+         </div>
+      </div>
+
       <div class="modal fade" id="modalFiltrarProducto" tabindex="-1" role="dialog" aria-labelledby="modalexito" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">

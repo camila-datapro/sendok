@@ -292,7 +292,23 @@ function eliminarProducto() {
 }
 
 function enviarPropuesta(propuesta) {
-	$("#modalCuerpoCorreo").modal("show");
+	$.ajax({
+		type: "POST",
+		url: url_prev + '/validaExisteSMTP',
+		data: {
+			_token: $('input[name="_token"]').val()
+		} //esto es necesario, por la validacion de seguridad de laravel
+	}).done(function (msg) {		
+		if (msg == true) {
+			console.log("El mensaje fue: "+msg);
+			$("#modalCuerpoCorreo").modal("show");
+		} else {
+			$("#modalSinCredenciales").modal("show");
+		}
+	}).fail(function () {				
+		console.log("Error en propuestaLastId");
+	});
+	
 	//$("#modalCargando").modal('show');	   
 }
 

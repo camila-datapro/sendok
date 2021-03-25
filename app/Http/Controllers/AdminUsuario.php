@@ -116,6 +116,18 @@ class AdminUsuario extends Controller
 
     }
 
+    public function validaExisteSMTP(Request $request){
+        if((strlen(Auth::user()->email_smtp)==0)
+        &&(strlen(Auth::user()->password_smtp)==0)
+        &&(strlen(Auth::user()->host_smtp)==0)
+        &&(strlen(Auth::user()->encriptacion_smtp)==0)
+        &&(strlen(Auth::user()->port_smtp)==0)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     public function traductor(){
 
         
@@ -195,4 +207,6 @@ class AdminUsuario extends Controller
         ->with("encriptados", $encriptados)
         ->with("desencriptados", $desencriptados);
     }
+
+
 }
