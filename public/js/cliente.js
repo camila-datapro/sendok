@@ -1,4 +1,4 @@
-const url_prev = location.origin+'/desarrollo/public';
+const url_prev = location.origin + window.location.pathname;
 
 function cargarRegiones() {
   $.ajax({
@@ -28,7 +28,7 @@ function getComunasRegion() {
   });
   $.ajax({
     type: "POST",
-    url: url_prev + '/obtenerComunas',
+    url: url_prev + 'obtenerComunas',
     data: {
       id: idRegion,
       _token: $('input[name="_token"]').val()
@@ -119,7 +119,7 @@ function crearCliente() {
 
       $.ajax({
         type: "POST",
-        url: url_prev + '/crearCliente',
+        url: url_prev + 'crearCliente',
         data: {
           json_datos: json_datos,
           _token: token
@@ -155,7 +155,7 @@ function eliminarCliente(){
 
   $.ajax({
     type: "POST",
-    url: url_prev + '/eliminarCliente',
+    url: url_prev + 'eliminarCliente',
     data: {
       id_cliente: id_cliente,
       _token: $('input[name="_token"]').val()
@@ -301,7 +301,7 @@ function editarClienteBD(){
 
       $.ajax({
         type: "POST",
-        url: url_prev + '/editarCliente',
+        url: url_prev + 'editarCliente',
         data: {
           json_datos: json_datos,
           _token: token

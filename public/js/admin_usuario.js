@@ -1,4 +1,4 @@
-const url_prev = location.origin+'/desarrollo/public';
+const url_prev = location.origin + window.location.pathname;
 
 function mostrarAcciones(){
 	$("#btn_editar").hide();
@@ -75,7 +75,7 @@ function enable() {
 
 	  $.ajax({
 		type: "POST",
-		url: url_prev + '/editarUsuario',
+		url: url_prev + 'editarUsuario',
 		data: {
 		  json_datos: json_datos,
 		  _token: $('input[name="_token"]').val()
@@ -244,7 +244,7 @@ $("input:checkbox").on('click', function() {
 	$(".cke_editable").hide();
 	$.ajax({
 		type: "POST",
-		url: url_prev + '/obtenerHTML',
+		url: url_prev + 'obtenerHTML',
 		data: {
 		  _token: $('input[name="_token"]').val()
 		} //esto es necesario, por la validacion de seguridad de laravel
@@ -317,7 +317,7 @@ $("#form_firma").on("submit", function (e) {
 	var html = CKEDITOR.instances.summernote.getData();
 	$.ajax({
 		type: "POST",
-		url: url_prev + '/guardarHTML',
+		url: url_prev + 'guardarHTML',
 		data: {
 			html: html,
 		  _token: $('input[name="_token"]').val()
@@ -362,7 +362,7 @@ $("#form_firma").on("submit", function (e) {
 	  console.log(json_datos);
 	  $.ajax({
 		type: "POST",
-		url: url_prev + '/crearPlantilla',
+		url: url_prev + 'crearPlantilla',
 		data: {
 		  json_datos: json_datos,
 		  _token: $("#token").val()
@@ -416,7 +416,7 @@ $("#form_firma").on("submit", function (e) {
 
 	$.ajax({
 		type: "POST",
-		url: url_prev + '/eliminarPlantilla',
+		url: url_prev + 'eliminarPlantilla',
 		data: {
 		  id: id,
 		  _token: $("#token").val()
@@ -475,7 +475,7 @@ $("#form_firma").on("submit", function (e) {
 	  console.log(json_datos);
 	  $.ajax({
 		type: "POST",
-		url: url_prev + '/editarPlantilla',
+		url: url_prev + 'editarPlantilla',
 		data: {
 		  json_datos: json_datos,
 		  _token: $("#token").val()
@@ -524,7 +524,7 @@ function guardarSMTP() {
 	console.log("json : "+ json_datos);
 	$.ajax({
 		type: "POST",
-		url: url_prev + '/modificarSMTP',
+		url: url_prev + 'modificarSMTP',
 		data: {
 		  json_datos: json_datos,
 		  _token: $("#token").val()

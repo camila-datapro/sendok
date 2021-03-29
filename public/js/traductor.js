@@ -1,5 +1,4 @@
-
-const url_prev = location.origin+'/desarrollo/public';
+const url_prev = location.origin + window.location.pathname;
 
 function copy() {
     let textarea = document.getElementById("nueva_config");

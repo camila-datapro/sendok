@@ -1,4 +1,4 @@
-const url_prev = location.origin+'/desarrollo/public';
+const url_prev = location.origin + window.location.pathname;
 
 
 function construirTabla(){
@@ -76,7 +76,7 @@ function importarTabla(){
     if(vacios==""){
         $.ajax({
             type: "POST",
-            url: url_prev + '/insertarProductos',
+            url: url_prev + 'insertarProductos',
             data: {
             productos: json_array,         
             _token: $('input[name="_token"]').val()

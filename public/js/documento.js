@@ -1,4 +1,4 @@
-const url_prev = location.origin + '/desarrollo/public';
+const url_prev = location.origin + window.location.pathname;
 
 // In your Javascript (external .js resource or <script> tag)
 
@@ -12,7 +12,7 @@ $(document).ready(function () {
 	// se obtienen los productos
 	$.ajax({
 		type: "POST",
-		url: url_prev + '/listProductos',
+		url: url_prev + 'listProductos',
 		data: {
 			_token: $('input[name="_token"]').val()
 		} //esto es necesario, por la validacion de seguridad de laravel
@@ -118,7 +118,7 @@ function guardarPropuesta() {
 			var bpdf = btoa(pdf);
 			$.ajax({
 				type: "POST",
-				url: url_prev + '/guardarPDF',
+				url: url_prev + 'guardarPDF',
 				data: {
 					pdf: bpdf,
 					nombre_doc: folio+'.pdf',
@@ -168,7 +168,7 @@ function vistaPreviaPDF() {
 		var id_cliente = $("#select_cliente option:selected").attr('id');
 		$.ajax({
 			type: "POST",
-			url: url_prev + '/propuestaLastId',
+			url: url_prev + 'propuestaLastId',
 			data: {
 				_token: $('input[name="_token"]').val()
 			} //esto es necesario, por la validacion de seguridad de laravel
@@ -294,7 +294,7 @@ function eliminarProducto() {
 function enviarPropuesta(propuesta) {
 	$.ajax({
 		type: "POST",
-		url: url_prev + '/validaExisteSMTP',
+		url: url_prev + 'validaExisteSMTP',
 		data: {
 			_token: $('input[name="_token"]').val()
 		} //esto es necesario, por la validacion de seguridad de laravel
@@ -344,7 +344,7 @@ function enviarCorreo(){
 
 		$.ajax({
 		  type: "POST",
-		  url: url_prev + '/enviarPropuesta',
+		  url: url_prev + 'enviarPropuesta',
 		  data: {
 			destinatario: destinatario,
 			contenido: cuerpo,
@@ -463,7 +463,7 @@ function guardarEnBD(){
 	$("#modalCargando").modal('hide');
 	$.ajax({
 		type: "POST",
-		url: url_prev + '/setPropuesta',
+		url: url_prev + 'setPropuesta',
 		data: {
 		  datos_envio: datos_envio,
 		  _token: $('input[name="_token"]').val()
@@ -511,7 +511,7 @@ function cargarRegiones() {
 	});
 	$.ajax({
 	  type: "POST",
-	  url: url_prev + '/obtenerProvincias',
+	  url: url_prev + 'obtenerProvincias',
 	  data: {
 		id: idRegion,
 		_token: $('input[name="_token"]').val()
@@ -536,7 +536,7 @@ function cargarRegiones() {
 	});
 	$.ajax({
 	  type: "POST",
-	  url: url_prev + '/obtenerComunas',
+	  url: url_prev + 'obtenerComunas',
 	  data: {
 		id: idProvincia,
 		_token: $('input[name="_token"]').val()
@@ -653,7 +653,7 @@ function cargarRegiones() {
 	
 		$.ajax({
 		type: "POST",
-		url: url_prev + '/crearCliente',
+		url: url_prev + 'crearCliente',
 		data: {
 			json_datos: json_datos,
 			_token: token
@@ -743,7 +743,7 @@ function cargarRegiones() {
 
        $.ajax({
 				type: "POST",
-				url: url_prev + '/guardarPDFProducto',
+				url: url_prev + 'guardarPDFProducto',
 				data: {
 					pdf: base64String,
 					nombre_doc: 'producto_'+numero_fabricacion+'.pdf',
@@ -797,7 +797,7 @@ function cargarRegiones() {
      
       $.ajax({
           type: "POST",
-          url: url_prev + '/crearProducto',
+          url: url_prev + 'crearProducto',
           data: {
           json_datos: json_datos,
           _token: token
@@ -848,7 +848,7 @@ function visarUnidades(){
   function setEstadoEnviado(folio){
 	$.ajax({
 		type: "POST",
-		url: url_prev + '/setEstadoEnviado',
+		url: url_prev + 'setEstadoEnviado',
 		data: {
 		  folio: folio,
 		  _token: $('input[name="_token"]').val()
@@ -906,7 +906,7 @@ function mostrarFiltros(boton){
 
 		$.ajax({
 			type: "POST",
-			url: url_prev + '/filtrarProductos',
+			url: url_prev + 'filtrarProductos',
 			data: {
 			  datos_filtro: datos_filtro,
 			  _token: $('input[name="_token"]').val()

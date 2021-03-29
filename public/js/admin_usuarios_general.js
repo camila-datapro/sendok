@@ -1,3 +1,5 @@
+const url_prev = location.origin + window.location.pathname;
+
 $("#a_mi_empresa").click(function () {
     $("#div_nuevos_usuarios").hide();
     $("#div_mi_empresa").show();

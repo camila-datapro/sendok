@@ -7,7 +7,7 @@ $(document).ready(function() {
 
 
 
-const url_prev = location.origin+'/desarrollo/public';
+const url_prev = location.origin + window.location.pathname;
 
 
 
@@ -30,7 +30,7 @@ const url_prev = location.origin+'/desarrollo/public';
   
     $.ajax({
       type: "POST",
-      url: url_prev + '/eliminarProducto',
+      url: url_prev + 'eliminarProducto',
       data: {
         id_producto: id_producto,
         _token: $('input[name="_token"]').val()
@@ -155,7 +155,7 @@ function editarBDProducto(){
 
         $.ajax({
           type: "POST",
-          url: url_prev + '/guardarPDFProducto',
+          url: url_prev + 'guardarPDFProducto',
           data: {
             pdf: base64String,
             nombre_doc: 'producto_'+numero_fabricacion+'.pdf',
@@ -210,7 +210,7 @@ function editarBDProducto(){
    
     $.ajax({
         type: "POST",
-        url: url_prev + '/editarProducto',
+        url: url_prev + 'editarProducto',
         data: {
         json_datos: json_datos,
         _token: token

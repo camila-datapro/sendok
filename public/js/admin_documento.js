@@ -1,4 +1,4 @@
-const url_prev = location.origin + '/desarrollo/public';
+const url_prev = location.origin + window.location.pathname;
 
 $(document).ready(function () {
 	$('.js-example-basic-single').select2();
@@ -6,7 +6,7 @@ $(document).ready(function () {
 	// se obtienen los productos
 	$.ajax({
 		type: "POST",
-		url: url_prev + '/listProductos',
+		url: url_prev + 'listProductos',
 		data: {
 			_token: $('input[name="_token"]').val()
 		} //esto es necesario, por la validacion de seguridad de laravel
@@ -286,7 +286,7 @@ function guardarPropuesta() {
 
 			$.ajax({
 				type: "POST",
-				url: url_prev + '/guardarPDF',
+				url: url_prev + 'guardarPDF',
 				data: {
 					pdf: bpdf,
 					nombre_doc: folio+'.pdf',
@@ -391,7 +391,7 @@ function actualizaEnBD(){
 	$("#modalCargando").modal('hide');
 	$.ajax({
 		type: "POST",
-		url: url_prev + '/updatePropuesta',
+		url: url_prev + 'updatePropuesta',
 		data: {
 		  datos_envio: datos_envio,
 		  _token: $('input[name="_token"]').val()
@@ -436,7 +436,7 @@ function enviarCorreo(){
 
 		$.ajax({
 		  type: "POST",
-		  url: url_prev + '/enviarPropuesta',
+		  url: url_prev + 'enviarPropuesta',
 		  data: {
 			destinatario: destinatario,
 			contenido: cuerpo,
@@ -481,7 +481,7 @@ function sendMailFromList(propuestas){
 	// envio de propuesta
 	$.ajax({
 	  type: "POST",
-	  url: url_prev + '/enviarPropuesta',
+	  url: url_prev + 'enviarPropuesta',
 	  data: {
 		destinatario: destinatario,
 		contenido: contenido,
@@ -504,7 +504,7 @@ function sendMailFromList(propuestas){
 function setEstadoEnviado(folio){
 	$.ajax({
 		type: "POST",
-		url: url_prev + '/setEstadoEnviado',
+		url: url_prev + 'setEstadoEnviado',
 		data: {
 		  folio: folio,
 		  _token: $('input[name="_token"]').val()
