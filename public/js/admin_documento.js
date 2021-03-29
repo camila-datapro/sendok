@@ -1,4 +1,9 @@
-const url_prev = location.origin + window.location.pathname;
+const carpeta = window.location.pathname;
+if (carpeta.includes("desarrollo")) {
+	var url_prev = location.origin + "/desarrollo/public/";
+} else {
+	var url_prev = location.origin + "/public/";
+}
 
 $(document).ready(function () {
 	$('.js-example-basic-single').select2();

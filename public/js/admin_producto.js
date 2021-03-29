@@ -1,18 +1,19 @@
-$(document).ready(function() {
+const carpeta = window.location.pathname;
+if (carpeta.includes("desarrollo")) {
+	var url_prev = location.origin + "/desarrollo/public/";
+} else {
+	var url_prev = location.origin + "/public/";
+}
+
+
+
+$(document).ready(function () {
     $('#example').DataTable( {
         "scrollX": true
     } );
   
 } );
 
-
-
-const url_prev = location.origin + window.location.pathname;
-
-
-
-  
-  
   function confirmarEliminacion(producto){
     id_boton = producto.id_producto;
     nombre_producto = producto.nombre_producto;
