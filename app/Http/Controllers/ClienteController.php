@@ -25,7 +25,6 @@ class ClienteController extends Controller
     {
         return view('cliente')
             ->with('regiones', RegionModel::all())
-            ->with('provincias', ProvinciaModel::all())
             ->with('comunas', ComunaModel::all());
     }
 

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ClienteModel;
 use App\RegionModel;
-use App\ProvinciaModel;
 use App\ComunaModel;
 
 class AdminClienteController extends Controller
@@ -24,7 +23,6 @@ class AdminClienteController extends Controller
         return view('admin_cliente')
             ->with('clientes', ClienteModel::listarClientes())
             ->with('regiones', RegionModel::all())
-            ->with('provincias', ProvinciaModel::all())
             ->with('comunas', ComunaModel::all());
     }
 }

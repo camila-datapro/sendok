@@ -76,13 +76,25 @@
                                     </div>
                                     <br>
                                     <div class="row">
-                                       <label class="col-md-1">Region</label>
-                                       <div class="col-md-5">
-                                          <input class="form-control" id="region_empresa"></input>
-                                       </div>
-                                       <label class="col-md-1">Comuna</label>
-                                       <div class="col-md-5">
-                                          <input class="form-control" id="comuna_empresa"></input>
+
+                                          <label for="region" class="col-md-1">Región</label>
+                                          <div class="col-md-5">
+                                             <select class="form-control" id="region" onchange="getComunasRegion();">
+                                                <option _blank="">Elija Una</option>
+                                                <?php                  
+                                                   for($i=0;$i<sizeOf($regiones);$i++){
+                                                      echo "<option value='".$regiones[$i]->id."'>".$regiones[$i]->region."</option>";
+                                                   }
+                                                   ?> 
+                                             </select>
+                                          </div>
+                                       
+                                      
+                                          <label for="provincia" class="col-md-1">Comuna</label>
+                                          <div class="col-md-5">
+                                          <select class="form-control" id="comuna">
+                                             <option id="_blank">Elija Una </option>
+                                          </select>
                                        </div>
                                     </div>
                                     <br>

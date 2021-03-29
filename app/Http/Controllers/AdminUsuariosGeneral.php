@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\RegionModel;
+use App\ComunaModel;
 
 class AdminUsuariosGeneral extends Controller
 {
@@ -18,6 +20,8 @@ class AdminUsuariosGeneral extends Controller
      * @group AdminUsuario
      */
     public function index(){
-        return view('admin_usuarios');                
+        return view('admin_usuarios')
+        ->with('regiones', RegionModel::all())
+        ->with('comunas', ComunaModel::all());                
     }
 }
