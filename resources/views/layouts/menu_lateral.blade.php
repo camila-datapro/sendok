@@ -124,12 +124,13 @@
             </form>
          </a>
       </li>
-
+      <!--
       <li class="nav-item">
          <a style="background:green; color: white;" href="./traductor" class="nav-link">
             <span class="nav__name">Configurar ENV</span>
          </a>
       </li>
+      -->
    </ul>
 </nav>
 @yield('body2')
