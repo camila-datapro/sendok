@@ -178,7 +178,10 @@ function vistaPreviaPDF() {
 				_token: $('input[name="_token"]').val()
 			} //esto es necesario, por la validacion de seguridad de laravel
 		}).done(function (msg) {
-			
+
+			if (!msg[0].numero_folio) {
+				msg[0].numero_folio = 0;
+			}
 			var folio_propuesta = "PC"+id_cliente+"_"+(parseInt(msg[0].numero_folio)+1);
 			$("#folio_propuesta").text(folio_propuesta+"-1");
 		}).fail(function () {				

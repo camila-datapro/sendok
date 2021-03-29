@@ -86,7 +86,7 @@
                               <td> <?php echo Auth::user()->email; ?></td>
                            </tr>
                            <tr>
-                              <td> Fono</td>
+                              <td> <?php echo Auth::user()->fono; ?></td>
                            </tr>
                         </tbody>
                      </table>
