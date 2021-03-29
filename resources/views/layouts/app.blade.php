@@ -11,21 +11,21 @@
     <title>{{ config('app.name', 'Sendok') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
     <script src="{{ asset('js/login.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">-->
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     
     <!-- Estilos personalizados -->
     <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Muli:300,700&display=swap" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css?family=Muli:300,700&display=swap" rel="stylesheet">-->
     <!-- Ionic icons -->
-    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+    <!--<link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">-->
     <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
     <title>Dashboard - Sendok</title>
     <style>

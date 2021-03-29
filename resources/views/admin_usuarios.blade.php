@@ -223,20 +223,12 @@
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
       <!--<script src="{{ asset('/js/producto.js') }}"></script>-->
       <script src="{{ asset('/js/admin_usuarios_general.js') }}"></script>
-      <script src="https://unpkg.com/@popperjs/core@2"></script>
+      <script src="{{ asset('/assets/js/popper.min.js') }}"></script>
       <script src="{{ asset('/js/dataTables.js')}}"></script>
       <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
       <!-- include summernote css/js -->
       <!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   -->
       <!-- End custom js for this page-->
-      <script>
-         $(document).ready(function() {
-         
-          
-            
-         });
-         
-      </script>
    </body>
 </html>
 @endsection

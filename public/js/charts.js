@@ -85,8 +85,7 @@ $(function () {
           legendCallback: function (chart) {
             var text = [];
             text.push('<div class="chartjs-legend d-flex justify-content-center mt-4"><ul>');
-            for (var i = 0; i < chart.data.datasets.length; i++) {
-              console.log(chart.data.datasets[i]); // see what's inside the obj.
+            for (var i = 0; i < chart.data.datasets.length; i++) {              
               text.push('<li>');
               text.push('<span style="background-color:' + chart.data.datasets[i].borderColor + '">' + '</span>');
               text.push(chart.data.datasets[i].label);
@@ -173,8 +172,7 @@ $(function () {
         legendCallback: function (chart) {
           var text = [];
           text.push('<div class="chartjs-legend"><ul>');
-          for (var i = 0; i < chart.data.datasets.length; i++) {
-            console.log(chart.data.datasets[i]); // see what's inside the obj.
+          for (var i = 0; i < chart.data.datasets.length; i++) {            
             text.push('<li>');
             text.push('<span style="background-color:' + chart.data.datasets[i].borderColor + '">' + '</span>');
             text.push(chart.data.datasets[i].label);
@@ -273,8 +271,7 @@ $(function () {
         legendCallback: function (chart) {
           var text = [];
           text.push('<div class="chartjs-legend"><ul>');
-          for (var i = 0; i < chart.data.datasets.length; i++) {
-            console.log(chart.data.datasets[i]); // see what's inside the obj.
+          for (var i = 0; i < chart.data.datasets.length; i++) {            
             text.push('<li>');
             text.push('<span style="background-color:' + chart.data.datasets[i].borderColor + '">' + '</span>');
             text.push(chart.data.datasets[i].label);
@@ -305,8 +302,7 @@ $(function () {
     if ($("#barChart").length) {
       var barChartCanvas = $("#barChart").get(0).getContext("2d");
       var total_1 = parseInt(($("#total_01").attr("total_mes"))!=undefined? $("#total_01").attr("total_mes"): "0");
-      console.log(total_1);
-      console.log(total_2);
+
       var total_2 = parseInt(($("#total_02").attr("total_mes"))!=undefined? $("#total_02").attr("total_mes"): "0");
       var total_3 = parseInt(($("#total_03").attr("total_mes"))!=undefined? $("#total_03").attr("total_mes"): "0");
       var total_4 = parseInt(($("#total_04").attr("total_mes"))!=undefined? $("#total_04").attr("total_mes"): "0");
@@ -396,8 +392,7 @@ $(function () {
           legendCallback: function (chart) {
             var text = [];
             text.push('<div class="chartjs-legend"><ul>');
-            for (var i = 0; i < chart.data.datasets.length; i++) {
-              console.log(chart.data.datasets[i]); // see what's inside the obj.
+            for (var i = 0; i < chart.data.datasets.length; i++) {              
               text.push('<li>');
               text.push('<span style="background-color:' + chart.data.datasets[i].backgroundColor + '">' + '</span>');
               text.push(chart.data.datasets[i].label);
@@ -506,8 +501,7 @@ $(function () {
           legendCallback: function (chart) {
             var text = [];
             text.push('<div class="chartjs-legend"><ul>');
-            for (var i = 0; i < chart.data.datasets.length; i++) {
-              console.log(chart.data.datasets[i]); // see what's inside the obj.
+            for (var i = 0; i < chart.data.datasets.length; i++) {              
               text.push('<li>');
               text.push('<span style="background-color:' + chart.data.datasets[i].backgroundColor + '">' + '</span>');
               text.push(chart.data.datasets[i].label);
@@ -574,7 +568,6 @@ $(function () {
           var text = [];
           text.push('<div class="chartjs-legend"><ul>');
           for (var i = 0; i < chart.data.datasets.length; i++) {
-            console.log(chart.data.datasets[i]); // see what's inside the obj.
             text.push('<li>');
             text.push('<span style="background-color:' + chart.data.datasets[i].backgroundColor + '">' + '</span>');
             text.push(chart.data.datasets[i].label);
@@ -970,8 +963,7 @@ $(function () {
           legendCallback: function (chart) {
             var text = [];
             text.push('<div class="chartjs-legend"><ul>');
-            for (var i = 0; i < chart.data.datasets.length; i++) {
-              console.log(chart.data.datasets[i]); // see what's inside the obj.
+            for (var i = 0; i < chart.data.datasets.length; i++) {              
               text.push('<li>');
               text.push('<span style="background-color:' + chart.data.datasets[i].backgroundColor + '">' + '</span>');
               text.push(chart.data.datasets[i].label);

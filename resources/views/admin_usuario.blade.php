@@ -176,7 +176,7 @@
                                        </div>
                                        <div class="row form-group">
                                           <label> Password </label>                                          
-                                          <input required class="form-control" type="text" id="password_smtp" placeholder="Password" value="{{$usuarioSMTP['password_smtp']}}"></input>                                          
+                                          <input required class="form-control" type="password" id="password_smtp" placeholder="Password" value="{{$usuarioSMTP['password_smtp']}}"></input>                                          
                                        </div>
                                        <div class="row form-group">
                                           <label> Host</label>                                          

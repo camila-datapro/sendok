@@ -65,3 +65,49 @@ $("#form_nuevos_usuarios").on("submit", function (e) {
     e.preventDefault();
     alert("Funcionalidad en desarrollo...");
 });
+
+
+
+function cargarRegiones() {
+    $.ajax({
+      type: "GET",
+      url: '/obtenerRegiones',
+      data: {}
+    }).done(function(msg) {});
+  }
+
+$('region').on('change', function() {
+    limpiarSeleccion();
+  });
+  
+  function limpiarSeleccion() {
+    var opcion = "<option id='0'> Elija Una </option>";
+    $('#comuna').find('option').remove().end().append(opcion);
+  }
+  
+  
+  function getComunasRegion() {
+    
+    var idRegion = parseInt($("#region").val());
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
+      }
+    });
+    $.ajax({
+      type: "POST",
+      url: url_prev + 'obtenerComunas',
+      data: {
+        id: idRegion,
+        _token: $('input[name="_token"]').val()
+      } //esto es necesario, por la validacion de seguridad de laravel
+    }).done(function(msg) {
+      // se incorporan las opciones en la comuna
+      var json = JSON.parse(msg);
+      var opciones = "<option id='0'> Elija Una </option>";
+      for (var i = 0; i < json.length; i++) {
+        opciones = opciones + "<option id='" + json[i].id + "' id_comuna='" + json[i].id + "'>" + json[i].comuna + "</option>";
+      }
+      $('#comuna').find('option').remove().end().append(opciones);
+    });
+  }
