@@ -16,13 +16,29 @@
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.addons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/shared/style.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
       <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
+      <script
+         type="text/javascript"
+         src="https://cdnjs.cloudfare.com/ajax/libs/xlsx/0.15.3/xlsx.full.min.js"
+      ></script>
       <style>
+               
          table {
-            display: block;
-            overflow-x: auto;
-            white-space: nowrap;
+            border-collapse: collapse;
+            table-layout: fixed;
+            width: 500px;
          }
+         .table td{
+            white-space: normal;
+         }
+
+         table th {        
+            word-wrap: none;
+            width: 50px;
+         }
+         
+
       </style>
    </head>
    @endsection
@@ -50,7 +66,18 @@
                      <div class="col-md-12 grid-margin stretch-card">
                         <div class="card">
                            <div class="card-body">
-                              <div id="vista_importar">
+                              
+                              <h5>Importar archivo</h5>
+                              <div id="vista_importar" class="row col-md-12">
+                              <div class="col-md-3">
+                                 <input type="file" class="form-control" id="fileUpload" accept=".xls,.xlsx" /><br />
+                              </div>
+                              <div class="col-md-3">
+                                 <!--<button type="button" class="btn btn-warning" id="uploadExcel">Cargar</button>-->
+                                 <button id="boton_importar" style="margin-left:20px;" class="btn btn-success" onclick="importarTabla();"><i class="fas fa-file-import"></i> Importar</button>
+                              </div>
+                              <pre id="jsonData" style="display:none;"></pre>
+                              <!--
                                  <div class="row">
                                     <form method="get" action="{{ asset('/documentos/plantilla_documento.xlsx') }}">
                                        <button class="btn btn-success" id="descargar_formato" type="submit"><i class="far fa-file-pdf"></i> Descargar Formato</button>
@@ -72,7 +99,13 @@
                                  </div>
                                
                               </div>
+                              -->
                               
+                              <div class="row" style="margin-top: 20px;">
+                                 <div class="col-md-1"></div>
+                                 <div class="col-md-10" id="div_table"></div>
+                                 <div class="col-md-1"></div>
+                              </div>
                            </div>
                         </div>
                      </div>
@@ -160,6 +193,74 @@
       <script src="{{ asset('/js/ingreso_masivo.js') }}"></script>
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
       <script src="{{ asset('/generaPDF/dist/html2pdf.bundle.min.js') }}"></script>
+      <script src="{{ asset('/js/dataTablesFilter.js')}}"></script>     
+      <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+      <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+      <script>
+         var selectedFile;
+         document
+            .getElementById("fileUpload")
+            .addEventListener("change", function(event) {
+               $("#boton_importar").attr("disabled",false);
+               selectedFile = event.target.files[0];
+               if (selectedFile) {
+                  var fileReader = new FileReader();
+                  fileReader.onload = function (event) {
+                        var data = event.target.result;
+                        var workbook = XLSX.read(data, {
+                           type: "binary"
+                        });
+                        workbook.SheetNames.forEach(sheet => {
+                           let rowObject = XLSX.utils.sheet_to_row_object_array(
+                              workbook.Sheets[sheet]
+                           );            
+                           let jsonObject = JSON.stringify(rowObject);
+                           document.getElementById("jsonData").innerHTML = jsonObject;
+                           
+                           // se crea la tabla de contenido                           
+                          
+                           var table = $('<table id="tabla_contenido" class="table table-hover">');
+                           table.append('</table>');
+                           $('#div_table').html(table);
+
+                           // importo contenido de json en tabla de html
+
+                           var html = '';
+                           var i = 0;
+                           $.each(JSON.parse(jsonObject), function(key, value){
+                              if(i==0){
+                                 html += "<thead>";
+                                 html += "<tr>";
+                                 $.each(value, function(header, value2){
+                                    html += "<th>" + header+ "</th>";
+                                 })
+                                 html += "</tr>";
+                                 html += "</thead>";
+                                 i++;
+                              }else{
+                                 html += "<tr>";
+                                 $.each(value, function(header, value2){
+                                    html += "<td>" + value2+ "</td>";
+                                 })
+                                 html += "</tr>"
+                              }
+                           });
+                           //html += "</tr>";
+
+                           $("#tabla_contenido").append(html);
+
+                           $("#tabla_contenido").DataTable({
+                              columnDefs: [
+                                    { width: 50, targets: 0 }
+                              ]
+                           });
+                        });
+                  };
+                  fileReader.readAsBinaryString(selectedFile);
+               }
+            });
+
+      </script>
    </body>
 </html>
 @endsection

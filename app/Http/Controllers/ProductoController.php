@@ -53,7 +53,8 @@ class ProductoController extends Controller
      */
     public function insertarProductos(Request $request){
         $array_productos = $request["productos"];
-        $response = ProductoModel::insertarProductos($array_productos);
+        $array_headers = $request["headers"];
+        $response = ProductoModel::insertarProductos($array_productos, $array_headers);
         return $response;
     }
 

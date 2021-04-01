@@ -294,6 +294,8 @@ function enable() {
   $('#modalEditar input').each(function () {
     $(this).prop('disabled', false);
  });
+
+ $("#descripcion_producto").prop("disabled",false);
  $('#modalEditar select').each(function () {
   $(this).prop('disabled', false);
 });
@@ -304,6 +306,7 @@ function disable() {
   $('#modalEditar input').each(function () {
     $(this).prop('disabled', true);
  });
+ $("#descripcion_producto").prop("disabled",true);
  $('#modalEditar select').each(function () {
   $(this).prop('disabled', true);
 });

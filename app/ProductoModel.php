@@ -139,20 +139,24 @@ class ProductoModel extends Model
     }
 
 
-    public static function insertarProductos($productos_json){
+    public static function insertarProductos($productos_json, $headers){
+        
         $productos = json_decode($productos_json,true);
-        for($i=0;$i<(sizeOf($productos)-1);$i++){
+        $headers = json_decode($headers,true);
+
+        for($i=0;$i<(sizeOf($productos));$i++){
         $clase = "producto";
-        $nombre = $productos[$i]["nombre_producto"];
-        $valor = $productos[$i]["valor_producto"];
-        $descripcion = $productos[$i]["descripcion_producto"];
+  
+        $nombre = $productos[$i][0]["Nombre"];
+        $valor = $productos[$i][0]["Precio"];
+        $descripcion = $productos[$i][0]["Descripcion"];
         $tipo_cambio = "usd";
-        $stock = $productos[$i]["stock"];
-        $costo = $productos[$i]["costo"];
-        $margen = $productos[$i]["margen"];
-        $numero_interno = $productos[$i]["numero_interno"];
-        $numero_fabricacion = $productos[$i]["numero_fabricacion"];
-        $nombre_proveedor = $productos[$i]["nombre_proveedor"];
+        $stock = 0; // para la prueba no se envio el stock por lo que pormientras quedara en cero
+        $costo = $productos[$i][0]["Costo"];
+        $margen = $productos[$i][0]["Margen"];
+        $numero_interno = $productos[$i][0]["Sku"];
+        $numero_fabricacion = $productos[$i][0]["Sku"]; //para la prueba no se envio asi que se dejara igual que interno
+        $nombre_proveedor = $productos[$i][0]["Proveedor"];
         $tiene_folleto = 0;
 
         $query = "insert into producto (
@@ -171,17 +175,19 @@ class ProductoModel extends Model
             ) VALUES (
                 '".$clase."',
                 '".$nombre."',   
-                ".intval($valor).",      
+                round(".floatval($valor).",2),      
                 '".$descripcion."',
                 '".$tipo_cambio."',
                 ".intval($stock).",
-                ".intval($costo).",
+                round(".floatval($costo).",2),
                 ".intval($margen).",
                 '".$numero_interno."',
                 '".$numero_fabricacion."',
                 ".intval($tiene_folleto).",
                 '".$nombre_proveedor."'
             )"; 
+
+            Log::debug($query);
         $results = DB::insert($query);  
         }       
         return $results;

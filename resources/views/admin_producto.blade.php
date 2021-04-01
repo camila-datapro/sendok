@@ -238,7 +238,7 @@
                      </div>
                      <div style="padding-left: 0px !important;" class="form-group col-md-12">
                         <label>Descripción Producto</label>
-                        <input required disabled id="descripcion_producto" maxlength="250" name="descripcion_producto" type="text" class="form-control form-control-sm" aria-label="Descripción de Producto">
+                        <textarea required disabled id="descripcion_producto" maxlength="250" name="descripcion_producto" type="text" class="form-control"></textarea>
                      </div>
                      <div style="padding-left: 0px !important;" class="form-group col-md-12">
                         <label>Proveedor</label>
@@ -286,7 +286,7 @@
                               </div>
                               <label class="col-md-2">Costo</label>
                               <div class="col-md-4">
-                                 <input required disabled type="number" maxlength="10" class="form-control form-control-sm" aria-label="costo" id="costo">
+                                 <input required disabled maxlength="10" class="form-control form-control-sm" aria-label="costo" id="costo">
                               </div>
                            </div>
                         </div>
@@ -299,7 +299,7 @@
                            </div>
                            <label class="col-md-2">Valor venta</label>
                            <div class="form-group col-md-4">
-                              <input required disabled editable type="number" maxlength="10" class="form-control form-control-sm" aria-label="valor_venta" id="valor_venta">
+                              <input required disabled editable  maxlength="10" class="form-control form-control-sm" aria-label="valor_venta" id="valor_venta">
                            </div>
                         </div>
                      </div>
