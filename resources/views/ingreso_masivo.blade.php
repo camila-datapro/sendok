@@ -73,8 +73,14 @@
                                  <input type="file" class="form-control" id="fileUpload" accept=".xls,.xlsx" /><br />
                               </div>
                               <div class="col-md-3">
+                              <div class="row">
                                  <!--<button type="button" class="btn btn-warning" id="uploadExcel">Cargar</button>-->
-                                 <button id="boton_importar" style="margin-left:20px;" class="btn btn-success" onclick="importarTabla();"><i class="fas fa-file-import"></i> Importar</button>
+                                 <button id="boton_importar" style="margin-left:20px; margin-right: 20px;" class="btn btn-success" onclick="importarTabla();"><i class="fas fa-file-import"></i> Importar</button>
+
+                                 <form method="get" action="{{ asset('/documentos/plantilla_documento.xlsx') }}">
+                                       <button class="btn btn-primary" id="descargar_formato" type="submit"><i class="far fa-file-pdf"></i> Descargar Formato</button>
+                                 </form>
+                                 </div>
                               </div>
                               <pre id="jsonData" style="display:none;"></pre>
                               <!--
@@ -212,8 +218,12 @@
                         });
                         workbook.SheetNames.forEach(sheet => {
                            let rowObject = XLSX.utils.sheet_to_row_object_array(
-                              workbook.Sheets[sheet]
-                           );            
+                              workbook.Sheets[sheet],{
+                                 header: 1,
+                                 defval: ""
+                              }
+                           );    
+                           console.log(workbook.Sheets[sheet]);   
                            let jsonObject = JSON.stringify(rowObject);
                            document.getElementById("jsonData").innerHTML = jsonObject;
                            
@@ -232,7 +242,7 @@
                                  html += "<thead>";
                                  html += "<tr>";
                                  $.each(value, function(header, value2){
-                                    html += "<th>" + header+ "</th>";
+                                    html += "<th>" + value2+ "</th>";
                                  })
                                  html += "</tr>";
                                  html += "</thead>";

@@ -10,6 +10,7 @@ function construirTabla(){
     var data = $('#contenido_ingreso').val();
     if(data!=""){
         var rows = data.split("\n");
+        console.log(rows);
         var table = $('<table id="tabla_contenido" class="table table-hover">');
         var nro_columnas = 0;
         // header de tabla            
