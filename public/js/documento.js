@@ -892,13 +892,14 @@ function mostrarAdjunto(element){
 }
 
 function mostrarFiltros(boton){
-	console.log(boton.id);
+	$("#boton_filtros").click();
 	$("#nombre_filtro").val("");
 	$("#sku_filtro").val("");
 	$("#descripcion_filtro").val("");
 	$("#div_tabla").hide();
 	$("#id_filtro").val(boton.id.replace("boton_filtro_producto_",""));
 	$("#modalFiltrarProducto").modal("show");
+
   }
 
   function filtrarProductos(){
@@ -947,8 +948,8 @@ function mostrarFiltros(boton){
 	
 	var table = document.createElement('TABLE');
 	table.setAttribute("onchange","updateTable()");
-	table.className= "table table-hover table-bordered tabla_productos";
-	table.border = '1';
+	table.className= "table table-striped table-hover tabla_productos text-center";
+	//table.border = '1';
 	table.id = 'tabla_productos';
 	divTabla.appendChild(table);
   	
@@ -992,12 +993,16 @@ function mostrarFiltros(boton){
 		var td = document.createElement('TD');
 	
 		td.appendChild(document.createTextNode(productos[i].nombre_producto));
+		td.className = 'resumido';
 		tr.appendChild(td);
+		
 
 		var td = document.createElement('TD');
 		
 		td.appendChild(document.createTextNode(productos[i].descripcion_producto));
+		td.className = 'resumido';
 		tr.appendChild(td);
+	
 
 		var td = document.createElement('TD');
 		

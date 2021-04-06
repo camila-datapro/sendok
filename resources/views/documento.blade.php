@@ -43,23 +43,26 @@
          table-layout: fixed;
          }
          .table td{
-         white-space: normal;
+         /**    white-space: normal;**/
          }
-         .div2{}
+         
          @media screen and (max-width: 1080px) {
-         .div2{width: 100%; border: none 0px RED;
-         overflow-x: scroll; overflow-y:hidden;}
-         table td {        
-         word-wrap: none;
-         width: 50px;
-         }
-         table th {        
-         word-wrap: none;
-         width: 50px;
-         }
+            .div2{
+               width: 100%; border: none 0px RED;
+            overflow-x: scroll; overflow-y:hidden;
+            }
+            table td {        
+            word-wrap: none;
+            width: 50px;
+            height: 70px;
+            }
+            table th {        
+            word-wrap: none;
+            width: 50px;
+            }
          }
          .control-label{
-         margin-top: 10px;
+            margin-top: 10px;
          }
 
          .vista_previa_plantilla{         
@@ -71,6 +74,25 @@
             background: #dee2e6;
          }
       
+         .modal-ku {
+            width: 750px;
+            margin: auto;
+         }
+
+         .resumido {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 50%;
+            margin: auto;
+         }
+
+      .resumido:hover {
+         text-overflow: initial;
+         white-space: initial;
+         overflow: visible;
+         cursor: pointer;
+      }
       </style>
       
    </head>
@@ -543,7 +565,7 @@
       </div>
 
       <div class="modal fade" id="modalFiltrarProducto" tabindex="-1" role="dialog" aria-labelledby="modalexito" aria-hidden="true">
-         <div class="modal-dialog" role="document">
+         <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px;" role="document">
             <div class="modal-content">
                <div class="modal-header">
                   <h5 class="modal-title" id="modalexito">Filtrar productos</h5>
@@ -557,13 +579,22 @@
                         <div class="form-group">
                            <div class="col-md-12">
                               <div class="form-group row">
-                                 <label for="inputKey" class="col-md-2 control-label">Nombre</label>
-                                 <div class="col-md-4">
+                                 <label for="inputKey" class="control-label" style="margin-left: 10px;">Nombre</label>
+                                 <div class="col-md-3">
                                     <input id="nombre_filtro" maxlength="20" class="form-control"  placeholder="Nombre">
                                  </div>
-                                 <label for="inputValue" class="col-md-2 control-label">SKU</label>
-                                 <div class="col-md-4">
+                                 <label for="inputValue" class="control-label">SKU</label>
+                                 <div class="col-md-2">
                                     <input id="sku_filtro" maxlength="20" type="text" class="form-control" placeholder="SKU">
+                                 </div>
+
+                                 <label for="inputKey" class="control-label">Descripcion</label>
+                                 <div class="col-md-3">
+                                    <input id="descripcion_filtro" type="text" maxlength="50" class="form-control"  placeholder="Nombre">
+                                 </div>
+
+                                 <div class="col-md-2">
+                                    <button id="boton_filtros" onclick="filtrarProductos()" class="btn btn-warning"><i class="fas fa-search"></i> Buscar</button>
                                  </div>
                               </div>
                            </div>
@@ -572,24 +603,21 @@
                         <div class="form-group">
                            <div class="col-md-12">
                               <div class="form-group row">
-                                 <label for="inputKey" class="col-md-2 control-label">Descripcion</label>
-                                 <div class="col-md-6">
-                                    <input id="descripcion_filtro" type="text" maxlength="50" class="form-control"  placeholder="Nombre">
-                                 </div>
+                                 
 
-                                 <div class="col-md-4">
-                                    <button id="boton_filtros" onclick="filtrarProductos()" class="btn btn-warning"><i class="fas fa-search"></i> Buscar</button>
-                                 </div>
+                                 
                                  
                               </div>
                            </div>
                         </div>
                      </form>
-                     <div id="div_tabla">
-                        <div id="div_tabla_productos" >
-                              
-                        </div>              
-                     </div>     
+                     <div class="col-md-12">
+                        <div id="div_tabla">
+                           <div id="div_tabla_productos" >
+                                 
+                           </div>              
+                        </div>     
+                     </div>
                      <button style="display:none;" type="button" class="btn btn-ar btn-default" id="boton_cerrar" data-dismiss="modal">
                </div>
            
@@ -613,7 +641,13 @@
                   function updateTable(){
                      if(!hasClassName("dataTable","tabla_productos")){
                         $("#tabla_productos").DataTable({
-                              //
+                           bAutoWidth: false, 
+                           aoColumns : [
+                              { sWidth: '15%' },
+                              { sWidth: '30%' },
+                              { sWidth: '40%' },
+                              { sWidth: '15%' }
+                           ]
                         });
                      }
                   }
