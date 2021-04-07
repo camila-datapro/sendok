@@ -891,13 +891,16 @@ function mostrarAdjunto(element){
 
 }
 
-function mostrarFiltros(boton){
+function mostrarFiltros(boton) {
+	var id_boton = boton.id.replace("boton_filtro_producto_", "");
+	console.log("El boton del filtro es : "+id_boton);
+	$("#id_filtro").attr("boton",id_boton);
 	$("#boton_filtros").click();
 	$("#nombre_filtro").val("");
 	$("#sku_filtro").val("");
 	$("#descripcion_filtro").val("");
 	$("#div_tabla").hide();
-	$("#id_filtro").val(boton.id.replace("boton_filtro_producto_",""));
+	
 	$("#modalFiltrarProducto").modal("show");
 
   }
@@ -905,14 +908,17 @@ function mostrarFiltros(boton){
   function filtrarProductos(){
 		var nombre = ($("#nombre_filtro").val()!="")?$("#nombre_filtro").val():"";
 		var sku = ($("#sku_filtro").val()!="")?$("#sku_filtro").val():"";
-		var descripcion = ($("#descripcion_filtro").val()!="")?$("#descripcion_filtro").val():"";
-		var id_boton = $("#id_filtro").val();
+	  var descripcion = ($("#descripcion_filtro").val() != "") ? $("#descripcion_filtro").val() : "";
+	  	console.log($("#id_filtro"));
+	  console.log($("#id_filtro").val());
+	  	console.log("el id boton es:"+$("#id_filtro").attr("boton"));
+		var id_boton = $("#id_filtro").attr("boton");
 		datos_filtro = {
 			nombre : nombre,
 			sku: sku,
 			descripcion: descripcion
 		}
-
+		console.log("en filtrar productos, id_boton:"+id_boton);
 		$.ajax({
 			type: "POST",
 			url: url_prev + 'filtrarProductos',
@@ -921,7 +927,7 @@ function mostrarFiltros(boton){
 			  _token: $('input[name="_token"]').val()
 			} //esto es necesario, por la validacion de seguridad de laravel
 		  }).done(function (productos) {	
-			
+			  console.log("dentro de funcion done, id_boton:"+id_boton);
 			  		 
 				addTable(productos,id_boton);
 		  }).fail(function () {
@@ -937,6 +943,7 @@ function mostrarFiltros(boton){
   });
 
   function addTable(productos,id_boton) {
+	  console.log("add table productos:"+productos+" id_boton: "+id_boton);
 	$("#tabla_productos").remove();
 	$("#div_tabla_productos").remove();
 	var divTabla = document.getElementById("div_tabla");
@@ -1015,8 +1022,7 @@ function mostrarFiltros(boton){
 		icon.className = 'fas fa-plus';
 		button.appendChild(icon);
 		button.setAttribute('producto', JSON.stringify(productos[i]));
-
-		button.setAttribute('onclick','seleccion_producto('+JSON.stringify(productos[i])+', '+id_boton+')');
+		button.setAttribute('onclick','seleccion_producto('+JSON.stringify(productos[i])+','+$("#id_filtro").attr("boton")+')');
 
 		td.appendChild(button);
 		tr.appendChild(td);  		
@@ -1027,7 +1033,7 @@ function mostrarFiltros(boton){
  
 
 function seleccion_producto(producto,id_boton){
-	console.log(id_boton);
+	console.log("seleccion producto : "+JSON.stringify(producto)+" id_boton : "+id_boton);
 	var id_boton = parseInt(id_boton);
 	 $("#select_producto_"+id_boton).attr("producto", JSON.stringify(producto));
 

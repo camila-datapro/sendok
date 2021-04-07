@@ -563,8 +563,8 @@
             </div>
          </div>
       </div>
-
-      <div class="modal fade" id="modalFiltrarProducto" tabindex="-1" role="dialog" aria-labelledby="modalexito" aria-hidden="true">
+      <input type="hidden" id="id_filtro" class="form-control"/>
+      <div class="modal fade" id="modalFiltrarProducto" tabindex="-1" role="dialog" aria-labelledby="modalexito" aria-hidden="true" boton="">
          <div class="modal-dialog modal-dialog-centered" style="max-width: 1000px;" role="document">
             <div class="modal-content">
                <div class="modal-header">
@@ -575,7 +575,7 @@
                </div>
                <div class="modal-body">
                      <form id="formulario_busqueda" class="form-example">
-                     <input type="hidden" id="id_filtro" class="form-control">
+                  
                         <div class="form-group">
                            <div class="col-md-12">
                               <div class="form-group row">
@@ -636,6 +636,7 @@
       <script src="{{ asset('/js/dataTablesFilter.js')}}"></script>   
       <!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   -->
       <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+      
       <!-- End custom js for this page-->
                <script>
                   function updateTable(){
