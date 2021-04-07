@@ -240,6 +240,7 @@ function vistaPreviaPDF() {
 			html ='<tr>'+
 				'<td>'+$("#unidades_producto_"+i).val()+'</td>'+
 				'<td>'+select_producto.nombre_producto+'</td>'+
+				'<td>'+select_producto.nombre_producto+'</td>'+
 				'<td><b>'+tipo_cambio_p+' </b> '+select_producto.valor_producto+'</td>';
 				//evaluamos si es que tiene descuento y mostramos la columna
 				if(tiene_descuento==1){ // caso que si posea descuento

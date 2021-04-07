@@ -93,6 +93,12 @@
          overflow: visible;
          cursor: pointer;
       }
+
+      .tablaFixed td{
+         word-wrap: none;
+         width: 50px;
+         white-space: normal;
+      }
       </style>
       
    </head>
@@ -626,7 +632,7 @@
       </div>
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.base.js') }}"></script>
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.addons.js') }}"></script>
-      <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+      <script src="{{ asset('/js/select2.min.js')}}"></script>
       <script src="{{ asset('/js/documento.js') }}"></script>
       <script src="{{ asset('/assets/js/shared/off-canvas.js') }}"></script>
       <script src="{{ asset('/assets/js/shared/misc.js') }}"></script>
@@ -635,7 +641,7 @@
       <script src="https://unpkg.com/@popperjs/core@2"></script>
       <script src="{{ asset('/js/dataTablesFilter.js')}}"></script>   
       <!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   -->
-      <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+      <script src="{{ asset('/js/dataTables.min.js')}}"></script>
       
       <!-- End custom js for this page-->
                <script>

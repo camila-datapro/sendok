@@ -97,14 +97,15 @@
             <!---documento-->
             <div class="row">
                <div class="col-md-12" style="padding-left: 0px;">
-                  <table class="table table-striped table-bordered" style="border-bottom: 4px solid #142444;">
+                  <table class="table table-striped table-bordered tablaFixed" style="border-bottom: 4px solid #142444;">
                      <thead style="background:#142444; ">
                         <tr>
-                           <th style="color: #ffffff !important;"> CTD </th>
-                           <th style="color: #ffffff !important;"> Descripción </th>
-                           <th style="color: #ffffff !important;"> Precio Unitario </th>
-                           <th id="columna_descuento" style="color: #ffffff !important; display: none;"> % Descuento </th>
-                           <th style="color: #ffffff !important;text-align:right;"> Precio </th>
+                           <th style="color: #ffffff !important; width: 8%"> CTD </th>
+                           <th style="color: #ffffff !important; width: 27%"> Nombre </th>
+                           <th style="color: #ffffff !important; width: 33%"> Descripción </th>
+                           <th style="color: #ffffff !important; width: 12%"> Precio Unitario </th>
+                           <th id="columna_descuento" style="color: #ffffff !important; width: 10%; display: none;"> % Descuento </th>
+                           <th style="color: #ffffff !important;text-align:right; width: 10%"> Precio </th>
                         </tr>
                      </thead>
                      <tbody id="tabla_propuesta_body">
