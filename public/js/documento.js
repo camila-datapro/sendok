@@ -87,59 +87,224 @@ $(document).ready(function () {
 });
 
 
+function guardarEnBD(){
+
+	// se almacena la propuesta en base de datos
+	var cantidad_divs = $("#cantidad_divs").attr("cantidad");		
+	var id_productos_folleto = [];	
+	var id_interno="";	
+	var tiene_folleto = false;
+	var array_tipo_cambio = [];
+	var array_id_producto = [];
+	var array_nombre_producto = [];
+	var array_unidades = [];
+	var array_valor_unitario_producto =[];
+	var array_subtotal_producto = [];
+	var array_descuento = [];
+	var iva = 0.19;
+	var subtotal = 0;
+	
+	for(i=1;i<=cantidad_divs; i++){
+		var select_producto = $("#select_producto_"+i).attr("producto");
+		tiene_folleto =  $('#adjuntar_ficha_'+i).is(":checked");
+		if(tiene_folleto == true){				
+			id_interno = select_producto.numero_interno;
+			id_productos_folleto.push("producto_"+numero_interno+".pdf");
+		}			
+	}		
+	
+	for(var i=1;i<=cantidad_divs;i++){
+		var select_producto =JSON.parse($("#select_producto_"+i).attr("producto"));
+		subtotal = parseInt(select_producto.valor_producto)*parseInt($("#unidades_producto_"+i).val());				
+		array_tipo_cambio.push(select_producto.tipo_cambio.toUpperCase());
+		array_id_producto.push(select_producto.id_producto);
+		array_nombre_producto.push(select_producto.nombre_producto);
+		array_valor_unitario_producto.push(select_producto.valor_producto);
+		array_unidades.push($("#unidades_producto_"+i).val());
+		array_descuento.push(($("#descuento_producto_"+i).val()));
+		array_subtotal_producto.push(subtotal);		
+	}			
+
+	var datos_envio = [
+		JSON.stringify(array_tipo_cambio),
+		JSON.stringify(array_id_producto),
+		JSON.stringify(array_nombre_producto),
+		JSON.stringify(array_unidades),
+		JSON.stringify(array_valor_unitario_producto),
+		JSON.stringify(array_subtotal_producto),
+		parseInt($("#subtotal").text().substr(3).trim()),
+		parseInt($("#total_con_iva").text().substr(3).trim()),
+		Math.round(total_s_iva*iva),
+		$("#id_usuario").text(),
+		$("#select_cliente option:selected").attr("id"),
+		$("#select_cliente option:selected").attr("email_cliente"),
+		$("#select_cliente option:selected").attr("fono_cliente"),
+		$("#select_cliente option:selected").attr("nombre_cliente"),
+		$("#folio_propuesta").text(),
+		JSON.stringify(array_descuento),
+		JSON.stringify(id_productos_folleto)
+	];
+
+	$("#modalCargando").modal('hide');
+	$.ajax({
+		type: "POST",
+		url: url_prev + 'setPropuesta',
+		data: {
+		  datos_envio: datos_envio,
+		  _token: $('input[name="_token"]').val()
+		} 
+		  }).done(function (msg) {
+			$("#cargando_accion").hide();
+			$("#enviar_propuesta").show();
+			$("#listar_propuestas").show();
+		}).fail(function () {
+		console.log("error en funcion enviarPropuesta");
+	});	
+}
 
 
 function guardarPropuesta() {
 	const elemento = document.getElementById('propuesta_detalle');
+	var currentdate = new Date(); 
+			var datetime = "Last Sync: " + currentdate.getDate() + "/"
+							+ (currentdate.getMonth()+1)  + "/" 
+							+ currentdate.getFullYear() + " @ "  
+							+ currentdate.getHours() + ":"  
+							+ currentdate.getMinutes() + ":" 
+							+ currentdate.getSeconds();
+							console.log("cargando datos:"+datetime);
 	$("#guardar_propuesta").hide();
-	$("#editar_propuesta").hide();
+	$("#editar_propuesta").hide();	
 	$("#cargando_accion").show();
-	var folio = $("#folio_propuesta").text();
-	html2pdf()
-		.set({
-			margin: 1,
-			filename: folio+'.pdf',
-			image: {
-				type: 'png',
-				quality: 0.98
-			},
-			html2canvas: {
-				scale: 1, // a mayor escala, mejores graficos pero mas peso
-			},
-			jsPDF: {
-				unit: "in",
-				format: "a3",
-				orientation: 'portrait' //landscape de forma horizontal
-			}
-		})
-		.from(elemento)
-		.save()
-		.catch(err => console.log(err))
-		.finally()
-		.outputPdf()
-		.then(function (pdf) {
-			// This logs the right base64
-			$("#modalCargando").modal("hide");
-			var bpdf = btoa(pdf);
-			$.ajax({
-				type: "POST",
-				url: url_prev + 'guardarPDF',
-				data: {
-					pdf: bpdf,
-					nombre_doc: folio+'.pdf',
-					_token: $('input[name="_token"]').val()
-				} //esto es necesario, por la validacion de seguridad de laravel
-			}).done(function (msg) {
-				guardarEnBD();
-				$("#guardar_propuesta").hide();
-				$("#editar_propuesta").hide();
-			}).fail(function () {				
-				console.log("Error en descarga del documento");
-			});
+	var folio = $("#folio_propuesta").text();	
+	// se almacena la propuesta en base de datos
+	var cantidad_divs = $("#cantidad_divs").attr("cantidad");		
+	var id_productos_folleto = [];	
+	var id_interno="";	
+	var tiene_folleto = false;
+	var array_tipo_cambio = [];
+	var array_id_producto = [];
+	var array_nombre_producto = [];
+	var array_unidades = [];
+	var array_valor_unitario_producto =[];
+	var array_subtotal_producto = [];
+	var array_descuento = [];
+	var iva = 0.19;
+	var subtotal = 0;
+	
+	for(i=1;i<=cantidad_divs; i++){
+		var select_producto = $("#select_producto_"+i).attr("producto");
+		tiene_folleto =  $('#adjuntar_ficha_'+i).is(":checked");
+		if(tiene_folleto == true){				
+			id_interno = select_producto.numero_interno;
+			id_productos_folleto.push("producto_"+numero_interno+".pdf");
+		}			
+	}		
+	
+	for(var i=1;i<=cantidad_divs;i++){
+		var select_producto =JSON.parse($("#select_producto_"+i).attr("producto"));
+		subtotal = parseInt(select_producto.valor_producto)*parseInt($("#unidades_producto_"+i).val());				
+		array_tipo_cambio.push(select_producto.tipo_cambio.toUpperCase());
+		array_id_producto.push(select_producto.id_producto);
+		array_nombre_producto.push(select_producto.nombre_producto);
+		array_valor_unitario_producto.push(select_producto.valor_producto);
+		array_unidades.push($("#unidades_producto_"+i).val());
+		array_descuento.push(($("#descuento_producto_"+i).val()));
+		array_subtotal_producto.push(subtotal);		
+	}			
 
+	var datos_envio = [
+		JSON.stringify(array_tipo_cambio),
+		JSON.stringify(array_id_producto),
+		JSON.stringify(array_nombre_producto),
+		JSON.stringify(array_unidades),
+		JSON.stringify(array_valor_unitario_producto),
+		JSON.stringify(array_subtotal_producto),
+		parseInt($("#subtotal").text().substr(3).trim()),
+		parseInt($("#total_con_iva").text().substr(3).trim()),
+		Math.round(parseInt($("#subtotal").text().substr(3).trim())*iva),
+		$("#id_usuario").text(),
+		$("#select_cliente option:selected").attr("id"),
+		$("#select_cliente option:selected").attr("email_cliente"),
+		$("#select_cliente option:selected").attr("fono_cliente"),
+		$("#select_cliente option:selected").attr("nombre_cliente"),
+		$("#folio_propuesta").text(),
+		JSON.stringify(array_descuento),
+		JSON.stringify(id_productos_folleto)
+	];
 
-			$("#hidden_pdf").attr("pdf_64", bpdf);
-		});
+	$.ajax({
+		type: "POST",
+		url: url_prev + 'setPropuesta',
+		data: {
+		  datos_envio: datos_envio,
+		  _token: $('input[name="_token"]').val()
+		} 
+		  }).done(function (msg) {
+			var currentdate = new Date(); 
+			var datetime = "Last Sync: " + currentdate.getDate() + "/"
+							+ (currentdate.getMonth()+1)  + "/" 
+							+ currentdate.getFullYear() + " @ "  
+							+ currentdate.getHours() + ":"  
+							+ currentdate.getMinutes() + ":" 
+							+ currentdate.getSeconds();
+							console.log("comenzo a guardar pdf en navegador:"+datetime);
+				html2pdf()
+				.set({
+					margin: 1,
+					filename: folio+'.pdf',
+					image: {
+						type: 'png',
+						quality: 0.98
+					},
+					html2canvas: {
+						scale: 1, // a mayor escala, mejores graficos pero mas peso
+					},
+					jsPDF: {
+						unit: "in",
+						format: "a3",
+						orientation: 'portrait' //landscape de forma horizontal
+					}
+				})
+				.from(elemento)
+				.catch(err => console.log(err))
+				.finally()
+				.outputPdf()
+				.then(function (pdf) {
+					// This logs the right base64
+					var bpdf = btoa(pdf);
+					$.ajax({
+						type: "POST",
+						url: url_prev + 'guardarPDF',
+						data: {
+							pdf: bpdf,
+							nombre_doc: folio+'.pdf',
+							_token: $('input[name="_token"]').val()
+						} //esto es necesario, por la validacion de seguridad de laravel
+					}).done(function (msg) {
+						var currentdate = new Date(); 
+						var datetime = "Last Sync: " + currentdate.getDate() + "/"
+										+ (currentdate.getMonth()+1)  + "/" 
+										+ currentdate.getFullYear() + " @ "  
+										+ currentdate.getHours() + ":"  
+										+ currentdate.getMinutes() + ":" 
+										+ currentdate.getSeconds();
+										console.log("termino de guardar pdf en navegador: "+datetime);
+						$("#cargando_accion").hide();	
+						$("#enviar_propuesta").show();
+						$("#listar_propuestas").show();
+					}).fail(function () {				
+						console.log("Error en descarga del documento");
+					});
+		
+					$("#hidden_pdf").attr("pdf_64", bpdf);
+				}).save();
+						
+			}).fail(function () {
+		console.log("error en funcion enviarPropuesta");
+	});	
+	// se descarga el documento
+	
 }
 
 
@@ -309,7 +474,6 @@ function enviarPropuesta(propuesta) {
 		} //esto es necesario, por la validacion de seguridad de laravel
 	}).done(function (msg) {		
 		if (msg == true) {
-			console.log("El mensaje fue: "+msg);
 			$("#modalCuerpoCorreo").modal("show");
 		} else {
 			$("#modalSinCredenciales").modal("show");
@@ -378,114 +542,6 @@ function enviarCorreo(){
 		});					
 }
 
-function guardarEnBD(){
-
-
-	// se almacena la propuesta en base de datos
-	var folio = $("#folio_propuesta").text();
-	var cantidad_divs = $("#cantidad_divs").attr("cantidad");
-	var nombre_cliente = $("#nombre_cliente").text();
-	var email_destino =$("#email_cliente").text();
-	var id_ejecutivo = $("#id_usuario").text();
-	var id_cliente = $("#id_cliente").text();	
-	
-	
-	var id_productos_folleto = [];	
-	var id_interno="";	
-	var tiene_folleto = false;
-	
-	for(i=1;i<=cantidad_divs; i++){
-		var select_producto = $("#select_producto_"+i).attr("producto");
-		tiene_folleto =  $('#adjuntar_ficha_'+i).is(":checked");
-		if(tiene_folleto == true){				
-			id_interno = select_producto.numero_interno;
-			id_productos_folleto.push("producto_"+numero_interno+".pdf");
-		}			
-	}
-	
-	
-
-	
-	var array_tipo_cambio = [];
-	var array_id_producto = [];
-	var array_nombre_producto = [];
-	var array_unidades = [];
-	var array_valor_unitario_producto =[];
-	var array_subtotal_producto = [];
-	var array_descuento = [];
-	var total_con_iva = parseInt($("#total_con_iva").text().substr(3).trim());
-	var iva = 0.19;
-	var subtotal = 0;
-
-	  for(var i=1;i<=cantidad_divs;i++){
-		var select_producto =JSON.parse($("#select_producto_"+i).attr("producto"));
-		subtotal = parseInt(select_producto.valor_producto)*parseInt($("#unidades_producto_"+i).val());				
-		array_tipo_cambio.push(select_producto.tipo_cambio.toUpperCase());
-		array_id_producto.push(select_producto.id_producto);
-		array_nombre_producto.push(select_producto.nombre_producto);
-		array_valor_unitario_producto.push(select_producto.valor_producto);
-		array_unidades.push($("#unidades_producto_"+i).val());
-		array_descuento.push(($("#descuento_producto_"+i).val()));
-		array_subtotal_producto.push(subtotal);
-		
-	}			
-
-	var json_tipo_cambio = JSON.stringify(array_tipo_cambio);
-	var json_id_producto = JSON.stringify(array_id_producto);
-	var json_nombre_producto = JSON.stringify(array_nombre_producto);
-	var json_unidades = JSON.stringify(array_unidades);
-	var json_descuento = JSON.stringify(array_descuento);
-	var json_valor_unitario_producto = JSON.stringify(array_valor_unitario_producto);
-	var json_subtotal_producto = JSON.stringify(array_subtotal_producto);
-	var json_folletos = JSON.stringify(id_productos_folleto);
-	
-
-	var total_s_iva = parseInt($("#subtotal").text().substr(3).trim());
-
-	var id_ejecutivo = $("#id_usuario").text();
-	var id_cliente = $("#select_cliente option:selected").attr("id");
-	var email_cliente = $("#select_cliente option:selected").attr("email_cliente");
-	var fono_cliente =  $("#select_cliente option:selected").attr("fono_cliente");
-	var nombre_cliente = $("#select_cliente option:selected").attr("nombre_cliente");
-
-	
-	var datos_envio = [
-		json_tipo_cambio,
-		json_id_producto,
-		json_nombre_producto,
-		json_unidades,
-		json_valor_unitario_producto,
-		json_subtotal_producto,
-		total_s_iva,
-		total_con_iva,
-		Math.round(total_s_iva*iva),
-		id_ejecutivo,
-		id_cliente,
-		email_cliente,
-		fono_cliente,
-		nombre_cliente,
-		folio,
-		json_descuento,
-		json_folletos
-	];
-
-	$("#modalCargando").modal('hide');
-	$.ajax({
-		type: "POST",
-		url: url_prev + 'setPropuesta',
-		data: {
-		  datos_envio: datos_envio,
-		  _token: $('input[name="_token"]').val()
-		} //esto es necesario, por la validacion de seguridad de laravel
-		  }).done(function (msg) {
-			$("#cargando_accion").hide();
-			$("#enviar_propuesta").show();
-			$("#listar_propuestas").show();
-		}).fail(function () {
-		console.log("error en funcion enviarPropuesta");
-		});
-	//queda pendiente almacenar en la base de datos
-}
 
 
 function crearClienteDocumento(){
@@ -894,7 +950,6 @@ function mostrarAdjunto(element){
 
 function mostrarFiltros(boton) {
 	var id_boton = boton.id.replace("boton_filtro_producto_", "");
-	console.log("El boton del filtro es : "+id_boton);
 	$("#id_filtro").attr("boton",id_boton);
 	$("#boton_filtros").click();
 	$("#nombre_filtro").val("");
@@ -909,17 +964,13 @@ function mostrarFiltros(boton) {
   function filtrarProductos(){
 		var nombre = ($("#nombre_filtro").val()!="")?$("#nombre_filtro").val():"";
 		var sku = ($("#sku_filtro").val()!="")?$("#sku_filtro").val():"";
-	  var descripcion = ($("#descripcion_filtro").val() != "") ? $("#descripcion_filtro").val() : "";
-	  	console.log($("#id_filtro"));
-	  console.log($("#id_filtro").val());
-	  	console.log("el id boton es:"+$("#id_filtro").attr("boton"));
+	  	var descripcion = ($("#descripcion_filtro").val() != "") ? $("#descripcion_filtro").val() : "";	 
 		var id_boton = $("#id_filtro").attr("boton");
 		datos_filtro = {
 			nombre : nombre,
 			sku: sku,
 			descripcion: descripcion
 		}
-		console.log("en filtrar productos, id_boton:"+id_boton);
 		$.ajax({
 			type: "POST",
 			url: url_prev + 'filtrarProductos',
@@ -927,9 +978,7 @@ function mostrarFiltros(boton) {
 			  datos_filtro: datos_filtro,
 			  _token: $('input[name="_token"]').val()
 			} //esto es necesario, por la validacion de seguridad de laravel
-		  }).done(function (productos) {	
-			  console.log("dentro de funcion done, id_boton:"+id_boton);
-			  		 
+		  }).done(function (productos) {				  		 
 				addTable(productos,id_boton);
 		  }).fail(function () {
 			console.log("error en funcion filtrarProductos");
@@ -944,7 +993,6 @@ function mostrarFiltros(boton) {
   });
 
   function addTable(productos,id_boton) {
-	  console.log("add table productos:"+productos+" id_boton: "+id_boton);
 	$("#tabla_productos").remove();
 	$("#div_tabla_productos").remove();
 	var divTabla = document.getElementById("div_tabla");
@@ -1034,20 +1082,15 @@ function mostrarFiltros(boton) {
  
 
 function seleccion_producto(producto,id_boton){
-	console.log("seleccion producto : "+JSON.stringify(producto)+" id_boton : "+id_boton);
 	var id_boton = parseInt(id_boton);
 	 $("#select_producto_"+id_boton).attr("producto", JSON.stringify(producto));
-
 	  var producto =  JSON.parse($("#select_producto_"+id_boton).attr("producto"));
 	  var nombre = producto.nombre_producto;
-	  $("#select_producto_"+id_boton).val(nombre);
-	 // console.log(producto.nombre_producto);
-	  
+	  $("#select_producto_"+id_boton).val(nombre);	  
 	  $("#boton_cerrar").click();
   }
   
   $('#select_plantilla').on('change', function() {
-	  console.log("ingreso a select");
 	var cuerpo = $("#select_plantilla option:selected").attr("contenido");
 	var asunto = $("#select_plantilla option:selected").attr("asunto");
 	$("#representacion_plantilla").html(cuerpo);
