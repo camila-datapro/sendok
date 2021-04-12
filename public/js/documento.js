@@ -255,21 +255,33 @@ function guardarPropuesta() {
 					filename: folio+'.pdf',
 					image: {
 						type: 'png',
-						quality: 0.98
+						quality: 0.5
 					},
 					html2canvas: {
-						scale: 1, // a mayor escala, mejores graficos pero mas peso
+						compress: true,
+						scale: 0.9, // a mayor escala, mejores graficos pero mas peso
 					},
 					jsPDF: {
+						compress: true,
 						unit: "in",
 						format: "a3",
 						orientation: 'portrait' //landscape de forma horizontal
 					}
 				})
 				.from(elemento)
+				.save()
+				.outputPdf()
 				.then(function (pdf) {
 					// This logs the right base64
 					var bpdf = btoa(pdf);
+					var datetime = "Last Sync: " + currentdate.getDate() + "/"
+							+ (currentdate.getMonth()+1)  + "/" 
+							+ currentdate.getFullYear() + " @ "  
+							+ currentdate.getHours() + ":"  
+							+ currentdate.getMinutes() + ":" 
+							+ currentdate.getSeconds();
+							console.log("Se envia PDF a php:"+datetime);
+					//console.log(JSON.parse(pdf));
 					$.ajax({
 						type: "POST",
 						url: url_prev + 'guardarPDF',
@@ -286,7 +298,7 @@ function guardarPropuesta() {
 										+ currentdate.getHours() + ":"  
 										+ currentdate.getMinutes() + ":" 
 										+ currentdate.getSeconds();
-										console.log("termino de guardar pdf en navegador: "+datetime);
+										console.log("Respondio el PHP: "+datetime);
 						$("#cargando_accion").hide();	
 						$("#enviar_propuesta").show();
 						$("#listar_propuestas").show();
@@ -295,8 +307,8 @@ function guardarPropuesta() {
 					});
 		
 					$("#hidden_pdf").attr("pdf_64", bpdf);
-				}).save()
-				.outputPdf();
+				})
+				
 						
 			}).fail(function () {
 		console.log("error en funcion enviarPropuesta");
