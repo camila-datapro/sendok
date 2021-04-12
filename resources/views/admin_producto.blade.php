@@ -19,31 +19,7 @@
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/js/dataTables.min.js') }}">
       <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
-      <style>
-         table {
-         border-collapse: collapse;
-         table-layout: fixed;
-         }
-         .table td{
-         white-space: normal;
-         }
-         .div2{}
-         @media screen and (max-width: 1080px) {
-         .div2{width: 100%; border: none 0px RED;
-         overflow-x: scroll; overflow-y:hidden;}
-         table td {        
-         word-wrap: none;
-         width: 50px;
-         }
-         table th {        
-         word-wrap: none;
-         width: 50px;
-         }
-         }
-         .control-label{
-         margin-top: 10px;
-         }
-      </style>
+      <link href="{{ asset('/css/admin_producto.css') }}" rel="stylesheet" />
    </head>
    @endsection
    @section('body1')

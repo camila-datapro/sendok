@@ -16,11 +16,7 @@
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.addons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/shared/style.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
-      <style>
-         .margined-left{
-         margin-left: 12px;
-         }
-      </style>
+      <link href="{{ asset('/css/cliente.css') }}" rel="stylesheet" />
    </head>
    @endsection
    @section('body1')

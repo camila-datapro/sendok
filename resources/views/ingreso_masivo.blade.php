@@ -22,24 +22,7 @@
          type="text/javascript"
          src="https://cdnjs.cloudfare.com/ajax/libs/xlsx/0.15.3/xlsx.full.min.js"
       ></script>
-      <style>
-               
-         table {
-            border-collapse: collapse;
-            table-layout: fixed;
-            width: 500px;
-         }
-         .table td{
-            white-space: normal;
-         }
-
-         table th {        
-            word-wrap: none;
-            width: 50px;
-         }
-         
-
-      </style>
+      <link href="{{ asset('/css/ingreso_masivo.css') }}" rel="stylesheet" />
    </head>
    @endsection
    @section('body1')

@@ -23,27 +23,7 @@
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/js/dataTables.min.js') }}">
       <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
-      <style>
-         .select2-container--default .select2-selection--single {
-         background-color: #fff;
-         border: 1px solid #dee2e6;
-         border-radius: 0px;
-         font-size: 0.75rem;
-         line-height: 14px;
-         font-weight: 300;
-         padding-left: 17px;
-         }
-         .top-spaced{
-         margin-top: 10px;
-         }
-         .modal {
-         overflow-y:auto;
-         }
-         iframe{
-         width: 100%;
-         height: 70vh;
-         }
-      </style>
+      <link href="{{ asset('/css/admin_documento.css') }}" rel="stylesheet" />
    </head>
    @endsection
    @section('body1')
