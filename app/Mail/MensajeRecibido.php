@@ -47,11 +47,17 @@ class MensajeRecibido extends Mailable
             Saludos y gracias por su preferencia.";
        }
         $user_id = Auth::user()->id;
-        $firma = file_get_contents('./firmas/html/firma_'.$user_id.'.html');
+        if(file_exists('./firmas/html/firma_'.$user_id.'.html')){
+            $firma = file_get_contents('./firmas/html/firma_'.$user_id.'.html');
+        }else{
+            $firma = "<html><body><p><b>".Auth::user()->name."</b><br>".Auth::user()->cargo."</p></body></html>";
+        }
+
+    
         if($firma=="" || $firma ==null){
             $firma =="";
         }
-        $contenido = "<text>".$contenido."</text><br>--".$firma;
+        $contenido = "<html><body><text>".$contenido."</text><br>--".$firma."</body></html>";
 
         $email = $this->view('emails.envio-documento')->with("contenido",$contenido);
         $email->attachData(file_get_contents('./documentos/'.$nombre),$nombre,[
