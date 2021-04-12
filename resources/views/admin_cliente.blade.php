@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-   <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
+      <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
       <meta name="csrg-token" content="{{ csrf_token() }}" />
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,7 +17,7 @@
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.addons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/shared/style.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
-      <link rel="stylesheet" href="{{ asset('/assets/js/dataTables.min.js') }}">
+      <link rel="application/javascript" href="{{ asset('/js/dataTables.min.js') }}">
       <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
    </head>
    @endsection
@@ -164,7 +164,6 @@
             </div>
          </div>
       </div>
-
       <div class="modal fade" id="modalEditarCliente" tabindex="-1" role="dialog" aria-labelledby="modalEditarCliente" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -175,110 +174,101 @@
                   </button>
                </div>
                <form class="forms-sample" id="form_cliente">
-               <div class="modal-body">
-                
-                        <input type="hidden" id="id_cliente" />
-                        <h4 class="card-title" style="color: #001fff9e;">Datos empresa</h4>
-                        <div class="margined-left">
-                           <div class="form-group">
-                              <div class="col-md-12">
-                                 <div class="form-group row">
-                                    <label for="exampleInputName1" class="col-md-2">Nombre</label>
-                                    <div class="col-md-4">
-                                       <input required disabled type="text" maxlength="20" class="form-control" id="nombre">
-                                    </div>
-                                    <label for="exampleInputName1" class="col-md-2">Rut</label>
-                                    <div class="col-md-4">
-                                       <input required disabled type="text" maxlength="15" class="form-control" id="rut">
-                                    </div>
+                  <div class="modal-body">
+                     <input type="hidden" id="id_cliente" />
+                     <h4 class="card-title" style="color: #001fff9e;">Datos empresa</h4>
+                     <div class="margined-left">
+                        <div class="form-group">
+                           <div class="col-md-12">
+                              <div class="form-group row">
+                                 <label for="exampleInputName1" class="col-md-2">Nombre</label>
+                                 <div class="col-md-4">
+                                    <input required disabled type="text" maxlength="20" class="form-control" id="nombre">
                                  </div>
-                              </div>
-                           </div>
-
-                           <div class="form-group">
-                              <div class="col-md-12">
-                                 <div class="form-group row">
-                                    <label for="region" class="col-md-2">Región</label>
-                                    <div class="col-md-10">
-                                       <select disabled class="form-control" id="region" onchange="getComunasRegion();">
-                                          <option _blank="">Elija Una</option>
-                                          <?php                  
-                                             for($i=0;$i<sizeOf($regiones);$i++){
-                                                echo "<option value='".$regiones[$i]->id."'>".$regiones[$i]->region."</option>";
-                                             }
-                                             ?> 
-                                       </select>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-
-
-                   
-                           <div class="form-group">
-                              <div class="col-md-12">
-                                 <div class="form-group row">
-                                    <label for="comuna" class="col-md-2">Comuna</label>
-                                    <div class="col-md-10">
-                                       <select disabled class="form-control" id="comuna">
-                                          <option id="_blank">Elija Una </option>
-                                       </select>
-                                    </div>
-                                 </div>
-                              </div>     
-                           </div>
-                           <div class="form-group">
-                              <div class="col-md-12">
-                                 <div class="form-group row">
-                                    <label for="exampleInputName1" class="col-md-2">Dirección</label>
-                                    <div class="col-md-10">
-                                       <input required disabled type="text" maxlength="30" class="form-control" id="direccion">
-                                    </div>
+                                 <label for="exampleInputName1" class="col-md-2">Rut</label>
+                                 <div class="col-md-4">
+                                    <input required disabled type="text" maxlength="15" class="form-control" id="rut">
                                  </div>
                               </div>
                            </div>
                         </div>
-                        <h4 class="card-title" style="color: #001fff9e;">Datos contacto</h4>
-                        <!-- datos de contacto-->
-                        <div class="margined-left">
-                           <div class="form-group">
-                              <div class="col-md-12">
-                                 <div class="form-group row">
-                                    <label class="col-md-2" for="nombre_contacto">Nombre</label>
-                                    <div class="col-md-4">
-                                       <input required disabled type="text" class="form-control" id="nombre_contacto">
-                                    </div>
-                                    <label class="col-md-2" for="nombre_contacto">Cargo</label>
-                                    <div class="col-md-4">
-                                       <input required disabled type="text" class="form-control" id="cargo_contacto">
-                                    </div>
+                        <div class="form-group">
+                           <div class="col-md-12">
+                              <div class="form-group row">
+                                 <label for="region" class="col-md-2">Región</label>
+                                 <div class="col-md-10">
+                                    <select disabled class="form-control" id="region" onchange="getComunasRegion();">
+                                       <option _blank="">Elija Una</option>
+                                       <?php                  
+                                          for($i=0;$i<sizeOf($regiones);$i++){
+                                             echo "<option value='".$regiones[$i]->id."'>".$regiones[$i]->region."</option>";
+                                          }
+                                          ?> 
+                                    </select>
                                  </div>
                               </div>
                            </div>
- 
-                           <div class="form-group">
-                              <div class="col-md-12">
-                                 <div class="form-group row">
-                                    <label for="exampleInputEmail3" class="col-md-1">Email</label>
-                                    <div class="col-md-5">
-                                       <input required  disabled type="email" class="form-control" id="email">
-                                    </div>
-                                    <label for="exampleInputName1" class="col-md-1">Fono</label>
-                                    <div class="col-md-5">
-                                       <input disabled type="number" maxlength="12" class="form-control" id="telefono">
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-              
                         </div>
-                 
-               </div>
-               <div class="modal-footer">
-               
-                  <button id="btn_editar" type="button" class="btn btn-primary" onclick="mostrarEditarCliente();">Editar Cliente</button>
-                  <button id="btn_guardar" style="display:none;" type="submit" class="btn btn-success" ">Guardar Cambios</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        <div class="form-group">
+                           <div class="col-md-12">
+                              <div class="form-group row">
+                                 <label for="comuna" class="col-md-2">Comuna</label>
+                                 <div class="col-md-10">
+                                    <select disabled class="form-control" id="comuna">
+                                       <option id="_blank">Elija Una </option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <div class="col-md-12">
+                              <div class="form-group row">
+                                 <label for="exampleInputName1" class="col-md-2">Dirección</label>
+                                 <div class="col-md-10">
+                                    <input required disabled type="text" maxlength="30" class="form-control" id="direccion">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <h4 class="card-title" style="color: #001fff9e;">Datos contacto</h4>
+                     <!-- datos de contacto-->
+                     <div class="margined-left">
+                        <div class="form-group">
+                           <div class="col-md-12">
+                              <div class="form-group row">
+                                 <label class="col-md-2" for="nombre_contacto">Nombre</label>
+                                 <div class="col-md-4">
+                                    <input required disabled type="text" class="form-control" id="nombre_contacto">
+                                 </div>
+                                 <label class="col-md-2" for="nombre_contacto">Cargo</label>
+                                 <div class="col-md-4">
+                                    <input required disabled type="text" class="form-control" id="cargo_contacto">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <div class="col-md-12">
+                              <div class="form-group row">
+                                 <label for="exampleInputEmail3" class="col-md-1">Email</label>
+                                 <div class="col-md-5">
+                                    <input required  disabled type="email" class="form-control" id="email">
+                                 </div>
+                                 <label for="exampleInputName1" class="col-md-1">Fono</label>
+                                 <div class="col-md-5">
+                                    <input disabled type="number" maxlength="12" class="form-control" id="telefono">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="modal-footer">
+                     <button id="btn_editar" type="button" class="btn btn-primary" onclick="mostrarEditarCliente();">Editar Cliente</button>
+                     <button id="btn_guardar" style="display:none;" type="submit" class="btn btn-success" ">Guardar Cambios</button>
+                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                </form>
                </div>
             </div>
@@ -291,7 +281,6 @@
       <script src="{{ asset('/assets/js/shared/misc.js') }}"></script>
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
       <script src="{{ asset('/js/cliente.js')}}"></script>
-      <script src="https://unpkg.com/@popperjs/core@2"></script>
       <script src="{{ asset('/js/dataTables.js')}}"></script>   
       <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   
       <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>

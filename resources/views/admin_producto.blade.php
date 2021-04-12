@@ -17,7 +17,7 @@
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.addons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/shared/style.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
-      <link rel="stylesheet" href="{{ asset('/assets/js/dataTables.min.js') }}">
+      <link rel="application/javascript" href="{{ asset('/js/dataTables.min.js') }}">
       <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
       <link href="{{ asset('/css/admin_producto.css') }}" rel="stylesheet" />
    </head>
@@ -315,9 +315,7 @@
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
       <!--<script src="{{ asset('/js/producto.js') }}"></script>-->
       <script src="{{ asset('/js/admin_producto.js') }}"></script>
-      <script src="https://unpkg.com/@popperjs/core@2"></script>
       <script src="{{ asset('/js/dataTables.js')}}"></script>   
-      <!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   -->
       <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
       <!-- End custom js for this page-->
       <script>

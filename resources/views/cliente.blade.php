@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-   <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
+      <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
       <meta name="csrg-token" content="{{ csrf_token() }}" />
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -180,14 +180,12 @@
             </div>
          </div>
       </div>
-
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.base.js') }}"></script>
       <script src="{{ asset('/assets/vendors/js/vendor.bundle.addons.js') }}"></script>
       <script src="{{ asset('/assets/js/shared/off-canvas.js') }}"></script>
       <script src="{{ asset('/assets/js/shared/misc.js') }}"></script>
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
       <script src="{{ asset('/js/cliente.js') }}"></script>
-
    </body>
 </html>
 @endsection

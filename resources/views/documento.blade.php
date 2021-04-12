@@ -19,7 +19,6 @@
       <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
       <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
       <link href="{{ asset('/css/documento.css') }}" rel="stylesheet" />
-      
    </head>
    @endsection
    @section('body1')
@@ -66,14 +65,11 @@
                                  </select>
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
-                                
-                                    <label style="margin-top:7px;"><b>Seleccion de Productos </b></label>
-                                       <button class="btn btn-success float-right" onclick="crearProductoDocumento();"><i class="fas fa-plus"></i> Nuevo Producto </button>
-                                
+                                 <label style="margin-top:7px;"><b>Seleccion de Productos </b></label>
+                                 <button class="btn btn-success float-right" onclick="crearProductoDocumento();"><i class="fas fa-plus"></i> Nuevo Producto </button>
                                  <div id='TextBoxesGroup'>
                                     <div class="col-md-12" id="TextBoxDiv1" style="margin-bottom: 20px; border: 1px solid; border-color: #dee2e6; background-color: #f7f7f7; padding: 12px; padding-top: 0px;">
                                        <label class="top-spaced">Seleccione producto N° 1: </label>
-                                       
                                        <div class="row">
                                           <div class="col-md-2">
                                              <button onclick="mostrarFiltros(this)" id="boton_filtro_producto_1" class="btn btn-warning boton_filtro_producto"><i class="fas fa-search"></i> Productos</button>
@@ -95,15 +91,13 @@
                                  </div>
                                  <input hidden id="cantidad_divs" cantidad="1"></input>
                                  <div>
-                                 <button type='button' class="btn btn-danger" id='removeButton'><i class="fas fa-minus"></i> Ítem</button>
+                                    <button type='button' class="btn btn-danger" id='removeButton'><i class="fas fa-minus"></i> Ítem</button>
                                     <button type='button'  class="btn btn-success"  id='addButton'><i class="fas fa-plus"></i> Ítem</button>
-                                    
                                     <!--<button type='button' class="btn btn-success" value='Obtener valores' id='getButtonValue'>Comprobar valores</button>-->
                                     <button type="button" onclick="vistaPreviaPDF();" class="btn btn-success float-right" > <i class="fas fa-file-download"></i> Crear Documento</button>
                                  </div>
                                  <br>
                               </div>
-                          
                            </div>
                         </div>
                      </div>
@@ -230,14 +224,13 @@
                   </button>
                </div>
                <div class="modal-body">
-                  
                   <select class="form-control" id="select_plantilla">
                      <option id="0">Elija una</option>
                      <?php 
-                     for($i=0;$i<sizeOf($plantillas);$i++){
-                        echo '<option id="'.$plantillas[$i]->id.'" asunto="'.$plantillas[$i]->asunto.'" contenido="'.$plantillas[$i]->cuerpo_mensaje.'" onclick="representarPlantilla('.json_encode($plantillas[$i]).')">'.$plantillas[$i]->nombre_plantilla.'</option>';
-                     }
-                     ?>
+                        for($i=0;$i<sizeOf($plantillas);$i++){
+                           echo '<option id="'.$plantillas[$i]->id.'" asunto="'.$plantillas[$i]->asunto.'" contenido="'.$plantillas[$i]->cuerpo_mensaje.'" onclick="representarPlantilla('.json_encode($plantillas[$i]).')">'.$plantillas[$i]->nombre_plantilla.'</option>';
+                        }
+                        ?>
                   </select>
                   <div id="representacion_plantilla" class="vista_previa_plantilla">
                   </div>
@@ -258,92 +251,83 @@
                </div>
                <div class="modal-body">
                   <div class="col-md-12">
-                    
-                           <form class="forms-sample">
-                              <h4 class="card-title" style="color: #001fff9e;">Datos empresa</h4>
-                              <div class="margined-left">
-                                 <div style="padding-left: 0px !important;" class="form-group row col-md-12">
-                                
-                                    <label for="exampleInputName1" class="col-md-2">Nombre</label>
-                                    <div class="col-md-4">
-                                       <input type="text" maxlength="20" class="form-control" id="nombre">
-                                    </div>
-                                
-                                    <label class="col-md-2" for="exampleInputName1">RUT</label>
-                                    <div class="col-md-4">
-                                       <input type="text" maxlength="15" class="form-control" id="rut">
-                                    </div>
-                               
-                                 </div>
-                                 <div style="padding-left: 0px !important;" class="form-group row col-md-12">
-                                    <label for="region" class="col-md-2">Región</label>
-                                    <div class="col-md-10">
-                                    <select class="form-control" id="region" onchange="getProvinciasRegion();">
-                                       <option _blank="">Elija Una</option>
-                                       <?php                  
-                                          for($i=0;$i<sizeOf($regiones);$i++){
-                                             echo "<option value='".$regiones[$i]->id."'>".$regiones[$i]->region."</option>";
-                                          }
-                                          ?> 
-                                    </select>
-                                       </div>
-                                 </div>
-                                 <div style="padding-left: 0px !important;" class="form-group row col-md-12">
-                                    <label for="provincia" class="col-md-2">Provincia</label>
-                                    <div class="col-md-10">
-                                       <select class="form-control" id="provincia" onchange="getComunasProvincia();">
-                                          <option id="_blank">Elija Una </option>
-                                       </select>
-                                    </div>
-                                 </div>
-                                 <div style="padding-left: 0px !important;" class="form-group row col-md-12">
-                                    <label for="comuna" class="col-md-2">Comuna</label>
-                                    <div class="col-md-10">
-                                       <select class="form-control" id="comuna">
-                                          <option id="_blank">Elija Una </option>
-                                       </select>
-                                    </div>
-                                 </div>
-                                 <div style="padding-left: 0px !important;" class="form-group row col-md-12">
-                                    <label for="exampleInputName1" class="col-md-2">Dirección</label>
-                                    <div class="col-md-10">
-                                       <input type="text" maxlength="30" class="form-control" id="direccion">
-                                    </div>
-                                 </div>
+                     <form class="forms-sample">
+                        <h4 class="card-title" style="color: #001fff9e;">Datos empresa</h4>
+                        <div class="margined-left">
+                           <div style="padding-left: 0px !important;" class="form-group row col-md-12">
+                              <label for="exampleInputName1" class="col-md-2">Nombre</label>
+                              <div class="col-md-4">
+                                 <input type="text" maxlength="20" class="form-control" id="nombre">
                               </div>
-                              <h4 class="card-title" style="color: #001fff9e;">Datos contacto</h4>
-                              <!-- datos de contacto-->
-                              <div class="margined-left">
-                              <div style="padding-left: 0px !important;" class="form-group row col-md-12">
-                                 
-                                    <label for="nombre_contacto" class="col-md-2">Nombre</label>
-                                    <div class="col-md-4">
-                                    <input type="email" class="form-control" id="nombre_contacto">
-                                 </div>
-                                 
-                                    <label for="nombre_contacto" class="col-md-2">Cargo</label>
-                                    <div class="col-md-4">
-                                    <input type="email" class="form-control" id="cargo_contacto">
-                                 </div>
+                              <label class="col-md-2" for="exampleInputName1">RUT</label>
+                              <div class="col-md-4">
+                                 <input type="text" maxlength="15" class="form-control" id="rut">
                               </div>
-                              <div style="padding-left: 0px !important;" class="form-group row col-md-12">
-                                 
-                                    <label for="exampleInputEmail3" class="col-md-2">Email</label>
-                                 <div class="col-md-4">
-                                    <input type="email" class="form-control" id="email">
-                                 </div>
-                                
-                                    <label for="exampleInputName1" class="col-md-2">Fono</label>
-                                    <div class="col-md-4">
-                                    <input type="number" maxlength="12" class="form-control" id="telefono">
-                                 </div>
-                              </div>
-                              </div>
-                           </form>
-                           <div class="modal-footer">
-                              <input type="button" onclick="crearCliente();" class="btn btn-dark" value="Crear Cliente">
                            </div>
-                       
+                           <div style="padding-left: 0px !important;" class="form-group row col-md-12">
+                              <label for="region" class="col-md-2">Región</label>
+                              <div class="col-md-10">
+                                 <select class="form-control" id="region" onchange="getProvinciasRegion();">
+                                    <option _blank="">Elija Una</option>
+                                    <?php                  
+                                       for($i=0;$i<sizeOf($regiones);$i++){
+                                          echo "<option value='".$regiones[$i]->id."'>".$regiones[$i]->region."</option>";
+                                       }
+                                       ?> 
+                                 </select>
+                              </div>
+                           </div>
+                           <div style="padding-left: 0px !important;" class="form-group row col-md-12">
+                              <label for="provincia" class="col-md-2">Provincia</label>
+                              <div class="col-md-10">
+                                 <select class="form-control" id="provincia" onchange="getComunasProvincia();">
+                                    <option id="_blank">Elija Una </option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div style="padding-left: 0px !important;" class="form-group row col-md-12">
+                              <label for="comuna" class="col-md-2">Comuna</label>
+                              <div class="col-md-10">
+                                 <select class="form-control" id="comuna">
+                                    <option id="_blank">Elija Una </option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div style="padding-left: 0px !important;" class="form-group row col-md-12">
+                              <label for="exampleInputName1" class="col-md-2">Dirección</label>
+                              <div class="col-md-10">
+                                 <input type="text" maxlength="30" class="form-control" id="direccion">
+                              </div>
+                           </div>
+                        </div>
+                        <h4 class="card-title" style="color: #001fff9e;">Datos contacto</h4>
+                        <!-- datos de contacto-->
+                        <div class="margined-left">
+                           <div style="padding-left: 0px !important;" class="form-group row col-md-12">
+                              <label for="nombre_contacto" class="col-md-2">Nombre</label>
+                              <div class="col-md-4">
+                                 <input type="email" class="form-control" id="nombre_contacto">
+                              </div>
+                              <label for="nombre_contacto" class="col-md-2">Cargo</label>
+                              <div class="col-md-4">
+                                 <input type="email" class="form-control" id="cargo_contacto">
+                              </div>
+                           </div>
+                           <div style="padding-left: 0px !important;" class="form-group row col-md-12">
+                              <label for="exampleInputEmail3" class="col-md-2">Email</label>
+                              <div class="col-md-4">
+                                 <input type="email" class="form-control" id="email">
+                              </div>
+                              <label for="exampleInputName1" class="col-md-2">Fono</label>
+                              <div class="col-md-4">
+                                 <input type="number" maxlength="12" class="form-control" id="telefono">
+                              </div>
+                           </div>
+                        </div>
+                     </form>
+                     <div class="modal-footer">
+                        <input type="button" onclick="crearCliente();" class="btn btn-dark" value="Crear Cliente">
+                     </div>
                   </div>
                </div>
             </div>
@@ -362,13 +346,12 @@
                      <div style="padding-left: 0px !important;" class="form-group row">
                         <label class="col-md-2">Clase</label>
                         <div class="col-md-4">
-                        <select class="form-control form-control-md" id="tipo_producto" onchange="visarUnidades();">
-                           <option _blank="">Elija Uno</option>
-                           <option id="producto">Producto</option>
-                           <option id="servicio">Servicio</option>
-                        </select>
+                           <select class="form-control form-control-md" id="tipo_producto" onchange="visarUnidades();">
+                              <option _blank="">Elija Uno</option>
+                              <option id="producto">Producto</option>
+                              <option id="servicio">Servicio</option>
+                           </select>
                         </div>
-                     
                         <label class="col-md-2">Nombre</label>
                         <div class="col-md-4">
                            <input id="nombre_producto" maxlength="20" name="nombre_producto" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
@@ -383,52 +366,46 @@
                         <input id="nombre_proveedor" maxlength="20" name="nombre_proveedor" type="text" class="form-control form-control-sm" aria-label="Nombre proveedor">
                      </div>
                      <div style="padding-left: 0px !important;" class="form-group">
-                       
-                           <div class="form-group row">
-                              <label for="inputKey" class="col-md-2 control-label">N° Fabricacion</label>
-                              <div class="col-md-4">
-                                 <input required  id="numero_fabricacion" maxlength="20" class="form-control"  placeholder="N° Fabricacion">
-                              </div>
-                              <label for="inputValue" class="col-md-2 control-label">SKU</label>
-                              <div class="col-md-4">
-                                 <input required  id="numero_interno" maxlength="20" class="form-control" placeholder="SKU">
-                              </div>
+                        <div class="form-group row">
+                           <label for="inputKey" class="col-md-2 control-label">N° Fabricacion</label>
+                           <div class="col-md-4">
+                              <input required  id="numero_fabricacion" maxlength="20" class="form-control"  placeholder="N° Fabricacion">
                            </div>
-                       
+                           <label for="inputValue" class="col-md-2 control-label">SKU</label>
+                           <div class="col-md-4">
+                              <input required  id="numero_interno" maxlength="20" class="form-control" placeholder="SKU">
+                           </div>
+                        </div>
                      </div>
-                   
-                        <div style="padding-left: 0px !important;" >
-                           <div class="form-group row">
-                              <label class="col-md-2">Ficha técnica</label>         
-                              <div class="col-md-4" id="div_ficha_tecnica">                                                                                                     
-                                 <input  id="ficha_tecnica" class="form-control" type="file" accept="application/pdf"/>
-                              </div>
-                              <label id="stock_label" style=" display:none;" class="col-md-2">Stock</label>
-                              <div class="form-group col-md-4"  id="div_unidades" style=" display:none;">                                          
-                                 <input id="stock" maxlength="15" name="stock" type="number" class="form-control" aria-label="Stock">
-                              </div>
+                     <div style="padding-left: 0px !important;" >
+                        <div class="form-group row">
+                           <label class="col-md-2">Ficha técnica</label>         
+                           <div class="col-md-4" id="div_ficha_tecnica">                                                                                                     
+                              <input  id="ficha_tecnica" class="form-control" type="file" accept="application/pdf"/>
+                           </div>
+                           <label id="stock_label" style=" display:none;" class="col-md-2">Stock</label>
+                           <div class="form-group col-md-4"  id="div_unidades" style=" display:none;">                                          
+                              <input id="stock" maxlength="15" name="stock" type="number" class="form-control" aria-label="Stock">
                            </div>
                         </div>
-                   
-                  
-                        <div style="padding-left: 0px !important;" >
-                           <div class="form-group row">
-                              <label class="col-md-2">Tipo de Cambio</label>
-                              <div class="col-md-4">
-                                 <select class="form-control" id="select_cambio">
-                                    <option id="_blank">Elija Uno</option>
-                                    <option id="CLP">CLP</option>
-                                    <option id="USD">USD</option>
-                                    <option id="UF">UF</option>
-                                 </select>
-                              </div>
-                              <label class="col-md-2">Costo</label>
-                              <div class="col-md-4">
-                                 <input required type="number" maxlength="10" class="form-control form-control-sm" aria-label="costo" id="costo">
-                              </div>
+                     </div>
+                     <div style="padding-left: 0px !important;" >
+                        <div class="form-group row">
+                           <label class="col-md-2">Tipo de Cambio</label>
+                           <div class="col-md-4">
+                              <select class="form-control" id="select_cambio">
+                                 <option id="_blank">Elija Uno</option>
+                                 <option id="CLP">CLP</option>
+                                 <option id="USD">USD</option>
+                                 <option id="UF">UF</option>
+                              </select>
+                           </div>
+                           <label class="col-md-2">Costo</label>
+                           <div class="col-md-4">
+                              <input required type="number" maxlength="10" class="form-control form-control-sm" aria-label="costo" id="costo">
                            </div>
                         </div>
-                    
+                     </div>
                      <div style="padding-left: 0px !important;">
                         <div class="form-group row">
                            <label class="col-md-2">%Margen</label>
@@ -467,9 +444,6 @@
             </div>
          </div>
       </div>
-
-      
-
       <div class="modal fade" id="modalSinCredenciales" tabindex="-1" role="dialog" aria-labelledby="modalSinCredenciales" aria-hidden="true">
          <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -499,53 +473,43 @@
                   </button>
                </div>
                <div class="modal-body">
-                     <form id="formulario_busqueda" class="form-example">
-                  
-                        <div class="form-group">
-                           <div class="col-md-12">
-                              <div class="form-group row">
-                                 <label for="inputKey" class="control-label" style="margin-left: 10px;">Nombre</label>
-                                 <div class="col-md-3">
-                                    <input id="nombre_filtro" maxlength="20" class="form-control"  placeholder="Nombre">
-                                 </div>
-                                 <label for="inputValue" class="control-label">SKU</label>
-                                 <div class="col-md-2">
-                                    <input id="sku_filtro" maxlength="20" type="text" class="form-control" placeholder="SKU">
-                                 </div>
-
-                                 <label for="inputKey" class="control-label">Descripcion</label>
-                                 <div class="col-md-3">
-                                    <input id="descripcion_filtro" type="text" maxlength="50" class="form-control"  placeholder="Nombre">
-                                 </div>
-
-                                 <div class="col-md-2">
-                                    <button id="boton_filtros" onclick="filtrarProductos()" class="btn btn-warning"><i class="fas fa-search"></i> Buscar</button>
-                                 </div>
+                  <form id="formulario_busqueda" class="form-example">
+                     <div class="form-group">
+                        <div class="col-md-12">
+                           <div class="form-group row">
+                              <label for="inputKey" class="control-label" style="margin-left: 10px;">Nombre</label>
+                              <div class="col-md-3">
+                                 <input id="nombre_filtro" maxlength="20" class="form-control"  placeholder="Nombre">
+                              </div>
+                              <label for="inputValue" class="control-label">SKU</label>
+                              <div class="col-md-2">
+                                 <input id="sku_filtro" maxlength="20" type="text" class="form-control" placeholder="SKU">
+                              </div>
+                              <label for="inputKey" class="control-label">Descripcion</label>
+                              <div class="col-md-3">
+                                 <input id="descripcion_filtro" type="text" maxlength="50" class="form-control"  placeholder="Nombre">
+                              </div>
+                              <div class="col-md-2">
+                                 <button id="boton_filtros" onclick="filtrarProductos()" class="btn btn-warning"><i class="fas fa-search"></i> Buscar</button>
                               </div>
                            </div>
                         </div>
-                        
-                        <div class="form-group">
-                           <div class="col-md-12">
-                              <div class="form-group row">
-                                 
-
-                                 
-                                 
-                              </div>
-                           </div>
-                        </div>
-                     </form>
-                     <div class="col-md-12">
-                        <div id="div_tabla">
-                           <div id="div_tabla_productos" >
-                                 
-                           </div>              
-                        </div>     
                      </div>
-                     <button style="display:none;" type="button" class="btn btn-ar btn-default" id="boton_cerrar" data-dismiss="modal">
+                     <div class="form-group">
+                        <div class="col-md-12">
+                           <div class="form-group row">
+                           </div>
+                        </div>
+                     </div>
+                  </form>
+                  <div class="col-md-12">
+                     <div id="div_tabla">
+                        <div id="div_tabla_productos" >
+                        </div>
+                     </div>
+                  </div>
+                  <button style="display:none;" type="button" class="btn btn-ar btn-default" id="boton_cerrar" data-dismiss="modal">
                </div>
-           
             </div>
          </div>
       </div>
@@ -557,33 +521,30 @@
       <script src="{{ asset('/assets/js/shared/misc.js') }}"></script>
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
       <script src="{{ asset('/generaPDF/dist/html2pdf.bundle.min.js') }}"></script>
-      <script src="https://unpkg.com/@popperjs/core@2"></script>
       <script src="{{ asset('/js/dataTablesFilter.js')}}"></script>   
       <script src="{{ asset('/js/dataTables.min.js')}}"></script>
-      
       <!-- End custom js for this page-->
-               <script>
-                  function updateTable(){
-                     if(!hasClassName("dataTable","tabla_productos")){
-                        $("#tabla_productos").DataTable({
-                           bAutoWidth: false, 
-                           aoColumns : [
-                              { sWidth: '15%' },
-                              { sWidth: '30%' },
-                              { sWidth: '40%' },
-                              { sWidth: '15%' }
-                           ]
-                        });
-                     }
-                  }
-
-                  function hasClassName(classname,id) {
-                     return  String ( ( document.getElementById(id)||{} ) .className )
-                              .split(/\s/)
-                              .indexOf(classname) >= 0;
-                     }
-                  </script>
-
+      <script>
+         function updateTable(){
+            if(!hasClassName("dataTable","tabla_productos")){
+               $("#tabla_productos").DataTable({
+                  bAutoWidth: false, 
+                  aoColumns : [
+                     { sWidth: '15%' },
+                     { sWidth: '30%' },
+                     { sWidth: '40%' },
+                     { sWidth: '15%' }
+                  ]
+               });
+            }
+         }
+         
+         function hasClassName(classname,id) {
+            return  String ( ( document.getElementById(id)||{} ) .className )
+                     .split(/\s/)
+                     .indexOf(classname) >= 0;
+            }
+      </script>
    </body>
 </html>
 @endsection

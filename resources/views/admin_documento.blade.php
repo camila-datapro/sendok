@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-   <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
+      <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
       <meta name="csrg-token" content="{{ csrf_token() }}" />
       <meta charset="utf-8">
       <meta http-equiv="Expires" content="0">
@@ -21,7 +21,7 @@
       <link href="{{ asset('/css/select_buscador.css') }}" rel="stylesheet" />
       <link rel="stylesheet" href="{{ asset('/assets/css/shared/style.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
-      <link rel="stylesheet" href="{{ asset('/assets/js/dataTables.min.js') }}">
+      <link rel="application/javascript" href="{{ asset('/js/dataTables.min.js') }}">
       <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
       <link href="{{ asset('/css/admin_documento.css') }}" rel="stylesheet" />
    </head>
@@ -103,9 +103,6 @@
                   </div>
                </div>
                <input hidden id="id_propuesta_hidden" indice_propuesta="0"></input>
-               <!-- content-wrapper ends -->
-               <!-- partial:partials/_footer.html -->
-               <!-- partial -->
             </div>
             <!-- main-panel ends -->
          </div>
@@ -193,7 +190,6 @@
                               <select class="form-control" name="select_cliente" id="select_cliente">
                                  <option id="0">Elija Uno</option>
                                  <?php 
-                                 
                                     for($i=0;$i<sizeOf($clientes); $i++){                                          
                                        echo "<option id=".$clientes[$i]["id_cliente"]." fono_cliente='".$clientes[$i]["fono_cliente"]."' nombre_cliente='".$clientes[$i]["nombre_cliente"]."' email_cliente='".$clientes[$i]["email_cliente"]."' contacto_nombre='".$clientes[$i]["nombre_contacto"]."' contacto_cargo='".$clientes[$i]["cargo_contacto"]."' >".$clientes[$i]["nombre_cliente"]."</option>";
                                     }
@@ -213,13 +209,11 @@
                                           }
                                           ?>
                                     </select>
-
                                     <div class="row">
-                                          <div style="display:none;" class="form-check" id="check_1">
-                                             <input type="checkbox" class="checkbox" id="adjuntar_ficha_1"> <label style="margin-top:4px;">Adjuntar Ficha Técnica</label></input>
-                                          </div>
+                                       <div style="display:none;" class="form-check" id="check_1">
+                                          <input type="checkbox" class="checkbox" id="adjuntar_ficha_1"> <label style="margin-top:4px;">Adjuntar Ficha Técnica</label></input>
                                        </div>
-                                       
+                                    </div>
                                     <label class="top-spaced">Unidades producto N° 1</label>
                                     <input class="form-control form-control-sm" id="unidades_producto_1" nombre="unidades_producto"></input>  
                                     <label class="top-spaced">Descuento para producto N° 1 (opcional)</label>
@@ -364,18 +358,14 @@
       <script src="{{ asset('/assets/js/shared/misc.js') }}"></script>
       <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
-      <?php 
-         echo "<script src='".asset('/js/admin_documento.js?ver='.rand())."'></script>";
-      ?>
-      <script src="https://unpkg.com/@popperjs/core@2"></script>
+      <script src="{{ asset('/js/admin_documento.js') }}"></script>
       <script src="{{ asset('/js/dataTables.js')}}"></script>     
-      <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   
       <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
       <script src="{{ asset('/generaPDF/dist/html2pdf.bundle.min.js') }}"></script>
       <script>
          $(document).ready(function() {
             $(".tabla_propuestas").DataTable({
-                responsive: true
+               
             });
          });
       </script>

@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>Sendok</title>
@@ -40,7 +39,7 @@
                   for($i=0; $i<sizeOf($totalMes); $i++){
                      echo "<input hidden id='total_".$totalMes[$i]->mes."' id_mes='".$totalMes[$i]->mes."' total_mes='".$totalMes[$i]->cantidad."'></input>";
                   }
-               ?>
+                  ?>
                <!-- inicio row--> 
                <!-- Page Title Header Ends-->
                <div class="row">
@@ -103,44 +102,71 @@
                </div>
                <!--fin row-->
                <!-- inicio row-->
-            <div class="row">
-
+               <div class="row">
                   <div class="col-lg-6 grid-margin stretch-card">
-                  <div class="card">
-                     <div class="p-4 pr-5 border-bottom bg-light d-flex justify-content-between">
-                     <h4 class="card-title mb-0">Análisis de propuestas</h4>
-                     <div id="doughnut-chart-legend" class="mr-4"><div class="chartjs-legend"><ul><li><span style="background-color:#5D62B4"></span>Creadas</li><li><span style="background-color:#54C3BE"></span>Enviadas</li></ul></div></div>
+                     <div class="card">
+                        <div class="p-4 pr-5 border-bottom bg-light d-flex justify-content-between">
+                           <h4 class="card-title mb-0">Análisis de propuestas</h4>
+                           <div id="doughnut-chart-legend" class="mr-4">
+                              <div class="chartjs-legend">
+                                 <ul>
+                                    <li><span style="background-color:#5D62B4"></span>Creadas</li>
+                                    <li><span style="background-color:#54C3BE"></span>Enviadas</li>
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                           <div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                              <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                 <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                              </div>
+                              <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                 <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                              </div>
+                           </div>
+                           <canvas class="my-auto chartjs-render-monitor" id="doughnutChart" height="201" width="442" style="display: block; width: 442px; height: 201px;"></canvas>
+                           <div class="d-flex mt-5 py-3 border-top">
+                              <p class="mb-0 font-weight-semibold"><span class="dot-indicator bg-success"></span>Creadas </p>
+                              <p class="mb-0 ml-auto text-primary">{{ intval($propuestas_total[0]->est) }}</p>
+                           </div>
+                           <div class="d-flex pt-3 border-top">
+                              <p class="mb-0 font-weight-semibold"><span class="dot-indicator bg-success"></span>Enviadas </p>
+                              <p class="mb-0 ml-auto text-primary">{{ intval($propuestas_enviadas[0]->est) }}</p>
+                           </div>
+                        </div>
                      </div>
-                     <div class="card-body d-flex flex-column"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                     <canvas class="my-auto chartjs-render-monitor" id="doughnutChart" height="201" width="442" style="display: block; width: 442px; height: 201px;"></canvas>
-                     <div class="d-flex mt-5 py-3 border-top">
-                        <p class="mb-0 font-weight-semibold"><span class="dot-indicator bg-success"></span>Creadas </p>
-                        <p class="mb-0 ml-auto text-primary">{{ intval($propuestas_total[0]->est) }}</p>
-                     </div>
-                     <div class="d-flex pt-3 border-top">
-                        <p class="mb-0 font-weight-semibold"><span class="dot-indicator bg-success"></span>Enviadas </p>
-                        <p class="mb-0 ml-auto text-primary">{{ intval($propuestas_enviadas[0]->est) }}</p>
-                     </div>
+                  </div>
+                  <div class="col-lg-6 grid-margin stretch-card">
+                     <div class="card">
+                        <div class="p-4 border-bottom bg-light">
+                           <h4 class="card-title mb-0">Totales ofertados en 2021</h4>
+                        </div>
+                        <div class="card-body">
+                           <div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                              <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                 <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                              </div>
+                              <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                 <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                              </div>
+                           </div>
+                           <div class="d-flex justify-content-between align-items-center pb-4">
+                              <h4 class="card-title mb-0">Total ofertado en propuestas por mes</h4>
+                              <div id="bar-traffic-legend">
+                                 <div class="chartjs-legend">
+                                    <ul>
+                                       <li><span style="background-color:#5D62B4"></span>Cantidad en USD</li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                           <p class="mb-4"></p>
+                           <canvas id="barChart" style="height: 221px; display: block; width: 442px;" width="442" height="221" class="chartjs-render-monitor"></canvas>
+                        </div>
                      </div>
                   </div>
                </div>
-
-               <div class="col-lg-6 grid-margin stretch-card">
-                  <div class="card">
-                     <div class="p-4 border-bottom bg-light">
-                     <h4 class="card-title mb-0">Totales ofertados en 2021</h4>
-                     </div>
-                     <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                     <div class="d-flex justify-content-between align-items-center pb-4">
-                        <h4 class="card-title mb-0">Total ofertado en propuestas por mes</h4>
-                        <div id="bar-traffic-legend"><div class="chartjs-legend"><ul><li><span style="background-color:#5D62B4"></span>Cantidad en USD</li></ul></div></div>
-                     </div>
-                     <p class="mb-4"></p>
-                     <canvas id="barChart" style="height: 221px; display: block; width: 442px;" width="442" height="221" class="chartjs-render-monitor"></canvas>
-                     </div>
-                  </div>
-               </div>
-              </div>
                <!--fin row-->
             </div>
          </div>

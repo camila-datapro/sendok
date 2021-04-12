@@ -74,7 +74,6 @@ function importarTabla(){
   
     var headers = [];
     var vacios = "";
-    var fila = 0;
     $("#modalCargando").modal("show");
     
     var tbl = $('#tabla_contenido').DataTable();
@@ -84,40 +83,12 @@ function importarTabla(){
         k++;
     });
     
-    console.log(headers);
-    
     var z = 0;
-    var datos = [];
-    console.log("Headers length: " + headers.length);
-    
-    var array = {};
     var json_datos = "{";
     var cantidad_filas = tbl.rows()[0].length;
     tbl.rows().every(function () {
         // se recorren todas las filas de la tabla
         var data = this.data();
-        console.log("data : ");
-        console.log(data);
-        //console.log("Dato "+z+" : "+data+" Tipo : "+ typeof(data)+ "\n");
-        //datos = data.toString().split(",");        
-
-      
-        
-/**
- * 
- *  'Margen' => '12',
-    'Precio' => '9.43',
-    'Costo' => '8.42',
-    'Nombre' => 'Power BI Pro',
-    'Descripcion' => 'Power BI Pro',
-    'Numero Interno' => 'AAA-13173',
-    'Proveedor ' => 'Microsoft',
- * 
- */
-
-
-        //console.log("headers length: "+headers.length);
-        
         json_datos = json_datos+'"'+z+'" : [{ "Margen" : "'+data[0]+'"'+
         ', "Precio" : "'+data[1].toString().replace(",",".")+'"'+
         ', "Costo" : "'+data[2].toString().replace(",",".")+'"'+
@@ -133,24 +104,7 @@ function importarTabla(){
         z++;
         console.log("Valor de Z : " + z);
     });
-    json_datos = json_datos + "}";
-
-    console.log(JSON.parse(json_datos));
-
-   /* $('#tabla_contenido tr').has('td').each(function() {
-        fila++;
-        var arrayItem = {};
-        $('td', $(this)).each(function(index, item) {
-            arrayItem[headers[index]] = $(item).html();
-            if(($(item).html()=="") && (fila<($("#tabla_contenido tr").length-1))){ 
-                vacios = vacios+"- Fila: "+fila+" columna: "+(index+1)+"</br>";
-            }
-        });
-        
-        array.push(arrayItem);
-        
-    });*/
-    
+    json_datos = json_datos + "}";    
     var json_array = json_datos;
     var json_headers = JSON.stringify(headers);
     console.log(json_array);

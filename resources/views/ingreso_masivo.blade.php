@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-   <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
+      <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -16,80 +16,50 @@
       <link rel="stylesheet" href="{{ asset('/assets/vendors/css/vendor.bundle.addons.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/shared/style.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
-      <link rel="stylesheet" href="{{ asset('/assets/js/dataTables.min.js') }}">
+      <link rel="application/javascript" href="{{ asset('/js/xlsx.full.min.js') }}">
       <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
-      <script
-         type="text/javascript"
-         src="https://cdnjs.cloudfare.com/ajax/libs/xlsx/0.15.3/xlsx.full.min.js"
-      ></script>
+      <link rel="application/javascript" href="{{ asset('/js/dataTables.min.js') }}">
       <link href="{{ asset('/css/ingreso_masivo.css') }}" rel="stylesheet" />
    </head>
    @endsection
    @section('body1')
    <body>
       <div class="container-scroller">
-         <!-- partial:partials/_navbar.html -->
-         @endsection
-         @section('body2')
-         <!-- partial -->
-         <div class="main-panel">
-            <div class="content-wrapper">
-               <!-- Page Title Header Starts-->
-               <div class="row page-title-header">
-                  <div class="col-12">
-                     <div class="page-header">
-                        <h4 class="page-title">Ingreso masivo de productos</h4>
-                     </div>
+      <!-- partial:partials/_navbar.html -->
+      @endsection
+      @section('body2')
+      <!-- partial -->
+      <div class="main-panel">
+         <div class="content-wrapper">
+            <!-- Page Title Header Starts-->
+            <div class="row page-title-header">
+               <div class="col-12">
+                  <div class="page-header">
+                     <h4 class="page-title">Ingreso masivo de productos</h4>
                   </div>
                </div>
-               <input type="hidden" name="_token" value="{{ csrf_token() }}">
-               <!-- Page Title Header Ends-->
-               <div class="row">
-                  <div class="col-md-12 grid-margin">
-                     <div class="col-md-12 grid-margin stretch-card">
-                        <div class="card">
-                           <div class="card-body">
-                              
-                              <h5>Importar archivo</h5>
-                              <div id="vista_importar" class="row col-md-12">
+            </div>
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <!-- Page Title Header Ends-->
+            <div class="row">
+               <div class="col-md-12 grid-margin">
+                  <div class="col-md-12 grid-margin stretch-card">
+                     <div class="card">
+                        <div class="card-body">
+                           <h5>Importar archivo</h5>
+                           <div id="vista_importar" class="row col-md-12">
                               <div class="col-md-3">
                                  <input type="file" class="form-control" id="fileUpload" accept=".xls,.xlsx" /><br />
                               </div>
                               <div class="col-md-3">
-                              <div class="row">
-                                 <!--<button type="button" class="btn btn-warning" id="uploadExcel">Cargar</button>-->
-                                 <button id="boton_importar" style="margin-left:20px; margin-right: 20px;" class="btn btn-success" onclick="importarTabla();"><i class="fas fa-file-import"></i> Importar</button>
-
-                                 <form method="get" action="{{ asset('/documentos/plantilla_documento.xlsx') }}">
+                                 <div class="row">
+                                    <button id="boton_importar" style="margin-left:20px; margin-right: 20px;" class="btn btn-success" onclick="importarTabla();"><i class="fas fa-file-import"></i> Importar</button>
+                                    <form method="get" action="{{ asset('/documentos/plantilla_documento.xlsx') }}">
                                        <button class="btn btn-primary" id="descargar_formato" type="submit"><i class="far fa-file-pdf"></i> Descargar Formato</button>
-                                 </form>
+                                    </form>
                                  </div>
                               </div>
                               <pre id="jsonData" style="display:none;"></pre>
-                              <!--
-                                 <div class="row">
-                                    <form method="get" action="{{ asset('/documentos/plantilla_documento.xlsx') }}">
-                                       <button class="btn btn-success" id="descargar_formato" type="submit"><i class="far fa-file-pdf"></i> Descargar Formato</button>
-                                    </form>
-                                    <form method="get" action="{{ asset('/documentos/documento_ejemplo.xlsx') }}">
-                                       <button style="margin-left: 10px;" class="btn btn-primary" id="descargar_ejemplo" type="submit"><i class="fas fa-download"></i> Descargar archivo ejemplo</button>
-                                    </form>
-                                    <button style="margin-left: 10px;" class="btn btn-danger" id="borrar_contenido" onclick="limpiarContenido();"><i class="fas fa-trash-alt"></i> Borrar contenido</button>
-                                    <div id="div_opciones" style="position: absolute; right: 40px; display:none;">
-                                    <button id="boton_limpiar"onclick="limpiarTabla();" class="btn btn-warning"><i class="fas fa-undo-alt"></i> Limpiar Tabla</button>
-                                    <button id="boton_importar" style="margin-left:20px;" class="btn btn-success" onclick="importarTabla();"><i class="fas fa-file-import"></i> Importar</button>
-                                 </div>
-                                 </div>
-                                
-                                 <div class="row" style="margin-top: 20px;  width: 100%; height: 120px;">
-                                    <textarea  onchange="construirTabla();" style=" width: 100%; height: 100px;" id="contenido_ingreso" placeholder="Pegue aqui la tabla de excel, incluyendo las cabeceras con los nombres de las columnas."></textarea>
-                                 </div>
-                                 <div class="row" id="div_table">
-                                 </div>
-                               
-                              </div>
-                              -->
-                              
                               <div class="row" style="margin-top: 20px;">
                                  <div class="col-md-1"></div>
                                  <div class="col-md-10" id="div_table"></div>
@@ -206,7 +176,6 @@
                                  defval: ""
                               }
                            );    
-                           console.log(workbook.Sheets[sheet]);   
                            let jsonObject = JSON.stringify(rowObject);
                            document.getElementById("jsonData").innerHTML = jsonObject;
                            
@@ -215,9 +184,9 @@
                            var table = $('<table id="tabla_contenido" class="table table-hover">');
                            table.append('</table>');
                            $('#div_table').html(table);
-
+         
                            // importo contenido de json en tabla de html
-
+         
                            var html = '';
                            var i = 0;
                            $.each(JSON.parse(jsonObject), function(key, value){
@@ -239,9 +208,9 @@
                               }
                            });
                            //html += "</tr>";
-
+         
                            $("#tabla_contenido").append(html);
-
+         
                            $("#tabla_contenido").DataTable({
                               columnDefs: [
                                     { width: 50, targets: 0 }
@@ -252,7 +221,7 @@
                   fileReader.readAsBinaryString(selectedFile);
                }
             });
-
+         
       </script>
    </body>
 </html>

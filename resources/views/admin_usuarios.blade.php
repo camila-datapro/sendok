@@ -21,7 +21,7 @@
       <link href="{{ asset('/css/select_buscador.css') }}" rel="stylesheet" />
       <link rel="stylesheet" href="{{ asset('/assets/css/shared/style.css') }}">
       <link rel="stylesheet" href="{{ asset('/assets/css/demo_1/style.css') }}">
-      <link rel="stylesheet" href="{{ asset('/assets/js/dataTables.min.js') }}">    
+      <link rel="stylesheet" href="{{ asset('/js/dataTables.min.js') }}">
       <script src="https://kit.fontawesome.com/4a145961cd.js" crossorigin="anonymous"></script>
    </head>
    @endsection
@@ -75,22 +75,19 @@
                                     </div>
                                     <br>
                                     <div class="row">
-
-                                          <label for="region" class="col-md-1">Región</label>
-                                          <div class="col-md-5">
-                                             <select class="form-control" id="region" onchange="getComunasRegion();">
-                                                <option _blank="">Elija Una</option>
-                                                <?php                  
-                                                   for($i=0;$i<sizeOf($regiones);$i++){
-                                                      echo "<option value='".$regiones[$i]->id."'>".$regiones[$i]->region."</option>";
-                                                   }
-                                                   ?> 
-                                             </select>
-                                          </div>
-                                       
-                                      
-                                          <label for="provincia" class="col-md-1">Comuna</label>
-                                          <div class="col-md-5">
+                                       <label for="region" class="col-md-1">Región</label>
+                                       <div class="col-md-5">
+                                          <select class="form-control" id="region" onchange="getComunasRegion();">
+                                             <option _blank="">Elija Una</option>
+                                             <?php                  
+                                                for($i=0;$i<sizeOf($regiones);$i++){
+                                                   echo "<option value='".$regiones[$i]->id."'>".$regiones[$i]->region."</option>";
+                                                }
+                                                ?> 
+                                          </select>
+                                       </div>
+                                       <label for="provincia" class="col-md-1">Comuna</label>
+                                       <div class="col-md-5">
                                           <select class="form-control" id="comuna">
                                              <option id="_blank">Elija Una </option>
                                           </select>
@@ -186,8 +183,6 @@
             </div>
          </div>
       </div>
-     
- 
       <!--contenido modal crear nueva plantilla-->
       <!-- fin contenido modal crear nueva plantilla-->
       <div class="modal fade" id="modal_eliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -220,14 +215,10 @@
       <script src="{{ asset('/assets/js/shared/off-canvas.js') }}"></script>
       <script src="{{ asset('/assets/js/shared/misc.js') }}"></script>
       <script src="{{ asset('/assets/js/demo_1/dashboard.js') }}"></script>
-      <!--<script src="{{ asset('/js/producto.js') }}"></script>-->
       <script src="{{ asset('/js/admin_usuarios_general.js') }}"></script>
       <script src="{{ asset('/assets/js/popper.min.js') }}"></script>
       <script src="{{ asset('/js/dataTables.js')}}"></script>
       <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-      <!-- include summernote css/js -->
-      <!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   -->
-      <!-- End custom js for this page-->
    </body>
 </html>
 @endsection

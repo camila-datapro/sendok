@@ -33,9 +33,7 @@
       </button>
    </div>
 </nav>
-<!-- partial -->
 <div class="container-fluid page-body-wrapper">
-<!-- partial:partials/_sidebar.html -->
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
    <ul class="nav">
       <li class="nav-item nav-profile">
@@ -45,7 +43,6 @@
                <div class="dot-indicator bg-success"></div>
             </div>
             <div class="text-wrapper">
-               <!--<p class="profile-name">{{ Auth::user()->name }}</p>-->
                <p class="profile-name">{{ Auth::user()->empresa }}</p>
             </div>
          </a>
@@ -84,7 +81,7 @@
          </a>
          <div class="collapse" id="menu_productos">
             <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
+               <li class="nav-item">
                   <a class="nav-link" href="./ingreso_masivo">Ingreso Masivo</a>
                </li>
                <li class="nav-item">
@@ -124,13 +121,6 @@
             </form>
          </a>
       </li>
-      <!--
-      <li class="nav-item">
-         <a style="background:green; color: white;" href="./traductor" class="nav-link">
-            <span class="nav__name">Configurar ENV</span>
-         </a>
-      </li>
-      -->
    </ul>
 </nav>
 @yield('body2')
