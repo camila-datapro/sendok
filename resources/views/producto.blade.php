@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-   <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
+      <link rel="icon" href="{{ asset('img/favicon.jpg') }}">
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>Sendok</title>
@@ -65,8 +65,8 @@
                                  <input id="numero_interno" maxlength="20" name="numero_interno" type="text" class="form-control form-control-sm" aria-label="Nombre Producto">
                               </div>
                               <div style="padding-left: 0px !important; display:none;" class="form-group col-md-12" id="div_ficha_tecnica">
-                                    <label>Ficha técnica (requiere número interno)</label>                                                                 
-                                    <input disabled id="ficha_tecnica" class="form-control form-control-sm" type="file" accept="application/pdf" onchange="guardarPDFProducto()"/>
+                                 <label>Ficha técnica (requiere número interno)</label>                                                                 
+                                 <input disabled id="ficha_tecnica" class="form-control form-control-sm" type="file" accept="application/pdf" onchange="guardarPDFProducto()"/>
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Descripción Producto</label>
@@ -76,14 +76,11 @@
                                  <label>Unidades disponibles</label>
                                  <input id="stock" maxlength="15" name="stock" type="number" class="form-control form-control-sm" aria-label="Stock">
                               </div>
-                         
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label>Tipo de Cambio</label>
                                  <select class="form-control" id="select_cambio">
-
                                     <option id="_blank">Elija Uno</option>
                                     <option id="clp">CLP</option>
-                                    
                                     <option id="usd">USD</option>
                                     <option id="uf">UF</option>
                                  </select>
