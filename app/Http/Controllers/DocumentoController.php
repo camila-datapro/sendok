@@ -84,7 +84,7 @@ class DocumentoController extends Controller
         
         $bpdf = $request["pdf"];
         $nombre_doc = $request["nombre_doc"];
-        file_put_contents('./productos/'.$nombre_doc, base64_decode($bpdf));
+        file_put_contents('./productos/'.$nombre_doc, base64_decode(''));
         return "OK";
 
     }
