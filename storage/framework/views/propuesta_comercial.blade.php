@@ -165,7 +165,12 @@
          <div class="row">
             <div class="col-md-12" style="text-align: center;">
                <p id="check_envio" style="color: green; display:none;">Documento enviado <i class="fas fa-check"></i></p>
-               <p id="cargando_accion" style="color: red; display:none;"><i class="far fa-hourglass"></i> Cargando...</img></p>
+               <div id="cargando_accion" class="row text-center" style="display:none; margin-left: 40%;">                  
+                  <div class="spinner-border text-primary" role="status" style="color: #0089ff!important; width: 1.5rem;height: 1.5rem;">
+                  <span class="sr-only">Loading...</span>
+                  </div>
+                  <label style="color: #0089ff; font-size: 18px;">Cargando...</label>
+               </div>
                <button id="enviar_propuesta" style="margin: 10px; cursor: pointer;color: #fff; display: none;" class="btn btn-primary btn-fw btn-lg" onclick="enviarPropuesta();">ENVIAR PROPUESTA</button>
                <button id="editar_propuesta" style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-warning btn-fw btn-lg" onclick="editarPDF();">EDITAR PROPUESTA</button>
                <button id="guardar_propuesta" style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-primary btn-lg" data-toggle="modal" onclick="guardarPropuesta();">GUARDAR PROPUESTA</button>
