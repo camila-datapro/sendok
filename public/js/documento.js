@@ -272,7 +272,8 @@ function guardarPropuesta() {
 				.from(elemento)
 				.outputPdf()
 				.then(function (pdf) {
-					// This logs the right base64
+					setTimeout(() => {
+						// This logs the right base64
 					var bpdf = btoa(pdf);
 					var datetime = "Last Sync: " + currentdate.getDate() + "/"
 							+ (currentdate.getMonth()+1)  + "/" 
@@ -299,40 +300,47 @@ function guardarPropuesta() {
 										+ currentdate.getMinutes() + ":" 
 										+ currentdate.getSeconds();
 										console.log("Respondio el PHP: "+datetime);
-						$("#cargando_accion").hide();	
+					
+						
+						setTimeout(() => {
+							html2pdf()
+							.set({
+								margin: 1,
+								filename: folio+'.pdf',
+								image: {
+									type: 'png',
+									quality: 0.5
+								},
+								html2canvas: {
+									compress: true,
+									scale: 0.9, // a mayor escala, mejores graficos pero mas peso
+								},
+								jsPDF: {
+									compress: true,
+									unit: "in",
+									format: "a3",
+									orientation: 'portrait' //landscape de forma horizontal
+								}
+							})
+							.from(elemento)
+							.outputPdf()
+							.save();		
+							$("#cargando_accion").hide();	
+
 						$("#enviar_propuesta").show();
-						$("#listar_propuestas").show();
+						$("#listar_propuestas").show();		
+						}, 300);
+						
 					}).fail(function () {				
 						console.log("Error en descarga del documento");
 					});
 		
 					$("#hidden_pdf").attr("pdf_64", bpdf);
+					}, 600);
+					
 				});
 
-				setTimeout(() => {
-					html2pdf()
-					.set({
-						margin: 1,
-						filename: folio+'.pdf',
-						image: {
-							type: 'png',
-							quality: 0.5
-						},
-						html2canvas: {
-							compress: true,
-							scale: 0.9, // a mayor escala, mejores graficos pero mas peso
-						},
-						jsPDF: {
-							compress: true,
-							unit: "in",
-							format: "a3",
-							orientation: 'portrait' //landscape de forma horizontal
-						}
-					})
-					.from(elemento)
-					.outputPdf()
-					.save();				
-				}, 600);
+			
 			
 				
 						
