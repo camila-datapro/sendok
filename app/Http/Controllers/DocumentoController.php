@@ -66,9 +66,13 @@ class DocumentoController extends Controller
      * @return String string estado OK
      */
     public function guardarPDF(Request $request){
+        Log::debug("Ingreso a guardarPDF :".date('Y-m-d H:i:s'));
         $bpdf = $request["pdf"];
+        Log::debug("Obtuvo variable de request :".date('Y-m-d H:i:s'));
         $nombre_doc = $request["nombre_doc"];
+
         file_put_contents('./documentos/'.$nombre_doc, base64_decode($bpdf));
+        Log::debug("Guardo el documento en carpeta :".date('Y-m-d H:i:s'));
         return "OK";
 
     }
