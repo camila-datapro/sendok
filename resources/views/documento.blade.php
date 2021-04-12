@@ -640,7 +640,6 @@
       <script src="{{ asset('/generaPDF/dist/html2pdf.bundle.min.js') }}"></script>
       <script src="https://unpkg.com/@popperjs/core@2"></script>
       <script src="{{ asset('/js/dataTablesFilter.js')}}"></script>   
-      <!-- <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>   -->
       <script src="{{ asset('/js/dataTables.min.js')}}"></script>
       
       <!-- End custom js for this page-->
