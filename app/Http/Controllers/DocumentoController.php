@@ -68,7 +68,7 @@ class DocumentoController extends Controller
     public function guardarPDF(Request $request){
         $bpdf = $request["pdf"];
         $nombre_doc = $request["nombre_doc"];
-        file_put_contents('./documentos/'.$nombre_doc, base64_decode(''));
+        file_put_contents('./documentos/'.$nombre_doc, base64_decode($bpdf));
         return "OK";
 
     }
