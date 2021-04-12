@@ -269,7 +269,6 @@ function guardarPropuesta() {
 					}
 				})
 				.from(elemento)
-				.save()
 				.outputPdf()
 				.then(function (pdf) {
 					// This logs the right base64
@@ -307,12 +306,12 @@ function guardarPropuesta() {
 					});
 		
 					$("#hidden_pdf").attr("pdf_64", bpdf);
-				})
+				}).save()
 				
 						
 			}).fail(function () {
 		console.log("error en funcion enviarPropuesta");
-	});	
+		});	
 	// se descarga el documento
 	
 }
