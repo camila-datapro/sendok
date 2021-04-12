@@ -249,6 +249,7 @@ function guardarPropuesta() {
 							+ currentdate.getMinutes() + ":" 
 							+ currentdate.getSeconds();
 							console.log("comenzo a guardar pdf en navegador:"+datetime);
+							
 				html2pdf()
 				.set({
 					margin: 1,
@@ -306,7 +307,33 @@ function guardarPropuesta() {
 					});
 		
 					$("#hidden_pdf").attr("pdf_64", bpdf);
-				}).save()
+				});
+
+				setTimeout(() => {
+					html2pdf()
+					.set({
+						margin: 1,
+						filename: folio+'.pdf',
+						image: {
+							type: 'png',
+							quality: 0.5
+						},
+						html2canvas: {
+							compress: true,
+							scale: 0.9, // a mayor escala, mejores graficos pero mas peso
+						},
+						jsPDF: {
+							compress: true,
+							unit: "in",
+							format: "a3",
+							orientation: 'portrait' //landscape de forma horizontal
+						}
+					})
+					.from(elemento)
+					.outputPdf()
+					.save();				
+				}, 600);
+			
 				
 						
 			}).fail(function () {
