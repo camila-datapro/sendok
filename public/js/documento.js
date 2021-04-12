@@ -267,9 +267,6 @@ function guardarPropuesta() {
 					}
 				})
 				.from(elemento)
-				.catch(err => console.log(err))
-				.finally()
-				.outputPdf()
 				.then(function (pdf) {
 					// This logs the right base64
 					var bpdf = btoa(pdf);
@@ -298,7 +295,8 @@ function guardarPropuesta() {
 					});
 		
 					$("#hidden_pdf").attr("pdf_64", bpdf);
-				}).save();
+				}).save()
+				.outputPdf();
 						
 			}).fail(function () {
 		console.log("error en funcion enviarPropuesta");
