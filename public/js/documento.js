@@ -610,34 +610,11 @@ function cargarRegiones() {
 	$('#comuna').find('option').remove().end().append(opcion);
   }
   
+
   
-  function getProvinciasRegion() {
+function getComunasRegion() {
+  
 	var idRegion = parseInt($("#region").val());
-	$.ajaxSetup({
-	  headers: {
-		'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
-	  }
-	});
-	$.ajax({
-	  type: "POST",
-	  url: url_prev + 'obtenerProvincias',
-	  data: {
-		id: idRegion,
-		_token: $('input[name="_token"]').val()
-	  } //esto es necesario, por la validacion de seguridad de laravel
-	}).done(function(msg) {
-	  // se incorporan las opciones en la provincia
-	  var json = JSON.parse(msg);
-	  var opciones = "<option id='0'> Elija Una </option>";
-	  for (var i = 0; i < json.length; i++) {
-		opciones = opciones + "<option id='" + json[i].id + "' id_provincia='" + json[i].id + "'>" + json[i].provincia + "</option>";
-	  }
-	  $('#provincia').find('option').remove().end().append(opciones);
-	});
-  }
-  
-  function getComunasProvincia() {
-	var idProvincia = $("#provincia option:selected").attr('id_provincia');
 	$.ajaxSetup({
 	  headers: {
 		'X-CSRF-TOKEN': $('meta[name="csrf-token]').attr('content')
@@ -647,7 +624,7 @@ function cargarRegiones() {
 	  type: "POST",
 	  url: url_prev + 'obtenerComunas',
 	  data: {
-		id: idProvincia,
+		id: idRegion,
 		_token: $('input[name="_token"]').val()
 	  } //esto es necesario, por la validacion de seguridad de laravel
 	}).done(function(msg) {
@@ -655,11 +632,12 @@ function cargarRegiones() {
 	  var json = JSON.parse(msg);
 	  var opciones = "<option id='0'> Elija Una </option>";
 	  for (var i = 0; i < json.length; i++) {
-		opciones = opciones + "<option id=" + json[i].id + " id_comuna= '" + json[i].id + "'>" + json[i].comuna + "</option>";
+		opciones = opciones + "<option id='" + json[i].id + "' id_comuna='" + json[i].id + "'>" + json[i].comuna + "</option>";
 	  }
 	  $('#comuna').find('option').remove().end().append(opciones);
 	});
   }
+  
 
   function crearProductoDocumento(){
 	$("#modalCrearProducto").modal("show");

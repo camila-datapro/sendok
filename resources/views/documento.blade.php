@@ -267,21 +267,13 @@
                            <div style="padding-left: 0px !important;" class="form-group row col-md-12">
                               <label for="region" class="col-md-2">Región</label>
                               <div class="col-md-10">
-                                 <select class="form-control" id="region" onchange="getProvinciasRegion();">
+                                 <select class="form-control" id="region" onchange="getComunasRegion();">
                                     <option _blank="">Elija Una</option>
                                     <?php                  
                                        for($i=0;$i<sizeOf($regiones);$i++){
                                           echo "<option value='".$regiones[$i]->id."'>".$regiones[$i]->region."</option>";
                                        }
                                        ?> 
-                                 </select>
-                              </div>
-                           </div>
-                           <div style="padding-left: 0px !important;" class="form-group row col-md-12">
-                              <label for="provincia" class="col-md-2">Provincia</label>
-                              <div class="col-md-10">
-                                 <select class="form-control" id="provincia" onchange="getComunasProvincia();">
-                                    <option id="_blank">Elija Una </option>
                                  </select>
                               </div>
                            </div>
