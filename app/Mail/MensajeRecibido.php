@@ -69,9 +69,6 @@ class MensajeRecibido extends Mailable
             ]);
         }
         
-        
-
-        //Log::debug("Asunto:\n".$this->asunto."\n\n"."Contenido:\n".$contenido);
         return $this->from(Crypt::decryptString(Auth::user()->email_smtp));
     }
 }

@@ -41,7 +41,6 @@ Route::get('/documentacion', 'PHPDocumentador@index')->name('documentacion');
 
 //creacion de cliente
 Route::get('/obtenerRegiones','RegionController@getRegiones')->name('obtenerRegiones');
-Route::post('/obtenerProvincias','ProvinciaController@getProvincias')->name('obtenerProvincias');
 Route::post('/obtenerComunas','ComunaController@getComunas')->name('obtenerComunas');
 Route::post('/crearCliente','ClienteController@setCliente')->name('crearCliente');
 Route::post('/editarCliente','ClienteController@editarCliente')->name('editarCliente');

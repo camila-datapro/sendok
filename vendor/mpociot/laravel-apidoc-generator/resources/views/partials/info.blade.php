@@ -123,8 +123,12 @@ public function index()<br>
 ===
 Para la documentacion se utilizo apidoc  en su versión 3.* , para más información visite el <a href="https://beyondco.de/docs/laravel-apidoc-generator/getting-started/installation"> Manual de instalación de apidoc </a>
 <br>
-Para su instalación es necesario que tengas instalado composer en tu computador, para más información de como instalar composer , visite la <a href="https://getcomposer.org/doc/"> Documentación oficial de composer </a><br>
-Luego desde terminal debe situarse en el proyecto y ejecutar el siguiente comando: <br><br>
+Si es que deseas modificar el contenido de esta pagina, debes acudir a la plantilla que se encuentra en app/vendor/mpociot/laravel-apidoc-generator/resources/view/partials/info.blade.php. 
+<br>
+Dicho archivo es una plantilla HTML que puedes modificar a tu gusto y te permitirá editar el contenido de esta pagina.
+<br>
+Para su uso es necesario que tengas instalado composer en tu computador, para más información de como instalar composer , visite la <a href="https://getcomposer.org/doc/"> Documentación oficial de composer </a><br>
+<br>
 <span style="color: #2a8629;"> 
 <b>
 >> composer require mpociot/laravel-apidoc-generator</b>
@@ -141,7 +145,7 @@ Para la primera vez que se crea la documentación, también deberá publicar el 
 </b>
 </span>
 <br><br>
-Y cada vez que se desee compilar la doc, se debe ejecutar el siguiente comando por consola (no olvidar que hay que estar situado en la ubicacion del proyecto):<br>
+Y cada vez que se desee compilar la doc cuando se haga algun cambio sobre info.blade.php o bien se añadan nuevos comentarios en los controladores, se debe ejecutar el siguiente comando por consola (no olvidar que hay que estar situado en la ubicacion del proyecto):<br>
 <span style="color: #2a8629;">
 <b>
 >> php artisan apidoc:generate
@@ -163,9 +167,20 @@ Estas funciones deben ser estáticas, ya que la lógica de obtención de datos e
 
 <p>Para el adecuado respaldo de los datos, lo conveniente es dejar una versión estable de la base de datos MySQL con el formato de nombre YYYYMMDD_Desarrollador.sql en la parpeta ../database/sql/ </p>
 
+<h3> users </h3>
+<p>Tabla que almacena a los usuarios y sus datos de configuracion smtp encriptados.</p>
+
+
+<h3> plantilla_correo </h3>
+<p>Tabla que almacena las plantillas de contenido de mensaje de correo para los diferentes usuarios del sistema.</p>
+
 <h3> cliente_destino </h3>
 
 <p>Tabla que almacena los datos de cliente , ellos serán los destinatarios del documento, por lo que es fundamental que se almacene tanto su nombre, como su correo, cargo y dirección.</p>
+
+<h3> empresa_origen </h3>
+<p>Tabla que almacenará (más adelante) el contenido de la empresa de origen que utilizará el sistema.</p>
+
 
 <h3> producto </h3>
 <p>Tabla que almacena los datos de producto, cada uno de estos puede poseer una ficha tecnica asociada.</p>
@@ -179,9 +194,8 @@ Estas funciones deben ser estáticas, ya que la lógica de obtención de datos e
 </p>
 <h3> region </h3>
 <p>Tabla que contiene el listado de regiones.</p>
-<h3> provincia </h3>
-<p>Tabla que almacena el listado de provincias e indica las asociaciones de region y comuna.</p>
 <h3> comuna </h3>
-<p>Tabla que almacena el listado de comunas que están asociadas a una provincia en particular.</p>
+<p>Tabla que almacena el listado de comunas que están asociadas a una region en particular.</p>
 
 </p>
+

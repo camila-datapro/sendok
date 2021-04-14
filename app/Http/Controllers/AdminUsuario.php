@@ -110,12 +110,24 @@ class AdminUsuario extends Controller
 
     }
 
+    /**
+     * modificarSMTP
+     * @params array Request recibe los datos del formulario de perfil de usuario que contienen configuracion de SMTP
+     * @group AdminUsuario
+     */
     public function modificarSMTP(Request $request){
         $datos = $request["json_datos"];
         return UsuarioModel::modificarSMTP($datos);
 
     }
 
+
+    /**
+     * validaExisteSMTP
+     * @params array Request recibe los datos de SMTP del formulario de perfil , y valida que no sean nulos
+     * @group AdminUsuario
+     * @return boolean true o false dependiendo de si cumple condicion
+     */
     public function validaExisteSMTP(Request $request){
         if((strlen(Auth::user()->email_smtp)==0)
         &&(strlen(Auth::user()->password_smtp)==0)
@@ -128,6 +140,11 @@ class AdminUsuario extends Controller
         }
     }
 
+    /**
+     * traductor (deprecated)
+     * Esta funcion fue deprecada pero se mantiene el codigo: Permite obtener y modificar el .env a través de la ruta /traductor de la web
+     * @group AdminUsuario
+     */
     public function traductor(){
 
         

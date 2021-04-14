@@ -166,13 +166,13 @@ function guardarEnBD(){
 function guardarPropuesta() {
 	const elemento = document.getElementById('propuesta_detalle');
 	var currentdate = new Date(); 
-			var datetime = "Last Sync: " + currentdate.getDate() + "/"
-							+ (currentdate.getMonth()+1)  + "/" 
-							+ currentdate.getFullYear() + " @ "  
-							+ currentdate.getHours() + ":"  
-							+ currentdate.getMinutes() + ":" 
-							+ currentdate.getSeconds();
-							console.log("cargando datos:"+datetime);
+	var datetime = "Last Sync: " + currentdate.getDate() + "/"
+					+ (currentdate.getMonth()+1)  + "/" 
+					+ currentdate.getFullYear() + " @ "  
+					+ currentdate.getHours() + ":"  
+					+ currentdate.getMinutes() + ":" 
+					+ currentdate.getSeconds();
+					console.log("cargando datos:"+datetime);
 	$("#guardar_propuesta").hide();
 	$("#editar_propuesta").hide();	
 	$("#cargando_accion").show();
@@ -273,7 +273,6 @@ function guardarPropuesta() {
 				.outputPdf()
 				.then(function (pdf) {
 					setTimeout(() => {
-						// This logs the right base64
 					var bpdf = btoa(pdf);
 					var datetime = "Last Sync: " + currentdate.getDate() + "/"
 							+ (currentdate.getMonth()+1)  + "/" 
@@ -282,7 +281,6 @@ function guardarPropuesta() {
 							+ currentdate.getMinutes() + ":" 
 							+ currentdate.getSeconds();
 							console.log("Se envia PDF a php:"+datetime);
-					//console.log(JSON.parse(pdf));
 					$.ajax({
 						type: "POST",
 						url: url_prev + 'guardarPDF',
@@ -338,17 +336,10 @@ function guardarPropuesta() {
 					$("#hidden_pdf").attr("pdf_64", bpdf);
 					}, 600);
 					
-				});
-
-			
-			
-				
-						
+				});														
 			}).fail(function () {
 		console.log("error en funcion enviarPropuesta");
-		});	
-	// se descarga el documento
-	
+		});		
 }
 
 

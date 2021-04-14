@@ -164,8 +164,12 @@ public function index()<br>
 ===
 Para la documentacion se utilizo apidoc  en su versión 3.* , para más información visite el <a href="https://beyondco.de/docs/laravel-apidoc-generator/getting-started/installation"> Manual de instalación de apidoc </a>
 <br>
-Para su instalación es necesario que tengas instalado composer en tu computador, para más información de como instalar composer , visite la <a href="https://getcomposer.org/doc/"> Documentación oficial de composer </a><br>
-Luego desde terminal debe situarse en el proyecto y ejecutar el siguiente comando: <br><br>
+Si es que deseas modificar el contenido de esta pagina, debes acudir a la plantilla que se encuentra en app/vendor/mpociot/laravel-apidoc-generator/resources/view/partials/info.blade.php. 
+<br>
+Dicho archivo es una plantilla HTML que puedes modificar a tu gusto y te permitirá editar el contenido de esta pagina.
+<br>
+Para su uso es necesario que tengas instalado composer en tu computador, para más información de como instalar composer , visite la <a href="https://getcomposer.org/doc/"> Documentación oficial de composer </a><br>
+<br>
 <span style="color: #2a8629;"> 
 <b>
 >> composer require mpociot/laravel-apidoc-generator</b>
@@ -182,7 +186,7 @@ Para la primera vez que se crea la documentación, también deberá publicar el 
 </b>
 </span>
 <br><br>
-Y cada vez que se desee compilar la doc, se debe ejecutar el siguiente comando por consola (no olvidar que hay que estar situado en la ubicacion del proyecto):<br>
+Y cada vez que se desee compilar la doc cuando se haga algun cambio sobre info.blade.php o bien se añadan nuevos comentarios en los controladores, se debe ejecutar el siguiente comando por consola (no olvidar que hay que estar situado en la ubicacion del proyecto):<br>
 <span style="color: #2a8629;">
 <b>
 >> php artisan apidoc:generate
@@ -203,9 +207,18 @@ Estas funciones deben ser estáticas, ya que la lógica de obtención de datos e
 
 <p>Para el adecuado respaldo de los datos, lo conveniente es dejar una versión estable de la base de datos MySQL con el formato de nombre YYYYMMDD_Desarrollador.sql en la parpeta ../database/sql/ </p>
 
+<h3> users </h3>
+<p>Tabla que almacena a los usuarios y sus datos de configuracion smtp encriptados.</p>
+
+<h3> plantilla_correo </h3>
+<p>Tabla que almacena las plantillas de contenido de mensaje de correo para los diferentes usuarios del sistema.</p>
+
 <h3> cliente_destino </h3>
 
 <p>Tabla que almacena los datos de cliente , ellos serán los destinatarios del documento, por lo que es fundamental que se almacene tanto su nombre, como su correo, cargo y dirección.</p>
+
+<h3> empresa_origen </h3>
+<p>Tabla que almacenará (más adelante) el contenido de la empresa de origen que utilizará el sistema.</p>
 
 <h3> producto </h3>
 <p>Tabla que almacena los datos de producto, cada uno de estos puede poseer una ficha tecnica asociada.</p>
@@ -219,10 +232,8 @@ Estas funciones deben ser estáticas, ya que la lógica de obtención de datos e
 </p>
 <h3> region </h3>
 <p>Tabla que contiene el listado de regiones.</p>
-<h3> provincia </h3>
-<p>Tabla que almacena el listado de provincias e indica las asociaciones de region y comuna.</p>
 <h3> comuna </h3>
-<p>Tabla que almacena el listado de comunas que están asociadas a una provincia en particular.</p>
+<p>Tabla que almacena el listado de comunas que están asociadas a una region en particular.</p>
 
 </p>
 <!-- END_INFO -->
@@ -366,6 +377,40 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET admin_usuario</code></p>
 <!-- END_40675f9760cd57fa04c934f03d1a2072 -->
+<!-- START_1a1640f702c54bb1fa0b5d47dbbf6ede -->
+<h2>index</h2>
+<p>Permite crear usuarios desde un perfil de empresa</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/admin_usuarios" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/admin_usuarios"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET admin_usuarios</code></p>
+<!-- END_1a1640f702c54bb1fa0b5d47dbbf6ede -->
 <!-- START_02c5011d04c06484cb773b9345a878de -->
 <h2>editarUsuario</h2>
 <blockquote>
@@ -375,7 +420,7 @@ fetch(url, {
     "http://localhost/editarUsuario" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"array":"suscipit"}'
+    -d '{"array":"laborum"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/editarUsuario"
@@ -387,7 +432,7 @@ let headers = {
 };
 
 let body = {
-    "array": "suscipit"
+    "array": "laborum"
 }
 
 fetch(url, {
@@ -419,6 +464,33 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_02c5011d04c06484cb773b9345a878de -->
+<!-- START_d3dc8538d6958bacc5d6b07e75a43c78 -->
+<h2>validaExisteSMTP</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/validaExisteSMTP" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/validaExisteSMTP"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST validaExisteSMTP</code></p>
+<!-- END_d3dc8538d6958bacc5d6b07e75a43c78 -->
 <!-- START_7d8f68d0f2287174ee7547ade681eca6 -->
 <h2>crearPlantilla</h2>
 <blockquote>
@@ -554,6 +626,67 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>POST obtenerHTML</code></p>
 <!-- END_94d29c8dbd73bcb5cf48c44658ac7cac -->
+<!-- START_4f5af1c0f6ddbdcf23b4ec45e73eed75 -->
+<h2>modificarSMTP</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost/modificarSMTP" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/modificarSMTP"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST modificarSMTP</code></p>
+<!-- END_4f5af1c0f6ddbdcf23b4ec45e73eed75 -->
+<!-- START_4278d986f0a5b78b3087a16d9b76342b -->
+<h2>traductor (deprecated)</h2>
+<p>Esta funcion fue deprecada pero se mantiene el codigo: Permite obtener y modificar el .env a través de la ruta /traductor de la web</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/traductor" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/traductor"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET traductor</code></p>
+<!-- END_4278d986f0a5b78b3087a16d9b76342b -->
 <h1>AuthenticatesUsers</h1>
 <!-- START_66e08d3cc8222573018fed49e121e96d -->
 <h2>showLoginForm</h2>
@@ -643,6 +776,41 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>POST logout</code></p>
 <!-- END_e65925f23b9bc6b93d9356895f29f80c -->
+<h1>CaptchaControler</h1>
+<!-- START_128f0bdc01c65a20e669a2ec0767fcf1 -->
+<h2>refreshCaptcha</h2>
+<p>Permite obtener una nueva imagen de captcha con numeros y letras al azar</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/refresh_captcha" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/refresh_captcha"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "captcha": "&lt;img src=\"http:\/\/localhost\/captcha\/default?rH8oyuZW\" &gt;"
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET refresh_captcha</code></p>
+<!-- END_128f0bdc01c65a20e669a2ec0767fcf1 -->
 <h1>ClienteController</h1>
 <!-- START_e805c275840cde2fcd30613645581cd2 -->
 <h2>index</h2>
@@ -1947,61 +2115,6 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_3143b93222f97a8def7af2af22c1a4f6 -->
-<h1>ProvinciaController</h1>
-<!-- START_4960fd3cb6742ec54c3f6893e530bb16 -->
-<h2>getProvincias</h2>
-<p>Permite obtener el listado de provincias asociados a un identificador único de region</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost/obtenerProvincias" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -d '{"request":[]}'
-</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost/obtenerProvincias"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-let body = {
-    "request": []
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-    body: body
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST obtenerProvincias</code></p>
-<h4>Body Parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Status</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>request</code></td>
-<td>array</td>
-<td>optional</td>
-<td>array que contiene los datos de request y el id de region</td>
-</tr>
-</tbody>
-</table>
-<!-- END_4960fd3cb6742ec54c3f6893e530bb16 -->
 <h1>RegionController</h1>
 <!-- START_2a1827e1a539118fe47bc2a78b290066 -->
 <h2>getRegiones</h2>
@@ -2256,6 +2369,100 @@ fetch(url, {
 <h3>HTTP Request</h3>
 <p><code>GET obtenerTiposDeProducto</code></p>
 <!-- END_9331f6916f3f6b6009bc2e4c2e6c539c -->
+<h1>general</h1>
+<!-- START_7be72b842de762e9c78280bd09d963a2 -->
+<h2>get CAPTCHA api</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/captcha/api/" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/captcha/api/"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "sensitive": false,
+    "key": "eyJpdiI6IkgzaGJyT1ZHU2hkTkRjUjRmdnlRWWc9PSIsInZhbHVlIjoiVWhQU1ZKSVZobmxncU5rbW5DMStUckxYTlFldkYyRXpmK1haNHVwUFpzUDUzY3FKOFZxTFFVY0pJalBHZnQyaGtKNWNRempCRHhSN085ZXdtZGFyOGN5Zno5QTY5bU1wQU4vQklZbFQyb3M9IiwibWFjIjoiZjRlMTZlYjE5M2YzZGU4YTc2OTYyZDQyNjU0NzU5MWYzMWIyY2E5NmE5NGViZGU0YTA4N2JkMzc4NTQ1NGNmMyJ9",
+    "img": "data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAAkCAYAAABCKP5eAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAIVklEQVR4nO2baXBT1xmGH+2yhCVLNl7ZbIMNArMWwhLMNAG3kBRIgExJoe0wFDIlbdpJQ9MF0kJKJ8FNS9tJGpqQTl2ahqYhhGaSQEgxCYS6GAgGA2axjfdVFta+9oewsCxZYLCuwfj5daRzz73v3PeeT9\/5zpXI5\/P5GKDfIu5rAdEkZ84j5Mx5pK9l9Cmie2EGd5hcUri7j5UIzz1hcAf3otH3lMEddA7b\/d3se9LgzvT3WX3PG9xBf53VAwaHoT\/N6gGDI9AfjB4w+Ca4m8P3gME95G6b1QMG3yJ3i9ERDXa1GTEe+y+OpnokihjUI7PQjp8kpL4eYfe4+ehKGW6flyUZ4wS5Zufw\/efvbKGt1oLN5ECmkKLSKUgcGceIqUkMSogRRE9Xwhrsc7u5\/PJvqXn77\/jcrqA+mT6B9DVPkrJwqWAiO2P3uNlbcZbTrQ24fV4SYwYxTp\/EfYlDWbpvJyea65gQn8y+h1cFjbNuEAXaqs29G7ROf1DB\/peOs8NZAMAq+cqgfpFYRFZuGrlrcwQ3OqzBJc+so\/VwIQBxU6ejGTsBn8tF24n\/0V5aAkDKomVk\/fg5QcVWm008+tFOKs1tIX0KsQSn18MYXSJTBqeSP2NBVE3tjMvu5tVl75OUrSNjegrf\/sP6QN+zhu\/ReNGvVx2vZFn+bHRDYqOmpSshBte+u4sLL24CiYSxz79EwpwHgwa0HDlE6YYf4bVZyf75r0hesEgwscv3\/4NPai8DkKVNIFUdS\/lVY8DwoWotx5auE0xPZyytdtR6Zcj3HSG8Y1YnpGtYuX2uYLpCtgur3\/KHmSHLVoSYCxA\/M5es9RsBuFLwWpTlXcfqdvGfa+YuHDGGTxev4a15yyla8l1Wj\/kSAFUWEyWt9YJp6kw4c8GfhJUU7maHs4AdzgKay69SdbJJMF1BBjuaGrFVlgOQsnBJt4OSvvIwiqQUbJXlmC+ej67Ca9RYTHSEmrlpmUF9eUNGBdpXnQ5B9PSU7au3sEq+kh3OAhY8tUawfeogg21VFf4vFUpUIzIiDow15ABgrSiPjrIuGB32QDteqQrqs3VKBBUSqSB6eoqpzgL4Q\/WujdsoKdwtyAsJQXfD5\/YAIJJIbjhQLJMB4GgSJiQ6PO5AWy2VB\/UZnbZAWycPHyr7kuZyE2UHqwEQS0WMmJoMXF9DR7NSFmRwzNBhAHisFizlF1Gnj+x2oLnsnF+wXNGrgrpD2+k6RU3VzEgeFvh8tL4KABGQotYIoqcrHpcXp81NjOb6w+ewuDj3SRWHXz+Dx+UFYPbqcUHHQLCpvV1ACTJYmZKGduIUTCeLubB1Mzn5LyNRqUMGVb7xJ6wVlwCQ6\/S9IiQchTODixW7gMfWPs6W4wc5VFtOpkZPldkUyKxnJA1DJZVFTU8kqk81886znyFXSVHFKXA7vZhbbHQkDspYGXOeGI8hb3jE83Sd1bdrdMgyyXqlghNrV+A2tSFPGEzyQ4uJNeQgiVFhr62m4cO9mE4WB46f\/MYuYrMNt3TxrgZ2Zc6R00GfT7XUseLAP2mwmUOO1cgUvDd\/JWN0ibek5XYpO1TN\/t8cx2l1h\/QZ8oYx9weTkch6\/o7j7RodttBhr6vhQv7ztH7+acgAdWYW+pm5VBW8hlih5P4DRYjE4YX31MCbYVvJEX59\/CDpGj2jtPHIxRIMukS+kTWRpJhBPT5fb2NuttFQZqSssIbzB6vxef23d+LiTL68boLgeiLWoh2N9Zi+OI6jsQGxXM6gbAPa8ZM4v2UD9f++8RN1KwZGoqixmq998FdiJFJKv\/7DPgvHN0tzuYn3nvscU50VgOnfHMOMlWME1RBxTXF0ceSKy8inf0bakuW9KigSZW3+AoFYJMLl9QB3tsEJ6VqWvDibv609gNPq5mjBWbJy04gfLlwiGDA4XDgNNwMbPtzLuU0\/QSSVkTh3fnTVdSHxWgi2uF1M2PV70jV64uRKUtUaZiQNZWlmDso7bB2sTVZjmDeMk3sugw\/OHahi1qqxgl0\/cDduJpx67DYuv\/I7AJIfWoxMGxc9ZWHIGzqKR9PH8k75GWweN6XGxkDf25dP8\/q5Yt5f8K07LnQnj9bDHn+mb6wOTRCjyU0\/7j6vl7Mb1+NsakAyKJb0td+Ppq5ueSV3Ec9MnE1JSz211nZa7VYO11dS3FxLqbGRPRWlLB8pfDITiY5EC0AiF\/bfQkEGV735F+ImTwtZ9lw9\/QUXt71A+5lTIJFg2JyPLE4nmEi7x41UJEZ6LVvP0OjJ0Fxff7u9XjJ2bsXh9VBnaRdMl9vpQSq\/cdWvtrQl0E4aJWzUCzK4Yvsf8TrsSFRqlClpiBUK7HU1uIyt\/oO1cWT\/dBP6+2YJKvJkcx1PHHqXtYZp5KaMIDtucMBsgFMt9Ti8\/jKrvkudOprs\/eVRVHEKHnxqUrdGG2vMnP3YX2mTyMSMfmCoYPqgk8E+r5cRa56k5bNCzOdLsVwq83eIRChTh5A4bz5py1Yg18cLKhCg1WGlztrOL44dAEAmFpOq0qCQSHF43Fy5th8sEYl4IC3yJklvUfTmeSqKGgCoPd3CtMdHM\/L+VBTq67\/\/lcWN7Msvxu3wP3xTl2ej0glbK+92Heyx23C3tyPX6RFJ+zYzNTpsbD15iH9dPkOb0x72GLVUxgvTv8qyzBxBNNlMDgpfLeHsx1cC5UhEEJc6CKVGTnujFUvLda2GvGHkPT0FkVgU\/oRR4q57q\/J8WxOV7W002y1YXC5EIhFD1BpmJQ8nVqCNj84Ya8yc3X+FS0dqaalsD0qoAJKzdUx5bBRZuUME1wZ3ocF3Mh6Xl7ZaM\/arTiRyCdoUdcjOkdAMGNzP+T\/48EjQ7NXxRgAAAABJRU5ErkJggg=="
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET captcha/api/{config?}</code></p>
+<!-- END_7be72b842de762e9c78280bd09d963a2 -->
+<!-- START_ac3d8e4500522f6ab8e01138d80565d5 -->
+<h2>get CAPTCHA</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/captcha/" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/captcha/"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">null</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET captcha/{config?}</code></p>
+<!-- END_ac3d8e4500522f6ab8e01138d80565d5 -->
+<!-- START_1ba2656c6e47326108cfd8aa6d247915 -->
+<h2>mail</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET \
+    -G "http://localhost/mail" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json"</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost/mail"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET mail</code></p>
+<!-- END_1ba2656c6e47326108cfd8aa6d247915 -->
       </div>
       <div class="dark-box">
                         <div class="lang-selector">
