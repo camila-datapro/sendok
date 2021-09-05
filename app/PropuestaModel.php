@@ -152,6 +152,21 @@ class PropuestaModel extends Model
         $results = DB::select($query);
         return $results;
     }
+    public static function getAll(){
+        $query = "select * from propuesta_comercial order by id_propuesta desc;";
+        // $results = DB::select($query);
+        $propuesta_comercial = \DB::table('propuesta_comercial')->orderBy('id_propuesta','desc')->get()->all();
+
+        // $propuesta_comercial->transform(function($i) {
+        //     return (array)$i;
+        // });
+        // $results = $propuesta_comercial->toArray();
+        
+
+         return  $propuesta_comercial;
+
+
+    }
 
     public static function setEstadoEnvio($folio){
         $query = "update propuesta_comercial SET estado_envio= 'Enviado' where folio_propuesta='".$folio."'";
