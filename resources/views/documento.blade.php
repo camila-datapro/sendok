@@ -47,9 +47,7 @@
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
                                  <label><b>Seleccion de tipo de documento</b></label>
                                  <select class="form-control form-control-md" id="tipo_documento">
-                                    <option _blank="">Elija Uno</option>
-                                    <option id="1">Propuesta Comercial</option>
-                                    <option id="2">Orden de Compra</option>
+                                    
                                  </select>
                               </div>
                               <div style="padding-left: 0px !important;" class="form-group col-md-12">
@@ -84,9 +82,9 @@
                                           </div>
                                        </div>
                                        <label class="top-spaced">Unidades producto N° 1</label>
-                                       <input class="form-control form-control-sm" id="unidades_producto_1" nombre="unidades_producto"></input>  
+                                       <input class="form-control form-control-sm" id="unidades_producto_1" nombre="unidades_producto" type="text" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" maxlength="4"></input>  
                                        <label class="top-spaced"> % Descuento para producto N° 1 (opcional)</label>
-                                       <input type="number" onkeyup="validaPorcentaje(this)" class="form-control form-control-sm" id="descuento_producto_1" nombre="descuento_producto"></input>                                                                
+                                       <input  onkeyup="validaPorcentaje(this)" class="form-control form-control-sm" id="descuento_producto_1" type="text" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" nombre="descuento_producto"></input>                                                                
                                     </div>
                                  </div>
                                  <input hidden id="cantidad_divs" cantidad="1"></input>
@@ -111,10 +109,92 @@
                         <div class="card">
                            <div class="card-body" id="propuesta_documento">
                               <?php 
-                                 set_include_path(dirname(__FILE__)."/../");
-                                 include('propuesta_comercial.blade.php');
-                                 ?>
+                                 //set_include_path(dirname(__FILE__)."/../");
+                                 //include('propuesta_comercial.blade.php');
+                                 ?> 
                            </div>
+                           <div class="card-footer text-muted">
+                           <div class="row">
+                                                        <div class="col-md-12" style="text-align: center;">
+                                                        <p id="check_envio" style="color: green; display:none;">Documento enviado <i class="fas fa-check" aria-hidden="true"></i></p>
+                                                        <div id="cargando_accion" class="row text-center" style="display:none; margin-left: 40%;">                  
+                                                            <div class="spinner-border text-primary" role="status" style="color: #0089ff!important; width: 1.5rem;height: 1.5rem;">
+                                                            <span class="sr-only">Loading...</span>
+                                                            </div>
+                                                            <label style="color: #0089ff; font-size: 18px;">Cargando...</label>
+                                                        </div>
+                                                        <button id="enviar_propuesta" style="margin: 10px; cursor: pointer;color: #fff; display: none;" class="btn btn-primary btn-fw btn-lg" onclick="enviarPropuesta();">ENVIAR PROPUESTA</button>
+                                                        <button id="editar_propuesta" style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-warning btn-fw btn-lg" onclick="editarPDF();">EDITAR PROPUESTA</button>
+                                                        <button id="guardar_propuesta" style="margin: 10px; cursor: pointer;color: #fff;" class="btn btn-primary btn-lg" data-toggle="modal" onclick="guardarPropuesta();">GUARDAR PROPUESTA</button>
+                                                        <input id="listar_propuestas" style="margin: 10px; cursor: pointer;color: #fff; display: none;" class="btn btn-danger btn-lg" data-toggle="modal" onclick="location.href='./admin_documentos'" value="LISTAR PROPUESTAS">
+                                                        </div>
+                                                    </div>
+
+                                                    
+                                                   <div id="folio_propuesta" style="display:none"></div>
+                                                   <div id="tabla_propuesta_container" style="display:none">
+                                                   <table class="table table-striped table-bordered tablaFixed" style="border-bottom: 4px solid #142444;" id="tabla_propuesta_table">
+                                                                <thead style="background:#142444; ">
+                                                                    <tr>
+                                                                    <th style="color: #ffffff !important;     width: 50px;" > CTD </th>
+                                                                    <th style="color: #ffffff !important;"> Nombre </th>
+                                                                    <th style="color: #ffffff !important;"> Descripción </th>
+                                                                    <th style="color: #ffffff !important;     width: 120px;"> Precio Unitario </th>
+                                                                    <th id="columna_descuento" style="display: none;     width: 120px;"> % Descuento </th>
+                                                                    <th style="color: #ffffff !important;text-align:right;     width: 120px;"> Precio </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="tabla_propuesta_body">
+                                                                    <!--contenido dinamico-->                 
+                                                                </tbody>
+                                                            </table>
+
+                                                            <div class="row" id="discountRow">
+                                                            <div class="col-md-6"  >
+                                                                <table class="table table-striped ">
+                                                                    <thead style="background:#142444; ">
+                                                                    <tr>
+                                                                        <th style="color: #ffffff !important;text-align:center;"> Forma de pago </th>
+                                                                        <th style="color: #ffffff !important;text-align:center;"> Validez de la oferta </th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr class="table-bordered">
+                                                                        <td style="text-align:center;"> Contado </td>
+                                                                        <td style="text-align:center;"> 5 días </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                                <p class="card-description" style="text-align: center;margin-top: 10px;"> Todos los valores se encuentran expresados en dolares más IVA </p>
+                                                            </div>
+                                                            <div class="col-md-6" >
+                                                                <table class="table table-bordered">
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td> SubTotal</td>
+                                                                        <td id="subtotal" style="text-align:right;"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td> Iva </td>
+                                                                        <td id="iva" style="text-align:right;"> </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                    <tbody style="background:#142444; ">
+                                                                    <tr>
+                                                                        <th style="color: #ffffff !important;text-align:left;"> Total</th>
+                                                                        <th id="total_con_iva" style="color: #ffffff !important;text-align:right;"></th>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                
+                                                         </div>
+
+
+
+
+  </div>
                         </div>
                      </div>
                   </div>

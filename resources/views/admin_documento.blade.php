@@ -64,23 +64,31 @@
                                     </thead>
                                     <tbody>
                                        <?php                  
-                                          for($i=0;$i<sizeOf($propuestas);$i++){
-                                             $nombre_empresa ="";
-                                             $nombre_contacto= "";
-                                             for($x=0;$x<sizeOf($clientes);$x++){
-                                                   if($clientes[$x]["id_cliente"] == $propuestas[$i]["id_cliente"]){
-                                                         $nombre_empresa = $clientes[$x]["nombre_cliente"];
-                                                         $nombre_contacto = $clientes[$x]["nombre_contacto"];
-                                                         $x = sizeOf($clientes);
-                                                   }
-                                             }
-                                             echo "<tr>                                                     
-                                             <td >".$propuestas[$i]->folio_propuesta."</td><td>".$nombre_empresa."</td>";
-                                             echo "<td> ".$nombre_contacto."</td>";
-                                             echo "<td> ".$propuestas[$i]->fecha_modificacion."</td>
-                                             <td> ".$propuestas[$i]->total."</td>
-                                             <td> ".(($propuestas[$i]->estado_envio==null) ? 'Pendiente de envío' : $propuestas[$i]->estado_envio )."</td>
-                                             <td>
+// $arr=[];
+// foreach($propuestas as $row)
+// {
+//     $arr[] = (array) $row;
+// }
+// $propuestas=$arr; 
+                                      for($i=0;$i<sizeOf($propuestas);$i++){
+                                            $nombre_empresa ="";
+                                            $nombre_contacto= "";
+                                            $apellido_contacto= "";
+                                            for($x=0;$x<sizeOf($clientes);$x++){
+                                                  if($clientes[$x]["id_cliente"] == $propuestas[$i]["id_cliente"]){
+                                                        $nombre_empresa = $clientes[$x]["nombre_cliente"];
+                                                        $nombre_contacto = $clientes[$x]["nombre_contacto"];
+                                                        $apellido_contacto = $clientes[$x]["apellido_contacto"];
+                                                        $x = sizeOf($clientes);
+                                                  }
+                                            }
+                                            echo "<tr>                                                     
+                                            <td >".$propuestas[$i]->folio_propuesta."</td><td>".$nombre_empresa."</td>";
+                                            echo "<td> ".$nombre_contacto.' '.$apellido_contacto."</td>";
+                                            echo "<td> ".$propuestas[$i]->fecha_modificacion."</td>
+                                            <td> ".$propuestas[$i]->total."</td>
+                                            <td> ".(($propuestas[$i]->estado_envio==null) ? 'Pendiente de envío' : $propuestas[$i]->estado_envio )."</td>
+                                            <td>
                                              <button class='btn btn-warning' id='editar".$propuestas[$i]->id_propuesta."' onclick='adminEditarPropuesta(".$propuestas[$i].")'; >
                                                 <i class='fas fa-edit'></i>
                                                 </button> 
@@ -215,9 +223,9 @@
                                        </div>
                                     </div>
                                     <label class="top-spaced">Unidades producto N° 1</label>
-                                    <input class="form-control form-control-sm" id="unidades_producto_1" nombre="unidades_producto"></input>  
+                                    <input class="form-control form-control-sm" id="unidades_producto_1" nombre="unidades_producto" type="text" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" maxlength="4"></input>  
                                     <label class="top-spaced">Descuento para producto N° 1 (opcional)</label>
-                                    <input class="form-control form-control-sm" onkeyup="validaPorcentaje(this)" id="descuento_producto_1" nombre="descuento_producto"></input>                                                                
+                                    <input class="form-control form-control-sm" onkeyup="validaPorcentaje(this)" id="descuento_producto_1" type="text" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" nombre="descuento_producto"></input>                                                                
                                  </div>
                               </div>
                               <input hidden id="cantidad_divs" cantidad="1"></input>
@@ -234,10 +242,10 @@
                   <!-- fin datos ingreso-->
                   <input hidden pdf_64="" id="hidden_pdf"></input>
                   <div class="row" id="plantilla_documento" style="display:none;">
-                     <div class="col-md-12 ">                                                       
+                     <div class="col-md-12" id="contenidotemplate">                                                       
                         <?php 
-                           set_include_path(dirname(__FILE__)."/../");
-                           include('propuesta_comercial.blade.php');
+                           //set_include_path(dirname(__FILE__)."/../");
+                           //include('propuesta_comercial.blade.php');
                            ?>                                                           
                      </div>
                   </div>
@@ -365,7 +373,7 @@
       <script>
          $(document).ready(function() {
             $(".tabla_propuestas").DataTable({
-               
+               "order": [[ 3, "desc" ]]
             });
          });
       </script>

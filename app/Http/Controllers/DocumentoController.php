@@ -71,9 +71,11 @@ class DocumentoController extends Controller
         Log::debug("Obtuvo variable de request :".date('Y-m-d H:i:s'));
         $nombre_doc = $request["nombre_doc"];
 
-        file_put_contents('./documentos/'.$nombre_doc, base64_decode($bpdf));
-        Log::debug("Guardo el documento en carpeta :".date('Y-m-d H:i:s'));
-        return "OK";
+ 
+
+        file_put_contents(public_path('documentos/').$nombre_doc, base64_decode($bpdf)); 
+        Log::debug("Guardo el documento en carpeta :".date('Y-m-d H:i:s').' Nombre Documento: '.public_path('documentos/').$nombre_doc);
+        return "OK";  
 
     }
 
@@ -88,7 +90,7 @@ class DocumentoController extends Controller
         
         $bpdf = $request["pdf"];
         $nombre_doc = $request["nombre_doc"];
-        file_put_contents('./productos/'.$nombre_doc, base64_decode($bpdf));
+        file_put_contents(public_path('documentos/').$nombre_doc, base64_decode($bpdf));
         return "OK";
 
     }

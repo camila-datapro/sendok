@@ -19,8 +19,13 @@ class AdminDocumentoController extends Controller
      * @group AdminDocumentoController
      */
     public function index(){
+ 
+  
+    	$propuestas = PropuestaModel::all()->sortByDesc("fecha_creacion");
+
+
         return view('admin_documento')
-        ->with("propuestas", PropuestaModel::all())
+        ->with("propuestas", $propuestas)
         ->with("clientes", ClienteModel::listarClientes())
         ->with("productos", ProductoModel::listProductos());
     }
